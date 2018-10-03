@@ -162,7 +162,7 @@ extension Model {
             
             if let policy = policyFromString(executable: executable, value: executable.adminFilesPolicyString) {
                 services.adminFiles = services.adminFiles ?? []
-                services.postEvent?.append(policy)
+                services.adminFiles?.append(policy)
             }
             
             if let policy = policyFromString(executable: executable, value: executable.allFilesPolicyString) {
