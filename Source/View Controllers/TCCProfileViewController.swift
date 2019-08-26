@@ -140,26 +140,28 @@ class TCCProfileViewController: NSViewController {
         super.viewDidLoad()
         
         //  Setup policy pop up
-        addressBookPopUpAC.add(contentsOf: [ "-" , "Allow" , "Deny" ])
-        photosPopUpAC.add(contentsOf: [ "-" , "Allow" , "Deny" ])
-        remindersPopUpAC.add(contentsOf: [ "-" , "Allow" , "Deny" ])
-        calendarPopUpAC.add(contentsOf: [ "-" , "Allow" , "Deny" ])
-        accessibilityPopUpAC.add(contentsOf: [ "-" , "Allow" , "Deny" ])
-        postEventsPopUpAC.add(contentsOf: [ "-" , "Allow" , "Deny" ])
-        adminFilesPopUpAC.add(contentsOf: [ "-" , "Allow" , "Deny" ])
-        allFilesPopUpAC.add(contentsOf: [ "-" , "Allow" , "Deny" ])
-        cameraPopUpAC.add(contentsOf: [ "-" , "Deny" ])
-        microphonePopUpAC.add(contentsOf: [ "-" , "Deny" ])
-        fileProviderPresencePopUpAC.add(contentsOf: [ "-" , "Allow" , "Deny" ])
-        listenEventPopUpAC.add(contentsOf: [ "-" , "Deny" ])
-        mediaLibraryPopUpAC.add(contentsOf: [ "-" , "Allow" , "Deny" ])
-        screenCapturePopUpAC.add(contentsOf: [ "-" , "Deny" ])
-        speechRecognitionPopUpAC.add(contentsOf: [ "-" , "Allow" , "Deny" ])
-        dekstopFolderPopUpAC.add(contentsOf: [ "-" , "Allow" , "Deny" ])
-        documentsFolderPopUpAC.add(contentsOf: [ "-" , "Allow" , "Deny" ])
-        downloadsFolderPopUpAC.add(contentsOf: [ "-" , "Allow" , "Deny" ])
-        networkVolumesPopUpAC.add(contentsOf: [ "-" , "Allow" , "Deny" ])
-        removableVolumesPopUpAC.add(contentsOf: [ "-" , "Allow" , "Deny" ])
+        setupAllowDeny(policies: [addressBookPopUpAC,
+                                  photosPopUpAC,
+                                  remindersPopUpAC,
+                                  calendarPopUpAC,
+                                  accessibilityPopUpAC,
+                                  postEventsPopUpAC,
+                                  adminFilesPopUpAC,
+                                  allFilesPopUpAC,
+                                  fileProviderPresencePopUpAC,
+                                  mediaLibraryPopUpAC,
+                                  speechRecognitionPopUpAC,
+                                  dekstopFolderPopUpAC,
+                                  documentsFolderPopUpAC,
+                                  downloadsFolderPopUpAC,
+                                  networkVolumesPopUpAC,
+                                  removableVolumesPopUpAC])
+
+        setupDenyOnly(policies: [cameraPopUpAC,
+                                 microphonePopUpAC,
+                                 listenEventPopUpAC,
+                                 screenCapturePopUpAC])
+
 
         //  Setup table views
         executablesTable.registerForDraggedTypes([.fileURL])
@@ -169,7 +171,18 @@ class TCCProfileViewController: NSViewController {
         
         //  Record button
     }
-    
+
+    private func setupAllowDeny(policies: [NSArrayController]) {
+        for policy in policies {
+            policy.add(contentsOf: ["-", "Allow", "Deny"])
+        }
+    }
+
+    private func setupDenyOnly(policies: [NSArrayController]) {
+        for policy in policies {
+            policy.add(contentsOf: ["-", "Deny"])
+        }
+    }
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         guard let openVC = segue.destinationController as? OpenViewController else { return }
