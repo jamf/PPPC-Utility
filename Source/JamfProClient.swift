@@ -60,6 +60,14 @@ struct JamfProClient {
         let payloads = XMLElement(name: "payloads", stringValue: profileText)
         general.addChild(payloads)
 
+        let sites = XMLElement(name: "site")
+
+        let siteId = XMLElement(name: "id", stringValue: "1")
+        let siteName = XMLElement(name: "name", stringValue: "Second")
+        sites.addChild(siteId)
+        sites.addChild(siteName)
+        general.addChild(sites)
+
         general.addChild(XMLElement(name: "name", stringValue: profile.displayName))
         general.addChild(XMLElement(name: "description", stringValue: profile.payloadDescription))
 
