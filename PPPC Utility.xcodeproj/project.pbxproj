@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6E6216F9215321CE0043DF18 /* OpenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6216F8215321CE0043DF18 /* OpenViewController.swift */; };
+		6E651CC523143890001CC974 /* ProfilesDescriptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E651CC423143890001CC974 /* ProfilesDescriptions.swift */; };
 		6EB45830214FFCCB00BE5749 /* AppleEventRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB4582F214FFCCB00BE5749 /* AppleEventRule.swift */; };
 		6EB86F692151476500FBE634 /* JamfProClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB86F682151476500FBE634 /* JamfProClient.swift */; };
 		6EC409DE214D65BC00BE4F17 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC409DD214D65BC00BE4F17 /* AppDelegate.swift */; };
@@ -26,6 +27,7 @@
 /* Begin PBXFileReference section */
 		6E5D5A1521541B8F00B43312 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		6E6216F8215321CE0043DF18 /* OpenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenViewController.swift; sourceTree = "<group>"; };
+		6E651CC423143890001CC974 /* ProfilesDescriptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilesDescriptions.swift; sourceTree = "<group>"; };
 		6E95730721553B650002C30B /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		6E957309215557870002C30B /* PPPC Utility.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "PPPC Utility.entitlements"; sourceTree = "<group>"; };
 		6EB4582F214FFCCB00BE5749 /* AppleEventRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleEventRule.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 				6EC40A0F214DE3B200BE4F17 /* Executable.swift */,
 				6EC409F4214D95D200BE4F17 /* TCCProfile.swift */,
 				6EB4582F214FFCCB00BE5749 /* AppleEventRule.swift */,
+				6E651CC423143890001CC974 /* ProfilesDescriptions.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -204,6 +207,7 @@
 				6EC40A14214DFB5800BE4F17 /* Model.swift in Sources */,
 				6EC40A1C214EF87800BE4F17 /* SigningIdentity.swift in Sources */,
 				6EC40A18214ECF2C00BE4F17 /* UploadViewController.swift in Sources */,
+				6E651CC523143890001CC974 /* ProfilesDescriptions.swift in Sources */,
 				6EC409F5214D95D200BE4F17 /* TCCProfile.swift in Sources */,
 				6EC40A12214DF8FE00BE4F17 /* SecurityWrapper.swift in Sources */,
 				6EC409DE214D65BC00BE4F17 /* AppDelegate.swift in Sources */,

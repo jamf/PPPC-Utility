@@ -64,6 +64,28 @@ class TCCProfileViewController: NSViewController {
     @IBOutlet weak var networkVolumesPopUp: NSPopUpButton!
     @IBOutlet weak var removableVolumesPopUp: NSPopUpButton!
 
+    // Labels with descriptions
+    @IBOutlet weak var addressBookDescription: NSTextField!
+    @IBOutlet weak var photosDescription: NSTextField!
+    @IBOutlet weak var remindersDescription: NSTextField!
+    @IBOutlet weak var calendarDescription: NSTextField!
+    @IBOutlet weak var accessibilityDescription: NSTextField!
+    @IBOutlet weak var postEventsDescription: NSTextField!
+    @IBOutlet weak var adminFilesDescription: NSTextField!
+    @IBOutlet weak var allFilesDescription: NSTextField!
+    @IBOutlet weak var cameraDescription: NSTextField!
+    @IBOutlet weak var microphoneDescription: NSTextField!
+    @IBOutlet weak var fileProviderDescription: NSTextField!
+    @IBOutlet weak var listenEventDescription: NSTextField!
+    @IBOutlet weak var mediaLibraryDescription: NSTextField!
+    @IBOutlet weak var screenCaptureDescription: NSTextField!
+    @IBOutlet weak var speechRecognitionDescription: NSTextField!
+    @IBOutlet weak var desktopFolderDescription: NSTextField!
+    @IBOutlet weak var documentsFolderDescription: NSTextField!
+    @IBOutlet weak var downloadsFolderDescription: NSTextField!
+    @IBOutlet weak var networkVolumesDescription: NSTextField!
+    @IBOutlet weak var removableVolumesDescription: NSTextField!
+
     @IBOutlet weak var addressBookPopUpAC: NSArrayController!
     @IBOutlet weak var photosPopUpAC: NSArrayController!
     @IBOutlet weak var remindersPopUpAC: NSArrayController!
@@ -162,6 +184,7 @@ class TCCProfileViewController: NSViewController {
                                  listenEventPopUpAC,
                                  screenCapturePopUpAC])
 
+        setupDescriptions()
 
         //  Setup table views
         executablesTable.registerForDraggedTypes([.fileURL])
@@ -183,6 +206,30 @@ class TCCProfileViewController: NSViewController {
             policy.add(contentsOf: ["-", "Deny"])
         }
     }
+
+    private func setupDescriptions() {
+        addressBookDescription.stringValue = ProfilesDescriptions.addressBook.rawValue
+        photosDescription.stringValue = ProfilesDescriptions.photos.rawValue
+        remindersDescription.stringValue = ProfilesDescriptions.reminders.rawValue
+        calendarDescription.stringValue = ProfilesDescriptions.calendar.rawValue
+        accessibilityDescription.stringValue = ProfilesDescriptions.accessibility.rawValue
+        postEventsDescription.stringValue = ProfilesDescriptions.postEvent.rawValue
+        adminFilesDescription.stringValue = ProfilesDescriptions.systemPolicySysAdminFiles.rawValue
+        allFilesDescription.stringValue = ProfilesDescriptions.systemPolicyAllFiles.rawValue
+        cameraDescription.stringValue = ProfilesDescriptions.camera.rawValue
+        microphoneDescription.stringValue = ProfilesDescriptions.microphone.rawValue
+        fileProviderDescription.stringValue = ProfilesDescriptions.fileProviderPresence.rawValue
+        listenEventDescription.stringValue = ProfilesDescriptions.listenEvent.rawValue
+        mediaLibraryDescription.stringValue = ProfilesDescriptions.mediaLibrary.rawValue
+        screenCaptureDescription.stringValue = ProfilesDescriptions.screenCapture.rawValue
+        speechRecognitionDescription.stringValue = ProfilesDescriptions.speechRecognition.rawValue
+        desktopFolderDescription.stringValue = ProfilesDescriptions.systemPolicyDesktopFolder.rawValue
+        documentsFolderDescription.stringValue = ProfilesDescriptions.systemPolicyDocumentsFolder.rawValue
+        downloadsFolderDescription.stringValue = ProfilesDescriptions.systemPolicyDownloadsFolder.rawValue
+        networkVolumesDescription.stringValue = ProfilesDescriptions.systemPolicyNetworkVolumes.rawValue
+        removableVolumesDescription.stringValue = ProfilesDescriptions.systemPolicyRemovableVolumes.rawValue
+    }
+
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         guard let openVC = segue.destinationController as? OpenViewController else { return }
