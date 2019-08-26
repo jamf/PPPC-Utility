@@ -180,6 +180,56 @@ extension Model {
                 services.microphone?.append(policy)
             }
             
+            if let policy = policyFromString(executable: executable, value: executable.fileProviderPolicyString) {
+                services.fileProviderPresence = services.fileProviderPresence ?? []
+                services.fileProviderPresence?.append(policy)
+            }
+
+            if let policy = policyFromString(executable: executable, value: executable.listenEventPolicyString) {
+                services.listenEvent = services.listenEvent ?? []
+                services.listenEvent?.append(policy)
+            }
+
+            if let policy = policyFromString(executable: executable, value: executable.mediaLibraryPolicyString) {
+                services.mediaLibrary = services.mediaLibrary ?? []
+                services.mediaLibrary?.append(policy)
+            }
+
+            if let policy = policyFromString(executable: executable, value: executable.screenCapturePolicyString) {
+                services.screenCapture = services.screenCapture ?? []
+                services.screenCapture?.append(policy)
+            }
+
+            if let policy = policyFromString(executable: executable, value: executable.speechRecognitionPolicyString) {
+                services.speechRecognition = services.speechRecognition ?? []
+                services.speechRecognition?.append(policy)
+            }
+
+            if let policy = policyFromString(executable: executable, value: executable.desktopFolderPolicyString) {
+                services.desktopFolder = services.desktopFolder ?? []
+                services.desktopFolder?.append(policy)
+            }
+
+            if let policy = policyFromString(executable: executable, value: executable.documentsFolderPolicyString) {
+                services.documentsFolder = services.documentsFolder ?? []
+                services.documentsFolder?.append(policy)
+            }
+
+            if let policy = policyFromString(executable: executable, value: executable.downloadsFolderPolicyString) {
+                services.downloadsFolder = services.downloadsFolder ?? []
+                services.downloadsFolder?.append(policy)
+            }
+
+            if let policy = policyFromString(executable: executable, value: executable.networkVolumesPolicyString) {
+                services.networkVolumes = services.networkVolumes ?? []
+                services.networkVolumes?.append(policy)
+            }
+
+            if let policy = policyFromString(executable: executable, value: executable.removableVolumesPolicyString) {
+                services.removableVolumes = services.removableVolumes ?? []
+                services.removableVolumes?.append(policy)
+            }
+
             executable.appleEvents.forEach { event in
                 let policy = TCCPolicy(identifier: executable.identifier,
                                        codeRequirement: executable.codeRequirement,
