@@ -86,6 +86,17 @@ class TCCProfileViewController: NSViewController {
     @IBOutlet weak var networkVolumesHelpButton: InfoButton!
     @IBOutlet weak var removableVolumesHelpButton: InfoButton!
 
+    @IBOutlet weak var photosStackView: NSStackView!
+    @IBOutlet weak var calendarStackView: NSStackView!
+    @IBOutlet weak var postEventsStackView: NSStackView!
+    @IBOutlet weak var allFilesStackView: NSStackView!
+    @IBOutlet weak var microphoneStackView: NSStackView!
+    @IBOutlet weak var listenEventStackView: NSStackView!
+    @IBOutlet weak var screenCaptureStackView: NSStackView!
+    @IBOutlet weak var desktopFolderStackView: NSStackView!
+    @IBOutlet weak var downloadsFolderStackView: NSStackView!
+    @IBOutlet weak var removableVolumesStackView: NSStackView!
+
     @IBOutlet weak var addressBookPopUpAC: NSArrayController!
     @IBOutlet weak var photosPopUpAC: NSArrayController!
     @IBOutlet weak var remindersPopUpAC: NSArrayController!
@@ -186,6 +197,17 @@ class TCCProfileViewController: NSViewController {
 
         setupDescriptions()
 
+        setupStackViewsWithBackground(stackViews: [photosStackView,
+                                                   calendarStackView,
+                                                   postEventsStackView,
+                                                   allFilesStackView,
+                                                   microphoneStackView,
+                                                   listenEventStackView,
+                                                   screenCaptureStackView,
+                                                   desktopFolderStackView,
+                                                   downloadsFolderStackView,
+                                                   removableVolumesStackView])
+
         //  Setup table views
         executablesTable.registerForDraggedTypes([.fileURL])
         executablesTable.dataSource = self
@@ -208,6 +230,13 @@ class TCCProfileViewController: NSViewController {
     private func setupDenyOnly(policies: [NSArrayController]) {
         for policy in policies {
             policy.add(contentsOf: ["-", "Deny"])
+        }
+    }
+
+    private func setupStackViewsWithBackground(stackViews: [NSStackView]) {
+        for stackView in stackViews {
+            stackView.wantsLayer = true
+            stackView.layer?.backgroundColor = NSColor(red: 0.955, green: 0.96, blue: 0.96, alpha: 1.0).cgColor
         }
     }
 
