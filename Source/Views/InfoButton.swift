@@ -27,8 +27,16 @@
 
 import Cocoa
 
-class FlippedClipView: NSClipView {
-    override var isFlipped: Bool {
-        return true
+class InfoButton: NSButton {
+    private var helpMessage: String = ""
+
+    func setHelpMessage(_ message: String) {
+        self.helpMessage = message
+    }
+
+    func showHelpMessage() {
+        NSHelpManager.shared.setContextHelp(NSAttributedString(string: helpMessage), for: self)
+        NSHelpManager.shared.showContextHelp(for: self, locationHint: NSEvent.mouseLocation)
+        NSHelpManager.shared.removeContextHelp(for: self)
     }
 }

@@ -65,26 +65,26 @@ class TCCProfileViewController: NSViewController {
     @IBOutlet weak var removableVolumesPopUp: NSPopUpButton!
 
     // Labels with descriptions
-    @IBOutlet weak var addressBookDescription: NSTextField!
-    @IBOutlet weak var photosDescription: NSTextField!
-    @IBOutlet weak var remindersDescription: NSTextField!
-    @IBOutlet weak var calendarDescription: NSTextField!
-    @IBOutlet weak var accessibilityDescription: NSTextField!
-    @IBOutlet weak var postEventsDescription: NSTextField!
-    @IBOutlet weak var adminFilesDescription: NSTextField!
-    @IBOutlet weak var allFilesDescription: NSTextField!
-    @IBOutlet weak var cameraDescription: NSTextField!
-    @IBOutlet weak var microphoneDescription: NSTextField!
-    @IBOutlet weak var fileProviderDescription: NSTextField!
-    @IBOutlet weak var listenEventDescription: NSTextField!
-    @IBOutlet weak var mediaLibraryDescription: NSTextField!
-    @IBOutlet weak var screenCaptureDescription: NSTextField!
-    @IBOutlet weak var speechRecognitionDescription: NSTextField!
-    @IBOutlet weak var desktopFolderDescription: NSTextField!
-    @IBOutlet weak var documentsFolderDescription: NSTextField!
-    @IBOutlet weak var downloadsFolderDescription: NSTextField!
-    @IBOutlet weak var networkVolumesDescription: NSTextField!
-    @IBOutlet weak var removableVolumesDescription: NSTextField!
+    @IBOutlet weak var addressBookHelpButton: InfoButton!
+    @IBOutlet weak var photosHelpButton: InfoButton!
+    @IBOutlet weak var remindersHelpButton: InfoButton!
+    @IBOutlet weak var calendarHelpButton: InfoButton!
+    @IBOutlet weak var accessibilityHelpButton: InfoButton!
+    @IBOutlet weak var postEventsHelpButton: InfoButton!
+    @IBOutlet weak var adminFilesHelpButton: InfoButton!
+    @IBOutlet weak var allFilesHelpButton: InfoButton!
+    @IBOutlet weak var cameraHelpButton: InfoButton!
+    @IBOutlet weak var microphoneHelpButton: InfoButton!
+    @IBOutlet weak var fileProviderHelpButton: InfoButton!
+    @IBOutlet weak var listenEventHelpButton: InfoButton!
+    @IBOutlet weak var mediaLibraryHelpButton: InfoButton!
+    @IBOutlet weak var screenCaptureHelpButton: InfoButton!
+    @IBOutlet weak var speechRecognitionHelpButton: InfoButton!
+    @IBOutlet weak var desktopFolderHelpButton: InfoButton!
+    @IBOutlet weak var documentsFolderHelpButton: InfoButton!
+    @IBOutlet weak var downloadsFolderHelpButton: InfoButton!
+    @IBOutlet weak var networkVolumesHelpButton: InfoButton!
+    @IBOutlet weak var removableVolumesHelpButton: InfoButton!
 
     @IBOutlet weak var addressBookPopUpAC: NSArrayController!
     @IBOutlet weak var photosPopUpAC: NSArrayController!
@@ -195,6 +195,10 @@ class TCCProfileViewController: NSViewController {
         //  Record button
     }
 
+    @IBAction func showHelpMessage(_ sender: InfoButton) {
+        sender.showHelpMessage()
+    }
+
     private func setupAllowDeny(policies: [NSArrayController]) {
         for policy in policies {
             policy.add(contentsOf: ["-", "Allow", "Deny"])
@@ -208,26 +212,26 @@ class TCCProfileViewController: NSViewController {
     }
 
     private func setupDescriptions() {
-        addressBookDescription.stringValue = ProfilesDescriptions.addressBook.rawValue
-        photosDescription.stringValue = ProfilesDescriptions.photos.rawValue
-        remindersDescription.stringValue = ProfilesDescriptions.reminders.rawValue
-        calendarDescription.stringValue = ProfilesDescriptions.calendar.rawValue
-        accessibilityDescription.stringValue = ProfilesDescriptions.accessibility.rawValue
-        postEventsDescription.stringValue = ProfilesDescriptions.postEvent.rawValue
-        adminFilesDescription.stringValue = ProfilesDescriptions.systemPolicySysAdminFiles.rawValue
-        allFilesDescription.stringValue = ProfilesDescriptions.systemPolicyAllFiles.rawValue
-        cameraDescription.stringValue = ProfilesDescriptions.camera.rawValue
-        microphoneDescription.stringValue = ProfilesDescriptions.microphone.rawValue
-        fileProviderDescription.stringValue = ProfilesDescriptions.fileProviderPresence.rawValue
-        listenEventDescription.stringValue = ProfilesDescriptions.listenEvent.rawValue
-        mediaLibraryDescription.stringValue = ProfilesDescriptions.mediaLibrary.rawValue
-        screenCaptureDescription.stringValue = ProfilesDescriptions.screenCapture.rawValue
-        speechRecognitionDescription.stringValue = ProfilesDescriptions.speechRecognition.rawValue
-        desktopFolderDescription.stringValue = ProfilesDescriptions.systemPolicyDesktopFolder.rawValue
-        documentsFolderDescription.stringValue = ProfilesDescriptions.systemPolicyDocumentsFolder.rawValue
-        downloadsFolderDescription.stringValue = ProfilesDescriptions.systemPolicyDownloadsFolder.rawValue
-        networkVolumesDescription.stringValue = ProfilesDescriptions.systemPolicyNetworkVolumes.rawValue
-        removableVolumesDescription.stringValue = ProfilesDescriptions.systemPolicyRemovableVolumes.rawValue
+        addressBookHelpButton.setHelpMessage(ProfilesDescriptions.addressBook.rawValue)
+        photosHelpButton.setHelpMessage(ProfilesDescriptions.photos.rawValue)
+        remindersHelpButton.setHelpMessage(ProfilesDescriptions.reminders.rawValue)
+        calendarHelpButton.setHelpMessage(ProfilesDescriptions.calendar.rawValue)
+        accessibilityHelpButton.setHelpMessage(ProfilesDescriptions.accessibility.rawValue)
+        postEventsHelpButton.setHelpMessage(ProfilesDescriptions.postEvent.rawValue)
+        adminFilesHelpButton.setHelpMessage(ProfilesDescriptions.systemPolicySysAdminFiles.rawValue)
+        allFilesHelpButton.setHelpMessage(ProfilesDescriptions.systemPolicyAllFiles.rawValue)
+        cameraHelpButton.setHelpMessage(ProfilesDescriptions.camera.rawValue)
+        microphoneHelpButton.setHelpMessage(ProfilesDescriptions.microphone.rawValue)
+        fileProviderHelpButton.setHelpMessage(ProfilesDescriptions.fileProviderPresence.rawValue)
+        listenEventHelpButton.setHelpMessage(ProfilesDescriptions.listenEvent.rawValue)
+        mediaLibraryHelpButton.setHelpMessage(ProfilesDescriptions.mediaLibrary.rawValue)
+        screenCaptureHelpButton.setHelpMessage(ProfilesDescriptions.screenCapture.rawValue)
+        speechRecognitionHelpButton.setHelpMessage(ProfilesDescriptions.speechRecognition.rawValue)
+        desktopFolderHelpButton.setHelpMessage(ProfilesDescriptions.systemPolicyDesktopFolder.rawValue)
+        documentsFolderHelpButton.setHelpMessage(ProfilesDescriptions.systemPolicyDocumentsFolder.rawValue)
+        downloadsFolderHelpButton.setHelpMessage(ProfilesDescriptions.systemPolicyDownloadsFolder.rawValue)
+        networkVolumesHelpButton.setHelpMessage(ProfilesDescriptions.systemPolicyNetworkVolumes.rawValue)
+        removableVolumesHelpButton.setHelpMessage(ProfilesDescriptions.systemPolicyRemovableVolumes.rawValue)
     }
 
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
