@@ -45,6 +45,16 @@ class Executable: NSObject {
     @objc dynamic var allFilesPolicyString: String = "-"
     @objc dynamic var cameraPolicyString: String = "-"
     @objc dynamic var microphonePolicyString: String = "-"
-    
+    @objc dynamic var fileProviderPolicyString: String = "-"
+    @objc dynamic var listenEventPolicyString: String = "-"
+    @objc dynamic var mediaLibraryPolicyString: String = "-"
+    @objc dynamic var screenCapturePolicyString: String = "-"
+    @objc dynamic var speechRecognitionPolicyString: String = "-"
+    @objc dynamic var desktopFolderPolicyString: String = "-"
+    @objc dynamic var documentsFolderPolicyString: String = "-"
+    @objc dynamic var downloadsFolderPolicyString: String = "-"
+    @objc dynamic var networkVolumesPolicyString: String = "-"
+    @objc dynamic var removableVolumesPolicyString: String = "-"
+
     @objc dynamic var appleEvents: [AppleEventRule] = []
 }
