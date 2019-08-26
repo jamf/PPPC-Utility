@@ -32,11 +32,13 @@ struct JamfProClient {
     var urlString: String
     var username: String
     var password: String
-    
-    init(_ url: String, _ user: String, _ pass: String) {
-        urlString = url
-        password = pass
-        username = user
+    var site: (String, String)?
+
+    init(_ url: String, _ user: String, _ pass: String, _ site: (String, String)? = nil) {
+        self.urlString = url
+        self.password = pass
+        self.username = user
+        self.site = site
     }
     
     func uploadProfile(_ profile: TCCProfile, signingIdentity: SecIdentity?, completionBlock: @escaping (Bool)->Void) {
@@ -60,13 +62,14 @@ struct JamfProClient {
         let payloads = XMLElement(name: "payloads", stringValue: profileText)
         general.addChild(payloads)
 
-        let sites = XMLElement(name: "site")
-
-        let siteId = XMLElement(name: "id", stringValue: "1")
-        let siteName = XMLElement(name: "name", stringValue: "Second")
-        sites.addChild(siteId)
-        sites.addChild(siteName)
-        general.addChild(sites)
+        if let site = self.site {
+            let sites = XMLElement(name: "site")
+            let siteId = XMLElement(name: "id", stringValue: site.0)
+            let siteName = XMLElement(name: "name", stringValue: site.1)
+            sites.addChild(siteId)
+            sites.addChild(siteName)
+            general.addChild(sites)
+        }
 
         general.addChild(XMLElement(name: "name", stringValue: profile.displayName))
         general.addChild(XMLElement(name: "description", stringValue: profile.payloadDescription))
