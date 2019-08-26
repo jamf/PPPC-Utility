@@ -53,7 +53,17 @@ class TCCProfileViewController: NSViewController {
     @IBOutlet weak var allFilesPopUp: NSPopUpButton!
     @IBOutlet weak var cameraPopUp: NSPopUpButton!
     @IBOutlet weak var microphonePopUp: NSPopUpButton!
-    
+    @IBOutlet weak var fileProviderPresencePopUp: NSPopUpButton!
+    @IBOutlet weak var listenEventPopUp: NSPopUpButton!
+    @IBOutlet weak var mediaLibraryPopUp: NSPopUpButton!
+    @IBOutlet weak var screenCapturePopUp: NSPopUpButton!
+    @IBOutlet weak var speechRecognitionPopUp: NSPopUpButton!
+    @IBOutlet weak var dekstopFolderPopUp: NSPopUpButton!
+    @IBOutlet weak var documentsFolderPopUp: NSPopUpButton!
+    @IBOutlet weak var downloadsFolderPopUp: NSPopUpButton!
+    @IBOutlet weak var networkVolumesPopUp: NSPopUpButton!
+    @IBOutlet weak var removableVolumesPopUp: NSPopUpButton!
+
     @IBOutlet weak var addressBookPopUpAC: NSArrayController!
     @IBOutlet weak var photosPopUpAC: NSArrayController!
     @IBOutlet weak var remindersPopUpAC: NSArrayController!
@@ -64,6 +74,16 @@ class TCCProfileViewController: NSViewController {
     @IBOutlet weak var allFilesPopUpAC: NSArrayController!
     @IBOutlet weak var cameraPopUpAC: NSArrayController!
     @IBOutlet weak var microphonePopUpAC: NSArrayController!
+    @IBOutlet weak var fileProviderPresencePopUpAC: NSArrayController!
+    @IBOutlet weak var listenEventPopUpAC: NSArrayController!
+    @IBOutlet weak var mediaLibraryPopUpAC: NSArrayController!
+    @IBOutlet weak var screenCapturePopUpAC: NSArrayController!
+    @IBOutlet weak var speechRecognitionPopUpAC: NSArrayController!
+    @IBOutlet weak var dekstopFolderPopUpAC: NSArrayController!
+    @IBOutlet weak var documentsFolderPopUpAC: NSArrayController!
+    @IBOutlet weak var downloadsFolderPopUpAC: NSArrayController!
+    @IBOutlet weak var networkVolumesPopUpAC: NSArrayController!
+    @IBOutlet weak var removableVolumesPopUpAC: NSArrayController!
 
     @IBOutlet weak var saveButton: NSButton!
     @IBOutlet weak var uploadButton: NSButton!
@@ -130,7 +150,17 @@ class TCCProfileViewController: NSViewController {
         allFilesPopUpAC.add(contentsOf: [ "-" , "Allow" , "Deny" ])
         cameraPopUpAC.add(contentsOf: [ "-" , "Deny" ])
         microphonePopUpAC.add(contentsOf: [ "-" , "Deny" ])
-        
+        fileProviderPresencePopUpAC.add(contentsOf: [ "-" , "Allow" , "Deny" ])
+        listenEventPopUpAC.add(contentsOf: [ "-" , "Deny" ])
+        mediaLibraryPopUpAC.add(contentsOf: [ "-" , "Allow" , "Deny" ])
+        screenCapturePopUpAC.add(contentsOf: [ "-" , "Deny" ])
+        speechRecognitionPopUpAC.add(contentsOf: [ "-" , "Allow" , "Deny" ])
+        dekstopFolderPopUpAC.add(contentsOf: [ "-" , "Allow" , "Deny" ])
+        documentsFolderPopUpAC.add(contentsOf: [ "-" , "Allow" , "Deny" ])
+        downloadsFolderPopUpAC.add(contentsOf: [ "-" , "Allow" , "Deny" ])
+        networkVolumesPopUpAC.add(contentsOf: [ "-" , "Allow" , "Deny" ])
+        removableVolumesPopUpAC.add(contentsOf: [ "-" , "Allow" , "Deny" ])
+
         //  Setup table views
         executablesTable.registerForDraggedTypes([.fileURL])
         executablesTable.dataSource = self
