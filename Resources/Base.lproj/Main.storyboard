@@ -3057,6 +3057,7 @@
                                             </popUpButtonCell>
                                             <connections>
                                                 <binding destination="BLh-gy-GqN" name="content" keyPath="arrangedObjects.displayName" id="th4-I9-mQ4"/>
+                                                <binding destination="BLh-gy-GqN" name="selectedIndex" keyPath="selectionIndex" previousBinding="th4-I9-mQ4" id="sfG-6W-XB5"/>
                                                 <binding destination="HiQ-kk-PBp" name="enabled" keyPath="self.credentialsVerified" id="Owy-IG-UcR"/>
                                                 <binding destination="HiQ-kk-PBp" name="enabled3" keyPath="self.mustSignForUpload" previousBinding="dTI-MZ-Zpi" id="mzd-OZ-ytS">
                                                     <dictionary key="options">
@@ -3336,6 +3337,7 @@ Gw
                                             </popUpButtonCell>
                                             <connections>
                                                 <binding destination="Gbd-Ki-uFy" name="content" keyPath="arrangedObjects.displayName" id="Dgg-oE-oZd"/>
+                                                <binding destination="Gbd-Ki-uFy" name="selectedIndex" keyPath="selectionIndex" previousBinding="Dgg-oE-oZd" id="FQQ-1T-nRl"/>
                                             </connections>
                                         </popUpButton>
                                     </gridCell>
