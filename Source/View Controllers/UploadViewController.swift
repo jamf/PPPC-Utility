@@ -73,7 +73,9 @@ class UploadViewController: NSViewController {
     @IBOutlet var identitiesPopUpAC: NSArrayController!
     @IBOutlet weak var uploadButton: NSButton!
     @IBOutlet weak var checkConnectionButton: NSButton!
-    
+    @IBOutlet weak var siteIdLabel: NSTextField!
+    @IBOutlet weak var siteNameLabel: NSTextField!
+
     @IBOutlet weak var gridView: NSGridView!
     
     @IBAction func uploadPressed(_ sender: NSButton) {
@@ -164,6 +166,7 @@ class UploadViewController: NSViewController {
         mustSignForUpload = UserDefaults.standard.bool(forKey: "enforceSigning")
         
         loadCredentials()
+        updateSiteUI()
     }
     
     override func viewWillAppear() {
@@ -211,6 +214,7 @@ class UploadViewController: NSViewController {
         if context == &UploadViewController.uploadKVOContext {
             updateCredentialsAvailable()
             updateReadForUpload()
+            updateSiteUI()
         } else {
             super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
         }
@@ -234,22 +238,28 @@ class UploadViewController: NSViewController {
             && (payloadName != nil)
             && !payloadName.isEmpty
             && (payloadIdentifier != nil)
-            && !payloadIdentifier.isEmpty) else {
-                checkSiteBeforeReadyToUpload()
-                return }
-        readyForUpload = !readyForUpload
+            && !payloadIdentifier.isEmpty
+            && isSiteReadyToUpload())
+            else { return }
 
-        checkSiteBeforeReadyToUpload()
+        readyForUpload = !readyForUpload
     }
 
-    func checkSiteBeforeReadyToUpload() {
+    func isSiteReadyToUpload() -> Bool {
         if site {
             if let siteId = siteId, let siteName = siteName, siteId != "", siteName != "" {
-                readyForUpload = true
+                return true
             } else {
-                readyForUpload = false
+                return false
             }
+        } else {
+            return true
         }
+    }
+
+    func updateSiteUI() {
+        siteIdLabel.isHidden = !site
+        siteNameLabel.isHidden = !site
     }
     
     func handleCheckConnectionFailure(enforceSigning: Bool?) {

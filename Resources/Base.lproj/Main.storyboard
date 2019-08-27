@@ -2741,6 +2741,7 @@
                                     <gridRow id="K3R-m6-oz9"/>
                                     <gridRow id="Fm8-cc-7hm"/>
                                     <gridRow id="unn-eA-XYi"/>
+                                    <gridRow id="EWx-k2-Y3A"/>
                                 </rows>
                                 <columns>
                                     <gridColumn xPlacement="trailing" width="150" id="beA-7f-m1M"/>
@@ -3118,11 +3119,6 @@
                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
                                                     <connections>
-                                                        <binding destination="HiQ-kk-PBp" name="enabled" keyPath="self.site" id="50J-vc-IGE">
-                                                            <dictionary key="options">
-                                                                <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
-                                                            </dictionary>
-                                                        </binding>
                                                         <binding destination="HiQ-kk-PBp" name="value" keyPath="self.siteId" id="5Ma-Os-2Tf">
                                                             <dictionary key="options">
                                                                 <string key="NSNullPlaceholder">Id</string>
@@ -3141,11 +3137,6 @@
                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
                                                     <connections>
-                                                        <binding destination="HiQ-kk-PBp" name="enabled" keyPath="self.site" id="omN-7r-vFz">
-                                                            <dictionary key="options">
-                                                                <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
-                                                            </dictionary>
-                                                        </binding>
                                                         <binding destination="HiQ-kk-PBp" name="value" keyPath="self.siteName" id="JQT-lk-0ZI">
                                                             <dictionary key="options">
                                                                 <string key="NSNullPlaceholder">Name</string>
@@ -3253,6 +3244,8 @@ Gw
                         <outlet property="payloadDescriptionLabel" destination="IZK-hA-8K2" id="dIN-QC-Reb"/>
                         <outlet property="payloadIdentifierLabel" destination="Tzm-C2-rLF" id="jcP-pd-xNc"/>
                         <outlet property="payloadNameLabel" destination="XrG-J9-cCf" id="fZD-Ex-FQm"/>
+                        <outlet property="siteIdLabel" destination="fhO-ZG-oVN" id="y66-hR-QOK"/>
+                        <outlet property="siteNameLabel" destination="a58-Wf-fNl" id="oXv-s5-nFE"/>
                         <outlet property="uploadButton" destination="JXB-OP-byU" id="cDN-Ao-UwI"/>
                         <outlet property="usernameLabel" destination="DGW-Mr-l1f" id="Jv5-WT-nLb"/>
                     </connections>
