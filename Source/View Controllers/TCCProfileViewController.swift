@@ -149,6 +149,26 @@ class TCCProfileViewController: NSViewController {
             self.insetIntoAppleEvents($0)
         }
     }
+
+    @IBAction func importProfile(_ sender: NSButton) {
+        guard let window = self.view.window else {
+            return
+        }
+
+        let tccProfileImporter = TCCProfileImporter()
+
+        tccProfileImporter.loadTCCProfileFromFile(window: window, { [weak self] tccProfileResult in
+            switch tccProfileResult {
+            case .success(let tccProfile):
+                print(tccProfile)
+                //configureUI
+            case .failure(let tccProfileImportError):
+                if let error = tccProfileImportError {
+                //error
+                }
+            }
+        })
+    }
     
     func promptForExecutables(_ block: @escaping (Executable) -> Void) {
         let panel = NSOpenPanel()

@@ -1,0 +1,620 @@
+ "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>PayloadContent</key>
+	<array>
+		<dict>
+			<key>PayloadDescription</key>
+			<string>TestProfile</string>
+			<key>PayloadDisplayName</key>
+			<string>TestTCCProfileSigned</string>
+			<key>PayloadIdentifier</key>
+			<string>95B9C6FF-E3E0-46C9-9ADB-1EB4AAAD9903</string>
+			<key>PayloadOrganization</key>
+			<string>Jamf</string>
+			<key>PayloadType</key>
+			<string>com.apple.TCC.configuration-profile-policy</string>
+			<key>PayloadUUID</key>
+			<string>2F0C1E79-5BD6-4778-9765-FA5E0FC86562</string>
+			<key>PayloadVersion</key>
+			<integer>1</integer>
+			<key>Services</key>
+			<dict>
+				<key>Accessibility</key>
+				<array>
+					<dict>
+						<key>Allowed</key>
+						<true/>
+						<key>CodeRequirement</key>
+						<string>identifier "io.brackets.appshell" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = JQ525L2MZD</string>
+						<key>Comment</key>
+						<string></string>
+						<key>Identifier</key>
+						<string>io.brackets.appshell</string>
+						<key>IdentifierType</key>
+						<string>bundleID</string>
+					</dict>
+					<dict>
+						<key>Allowed</key>
+						<false/>
+						<key>CodeRequirement</key>
+						<string>identifier "com.jamfsoftware.JamfAdmin" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = "483DWKW443"</string>
+						<key>Comment</key>
+						<string></string>
+						<key>Identifier</key>
+						<string>com.jamfsoftware.JamfAdmin</string>
+						<key>IdentifierType</key>
+						<string>bundleID</string>
+					</dict>
+				</array>
+				<key>AddressBook</key>
+				<array>
+					<dict>
+						<key>Allowed</key>
+						<false/>
+						<key>CodeRequirement</key>
+						<string>identifier "io.brackets.appshell" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = JQ525L2MZD</string>
+						<key>Comment</key>
+						<string></string>
+						<key>Identifier</key>
+						<string>io.brackets.appshell</string>
+						<key>IdentifierType</key>
+						<string>bundleID</string>
+					</dict>
+					<dict>
+						<key>Allowed</key>
+						<false/>
+						<key>CodeRequirement</key>
+						<string>identifier "com.jamfsoftware.JamfAdmin" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = "483DWKW443"</string>
+						<key>Comment</key>
+						<string></string>
+						<key>Identifier</key>
+						<string>com.jamfsoftware.JamfAdmin</string>
+						<key>IdentifierType</key>
+						<string>bundleID</string>
+					</dict>
+				</array>
+				<key>AppleEvents</key>
+				<array>
+					<dict>
+						<key>AEReceiverCodeRequirement</key>
+						<string>identifier "com.apple.finder" and anchor apple</string>
+						<key>AEReceiverIdentifier</key>
+						<string>com.apple.finder</string>
+						<key>AEReceiverIdentifierType</key>
+						<string>bundleID</string>
+						<key>Allowed</key>
+						<true/>
+						<key>CodeRequirement</key>
+						<string>identifier "io.brackets.appshell" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = JQ525L2MZD</string>
+						<key>Comment</key>
+						<string></string>
+						<key>Identifier</key>
+						<string>io.brackets.appshell</string>
+						<key>IdentifierType</key>
+						<string>bundleID</string>
+					</dict>
+					<dict>
+						<key>AEReceiverCodeRequirement</key>
+						<string>identifier "com.apple.systemuiserver" and anchor apple</string>
+						<key>AEReceiverIdentifier</key>
+						<string>com.apple.systemuiserver</string>
+						<key>AEReceiverIdentifierType</key>
+						<string>bundleID</string>
+						<key>Allowed</key>
+						<true/>
+						<key>CodeRequirement</key>
+						<string>identifier "io.brackets.appshell" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = JQ525L2MZD</string>
+						<key>Comment</key>
+						<string></string>
+						<key>Identifier</key>
+						<string>io.brackets.appshell</string>
+						<key>IdentifierType</key>
+						<string>bundleID</string>
+					</dict>
+					<dict>
+						<key>AEReceiverCodeRequirement</key>
+						<string>identifier "com.apple.finder" and anchor apple</string>
+						<key>AEReceiverIdentifier</key>
+						<string>com.apple.finder</string>
+						<key>AEReceiverIdentifierType</key>
+						<string>bundleID</string>
+						<key>Allowed</key>
+						<true/>
+						<key>CodeRequirement</key>
+						<string>identifier "com.jamfsoftware.JamfAdmin" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = "483DWKW443"</string>
+						<key>Comment</key>
+						<string></string>
+						<key>Identifier</key>
+						<string>com.jamfsoftware.JamfAdmin</string>
+						<key>IdentifierType</key>
+						<string>bundleID</string>
+					</dict>
+					<dict>
+						<key>AEReceiverCodeRequirement</key>
+						<string>identifier "io.brackets.appshell" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = JQ525L2MZD</string>
+						<key>AEReceiverIdentifier</key>
+						<string>io.brackets.appshell</string>
+						<key>AEReceiverIdentifierType</key>
+						<string>bundleID</string>
+						<key>Allowed</key>
+						<true/>
+						<key>CodeRequirement</key>
+						<string>identifier "com.jamfsoftware.JamfAdmin" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = "483DWKW443"</string>
+						<key>Comment</key>
+						<string></string>
+						<key>Identifier</key>
+						<string>com.jamfsoftware.JamfAdmin</string>
+						<key>IdentifierType</key>
+						<string>bundleID</string>
+					</dict>
+				</array>
+				<key>Calendar</key>
+				<array>
+					<dict>
+						<key>Allowed</key>
+						<true/>
+						<key>CodeRequirement</key>
+						<string>identifier "io.brackets.appshell" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = JQ525L2MZD</string>
+						<key>Comment</key>
+						<string></string>
+						<key>Identifier</key>
+						<string>io.brackets.appshell</string>
+						<key>IdentifierType</key>
+						<string>bundleID</string>
+					</dict>
+					<dict>
+						<key>Allowed</key>
+						<true/>
+						<key>CodeRequirement</key>
+						<string>identifier "com.jamfsoftware.JamfAdmin" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = "483DWKW443"</string>
+						<key>Comment</key>
+						<string></string>
+						<key>Identifier</key>
+						<string>com.jamfsoftware.JamfAdmin</string>
+						<key>IdentifierType</key>
+						<string>bundleID</string>
+					</dict>
+				</array>
+				<key>Camera</key>
+				<array>
+					<dict>
+						<key>Allowed</key>
+						<false/>
+						<key>CodeRequirement</key>
+						<string>identifier "io.brackets.appshell" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = JQ525L2MZD</string>
+						<key>Comment</key>
+						<string></string>
+						<key>Identifier</key>
+						<string>io.brackets.appshell</string>
+						<key>IdentifierType</key>
+						<string>bundleID</string>
+					</dict>
+					<dict>
+						<key>Allowed</key>
+						<false/>
+						<key>CodeRequirement</key>
+						<string>identifier "com.jamfsoftware.JamfAdmin" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = "483DWKW443"</string>
+						<key>Comment</key>
+						<string></string>
+						<key>Identifier</key>
+						<string>com.jamfsoftware.JamfAdmin</string>
+						<key>IdentifierType</key>
+						<string>bundleID</string>
+					</dict>
+				</array>
+				<key>FileProviderPresence</key>
+				<array>
+					<dict>
+						<key>Allowed</key>
+						<false/>
+						<key>CodeRequirement</key>
+						<string>identifier "io.brackets.appshell" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = JQ525L2MZD</string>
+						<key>Comment</key>
+						<string></string>
+						<key>Identifier</key>
+						<string>io.brackets.appshell</string>
+						<key>IdentifierType</key>
+						<string>bundleID</string>
+					</dict>
+					<dict>
+						<key>Allowed</key>
+						<true/>
+						<key>CodeRequirement</key>
+						<string>identifier "com.jamfsoftware.JamfAdmin" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = "483DWKW443"</string>
+						<key>Comment</key>
+						<string></string>
+						<key>Identifier</key>
+						<string>com.jamfsoftware.JamfAdmin</string>
+						<key>IdentifierType</key>
+						<string>bundleID</string>
+					</dict>
+				</array>
+				<key>ListenEvent</key>
+				<array>
+					<dict>
+						<key>Allowed</key>
+						<false/>
+						<key>CodeRequirement</key>
+						<string>identifier "io.brackets.appshell" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = JQ525L2MZD</string>
+						<key>Comment</key>
+						<string></string>
+						<key>Identifier</key>
+						<string>io.brackets.appshell</string>
+						<key>IdentifierType</key>
+						<string>bundleID</string>
+					</dict>
+					<dict>
+						<key>Allowed</key>
+						<false/>
+						<key>CodeRequirement</key>
+						<string>identifier "com.jamfsoftware.JamfAdmin" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = "483DWKW443"</string>
+						<key>Comment</key>
+						<string></string>
+						<key>Identifier</key>
+						<string>com.jamfsoftware.JamfAdmin</string>
+						<key>IdentifierType</key>
+						<string>bundleID</string>
+					</dict>
+				</array>
+				<key>MediaLibrary</key>
+				<array>
+					<dict>
+						<key>Allowed</key>
+						<true/>
+						<key>CodeRequirement</key>
+						<string>identifier "io.brackets.appshell" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = JQ525L2MZD</string>
+						<key>Comment</key>
+						<string></string>
+						<key>Identifier</key>
+						<string>io.brackets.appshell</string>
+						<key>IdentifierType</key>
+						<string>bundleID</string>
+					</dict>
+					<dict>
+						<key>Allowed</key>
+						<true/>
+						<key>CodeRequirement</key>
+						<string>identifier "com.jamfsoftware.JamfAdmin" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = "483DWKW443"</string>
+						<key>Comment</key>
+						<string></string>
+						<key>Identifier</key>
+						<string>com.jamfsoftware.JamfAdmin</string>
+						<key>IdentifierType</key>
+						<string>bundleID</string>
+					</dict>
+				</array>
+				<key>Microphone</key>
+				<array>
+					<dict>
+						<key>Allowed</key>
+						<false/>
+						<key>CodeRequirement</key>
+						<string>identifier "io.brackets.appshell" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = JQ525L2MZD</string>
+						<key>Comment</key>
+						<string></string>
+						<key>Identifier</key>
+						<string>io.brackets.appshell</string>
+						<key>IdentifierType</key>
+						<string>bundleID</string>
+					</dict>
+					<dict>
+						<key>Allowed</key>
+						<false/>
+						<key>CodeRequirement</key>
+						<string>identifier "com.jamfsoftware.JamfAdmin" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = "483DWKW443"</string>
+						<key>Comment</key>
+						<string></string>
+						<key>Identifier</key>
+						<string>com.jamfsoftware.JamfAdmin</string>
+						<key>IdentifierType</key>
+						<string>bundleID</string>
+					</dict>
+				</array>
+				<key>Photos</key>
+				<array>
+					<dict>
+						<key>Allowed</key>
+						<false/>
+						<key>CodeRequirement</key>
+						<string>identifier "io.brackets.appshell" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = JQ525L2MZD</string>
+						<key>Comment</key>
+						<string></string>
+						<key>Identifier</key>
+						<string>io.brackets.appshell</string>
+						<key>IdentifierType</key>
+						<string>bundleID</string>
+					</dict>
+					<dict>
+						<key>Allowed</key>
+						<false/>
+						<key>CodeRequirement</key>
+						<string>identifier "com.jamfsoftware.JamfAdmin" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = "483DWKW443"</string>
+						<key>Comment</key>
+						<string></string>
+						<key>Identifier</key>
+						<string>com.jamfsoftware.JamfAdmin</string>
+						<key>IdentifierType</key>
+						<string>bundleID</string>
+					</dict>
+				</array>
+				<key>PostEvent</key>
+				<array>
+					<dict>
+						<key>Allowed</key>
+						<true/>
+						<key>CodeRequirement</key>
+						<string>identifier "io.brackets.appshell" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = JQ525L2MZD</string>
+						<key>Comment</key>
+						<string></string>
+						<key>Identifier</key>
+						<string>io.brackets.appshell</string>
+						<key>IdentifierType</key>
+						<string>bundleID</string>
+					</dict>
+					<dict>
+						<key>Allowed</key>
+						<true/>
+						<key>CodeRequirement</key>
+						<string>identifier "com.jamfsoftware.JamfAdmin" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = "483DWKW443"</string>
+						<key>Comment</key>
+						<string></string>
+						<key>Identifier</key>
+						<string>com.jamfsoftware.JamfAdmin</string>
+						<key>IdentifierType</key>
+						<string>bundleID</string>
+					</dict>
+				</array>
+				<key>Reminders</key>
+				<array>
+					<dict>
+						<key>Allowed</key>
+						<false/>
+						<key>CodeRequirement</key>
+						<string>identifier "io.brackets.appshell" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = JQ525L2MZD</string>
+						<key>Comment</key>
+						<string></string>
+						<key>Identifier</key>
+						<string>io.brackets.appshell</string>
+						<key>IdentifierType</key>
+						<string>bundleID</string>
+					</dict>
+					<dict>
+						<key>Allowed</key>
+						<false/>
+						<key>CodeRequirement</key>
+						<string>identifier "com.jamfsoftware.JamfAdmin" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = "483DWKW443"</string>
+						<key>Comment</key>
+						<string></string>
+						<key>Identifier</key>
+						<string>com.jamfsoftware.JamfAdmin</string>
+						<key>IdentifierType</key>
+						<string>bundleID</string>
+					</dict>
+				</array>
+				<key>ScreenCapture</key>
+				<array>
+					<dict>
+						<key>Allowed</key>
+						<false/>
+						<key>CodeRequirement</key>
+						<string>identifier "io.brackets.appshell" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = JQ525L2MZD</string>
+						<key>Comment</key>
+						<string></string>
+						<key>Identifier</key>
+						<string>io.brackets.appshell</string>
+						<key>IdentifierType</key>
+						<string>bundleID</string>
+					</dict>
+				</array>
+				<key>SpeechRecognition</key>
+				<array>
+					<dict>
+						<key>Allowed</key>
+						<true/>
+						<key>CodeRequirement</key>
+						<string>identifier "io.brackets.appshell" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = JQ525L2MZD</string>
+						<key>Comment</key>
+						<string></string>
+						<key>Identifier</key>
+						<string>io.brackets.appshell</string>
+						<key>IdentifierType</key>
+						<string>bundleID</string>
+					</dict>
+				</array>
+				<key>SystemPolicyAllFiles</key>
+				<array>
+					<dict>
+						<key>Allowed</key>
+						<true/>
+						<key>CodeRequirement</key>
+						<string>identifier "io.brackets.appshell" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = JQ525L2MZD</string>
+						<key>Comment</key>
+						<string></string>
+						<key>Identifier</key>
+						<string>io.brackets.appshell</string>
+						<key>IdentifierType</key>
+						<string>bundleID</string>
+					</dict>
+					<dict>
+						<key>Allowed</key>
+						<true/>
+						<key>CodeRequirement</key>
+						<string>identifier "com.jamfsoftware.JamfAdmin" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = "483DWKW443"</string>
+						<key>Comment</key>
+						<string></string>
+						<key>Identifier</key>
+						<string>com.jamfsoftware.JamfAdmin</string>
+						<key>IdentifierType</key>
+						<string>bundleID</string>
+					</dict>
+				</array>
+				<key>SystemPolicyDesktopFolder</key>
+				<array>
+					<dict>
+						<key>Allowed</key>
+						<false/>
+						<key>CodeRequirement</key>
+						<string>identifier "io.brackets.appshell" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = JQ525L2MZD</string>
+						<key>Comment</key>
+						<string></string>
+						<key>Identifier</key>
+						<string>io.brackets.appshell</string>
+						<key>IdentifierType</key>
+						<string>bundleID</string>
+					</dict>
+				</array>
+				<key>SystemPolicyDocumentsFolder</key>
+				<array>
+					<dict>
+						<key>Allowed</key>
+						<true/>
+						<key>CodeRequirement</key>
+						<string>identifier "io.brackets.appshell" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = JQ525L2MZD</string>
+						<key>Comment</key>
+						<string></string>
+						<key>Identifier</key>
+						<string>io.brackets.appshell</string>
+						<key>IdentifierType</key>
+						<string>bundleID</string>
+					</dict>
+				</array>
+				<key>SystemPolicyDownloadsFolder</key>
+				<array>
+					<dict>
+						<key>Allowed</key>
+						<true/>
+						<key>CodeRequirement</key>
+						<string>identifier "io.brackets.appshell" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = JQ525L2MZD</string>
+						<key>Comment</key>
+						<string></string>
+						<key>Identifier</key>
+						<string>io.brackets.appshell</string>
+						<key>IdentifierType</key>
+						<string>bundleID</string>
+					</dict>
+				</array>
+				<key>SystemPolicyNetworkVolumes</key>
+				<array>
+					<dict>
+						<key>Allowed</key>
+						<false/>
+						<key>CodeRequirement</key>
+						<string>identifier "io.brackets.appshell" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = JQ525L2MZD</string>
+						<key>Comment</key>
+						<string></string>
+						<key>Identifier</key>
+						<string>io.brackets.appshell</string>
+						<key>IdentifierType</key>
+						<string>bundleID</string>
+					</dict>
+				</array>
+				<key>SystemPolicyRemovableVolumes</key>
+				<array>
+					<dict>
+						<key>Allowed</key>
+						<true/>
+						<key>CodeRequirement</key>
+						<string>identifier "io.brackets.appshell" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = JQ525L2MZD</string>
+						<key>Comment</key>
+						<string></string>
+						<key>Identifier</key>
+						<string>io.brackets.appshell</string>
+						<key>IdentifierType</key>
+						<string>bundleID</string>
+					</dict>
+				</array>
+				<key>SystemPolicySysAdminFiles</key>
+				<array>
+					<dict>
+						<key>Allowed</key>
+						<true/>
+						<key>CodeRequirement</key>
+						<string>identifier "io.brackets.appshell" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = JQ525L2MZD</string>
+						<key>Comment</key>
+						<string></string>
+						<key>Identifier</key>
+						<string>io.brackets.appshell</string>
+						<key>IdentifierType</key>
+						<string>bundleID</string>
+					</dict>
+					<dict>
+						<key>Allowed</key>
+						<false/>
+						<key>CodeRequirement</key>
+						<string>identifier "com.jamfsoftware.JamfAdmin" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = "483DWKW443"</string>
+						<key>Comment</key>
+						<string></string>
+						<key>Identifier</key>
+						<string>com.jamfsoftware.JamfAdmin</string>
+						<key>IdentifierType</key>
+						<string>bundleID</string>
+					</dict>
+				</array>
+			</dict>
+		</dict>
+	</array>
+	<key>PayloadDescription</key>
+	<string>TestProfile</string>
+	<key>PayloadDisplayName</key>
+	<string>TestTCCProfileSigned</string>
+	<key>PayloadIdentifier</key>
+	<string>95B9C6FF-E3E0-46C9-9ADB-1EB4AAAD9903</string>
+	<key>PayloadOrganization</key>
+	<string>Jamf</string>
+	<key>PayloadType</key>
+	<string>com.apple.TCC.configuration-profile-policy</string>
+	<key>PayloadUUID</key>
+	<string>77F5C809-610F-47F1-BC52-080D0016B169</string>
+	<key>PayloadVersion</key>
+	<integer>1</integer>
+	<key>payloadScope</key>
+	<string>system</string>
+</dict>
+</plist>
+      †Ç	Ã0Ç"0Ç
+†ﬁºƒ9m†0
+	*ÜHÜ˜
+ 0b10	UUS10U
+
+
+	*ÜHÜ˜
+ Ç OœÔYæ,ı≤l/èÓá2Ë5®nã}…iπŸºw,‘g‚˝öm:Y\ﬂÉΩ≤Æ*ar±ØÕ√E0è£É
+ŒG¥Òìä£tõ§√òrá;>ØEíTπ2ªêSk
+N∂ŸPl!Ä
+âNWåk[<=¶˝ﬁ˜
+#J&á?∫ëíL§mWızXá{hä‰ÜåJÎ‚I™•›U ©ÆªK0Æ·†±º)ÄÊ	wÂæ4¢ ‹‚
+Ê;∏ªÏ∫bïÛcAÇÕ;Lï§€´˘…ïÈO‰MÁ&ôÅÈº˘¥)“zf·.åˆ!ä≈¯x·ÅÆø”êù©≠ÛØ˝8ñg0Q•\ÏqäÇ¥l0Ç¢0Çä†pExˆÃ¯{y0
+	*ÜHÜ˜
+ 0Åñ10	UUS10U
+
+Apple Inc.1,0*U#Apple Worldwide Developer Relations1D0BU;Apple Worldwide Developer Relations Certification Authority0
+171019073254Z
+181019073254Z0Åï10
+	í&âìÚ,d
+3W664XW6KM1:08U1iPhone Developer: depjakub@gmail.com (WLA2YXME5K)10U
+MUVG6TA4V210U
+Adrian Kubisztal10	UUS0Ç"0
+	*ÜHÜ˜
+ Ç 0Ç
+Ç øì	Bw¥ı.“•≤õﬁNQOz	‰ﬂÊ	«DÜv€ë=Î;QütÖß≠q˘:‰¢õüÓ0–˚Ÿ†eYTöºÕ5e2óRÿ]‘zóÉÀÜ\èâQC/‘!˚À0§ã≥Í©:∂uÛ,´2*„10¶æÔØ\!Ò€”æK"Õ|î!Îºà≤Ëöv	√?íl‚eIofmâ}oisÃQÒÆıSë fÊ≈”Æ≠¿ÌtWÖ¯∞†ˇ›9xÄÔ]¨`“πÌóflWêZ<é'QÙTüú!èâ"óC√"qE˙ö-ÉbæëImv™)3ùJûøë·¡§ÃAMóCñπÔü∂¢!"ÓíÚ◊]- £ÇÒ0ÇÌ0?+3010/+0Ü#http://ocsp.apple.com/ocsp03-wwdr010U®'˚ií¨R3»±™‰ﬂQ>´ÂX0Uˇ0 0U#0Äà'	©∂`ãÏÎ∫ˆGY≈RT£∑0ÇU Ç0Ç0Ç	*ÜHÜ˜cd0Å˛0Å√+0Å∂Å≥Reliance on this certificate by any party assumes acceptance of the then applicable standard terms and conditions of use, certificate policy and certification practice statements.06+*http://www.apple.com/certificateauthority/0UˇÄ0U%ˇ0
++0
+*ÜHÜ˜cdˇ 0
+	*ÜHÜ˜
+ Ç …◊¸ˆòb™OﬂÓ¶èÖjè
+N©©·¥Ÿƒ¬t”º~·|E‚∂…˘ …)Y∑cñ|èéõÆ≠o‰«G¬ﬂÿ«ÉËz}˝¸Œﬁ\[ó˙Ë©ºn¨“(éÔlx˛]‘ÖægS†∫s.⁄bª¢6òYöıáâ!:§E5Å¯-DYaX™ÏlUOÚ!≤…>Ü¶ƒâÓù∫¸Ù^≠ßæZ•wﬁBòŒs√
+÷•?ßõë√ü∞Ñ?´`Ãô+‰∆¯&|øóZÙ∆ì“pprO˜-Ò)5ú∏Á$ÕG{Q
+¥REU⁄)äæM1¡Ôéº4hÜNø†◊åYE=CÆAˇ ÍıS\1ÇF0ÇB0Å£0Åñ10	UUS10U
+
+Apple Inc.1,0*U#Apple Worldwide Developer Relations1D0BU;Apple Worldwide Developer Relations Certification AuthoritypExˆÃ¯{y0	+ †y0	*ÜHÜ˜
+	1	*ÜHÜ˜
+0#	*ÜHÜ˜
+	1(hKä\v≥RÊ'ÜÂ˚ßçã’08	*ÜHÜ˜
+	1+0)0	`ÜHe0
+*ÜHÜ˜
+0*ÜHÜ˜
+ Ä0
+	*ÜHÜ˜
+ Ç qp≠NÃ
+Dö?1¿âãâ°Íê	ÿáÙÊ»IYÏV §»µë
+î÷ãœﬂ¡Ì›»¬ÇÓ-qñ)≈ÙÁ8ÍÊrÉë±‹ZY¢√è&õØfºqXíÇˇ0ëà=ôê.–úmdq@P ùñp:≠cc«V◊ø\–Ëä»’€S5ÄK£zeZ«U="&ätS Ùûsà∫eüyu…úº:å¸@ı>}1ãˇ•È˝˝ïõBÑ„&ò«£¸åixw∏ÚéÚ˛*ÉÛ#ƒ ˙MìlJÖã£≤=—WÊÂV›¸>ÌH3ıqÑâ	Ãÿ∞˘¸<∏ên˚U,ÀÈ≈º.é˛K+&<x4˚1>ÜÄo      
