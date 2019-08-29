@@ -249,6 +249,34 @@ extension Model {
                           services: services)
     }
 
+    func importProfile(tccProfile: TCCProfile) {
+
+        if let content = tccProfile.content.first {
+
+            let mirroredServices = Mirror(reflecting: content.services)
+
+            for (_, attr) in mirroredServices.children.enumerated() {
+                if let policy = attr.value as? [TCCPolicy] {
+                    checkAllPolicies(policies: policy)
+                    print(attr.label)
+                }
+            }
+
+            // we have all executables now we can adjust services and others for them based on tccprofile
+            if let addressBook = content.services.addressBook {
+                for book in addressBook {
+                    var executable = getExecutable(bundleIdentifier: book.identifier)
+                    if book.allowed {
+                    executable?.addressBookPolicyString = "Allow"
+                    } else {
+                    executable?.addressBookPolicyString = "Deny"
+                    }
+                }
+            }
+
+        }
+    }
+
     func policyFromString(executable: Executable, value: String) -> TCCPolicy? {
         let allowed: Bool
         switch value {
@@ -259,5 +287,34 @@ extension Model {
         return TCCPolicy(identifier: executable.identifier,
                          codeRequirement: executable.codeRequirement,
                          allowed: allowed)
+    }
+
+    func findExecutableUsing(bundleIdentifier: String) -> Executable?  {
+        if let path = NSWorkspace.shared.absolutePathForApplication(withBundleIdentifier: bundleIdentifier) {
+            if let fileURL = URL(string: "file://\(path)") {
+                let executable = self.loadExecutable(url: fileURL)
+                return executable
+            }
+        }
+        return nil
+    }
+
+    func checkAllPolicies(policies: [TCCPolicy]) {
+        for tccPolicy in policies {
+            if let executable = findExecutableUsing(bundleIdentifier: tccPolicy.identifier) {
+                if getExecutable(bundleIdentifier: tccPolicy.identifier) == nil {
+                    self.selectedExecutables.append(executable)
+                }
+            }
+        }
+    }
+
+    func getExecutable(bundleIdentifier: String) -> Executable? {
+        for executable in selectedExecutables {
+            if (executable.identifier == bundleIdentifier) {
+                return executable
+            }
+        }
+        return nil
     }
 }

@@ -56,5 +56,25 @@ class Executable: NSObject {
     @objc dynamic var networkVolumesPolicyString: String = "-"
     @objc dynamic var removableVolumesPolicyString: String = "-"
 
+    @objc dynamic var policy: [String : String] = ["addressBook": "-",
+                                                  "photos": "-",
+                                                  "reminders": "-",
+                                                  "calendar": "-",
+                                                  "accessibility": "-",
+                                                  "postEvents": "-",
+                                                  "adminFiles": "-",
+                                                  "allFiles": "-",
+                                                  "camera": "-",
+                                                  "microphone": "-",
+                                                  "fileProvider": "-",
+                                                  "listenEvent": "-",
+                                                  "mediaLibrary": "-",
+                                                  "screenCapture": "-",
+                                                  "speechRecognition": "-",
+                                                  "desktopFolder": "-",
+                                                  "documentsFolder": "-",
+                                                  "downloadsFolder": "-",
+                                                  "networkVolumes": "-",
+                                                  "removableVolumes": "-"]
     @objc dynamic var appleEvents: [AppleEventRule] = []
 }

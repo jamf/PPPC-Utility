@@ -160,9 +160,9 @@ class TCCProfileViewController: NSViewController {
         tccProfileImporter.loadTCCProfileFromFile(window: window, { [weak self] tccProfileResult in
             switch tccProfileResult {
             case .success(let tccProfile):
-                print(tccProfile)
-                //configureUI
+                self?.model.importProfile(tccProfile: tccProfile)
             case .failure(let tccProfileImportError):
+                print(tccProfileImportError)
                 if let error = tccProfileImportError {
                 //error
                 }
