@@ -3119,8 +3119,9 @@
                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
                                                     <connections>
-                                                        <binding destination="HiQ-kk-PBp" name="value" keyPath="self.siteId" id="5Ma-Os-2Tf">
+                                                        <binding destination="HiQ-kk-PBp" name="value" keyPath="self.siteId" id="zAi-vy-f3k">
                                                             <dictionary key="options">
+                                                                <bool key="NSContinuouslyUpdatesValue" value="YES"/>
                                                                 <string key="NSNullPlaceholder">Id</string>
                                                             </dictionary>
                                                         </binding>
@@ -3137,8 +3138,9 @@
                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
                                                     <connections>
-                                                        <binding destination="HiQ-kk-PBp" name="value" keyPath="self.siteName" id="JQT-lk-0ZI">
+                                                        <binding destination="HiQ-kk-PBp" name="value" keyPath="self.siteName" id="AdF-9R-4ED">
                                                             <dictionary key="options">
+                                                                <bool key="NSContinuouslyUpdatesValue" value="YES"/>
                                                                 <string key="NSNullPlaceholder">Name</string>
                                                             </dictionary>
                                                         </binding>
