@@ -35,4 +35,17 @@ class AppleEventRule: NSObject {
     
     var value: Bool { return valueString == "Allow" }
     
+    override init() {
+        super.init()
+    }
+
+    init(source: Executable, destination: Executable, value: Bool) {
+        self.source = source
+        self.destination = destination
+        if value{
+            valueString = "Allow"
+        } else {
+            valueString = "Deny"
+        }
+    }
 }

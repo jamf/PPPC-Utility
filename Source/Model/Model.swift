@@ -161,20 +161,28 @@ extension Model {
     }
 
     func importProfile(tccProfile: TCCProfile) {
-
         if let content = tccProfile.content.first {
 
-            for (_, policies) in content.services {
-                 getExecutablesFromAllPolicies(policies: policies)
-            }
+            self.removeExecutables()
 
             for (key, policies) in content.services {
+                getExecutablesFromAllPolicies(policies: policies)
+
                 for policy in policies {
                     let executable = getExecutable(bundleIdentifier: policy.identifier)
-                    if policy.allowed {
-                        executable?.policy.setValue("Allow", forKey: key)
+                    if key == ServicesKeys.appleEvents.rawValue {
+                        if let source = executable, let receiverIdentifier = policy.receiverIdentifier,
+                            let destination = findExecutableUsing(bundleIdentifier: receiverIdentifier) {
+
+                            let appleEvent = AppleEventRule(source: source, destination: destination, value: policy.allowed)
+                            executable?.appleEvents.append(appleEvent)
+                        }
                     } else {
-                        executable?.policy.setValue("Deny", forKey: key)
+                        if policy.allowed {
+                            executable?.policy.setValue("Allow", forKey: key)
+                        } else {
+                            executable?.policy.setValue("Deny", forKey: key)
+                        }
                     }
                 }
             }
@@ -221,5 +229,14 @@ extension Model {
             }
         }
         return nil
+    }
+
+    func removeExecutables() {
+        for executable in self.selectedExecutables {
+            executable.appleEvents = []
+            executable.policy = Policy()
+        }
+        self.selectedExecutables = []
+        self.current = nil
     }
 }
