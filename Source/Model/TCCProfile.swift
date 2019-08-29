@@ -123,7 +123,7 @@ struct TCCProfile : Codable {
         var type: String
         var uuid: String
         var version: Int
-        var services: TCCServices
+        var services: [String: [TCCPolicy]]
         enum CodingKeys: String, CodingKey {
             case payloadDescription = "PayloadDescription"
             case displayName = "PayloadDisplayName"
@@ -156,7 +156,7 @@ struct TCCProfile : Codable {
         case version = "PayloadVersion"
         case content = "PayloadContent"
     }
-    init(organization: String, identifier: String, displayName: String, payloadDescription: String, services: TCCServices) {
+    init(organization: String, identifier: String, displayName: String, payloadDescription: String, services: [String: [TCCPolicy]]) {
         let content = Content(payloadDescription: payloadDescription,
                               displayName: displayName,
                               identifier: identifier,
@@ -182,3 +182,30 @@ struct TCCProfile : Codable {
         return try encoder.encode(self)
     }
 }
+
+
+enum ServicesKeys: String {
+    case addressBook = "AddressBook"
+    case calendar = "Calendar"
+    case reminders = "Reminders"
+    case photos = "Photos"
+    case camera = "Camera"
+    case microphone = "Microphone"
+    case accessibility = "Accessibility"
+    case postEvent = "PostEvent"
+    case allFiles = "SystemPolicyAllFiles"
+    case adminFiles = "SystemPolicySysAdminFiles"
+    case fileProviderPresence = "FileProviderPresence"
+    case listenEvent = "ListenEvent"
+    case mediaLibrary = "MediaLibrary"
+    case screenCapture = "ScreenCapture"
+    case speechRecognition = "SpeechRecognition"
+    case desktopFolder = "SystemPolicyDesktopFolder"
+    case documentsFolder = "SystemPolicyDocumentsFolder"
+    case downloadsFolder = "SystemPolicyDownloadsFolder"
+    case networkVolumes = "SystemPolicyNetworkVolumes"
+    case removableVolumes = "SystemPolicyRemovableVolumes"
+    case appleEvents = "AppleEvents"
+}
+
+

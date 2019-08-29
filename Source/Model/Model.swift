@@ -125,109 +125,19 @@ extension Model {
 extension Model {
     
     func exportProfile(organization: String, identifier: String, displayName: String, payloadDescription: String) -> TCCProfile {
-        var services = TCCServices()
+        var services = [String: [TCCPolicy]]()
         
         selectedExecutables.forEach { executable in
-            if let policy = policyFromString(executable: executable, value: executable.addressBookPolicyString) {
-                services.addressBook = services.addressBook ?? []
-                services.addressBook?.append(policy)
-            }
-            
-            if let policy = policyFromString(executable: executable, value: executable.photosPolicyString) {
-                services.photos = services.photos ?? []
-                services.photos?.append(policy)
-            }
-            
-            if let policy = policyFromString(executable: executable, value: executable.remindersPolicyString) {
-                services.reminders = services.reminders ?? []
-                services.reminders?.append(policy)
-            }
-            
-            if let policy = policyFromString(executable: executable, value: executable.calendarPolicyString) {
-                services.calendar = services.calendar ?? []
-                services.calendar?.append(policy)
-            }
-            
-            
-            if let policy = policyFromString(executable: executable, value: executable.accessibilityPolicyString) {
-                services.accessibility = services.accessibility ?? []
-                services.accessibility?.append(policy)
-            }
-            
-            
-            if let policy = policyFromString(executable: executable, value: executable.postEventsPolicyString) {
-                services.postEvent = services.postEvent ?? []
-                services.postEvent?.append(policy)
-            }
-            
-            if let policy = policyFromString(executable: executable, value: executable.adminFilesPolicyString) {
-                services.adminFiles = services.adminFiles ?? []
-                services.adminFiles?.append(policy)
-            }
-            
-            if let policy = policyFromString(executable: executable, value: executable.allFilesPolicyString) {
-                services.allFiles = services.allFiles ?? []
-                services.allFiles?.append(policy)
-            }
-            
-            if let policy = policyFromString(executable: executable, value: executable.cameraPolicyString) {
-                services.camera = services.camera ?? []
-                services.camera?.append(policy)
-            }
-            
-            if let policy = policyFromString(executable: executable, value: executable.microphonePolicyString) {
-                services.microphone = services.microphone ?? []
-                services.microphone?.append(policy)
-            }
-            
-            if let policy = policyFromString(executable: executable, value: executable.fileProviderPolicyString) {
-                services.fileProviderPresence = services.fileProviderPresence ?? []
-                services.fileProviderPresence?.append(policy)
-            }
 
-            if let policy = policyFromString(executable: executable, value: executable.listenEventPolicyString) {
-                services.listenEvent = services.listenEvent ?? []
-                services.listenEvent?.append(policy)
-            }
+            let mirroredServices = Mirror(reflecting: executable.policy)
 
-            if let policy = policyFromString(executable: executable, value: executable.mediaLibraryPolicyString) {
-                services.mediaLibrary = services.mediaLibrary ?? []
-                services.mediaLibrary?.append(policy)
-            }
-
-            if let policy = policyFromString(executable: executable, value: executable.screenCapturePolicyString) {
-                services.screenCapture = services.screenCapture ?? []
-                services.screenCapture?.append(policy)
-            }
-
-            if let policy = policyFromString(executable: executable, value: executable.speechRecognitionPolicyString) {
-                services.speechRecognition = services.speechRecognition ?? []
-                services.speechRecognition?.append(policy)
-            }
-
-            if let policy = policyFromString(executable: executable, value: executable.desktopFolderPolicyString) {
-                services.desktopFolder = services.desktopFolder ?? []
-                services.desktopFolder?.append(policy)
-            }
-
-            if let policy = policyFromString(executable: executable, value: executable.documentsFolderPolicyString) {
-                services.documentsFolder = services.documentsFolder ?? []
-                services.documentsFolder?.append(policy)
-            }
-
-            if let policy = policyFromString(executable: executable, value: executable.downloadsFolderPolicyString) {
-                services.downloadsFolder = services.downloadsFolder ?? []
-                services.downloadsFolder?.append(policy)
-            }
-
-            if let policy = policyFromString(executable: executable, value: executable.networkVolumesPolicyString) {
-                services.networkVolumes = services.networkVolumes ?? []
-                services.networkVolumes?.append(policy)
-            }
-
-            if let policy = policyFromString(executable: executable, value: executable.removableVolumesPolicyString) {
-                services.removableVolumes = services.removableVolumes ?? []
-                services.removableVolumes?.append(policy)
+            for (_, attr) in mirroredServices.children.enumerated() {
+                if let key = attr.label, let value = attr.value as? String {
+                    if let policyToAppend = policyFromString(executable: executable, value: value) {
+                        services[key] = services[key] ?? []
+                        services[key]?.append(policyToAppend)
+                    }
+                }
             }
 
             executable.appleEvents.forEach { event in
@@ -236,8 +146,9 @@ extension Model {
                                        allowed: event.value,
                                        receiverIdentifier: event.destination.identifier,
                                        receiverCodeRequirement: event.destination.codeRequirement)
-                services.appleEvents = services.appleEvents ?? []
-                services.appleEvents?.append(policy)
+                let appleEventsKey = ServicesKeys.appleEvents.rawValue
+                services[appleEventsKey] = services[appleEventsKey] ?? []
+                services[appleEventsKey]?.append(policy)
                 
             }
         }
@@ -253,27 +164,20 @@ extension Model {
 
         if let content = tccProfile.content.first {
 
-            let mirroredServices = Mirror(reflecting: content.services)
-
-            for (_, attr) in mirroredServices.children.enumerated() {
-                if let policy = attr.value as? [TCCPolicy] {
-                    checkAllPolicies(policies: policy)
-                    print(attr.label)
-                }
+            for (key, policies) in content.services {
+                 checkAllPolicies(policies: policies)
             }
 
-            // we have all executables now we can adjust services and others for them based on tccprofile
-            if let addressBook = content.services.addressBook {
-                for book in addressBook {
-                    var executable = getExecutable(bundleIdentifier: book.identifier)
-                    if book.allowed {
-                    executable?.addressBookPolicyString = "Allow"
+            for (key, policies) in content.services {
+                for policy in policies {
+                    let executable = getExecutable(bundleIdentifier: policy.identifier)
+                    if policy.allowed {
+                        executable?.policy.setValue("Allow", forKey: key)
                     } else {
-                    executable?.addressBookPolicyString = "Deny"
+                        executable?.policy.setValue("Deny", forKey: key)
                     }
                 }
             }
-
         }
     }
 

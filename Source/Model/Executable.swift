@@ -35,46 +35,33 @@ class Executable: NSObject {
     @objc dynamic var identifier: String!
     @objc dynamic var codeRequirement: String!
 
-    @objc dynamic var addressBookPolicyString: String = "-"
-    @objc dynamic var photosPolicyString: String = "-"
-    @objc dynamic var remindersPolicyString: String = "-"
-    @objc dynamic var calendarPolicyString: String = "-"
-    @objc dynamic var accessibilityPolicyString: String = "-"
-    @objc dynamic var postEventsPolicyString: String = "-"
-    @objc dynamic var adminFilesPolicyString: String = "-"
-    @objc dynamic var allFilesPolicyString: String = "-"
-    @objc dynamic var cameraPolicyString: String = "-"
-    @objc dynamic var microphonePolicyString: String = "-"
-    @objc dynamic var fileProviderPolicyString: String = "-"
-    @objc dynamic var listenEventPolicyString: String = "-"
-    @objc dynamic var mediaLibraryPolicyString: String = "-"
-    @objc dynamic var screenCapturePolicyString: String = "-"
-    @objc dynamic var speechRecognitionPolicyString: String = "-"
-    @objc dynamic var desktopFolderPolicyString: String = "-"
-    @objc dynamic var documentsFolderPolicyString: String = "-"
-    @objc dynamic var downloadsFolderPolicyString: String = "-"
-    @objc dynamic var networkVolumesPolicyString: String = "-"
-    @objc dynamic var removableVolumesPolicyString: String = "-"
-
-    @objc dynamic var policy: [String : String] = ["addressBook": "-",
-                                                  "photos": "-",
-                                                  "reminders": "-",
-                                                  "calendar": "-",
-                                                  "accessibility": "-",
-                                                  "postEvents": "-",
-                                                  "adminFiles": "-",
-                                                  "allFiles": "-",
-                                                  "camera": "-",
-                                                  "microphone": "-",
-                                                  "fileProvider": "-",
-                                                  "listenEvent": "-",
-                                                  "mediaLibrary": "-",
-                                                  "screenCapture": "-",
-                                                  "speechRecognition": "-",
-                                                  "desktopFolder": "-",
-                                                  "documentsFolder": "-",
-                                                  "downloadsFolder": "-",
-                                                  "networkVolumes": "-",
-                                                  "removableVolumes": "-"]
+    @objc dynamic var policy: Policy = Policy()
     @objc dynamic var appleEvents: [AppleEventRule] = []
 }
+
+
+class Policy: NSObject {
+    @objc dynamic var AddressBook: String = "-"
+    @objc dynamic var Calendar: String = "-"
+    @objc dynamic var Reminders: String = "-"
+    @objc dynamic var Photos: String = "-"
+    @objc dynamic var Camera: String = "-"
+    @objc dynamic var Microphone: String = "-"
+    @objc dynamic var Accessibility: String = "-"
+    @objc dynamic var PostEvent: String = "-"
+    @objc dynamic var SystemPolicyAllFiles: String = "-"
+    @objc dynamic var SystemPolicySysAdminFiles: String = "-"
+    @objc dynamic var FileProviderPresence: String = "-"
+    @objc dynamic var ListenEvent: String = "-"
+    @objc dynamic var MediaLibrary: String = "-"
+    @objc dynamic var ScreenCapture: String = "-"
+    @objc dynamic var SpeechRecognition: String = "-"
+    @objc dynamic var SystemPolicyDesktopFolder: String = "-"
+    @objc dynamic var SystemPolicyDocumentsFolder: String = "-"
+    @objc dynamic var SystemPolicyDownloadsFolder: String = "-"
+    @objc dynamic var SystemPolicyNetworkVolumes: String = "-"
+    @objc dynamic var SystemPolicyRemovableVolumes: String = "-"
+
+
+}
+
