@@ -164,8 +164,8 @@ extension Model {
 
         if let content = tccProfile.content.first {
 
-            for (key, policies) in content.services {
-                 checkAllPolicies(policies: policies)
+            for (_, policies) in content.services {
+                 getExecutablesFromAllPolicies(policies: policies)
             }
 
             for (key, policies) in content.services {
@@ -195,7 +195,8 @@ extension Model {
 
     func findExecutableUsing(bundleIdentifier: String) -> Executable?  {
         if let path = NSWorkspace.shared.absolutePathForApplication(withBundleIdentifier: bundleIdentifier) {
-            if let fileURL = URL(string: "file://\(path)") {
+            let pathForURL = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? path
+            if let fileURL = URL(string: "file://\(pathForURL)") {
                 let executable = self.loadExecutable(url: fileURL)
                 return executable
             }
@@ -203,7 +204,7 @@ extension Model {
         return nil
     }
 
-    func checkAllPolicies(policies: [TCCPolicy]) {
+    func getExecutablesFromAllPolicies(policies: [TCCPolicy]) {
         for tccPolicy in policies {
             if let executable = findExecutableUsing(bundleIdentifier: tccPolicy.identifier) {
                 if getExecutable(bundleIdentifier: tccPolicy.identifier) == nil {
