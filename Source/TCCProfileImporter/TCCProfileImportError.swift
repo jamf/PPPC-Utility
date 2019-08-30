@@ -39,7 +39,7 @@ public enum TCCProfileImportError: Error {
         case .decodeProfileError:
             return "Unable to read configuration profile. Please make sure the file is correct and try again."
         case .invalidProfileFile(let description):
-            return "Invalid TCC Profile. Please make sure that required keys are inside the tcc profile: \(description)"
+            return "Invalid TCC Profile. Please make sure that required keys are inside profile: \(description)"
         case .emptyFields(let description):
             return "Unable to proceed. The following fields are required: \(description)"
         }

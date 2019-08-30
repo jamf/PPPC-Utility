@@ -162,9 +162,14 @@ class TCCProfileViewController: NSViewController {
             case .success(let tccProfile):
                 self?.model.importProfile(tccProfile: tccProfile)
             case .failure(let tccProfileImportError):
-                print(tccProfileImportError)
+
                 if let error = tccProfileImportError {
-                //error
+                    let alertWindow: NSAlert = NSAlert()
+                    alertWindow.messageText = "Operation Failed"
+                    alertWindow.informativeText = error.localizedDescription
+                    alertWindow.addButton(withTitle: "OK")
+                    alertWindow.alertStyle = .warning
+                    alertWindow.beginSheetModal(for: window)
                 }
             }
         })
