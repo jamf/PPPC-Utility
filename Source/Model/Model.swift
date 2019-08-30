@@ -250,5 +250,6 @@ extension Model {
         }
         self.selectedExecutables = []
         self.current = nil
+        self.store.removeAll()
     }
 }
