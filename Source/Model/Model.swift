@@ -162,7 +162,6 @@ extension Model {
 
     func importProfile(tccProfile: TCCProfile) {
         if let content = tccProfile.content.first {
-
             self.removeSelectedExecutables()
 
             for (key, policies) in content.services {
@@ -200,17 +199,6 @@ extension Model {
                          allowed: allowed)
     }
 
-    func findExecutableOnComputerUsing(bundleIdentifier: String) -> Executable?  {
-        if let path = NSWorkspace.shared.absolutePathForApplication(withBundleIdentifier: bundleIdentifier) {
-            let pathForURL = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? path
-            if let fileURL = URL(string: "file://\(pathForURL)") {
-                let executable = self.loadExecutable(url: fileURL)
-                return executable
-            }
-        }
-        return nil
-    }
-
     func getExecutablesFromAllPolicies(policies: [TCCPolicy]) {
         for tccPolicy in policies {
             if getExecutableFromSelectedExecutables(bundleIdentifier: tccPolicy.identifier) == nil {
@@ -229,15 +217,33 @@ extension Model {
         return nil
     }
 
+    
     func getExecutableFrom(identifier: String, codeRequirement: String) -> Executable {
-        var executable = Executable(identifier: identifier, codeRequirement: codeRequirement, iconPath: IconFilePath.application)
+        var executable = Executable(identifier: identifier, codeRequirement: codeRequirement)
         if let destExecutableFromComputer = findExecutableOnComputerUsing(bundleIdentifier: identifier) {
             executable = destExecutableFromComputer
         }
         return executable
     }
 
-    func removeSelectedExecutables() {
+    private func findExecutableOnComputerUsing(bundleIdentifier: String) -> Executable?  {
+        var pathToLoad: String?
+        if bundleIdentifier.contains("/") {
+            pathToLoad = bundleIdentifier
+        } else {
+            if let path = NSWorkspace.shared.absolutePathForApplication(withBundleIdentifier: bundleIdentifier) {
+                pathToLoad = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? path
+            }
+        }
+
+        if let pathForURL = pathToLoad, let fileURL = URL(string: "file://\(pathForURL)") {
+            let executable = self.loadExecutable(url: fileURL)
+            return executable
+        }
+        return nil
+    }
+
+    private func removeSelectedExecutables() {
         for executable in self.selectedExecutables {
             executable.appleEvents = []
             executable.policy = Policy()

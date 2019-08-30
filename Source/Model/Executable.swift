@@ -42,30 +42,36 @@ class Executable: NSObject {
         super.init()
     }
 
-    init(tccPolicy: TCCPolicy, iconPath: String) {
-        super.init()
-
-        self.identifier = tccPolicy.identifier
-        self.codeRequirement = tccPolicy.codeRequirement
-        self.iconPath = iconPath
-        let partNames = tccPolicy.identifier.components(separatedBy: ".")
-        self.displayName = partNames.last ?? tccPolicy.identifier
-    }
-
-    init(identifier: String, codeRequirement: String, iconPath: String, _ displayName: String? = nil) {
+    init(identifier: String, codeRequirement: String, _ displayName: String? = nil) {
         super.init()
 
         self.identifier = identifier
         self.codeRequirement = codeRequirement
-        self.iconPath = iconPath
-        if let dName = displayName {
-            self.displayName = dName
+        if displayName != nil {
+            self.displayName = displayName
         } else {
-            let partNames = identifier.components(separatedBy: ".")
-            self.displayName = partNames.last ?? identifier
+            self.displayName = generateDisplayName(identifier: identifier)
         }
+        self.iconPath = generateIconPath(identifier: identifier)
     }
 
+    func generateDisplayName(identifier: String) -> String {
+        var separatedBy = "."
+        if  identifier.contains("/") {
+            separatedBy = "/"
+        }
+        let partNames = identifier.components(separatedBy: separatedBy)
+
+        return partNames.last ?? identifier
+    }
+
+    func generateIconPath(identifier: String) -> String {
+        if identifier.contains("/") {
+            return IconFilePath.binary
+        } else {
+            return IconFilePath.application
+        }
+    }
 }
 
 
@@ -90,7 +96,5 @@ class Policy: NSObject {
     @objc dynamic var SystemPolicyDownloadsFolder: String = "-"
     @objc dynamic var SystemPolicyNetworkVolumes: String = "-"
     @objc dynamic var SystemPolicyRemovableVolumes: String = "-"
-
-
 }
 

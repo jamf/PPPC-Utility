@@ -10,6 +10,7 @@
 		5F90EBDD2319934F00738D09 /* Array+appendIfNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F90EBDC2319934F00738D09 /* Array+appendIfNew.swift */; };
 		5F90EBDF2319970000738D09 /* TCCProfileImportError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F90EBDE2319970000738D09 /* TCCProfileImportError.swift */; };
 		5F90EBE12319970500738D09 /* TCCProfileImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F90EBE02319970500738D09 /* TCCProfileImporter.swift */; };
+		5F90EBE42319992B00738D09 /* ModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F90EBE32319992B00738D09 /* ModelTests.swift */; };
 		5F95AE1623158F03002E0A22 /* SwiftyCMSDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F95AE1523158F03002E0A22 /* SwiftyCMSDecoder.swift */; };
 		5F95AE262315A7CB002E0A22 /* TCCProfileImporterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F95AE252315A7CB002E0A22 /* TCCProfileImporterTests.swift */; };
 		5F95AE2D2315B172002E0A22 /* TestTCCProfileSigned.mobileconfig in Resources */ = {isa = PBXBuildFile; fileRef = 5F95AE282315B172002E0A22 /* TestTCCProfileSigned.mobileconfig */; };
@@ -50,6 +51,7 @@
 		5F90EBDC2319934F00738D09 /* Array+appendIfNew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+appendIfNew.swift"; sourceTree = "<group>"; };
 		5F90EBDE2319970000738D09 /* TCCProfileImportError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TCCProfileImportError.swift; sourceTree = "<group>"; };
 		5F90EBE02319970500738D09 /* TCCProfileImporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TCCProfileImporter.swift; sourceTree = "<group>"; };
+		5F90EBE32319992B00738D09 /* ModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelTests.swift; sourceTree = "<group>"; };
 		5F95AE1523158F03002E0A22 /* SwiftyCMSDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyCMSDecoder.swift; sourceTree = "<group>"; };
 		5F95AE1B2315A6AD002E0A22 /* PPPC UtilityTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PPPC UtilityTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F95AE1F2315A6AD002E0A22 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -109,6 +111,14 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		5F90EBE22319991600738D09 /* ModelTests */ = {
+			isa = PBXGroup;
+			children = (
+				5F90EBE32319992B00738D09 /* ModelTests.swift */,
+			);
+			path = ModelTests;
+			sourceTree = "<group>";
+		};
 		5F95AE0B23158AB5002E0A22 /* TCCProfileImporter */ = {
 			isa = PBXGroup;
 			children = (
@@ -130,6 +140,7 @@
 		5F95AE1C2315A6AD002E0A22 /* PPPC UtilityTests */ = {
 			isa = PBXGroup;
 			children = (
+				5F90EBE22319991600738D09 /* ModelTests */,
 				5F95AE272315B069002E0A22 /* TCCProfileImporter */,
 				5F95AE1F2315A6AD002E0A22 /* Info.plist */,
 			);
@@ -346,6 +357,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5F95AE262315A7CB002E0A22 /* TCCProfileImporterTests.swift in Sources */,
+				5F90EBE42319992B00738D09 /* ModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -565,7 +577,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 3EET8WWQY9;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -587,7 +599,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 3EET8WWQY9;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
