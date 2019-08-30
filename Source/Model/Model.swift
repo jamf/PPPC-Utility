@@ -56,6 +56,7 @@ class Model : NSObject {
     }
 
     var store: [String:Executable] = [:]
+    public var importedTCCProfile: TCCProfile?
 }
 
 //  MARK: Loading executable
@@ -162,7 +163,9 @@ extension Model {
 
     func importProfile(tccProfile: TCCProfile) {
         if let content = tccProfile.content.first {
-            self.removeSelectedExecutables()
+            self.cleanUpAndRemoveDependencies()
+
+            self.importedTCCProfile = tccProfile
 
             for (key, policies) in content.services {
                 getExecutablesFromAllPolicies(policies: policies)
@@ -243,7 +246,7 @@ extension Model {
         return nil
     }
 
-    private func removeSelectedExecutables() {
+    private func cleanUpAndRemoveDependencies() {
         for executable in self.selectedExecutables {
             executable.appleEvents = []
             executable.policy = Policy()
@@ -251,5 +254,6 @@ extension Model {
         self.selectedExecutables = []
         self.current = nil
         self.store.removeAll()
+        self.importedTCCProfile = nil
     }
 }
