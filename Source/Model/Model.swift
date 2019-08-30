@@ -85,7 +85,7 @@ extension Model {
                     }
                     executable.iconPath = iconURL.path
                 } else {
-                    executable.iconPath = resourcesURL.appendingPathComponent("AppIcon.icns").path
+                    executable.iconPath = resourcesURL.appendingPathComponent("DefaultAppIcon.icns").path
                 }
                 
                 if !FileManager.default.fileExists(atPath: executable.iconPath) {
@@ -163,19 +163,18 @@ extension Model {
     func importProfile(tccProfile: TCCProfile) {
         if let content = tccProfile.content.first {
 
-            self.removeExecutables()
+            self.removeSelectedExecutables()
 
             for (key, policies) in content.services {
                 getExecutablesFromAllPolicies(policies: policies)
 
                 for policy in policies {
-                    let executable = getExecutable(bundleIdentifier: policy.identifier)
+                    let executable = getExecutableFromSelectedExecutables(bundleIdentifier: policy.identifier)
                     if key == ServicesKeys.appleEvents.rawValue {
-                        if let source = executable, let receiverIdentifier = policy.receiverIdentifier,
-                            let destination = findExecutableUsing(bundleIdentifier: receiverIdentifier) {
-
+                        if let source = executable, let rIdentifier = policy.receiverIdentifier, let rCodeRequirement = policy.receiverCodeRequirement {
+                            let destination = getExecutableFrom(identifier: rIdentifier, codeRequirement: rCodeRequirement)
                             let appleEvent = AppleEventRule(source: source, destination: destination, value: policy.allowed)
-                            executable?.appleEvents.append(appleEvent)
+                            executable?.appleEvents.appendIfNew(appleEvent)
                         }
                     } else {
                         if policy.allowed {
@@ -201,7 +200,7 @@ extension Model {
                          allowed: allowed)
     }
 
-    func findExecutableUsing(bundleIdentifier: String) -> Executable?  {
+    func findExecutableOnComputerUsing(bundleIdentifier: String) -> Executable?  {
         if let path = NSWorkspace.shared.absolutePathForApplication(withBundleIdentifier: bundleIdentifier) {
             let pathForURL = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? path
             if let fileURL = URL(string: "file://\(pathForURL)") {
@@ -214,15 +213,14 @@ extension Model {
 
     func getExecutablesFromAllPolicies(policies: [TCCPolicy]) {
         for tccPolicy in policies {
-            if let executable = findExecutableUsing(bundleIdentifier: tccPolicy.identifier) {
-                if getExecutable(bundleIdentifier: tccPolicy.identifier) == nil {
-                    self.selectedExecutables.append(executable)
-                }
+            if getExecutableFromSelectedExecutables(bundleIdentifier: tccPolicy.identifier) == nil {
+                let executable = getExecutableFrom(identifier: tccPolicy.identifier, codeRequirement: tccPolicy.codeRequirement)
+                self.selectedExecutables.append(executable)
             }
         }
     }
 
-    func getExecutable(bundleIdentifier: String) -> Executable? {
+    func getExecutableFromSelectedExecutables(bundleIdentifier: String) -> Executable? {
         for executable in selectedExecutables {
             if (executable.identifier == bundleIdentifier) {
                 return executable
@@ -231,7 +229,15 @@ extension Model {
         return nil
     }
 
-    func removeExecutables() {
+    func getExecutableFrom(identifier: String, codeRequirement: String) -> Executable {
+        var executable = Executable(identifier: identifier, codeRequirement: codeRequirement, iconPath: IconFilePath.application)
+        if let destExecutableFromComputer = findExecutableOnComputerUsing(bundleIdentifier: identifier) {
+            executable = destExecutableFromComputer
+        }
+        return executable
+    }
+
+    func removeSelectedExecutables() {
         for executable in self.selectedExecutables {
             executable.appleEvents = []
             executable.policy = Policy()

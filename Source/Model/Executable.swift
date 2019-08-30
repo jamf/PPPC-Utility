@@ -34,9 +34,38 @@ class Executable: NSObject {
     @objc dynamic var displayName: String!
     @objc dynamic var identifier: String!
     @objc dynamic var codeRequirement: String!
-
+    
     @objc dynamic var policy: Policy = Policy()
     @objc dynamic var appleEvents: [AppleEventRule] = []
+
+    override init() {
+        super.init()
+    }
+
+    init(tccPolicy: TCCPolicy, iconPath: String) {
+        super.init()
+
+        self.identifier = tccPolicy.identifier
+        self.codeRequirement = tccPolicy.codeRequirement
+        self.iconPath = iconPath
+        let partNames = tccPolicy.identifier.components(separatedBy: ".")
+        self.displayName = partNames.last ?? tccPolicy.identifier
+    }
+
+    init(identifier: String, codeRequirement: String, iconPath: String, _ displayName: String? = nil) {
+        super.init()
+
+        self.identifier = identifier
+        self.codeRequirement = codeRequirement
+        self.iconPath = iconPath
+        if let dName = displayName {
+            self.displayName = dName
+        } else {
+            let partNames = identifier.components(separatedBy: ".")
+            self.displayName = partNames.last ?? identifier
+        }
+    }
+
 }
 
 
