@@ -53,7 +53,50 @@ class TCCProfileViewController: NSViewController {
     @IBOutlet weak var allFilesPopUp: NSPopUpButton!
     @IBOutlet weak var cameraPopUp: NSPopUpButton!
     @IBOutlet weak var microphonePopUp: NSPopUpButton!
-    
+    @IBOutlet weak var fileProviderPresencePopUp: NSPopUpButton!
+    @IBOutlet weak var listenEventPopUp: NSPopUpButton!
+    @IBOutlet weak var mediaLibraryPopUp: NSPopUpButton!
+    @IBOutlet weak var screenCapturePopUp: NSPopUpButton!
+    @IBOutlet weak var speechRecognitionPopUp: NSPopUpButton!
+    @IBOutlet weak var dekstopFolderPopUp: NSPopUpButton!
+    @IBOutlet weak var documentsFolderPopUp: NSPopUpButton!
+    @IBOutlet weak var downloadsFolderPopUp: NSPopUpButton!
+    @IBOutlet weak var networkVolumesPopUp: NSPopUpButton!
+    @IBOutlet weak var removableVolumesPopUp: NSPopUpButton!
+
+    // Labels with descriptions
+    @IBOutlet weak var addressBookHelpButton: InfoButton!
+    @IBOutlet weak var photosHelpButton: InfoButton!
+    @IBOutlet weak var remindersHelpButton: InfoButton!
+    @IBOutlet weak var calendarHelpButton: InfoButton!
+    @IBOutlet weak var accessibilityHelpButton: InfoButton!
+    @IBOutlet weak var postEventsHelpButton: InfoButton!
+    @IBOutlet weak var adminFilesHelpButton: InfoButton!
+    @IBOutlet weak var allFilesHelpButton: InfoButton!
+    @IBOutlet weak var cameraHelpButton: InfoButton!
+    @IBOutlet weak var microphoneHelpButton: InfoButton!
+    @IBOutlet weak var fileProviderHelpButton: InfoButton!
+    @IBOutlet weak var listenEventHelpButton: InfoButton!
+    @IBOutlet weak var mediaLibraryHelpButton: InfoButton!
+    @IBOutlet weak var screenCaptureHelpButton: InfoButton!
+    @IBOutlet weak var speechRecognitionHelpButton: InfoButton!
+    @IBOutlet weak var desktopFolderHelpButton: InfoButton!
+    @IBOutlet weak var documentsFolderHelpButton: InfoButton!
+    @IBOutlet weak var downloadsFolderHelpButton: InfoButton!
+    @IBOutlet weak var networkVolumesHelpButton: InfoButton!
+    @IBOutlet weak var removableVolumesHelpButton: InfoButton!
+
+    @IBOutlet weak var photosStackView: NSStackView!
+    @IBOutlet weak var calendarStackView: NSStackView!
+    @IBOutlet weak var postEventsStackView: NSStackView!
+    @IBOutlet weak var allFilesStackView: NSStackView!
+    @IBOutlet weak var microphoneStackView: NSStackView!
+    @IBOutlet weak var listenEventStackView: NSStackView!
+    @IBOutlet weak var screenCaptureStackView: NSStackView!
+    @IBOutlet weak var desktopFolderStackView: NSStackView!
+    @IBOutlet weak var downloadsFolderStackView: NSStackView!
+    @IBOutlet weak var removableVolumesStackView: NSStackView!
+
     @IBOutlet weak var addressBookPopUpAC: NSArrayController!
     @IBOutlet weak var photosPopUpAC: NSArrayController!
     @IBOutlet weak var remindersPopUpAC: NSArrayController!
@@ -64,6 +107,16 @@ class TCCProfileViewController: NSViewController {
     @IBOutlet weak var allFilesPopUpAC: NSArrayController!
     @IBOutlet weak var cameraPopUpAC: NSArrayController!
     @IBOutlet weak var microphonePopUpAC: NSArrayController!
+    @IBOutlet weak var fileProviderPresencePopUpAC: NSArrayController!
+    @IBOutlet weak var listenEventPopUpAC: NSArrayController!
+    @IBOutlet weak var mediaLibraryPopUpAC: NSArrayController!
+    @IBOutlet weak var screenCapturePopUpAC: NSArrayController!
+    @IBOutlet weak var speechRecognitionPopUpAC: NSArrayController!
+    @IBOutlet weak var dekstopFolderPopUpAC: NSArrayController!
+    @IBOutlet weak var documentsFolderPopUpAC: NSArrayController!
+    @IBOutlet weak var downloadsFolderPopUpAC: NSArrayController!
+    @IBOutlet weak var networkVolumesPopUpAC: NSArrayController!
+    @IBOutlet weak var removableVolumesPopUpAC: NSArrayController!
 
     @IBOutlet weak var saveButton: NSButton!
     @IBOutlet weak var uploadButton: NSButton!
@@ -120,17 +173,41 @@ class TCCProfileViewController: NSViewController {
         super.viewDidLoad()
         
         //  Setup policy pop up
-        addressBookPopUpAC.add(contentsOf: [ "-" , "Allow" , "Deny" ])
-        photosPopUpAC.add(contentsOf: [ "-" , "Allow" , "Deny" ])
-        remindersPopUpAC.add(contentsOf: [ "-" , "Allow" , "Deny" ])
-        calendarPopUpAC.add(contentsOf: [ "-" , "Allow" , "Deny" ])
-        accessibilityPopUpAC.add(contentsOf: [ "-" , "Allow" , "Deny" ])
-        postEventsPopUpAC.add(contentsOf: [ "-" , "Allow" , "Deny" ])
-        adminFilesPopUpAC.add(contentsOf: [ "-" , "Allow" , "Deny" ])
-        allFilesPopUpAC.add(contentsOf: [ "-" , "Allow" , "Deny" ])
-        cameraPopUpAC.add(contentsOf: [ "-" , "Deny" ])
-        microphonePopUpAC.add(contentsOf: [ "-" , "Deny" ])
-        
+        setupAllowDeny(policies: [addressBookPopUpAC,
+                                  photosPopUpAC,
+                                  remindersPopUpAC,
+                                  calendarPopUpAC,
+                                  accessibilityPopUpAC,
+                                  postEventsPopUpAC,
+                                  adminFilesPopUpAC,
+                                  allFilesPopUpAC,
+                                  fileProviderPresencePopUpAC,
+                                  mediaLibraryPopUpAC,
+                                  speechRecognitionPopUpAC,
+                                  dekstopFolderPopUpAC,
+                                  documentsFolderPopUpAC,
+                                  downloadsFolderPopUpAC,
+                                  networkVolumesPopUpAC,
+                                  removableVolumesPopUpAC])
+
+        setupDenyOnly(policies: [cameraPopUpAC,
+                                 microphonePopUpAC,
+                                 listenEventPopUpAC,
+                                 screenCapturePopUpAC])
+
+        setupDescriptions()
+
+        setupStackViewsWithBackground(stackViews: [photosStackView,
+                                                   calendarStackView,
+                                                   postEventsStackView,
+                                                   allFilesStackView,
+                                                   microphoneStackView,
+                                                   listenEventStackView,
+                                                   screenCaptureStackView,
+                                                   desktopFolderStackView,
+                                                   downloadsFolderStackView,
+                                                   removableVolumesStackView])
+
         //  Setup table views
         executablesTable.registerForDraggedTypes([.fileURL])
         executablesTable.dataSource = self
@@ -139,7 +216,70 @@ class TCCProfileViewController: NSViewController {
         
         //  Record button
     }
-    
+
+    @IBAction func showHelpMessage(_ sender: InfoButton) {
+        sender.showHelpMessage()
+    }
+
+    private func setupAllowDeny(policies: [NSArrayController]) {
+        for policy in policies {
+            policy.add(contentsOf: ["-", "Allow", "Deny"])
+        }
+    }
+
+    private func setupDenyOnly(policies: [NSArrayController]) {
+        for policy in policies {
+            policy.add(contentsOf: ["-", "Deny"])
+        }
+    }
+
+    private func setupStackViewsWithBackground(stackViews: [NSStackView]) {
+        let darkModeEnabled = isDarkModeEnabled()
+
+        for stackView in stackViews {
+            stackView.wantsLayer = true
+            if darkModeEnabled {
+                stackView.layer?.backgroundColor = NSColor(red: 0.157, green: 0.165, blue: 0.173, alpha: 1.0).cgColor
+            } else {
+                stackView.layer?.backgroundColor = NSColor(red: 0.955, green: 0.96, blue: 0.96, alpha: 1.0).cgColor
+            }
+        }
+    }
+
+    private func isDarkModeEnabled() -> Bool {
+        var darkModeEnabled = false
+        if #available(OSX 10.14, *) {
+            if view.effectiveAppearance.name == .darkAqua {
+                darkModeEnabled = true
+            }
+        }
+
+        return darkModeEnabled
+    }
+
+    private func setupDescriptions() {
+        addressBookHelpButton.setHelpMessage(ProfilesDescriptions.addressBook.rawValue)
+        photosHelpButton.setHelpMessage(ProfilesDescriptions.photos.rawValue)
+        remindersHelpButton.setHelpMessage(ProfilesDescriptions.reminders.rawValue)
+        calendarHelpButton.setHelpMessage(ProfilesDescriptions.calendar.rawValue)
+        accessibilityHelpButton.setHelpMessage(ProfilesDescriptions.accessibility.rawValue)
+        postEventsHelpButton.setHelpMessage(ProfilesDescriptions.postEvent.rawValue)
+        adminFilesHelpButton.setHelpMessage(ProfilesDescriptions.systemPolicySysAdminFiles.rawValue)
+        allFilesHelpButton.setHelpMessage(ProfilesDescriptions.systemPolicyAllFiles.rawValue)
+        cameraHelpButton.setHelpMessage(ProfilesDescriptions.camera.rawValue)
+        microphoneHelpButton.setHelpMessage(ProfilesDescriptions.microphone.rawValue)
+        fileProviderHelpButton.setHelpMessage(ProfilesDescriptions.fileProviderPresence.rawValue)
+        listenEventHelpButton.setHelpMessage(ProfilesDescriptions.listenEvent.rawValue)
+        mediaLibraryHelpButton.setHelpMessage(ProfilesDescriptions.mediaLibrary.rawValue)
+        screenCaptureHelpButton.setHelpMessage(ProfilesDescriptions.screenCapture.rawValue)
+        speechRecognitionHelpButton.setHelpMessage(ProfilesDescriptions.speechRecognition.rawValue)
+        desktopFolderHelpButton.setHelpMessage(ProfilesDescriptions.systemPolicyDesktopFolder.rawValue)
+        documentsFolderHelpButton.setHelpMessage(ProfilesDescriptions.systemPolicyDocumentsFolder.rawValue)
+        downloadsFolderHelpButton.setHelpMessage(ProfilesDescriptions.systemPolicyDownloadsFolder.rawValue)
+        networkVolumesHelpButton.setHelpMessage(ProfilesDescriptions.systemPolicyNetworkVolumes.rawValue)
+        removableVolumesHelpButton.setHelpMessage(ProfilesDescriptions.systemPolicyRemovableVolumes.rawValue)
+    }
+
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         guard let openVC = segue.destinationController as? OpenViewController else { return }

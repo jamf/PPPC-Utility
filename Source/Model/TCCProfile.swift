@@ -78,6 +78,16 @@ struct TCCServices : Codable {
     var postEvent: [TCCPolicy]?
     var allFiles: [TCCPolicy]?
     var adminFiles: [TCCPolicy]?
+    var fileProviderPresence: [TCCPolicy]?
+    var listenEvent: [TCCPolicy]?
+    var mediaLibrary: [TCCPolicy]?
+    var screenCapture: [TCCPolicy]?
+    var speechRecognition: [TCCPolicy]?
+    var desktopFolder: [TCCPolicy]?
+    var documentsFolder: [TCCPolicy]?
+    var downloadsFolder: [TCCPolicy]?
+    var networkVolumes: [TCCPolicy]?
+    var removableVolumes: [TCCPolicy]?
     var appleEvents: [TCCPolicy]?
     enum CodingKeys: String, CodingKey {
         case addressBook = "AddressBook"
@@ -90,6 +100,16 @@ struct TCCServices : Codable {
         case postEvent = "PostEvent"
         case allFiles = "SystemPolicyAllFiles"
         case adminFiles = "SystemPolicySysAdminFiles"
+        case fileProviderPresence = "FileProviderPresence"
+        case listenEvent = "ListenEvent"
+        case mediaLibrary = "MediaLibrary"
+        case screenCapture = "ScreenCapture"
+        case speechRecognition = "SpeechRecognition"
+        case desktopFolder = "SystemPolicyDesktopFolder"
+        case documentsFolder = "SystemPolicyDocumentsFolder"
+        case downloadsFolder = "SystemPolicyDownloadsFolder"
+        case networkVolumes = "SystemPolicyNetworkVolumes"
+        case removableVolumes = "SystemPolicyRemovableVolumes"
         case appleEvents = "AppleEvents"
     }
 }
