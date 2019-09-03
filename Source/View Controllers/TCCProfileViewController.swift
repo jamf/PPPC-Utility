@@ -259,10 +259,27 @@ class TCCProfileViewController: NSViewController {
     }
 
     private func setupStackViewsWithBackground(stackViews: [NSStackView]) {
+        let darkModeEnabled = isDarkModeEnabled()
+
         for stackView in stackViews {
             stackView.wantsLayer = true
-            stackView.layer?.backgroundColor = NSColor(red: 0.955, green: 0.96, blue: 0.96, alpha: 1.0).cgColor
+            if darkModeEnabled {
+                stackView.layer?.backgroundColor = NSColor(red: 0.157, green: 0.165, blue: 0.173, alpha: 1.0).cgColor
+            } else {
+                stackView.layer?.backgroundColor = NSColor(red: 0.955, green: 0.96, blue: 0.96, alpha: 1.0).cgColor
+            }
         }
+    }
+
+    private func isDarkModeEnabled() -> Bool {
+        var darkModeEnabled = false
+        if #available(OSX 10.14, *) {
+            if view.effectiveAppearance.name == .darkAqua {
+                darkModeEnabled = true
+            }
+        }
+
+        return darkModeEnabled
     }
 
     private func setupDescriptions() {
