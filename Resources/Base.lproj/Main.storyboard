@@ -2750,7 +2750,7 @@
                                     <gridCell row="eyN-Xe-Uic" column="beA-7f-m1M" id="CC6-6a-qJZ">
                                         <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ra0-qo-Ut0">
                                             <rect key="frame" x="47" y="212" width="105" height="16"/>
-                                            <textFieldCell key="cell" lineBreakMode="clipping" title="Jamf Pro Server:" id="Feg-Ux-zb6">
+                                            <textFieldCell key="cell" lineBreakMode="clipping" title="Jamf Pro Server URL:" id="Feg-Ux-zb6">
                                                 <font key="font" usesAppearanceFont="YES"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -2771,10 +2771,10 @@
                                                         <string key="NSValueTransformerName">NSIsNil</string>
                                                     </dictionary>
                                                 </binding>
-                                                <binding destination="myc-4h-VBq" name="value" keyPath="values.jamfProServer" id="XiN-F4-3RS">
+                                                <binding destination="myc-4h-VBq" name="value" keyPath="values.jamfProServer" id="b2i-mX-P1C">
                                                     <dictionary key="options">
                                                         <bool key="NSContinuouslyUpdatesValue" value="YES"/>
-                                                        <string key="NSNullPlaceholder">[Required]</string>
+                                                        <string key="NSNullPlaceholder">https://jss.mycompany.com:8443/</string>
                                                     </dictionary>
                                                 </binding>
                                             </connections>
