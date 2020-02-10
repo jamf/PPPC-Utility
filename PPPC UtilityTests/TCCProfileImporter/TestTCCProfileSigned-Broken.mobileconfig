@@ -568,7 +568,7 @@
 	<string>77F5C809-610F-47F1-BC52-080D0016B169</string>
 	<key>PayloadVersion</key>
 	<integer>1</integer>
-	<key>payloadScope</key>
+	<key>PayloadScope</key>
 	<string>system</string>
 </dict>
 </plist>
