@@ -103,7 +103,7 @@ struct TCCProfile : Codable {
         case displayName = "PayloadDisplayName"
         case identifier = "PayloadIdentifier"
         case organization = "PayloadOrganization"
-        case scope = "payloadScope"
+        case scope = "PayloadScope"
         case type = "PayloadType"
         case uuid = "PayloadUUID"
         case version = "PayloadVersion"
@@ -120,8 +120,8 @@ struct TCCProfile : Codable {
                               services: services)
         self.version = 1
         self.uuid = UUID().uuidString
-        self.type = content.type
-        self.scope = "system"
+        self.type = "Configuration"
+        self.scope = "System"
         self.organization = content.organization
         self.identifier = content.identifier
         self.displayName = content.displayName
