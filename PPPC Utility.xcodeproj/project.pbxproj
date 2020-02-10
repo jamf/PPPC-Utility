@@ -7,6 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5F90EBDD2319934F00738D09 /* Array+appendIfNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F90EBDC2319934F00738D09 /* Array+appendIfNew.swift */; };
+		5F90EBDF2319970000738D09 /* TCCProfileImportError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F90EBDE2319970000738D09 /* TCCProfileImportError.swift */; };
+		5F90EBE12319970500738D09 /* TCCProfileImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F90EBE02319970500738D09 /* TCCProfileImporter.swift */; };
+		5F90EBE42319992B00738D09 /* ModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F90EBE32319992B00738D09 /* ModelTests.swift */; };
+		5F95AE1623158F03002E0A22 /* SwiftyCMSDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F95AE1523158F03002E0A22 /* SwiftyCMSDecoder.swift */; };
+		5F95AE262315A7CB002E0A22 /* TCCProfileImporterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F95AE252315A7CB002E0A22 /* TCCProfileImporterTests.swift */; };
+		5F95AE2D2315B172002E0A22 /* TestTCCProfileSigned.mobileconfig in Resources */ = {isa = PBXBuildFile; fileRef = 5F95AE282315B172002E0A22 /* TestTCCProfileSigned.mobileconfig */; };
+		5F95AE2E2315B172002E0A22 /* TestTCCUnsignedProfile.mobileconfig in Resources */ = {isa = PBXBuildFile; fileRef = 5F95AE292315B172002E0A22 /* TestTCCUnsignedProfile.mobileconfig */; };
+		5F95AE2F2315B172002E0A22 /* TestTCCUnsignedProfile-Broken.mobileconfig in Resources */ = {isa = PBXBuildFile; fileRef = 5F95AE2A2315B172002E0A22 /* TestTCCUnsignedProfile-Broken.mobileconfig */; };
+		5F95AE302315B172002E0A22 /* TestTCCProfileSigned-Broken.mobileconfig in Resources */ = {isa = PBXBuildFile; fileRef = 5F95AE2B2315B172002E0A22 /* TestTCCProfileSigned-Broken.mobileconfig */; };
+		5F95AE312315B172002E0A22 /* TestTCCUnsignedProfile-Empty.mobileconfig in Resources */ = {isa = PBXBuildFile; fileRef = 5F95AE2C2315B172002E0A22 /* TestTCCUnsignedProfile-Empty.mobileconfig */; };
 		6E6216F9215321CE0043DF18 /* OpenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6216F8215321CE0043DF18 /* OpenViewController.swift */; };
 		6E651CC523143890001CC974 /* ProfilesDescriptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E651CC423143890001CC974 /* ProfilesDescriptions.swift */; };
 		6E651CC82314397D001CC974 /* FlippedClipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E651CC72314397D001CC974 /* FlippedClipView.swift */; };
@@ -26,7 +37,30 @@
 		6EC40A1C214EF87800BE4F17 /* SigningIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC40A1B214EF87800BE4F17 /* SigningIdentity.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		5F95AE202315A6AD002E0A22 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6EC409D2214D65BC00BE4F17 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6EC409D9214D65BC00BE4F17;
+			remoteInfo = "PPPC Utility";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		5F90EBDC2319934F00738D09 /* Array+appendIfNew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+appendIfNew.swift"; sourceTree = "<group>"; };
+		5F90EBDE2319970000738D09 /* TCCProfileImportError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TCCProfileImportError.swift; sourceTree = "<group>"; };
+		5F90EBE02319970500738D09 /* TCCProfileImporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TCCProfileImporter.swift; sourceTree = "<group>"; };
+		5F90EBE32319992B00738D09 /* ModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelTests.swift; sourceTree = "<group>"; };
+		5F95AE1523158F03002E0A22 /* SwiftyCMSDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyCMSDecoder.swift; sourceTree = "<group>"; };
+		5F95AE1B2315A6AD002E0A22 /* PPPC UtilityTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PPPC UtilityTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5F95AE1F2315A6AD002E0A22 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5F95AE252315A7CB002E0A22 /* TCCProfileImporterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TCCProfileImporterTests.swift; sourceTree = "<group>"; };
+		5F95AE282315B172002E0A22 /* TestTCCProfileSigned.mobileconfig */ = {isa = PBXFileReference; lastKnownFileType = file; path = TestTCCProfileSigned.mobileconfig; sourceTree = "<group>"; };
+		5F95AE292315B172002E0A22 /* TestTCCUnsignedProfile.mobileconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = TestTCCUnsignedProfile.mobileconfig; sourceTree = "<group>"; };
+		5F95AE2A2315B172002E0A22 /* TestTCCUnsignedProfile-Broken.mobileconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "TestTCCUnsignedProfile-Broken.mobileconfig"; sourceTree = "<group>"; };
+		5F95AE2B2315B172002E0A22 /* TestTCCProfileSigned-Broken.mobileconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "TestTCCProfileSigned-Broken.mobileconfig"; sourceTree = "<group>"; };
+		5F95AE2C2315B172002E0A22 /* TestTCCUnsignedProfile-Empty.mobileconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "TestTCCUnsignedProfile-Empty.mobileconfig"; sourceTree = "<group>"; };
 		6E5D5A1521541B8F00B43312 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		6E6216F8215321CE0043DF18 /* OpenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenViewController.swift; sourceTree = "<group>"; };
 		6E651CC423143890001CC974 /* ProfilesDescriptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilesDescriptions.swift; sourceTree = "<group>"; };
@@ -52,6 +86,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		5F95AE182315A6AD002E0A22 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6EC409D7214D65BC00BE4F17 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -62,6 +103,63 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5F90EBDB2319931100738D09 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				5F90EBDC2319934F00738D09 /* Array+appendIfNew.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		5F90EBE22319991600738D09 /* ModelTests */ = {
+			isa = PBXGroup;
+			children = (
+				5F90EBE32319992B00738D09 /* ModelTests.swift */,
+			);
+			path = ModelTests;
+			sourceTree = "<group>";
+		};
+		5F95AE0B23158AB5002E0A22 /* TCCProfileImporter */ = {
+			isa = PBXGroup;
+			children = (
+				5F90EBE02319970500738D09 /* TCCProfileImporter.swift */,
+				5F90EBDE2319970000738D09 /* TCCProfileImportError.swift */,
+			);
+			name = TCCProfileImporter;
+			path = Source/TCCProfileImporter;
+			sourceTree = SOURCE_ROOT;
+		};
+		5F95AE1423158EF0002E0A22 /* External */ = {
+			isa = PBXGroup;
+			children = (
+				5F95AE1523158F03002E0A22 /* SwiftyCMSDecoder.swift */,
+			);
+			path = External;
+			sourceTree = "<group>";
+		};
+		5F95AE1C2315A6AD002E0A22 /* PPPC UtilityTests */ = {
+			isa = PBXGroup;
+			children = (
+				5F90EBE22319991600738D09 /* ModelTests */,
+				5F95AE272315B069002E0A22 /* TCCProfileImporter */,
+				5F95AE1F2315A6AD002E0A22 /* Info.plist */,
+			);
+			path = "PPPC UtilityTests";
+			sourceTree = "<group>";
+		};
+		5F95AE272315B069002E0A22 /* TCCProfileImporter */ = {
+			isa = PBXGroup;
+			children = (
+				5F95AE2B2315B172002E0A22 /* TestTCCProfileSigned-Broken.mobileconfig */,
+				5F95AE282315B172002E0A22 /* TestTCCProfileSigned.mobileconfig */,
+				5F95AE2A2315B172002E0A22 /* TestTCCUnsignedProfile-Broken.mobileconfig */,
+				5F95AE2C2315B172002E0A22 /* TestTCCUnsignedProfile-Empty.mobileconfig */,
+				5F95AE292315B172002E0A22 /* TestTCCUnsignedProfile.mobileconfig */,
+				5F95AE252315A7CB002E0A22 /* TCCProfileImporterTests.swift */,
+			);
+			path = TCCProfileImporter;
+			sourceTree = "<group>";
+		};
 		6E651CC623143969001CC974 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -77,7 +175,9 @@
 				6E95730721553B650002C30B /* LICENSE */,
 				6E5D5A1521541B8F00B43312 /* README.md */,
 				6EC409DC214D65BC00BE4F17 /* Source */,
+				5F95AE1423158EF0002E0A22 /* External */,
 				6EC409F6214D975A00BE4F17 /* Resources */,
+				5F95AE1C2315A6AD002E0A22 /* PPPC UtilityTests */,
 				6EC409DB214D65BC00BE4F17 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -86,6 +186,7 @@
 			isa = PBXGroup;
 			children = (
 				6EC409DA214D65BC00BE4F17 /* PPPC Utility.app */,
+				5F95AE1B2315A6AD002E0A22 /* PPPC UtilityTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -99,6 +200,8 @@
 				6E651CC623143969001CC974 /* Views */,
 				6EC40A1E214EF89600BE4F17 /* View Controllers */,
 				6EC40A1D214EF87E00BE4F17 /* Model */,
+				5F95AE0B23158AB5002E0A22 /* TCCProfileImporter */,
+				5F90EBDB2319931100738D09 /* Extensions */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -141,6 +244,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		5F95AE1A2315A6AD002E0A22 /* PPPC UtilityTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5F95AE222315A6AD002E0A22 /* Build configuration list for PBXNativeTarget "PPPC UtilityTests" */;
+			buildPhases = (
+				5F95AE172315A6AD002E0A22 /* Sources */,
+				5F95AE182315A6AD002E0A22 /* Frameworks */,
+				5F95AE192315A6AD002E0A22 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5F95AE212315A6AD002E0A22 /* PBXTargetDependency */,
+			);
+			name = "PPPC UtilityTests";
+			productName = "PPPC UtilityTests";
+			productReference = 5F95AE1B2315A6AD002E0A22 /* PPPC UtilityTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		6EC409D9214D65BC00BE4F17 /* PPPC Utility */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6EC409EA214D65BD00BE4F17 /* Build configuration list for PBXNativeTarget "PPPC Utility" */;
@@ -164,10 +285,15 @@
 		6EC409D2214D65BC00BE4F17 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1000;
+				LastSwiftUpdateCheck = 1020;
 				LastUpgradeCheck = 1000;
 				ORGANIZATIONNAME = Jamf;
 				TargetAttributes = {
+					5F95AE1A2315A6AD002E0A22 = {
+						CreatedOnToolsVersion = 10.2.1;
+						LastSwiftMigration = 1020;
+						TestTargetID = 6EC409D9214D65BC00BE4F17;
+					};
 					6EC409D9214D65BC00BE4F17 = {
 						CreatedOnToolsVersion = 10.0;
 						LastSwiftMigration = 1100;
@@ -196,11 +322,24 @@
 			projectRoot = "";
 			targets = (
 				6EC409D9214D65BC00BE4F17 /* PPPC Utility */,
+				5F95AE1A2315A6AD002E0A22 /* PPPC UtilityTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		5F95AE192315A6AD002E0A22 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5F95AE2D2315B172002E0A22 /* TestTCCProfileSigned.mobileconfig in Resources */,
+				5F95AE2E2315B172002E0A22 /* TestTCCUnsignedProfile.mobileconfig in Resources */,
+				5F95AE312315B172002E0A22 /* TestTCCUnsignedProfile-Empty.mobileconfig in Resources */,
+				5F95AE2F2315B172002E0A22 /* TestTCCUnsignedProfile-Broken.mobileconfig in Resources */,
+				5F95AE302315B172002E0A22 /* TestTCCProfileSigned-Broken.mobileconfig in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6EC409D8214D65BC00BE4F17 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -213,11 +352,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		5F95AE172315A6AD002E0A22 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5F95AE262315A7CB002E0A22 /* TCCProfileImporterTests.swift in Sources */,
+				5F90EBE42319992B00738D09 /* ModelTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6EC409D6214D65BC00BE4F17 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F90EBE12319970500738D09 /* TCCProfileImporter.swift in Sources */,
+				5F95AE1623158F03002E0A22 /* SwiftyCMSDecoder.swift in Sources */,
 				6EB86F692151476500FBE634 /* JamfProClient.swift in Sources */,
+				5F90EBDD2319934F00738D09 /* Array+appendIfNew.swift in Sources */,
 				6EC40A14214DFB5800BE4F17 /* Model.swift in Sources */,
 				6EC40A1C214EF87800BE4F17 /* SigningIdentity.swift in Sources */,
 				6EC40A18214ECF2C00BE4F17 /* UploadViewController.swift in Sources */,
@@ -231,11 +382,20 @@
 				6EC40A10214DE3B200BE4F17 /* Executable.swift in Sources */,
 				6EC40A16214ECF1E00BE4F17 /* SaveViewController.swift in Sources */,
 				6EB45830214FFCCB00BE5749 /* AppleEventRule.swift in Sources */,
+				5F90EBDF2319970000738D09 /* TCCProfileImportError.swift in Sources */,
 				6E651CC82314397D001CC974 /* FlippedClipView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		5F95AE212315A6AD002E0A22 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6EC409D9214D65BC00BE4F17 /* PPPC Utility */;
+			targetProxy = 5F95AE202315A6AD002E0A22 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		6EC409E3214D65BD00BE4F17 /* Main.storyboard */ = {
@@ -249,6 +409,51 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		5F95AE232315A6AD002E0A22 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 483DWKW443;
+				INFOPLIST_FILE = "PPPC UtilityTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.jamf.PPPC-UtilityTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PPPC Utility.app/Contents/MacOS/PPPC Utility";
+			};
+			name = Debug;
+		};
+		5F95AE242315A6AD002E0A22 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 483DWKW443;
+				INFOPLIST_FILE = "PPPC UtilityTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.jamf.PPPC-UtilityTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PPPC Utility.app/Contents/MacOS/PPPC Utility";
+			};
+			name = Release;
+		};
 		6EC409E8214D65BD00BE4F17 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -411,6 +616,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		5F95AE222315A6AD002E0A22 /* Build configuration list for PBXNativeTarget "PPPC UtilityTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5F95AE232315A6AD002E0A22 /* Debug */,
+				5F95AE242315A6AD002E0A22 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		6EC409D5214D65BC00BE4F17 /* Build configuration list for PBXProject "PPPC Utility" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

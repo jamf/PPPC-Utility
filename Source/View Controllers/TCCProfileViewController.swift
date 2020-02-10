@@ -149,6 +149,31 @@ class TCCProfileViewController: NSViewController {
             self.insetIntoAppleEvents($0)
         }
     }
+
+    @IBAction func importProfile(_ sender: NSButton) {
+        guard let window = self.view.window else {
+            return
+        }
+
+        let tccProfileImporter = TCCProfileImporter()
+
+        tccProfileImporter.loadTCCProfileFromFile(window: window, { [weak self] tccProfileResult in
+            switch tccProfileResult {
+            case .success(let tccProfile):
+                self?.model.importProfile(tccProfile: tccProfile)
+            case .failure(let tccProfileImportError):
+
+                if let error = tccProfileImportError {
+                    let alertWindow: NSAlert = NSAlert()
+                    alertWindow.messageText = "Operation Failed"
+                    alertWindow.informativeText = error.localizedDescription
+                    alertWindow.addButton(withTitle: "OK")
+                    alertWindow.alertStyle = .warning
+                    alertWindow.beginSheetModal(for: window)
+                }
+            }
+        })
+    }
     
     func promptForExecutables(_ block: @escaping (Executable) -> Void) {
         let panel = NSOpenPanel()

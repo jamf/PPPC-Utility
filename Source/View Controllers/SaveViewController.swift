@@ -95,6 +95,8 @@ class SaveViewController: NSViewController {
         } catch {
             print("Error loading identities: \(error)")
         }
+
+        loadImportedTCCProfileInfo()
     }
     
     override func viewWillAppear() {
@@ -137,6 +139,17 @@ class SaveViewController: NSViewController {
             print("Error: \(error)")
         }
         self.dismiss(nil)
+    }
+
+    func loadImportedTCCProfileInfo() {
+        let model = Model.shared
+
+        if let tccProfile = model.importedTCCProfile {
+            organizationLabel.stringValue = tccProfile.organization
+            payloadName = tccProfile.displayName
+            payloadDescription = tccProfile.payloadDescription
+            payloadIdentifier = tccProfile.identifier
+        }
     }
 
 }

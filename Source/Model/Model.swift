@@ -56,6 +56,7 @@ class Model : NSObject {
     }
 
     var store: [String:Executable] = [:]
+    public var importedTCCProfile: TCCProfile?
 }
 
 //  MARK: Loading executable
@@ -85,7 +86,7 @@ extension Model {
                     }
                     executable.iconPath = iconURL.path
                 } else {
-                    executable.iconPath = resourcesURL.appendingPathComponent("AppIcon.icns").path
+                    executable.iconPath = resourcesURL.appendingPathComponent("DefaultAppIcon.icns").path
                 }
                 
                 if !FileManager.default.fileExists(atPath: executable.iconPath) {
@@ -125,109 +126,19 @@ extension Model {
 extension Model {
     
     func exportProfile(organization: String, identifier: String, displayName: String, payloadDescription: String) -> TCCProfile {
-        var services = TCCServices()
+        var services = [String: [TCCPolicy]]()
         
         selectedExecutables.forEach { executable in
-            if let policy = policyFromString(executable: executable, value: executable.addressBookPolicyString) {
-                services.addressBook = services.addressBook ?? []
-                services.addressBook?.append(policy)
-            }
-            
-            if let policy = policyFromString(executable: executable, value: executable.photosPolicyString) {
-                services.photos = services.photos ?? []
-                services.photos?.append(policy)
-            }
-            
-            if let policy = policyFromString(executable: executable, value: executable.remindersPolicyString) {
-                services.reminders = services.reminders ?? []
-                services.reminders?.append(policy)
-            }
-            
-            if let policy = policyFromString(executable: executable, value: executable.calendarPolicyString) {
-                services.calendar = services.calendar ?? []
-                services.calendar?.append(policy)
-            }
-            
-            
-            if let policy = policyFromString(executable: executable, value: executable.accessibilityPolicyString) {
-                services.accessibility = services.accessibility ?? []
-                services.accessibility?.append(policy)
-            }
-            
-            
-            if let policy = policyFromString(executable: executable, value: executable.postEventsPolicyString) {
-                services.postEvent = services.postEvent ?? []
-                services.postEvent?.append(policy)
-            }
-            
-            if let policy = policyFromString(executable: executable, value: executable.adminFilesPolicyString) {
-                services.adminFiles = services.adminFiles ?? []
-                services.adminFiles?.append(policy)
-            }
-            
-            if let policy = policyFromString(executable: executable, value: executable.allFilesPolicyString) {
-                services.allFiles = services.allFiles ?? []
-                services.allFiles?.append(policy)
-            }
-            
-            if let policy = policyFromString(executable: executable, value: executable.cameraPolicyString) {
-                services.camera = services.camera ?? []
-                services.camera?.append(policy)
-            }
-            
-            if let policy = policyFromString(executable: executable, value: executable.microphonePolicyString) {
-                services.microphone = services.microphone ?? []
-                services.microphone?.append(policy)
-            }
-            
-            if let policy = policyFromString(executable: executable, value: executable.fileProviderPolicyString) {
-                services.fileProviderPresence = services.fileProviderPresence ?? []
-                services.fileProviderPresence?.append(policy)
-            }
 
-            if let policy = policyFromString(executable: executable, value: executable.listenEventPolicyString) {
-                services.listenEvent = services.listenEvent ?? []
-                services.listenEvent?.append(policy)
-            }
+            let mirroredServices = Mirror(reflecting: executable.policy)
 
-            if let policy = policyFromString(executable: executable, value: executable.mediaLibraryPolicyString) {
-                services.mediaLibrary = services.mediaLibrary ?? []
-                services.mediaLibrary?.append(policy)
-            }
-
-            if let policy = policyFromString(executable: executable, value: executable.screenCapturePolicyString) {
-                services.screenCapture = services.screenCapture ?? []
-                services.screenCapture?.append(policy)
-            }
-
-            if let policy = policyFromString(executable: executable, value: executable.speechRecognitionPolicyString) {
-                services.speechRecognition = services.speechRecognition ?? []
-                services.speechRecognition?.append(policy)
-            }
-
-            if let policy = policyFromString(executable: executable, value: executable.desktopFolderPolicyString) {
-                services.desktopFolder = services.desktopFolder ?? []
-                services.desktopFolder?.append(policy)
-            }
-
-            if let policy = policyFromString(executable: executable, value: executable.documentsFolderPolicyString) {
-                services.documentsFolder = services.documentsFolder ?? []
-                services.documentsFolder?.append(policy)
-            }
-
-            if let policy = policyFromString(executable: executable, value: executable.downloadsFolderPolicyString) {
-                services.downloadsFolder = services.downloadsFolder ?? []
-                services.downloadsFolder?.append(policy)
-            }
-
-            if let policy = policyFromString(executable: executable, value: executable.networkVolumesPolicyString) {
-                services.networkVolumes = services.networkVolumes ?? []
-                services.networkVolumes?.append(policy)
-            }
-
-            if let policy = policyFromString(executable: executable, value: executable.removableVolumesPolicyString) {
-                services.removableVolumes = services.removableVolumes ?? []
-                services.removableVolumes?.append(policy)
+            for (_, attr) in mirroredServices.children.enumerated() {
+                if let key = attr.label, let value = attr.value as? String {
+                    if let policyToAppend = policyFromString(executable: executable, value: value) {
+                        services[key] = services[key] ?? []
+                        services[key]?.append(policyToAppend)
+                    }
+                }
             }
 
             executable.appleEvents.forEach { event in
@@ -236,8 +147,9 @@ extension Model {
                                        allowed: event.value,
                                        receiverIdentifier: event.destination.identifier,
                                        receiverCodeRequirement: event.destination.codeRequirement)
-                services.appleEvents = services.appleEvents ?? []
-                services.appleEvents?.append(policy)
+                let appleEventsKey = ServicesKeys.appleEvents.rawValue
+                services[appleEventsKey] = services[appleEventsKey] ?? []
+                services[appleEventsKey]?.append(policy)
                 
             }
         }
@@ -247,6 +159,35 @@ extension Model {
                           displayName: displayName,
                           payloadDescription: payloadDescription,
                           services: services)
+    }
+
+    func importProfile(tccProfile: TCCProfile) {
+        if let content = tccProfile.content.first {
+            self.cleanUpAndRemoveDependencies()
+
+            self.importedTCCProfile = tccProfile
+
+            for (key, policies) in content.services {
+                getExecutablesFromAllPolicies(policies: policies)
+
+                for policy in policies {
+                    let executable = getExecutableFromSelectedExecutables(bundleIdentifier: policy.identifier)
+                    if key == ServicesKeys.appleEvents.rawValue {
+                        if let source = executable, let rIdentifier = policy.receiverIdentifier, let rCodeRequirement = policy.receiverCodeRequirement {
+                            let destination = getExecutableFrom(identifier: rIdentifier, codeRequirement: rCodeRequirement)
+                            let appleEvent = AppleEventRule(source: source, destination: destination, value: policy.allowed)
+                            executable?.appleEvents.appendIfNew(appleEvent)
+                        }
+                    } else {
+                        if policy.allowed {
+                            executable?.policy.setValue("Allow", forKey: key)
+                        } else {
+                            executable?.policy.setValue("Deny", forKey: key)
+                        }
+                    }
+                }
+            }
+        }
     }
 
     func policyFromString(executable: Executable, value: String) -> TCCPolicy? {
@@ -259,5 +200,60 @@ extension Model {
         return TCCPolicy(identifier: executable.identifier,
                          codeRequirement: executable.codeRequirement,
                          allowed: allowed)
+    }
+
+    func getExecutablesFromAllPolicies(policies: [TCCPolicy]) {
+        for tccPolicy in policies {
+            if getExecutableFromSelectedExecutables(bundleIdentifier: tccPolicy.identifier) == nil {
+                let executable = getExecutableFrom(identifier: tccPolicy.identifier, codeRequirement: tccPolicy.codeRequirement)
+                self.selectedExecutables.append(executable)
+            }
+        }
+    }
+
+    func getExecutableFromSelectedExecutables(bundleIdentifier: String) -> Executable? {
+        for executable in selectedExecutables {
+            if (executable.identifier == bundleIdentifier) {
+                return executable
+            }
+        }
+        return nil
+    }
+
+    
+    func getExecutableFrom(identifier: String, codeRequirement: String) -> Executable {
+        var executable = Executable(identifier: identifier, codeRequirement: codeRequirement)
+        if let destExecutableFromComputer = findExecutableOnComputerUsing(bundleIdentifier: identifier) {
+            executable = destExecutableFromComputer
+        }
+        return executable
+    }
+
+    private func findExecutableOnComputerUsing(bundleIdentifier: String) -> Executable?  {
+        var pathToLoad: String?
+        if bundleIdentifier.contains("/") {
+            pathToLoad = bundleIdentifier
+        } else {
+            if let path = NSWorkspace.shared.absolutePathForApplication(withBundleIdentifier: bundleIdentifier) {
+                pathToLoad = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? path
+            }
+        }
+
+        if let pathForURL = pathToLoad, let fileURL = URL(string: "file://\(pathForURL)") {
+            let executable = self.loadExecutable(url: fileURL)
+            return executable
+        }
+        return nil
+    }
+
+    private func cleanUpAndRemoveDependencies() {
+        for executable in self.selectedExecutables {
+            executable.appleEvents = []
+            executable.policy = Policy()
+        }
+        self.selectedExecutables = []
+        self.current = nil
+        self.store.removeAll()
+        self.importedTCCProfile = nil
     }
 }

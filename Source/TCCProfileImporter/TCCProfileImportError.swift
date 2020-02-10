@@ -1,10 +1,10 @@
 //
-//  AppleEventRule.swift
+//  ConfigProfileImportError.swift
 //  PPPC Utility
 //
 //  MIT License
 //
-//  Copyright (c) 2018 Jamf Software
+//  Copyright (c) 2019 Jamf Software
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -25,28 +25,23 @@
 //  SOFTWARE.
 //
 
-import Cocoa
+import Foundation
+public enum TCCProfileImportError: Error {
+    case unableToOpenFile
+    case decodeProfileError
+    case invalidProfileFile(description: String)
+    case emptyFields(description: String)
 
-class AppleEventRule: NSObject {
-    
-    @objc dynamic var source: Executable!
-    @objc dynamic var destination: Executable!
-    @objc dynamic var valueString: String! = "Allow"
-    
-    var value: Bool { return valueString == "Allow" }
-    
-    override init() {
-        super.init()
-    }
-
-    init(source: Executable, destination: Executable, value: Bool) {
-        super.init()
-        self.source = source
-        self.destination = destination
-        if value{
-            valueString = "Allow"
-        } else {
-            valueString = "Deny"
+    var localizedDescription: String {
+        switch self {
+        case .unableToOpenFile:
+            return "Unable to open file. Please make sure that file is correct and try again."
+        case .decodeProfileError:
+            return "Unable to read configuration profile. Please make sure the file is correct and try again."
+        case .invalidProfileFile(let description):
+            return "Invalid TCC Profile. Please make sure that required keys are inside profile: \(description)"
+        case .emptyFields(let description):
+            return "Unable to proceed. The following fields are required: \(description)"
         }
     }
 }

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>PayloadDescription</key>
+	<string>Test Unsigned Profile Empty</string>
+	<key>PayloadDisplayName</key>
+	<string>TestUnsignedProfile Empty</string>
+	<key>PayloadIdentifier</key>
+	<string>3A4EDE0C-A189-4372-953F-304ECA0B6489</string>
+	<key>PayloadOrganization</key>
+	<string>Jamf</string>
+	<key>PayloadType</key>
+	<string>com.apple.TCC.configuration-profile-policy</string>
+	<key>PayloadUUID</key>
+	<string>3FF5028C-CAA0-4B2F-A7BF-2A3539074424</string>
+	<key>PayloadVersion</key>
+	<integer>1</integer>
+	<key>payloadScope</key>
+	<string>system</string>
+</plist>
