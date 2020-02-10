@@ -47,22 +47,6 @@ class TCCProfileImporterTests: XCTestCase {
         })
     }
 
-    func testCorrectSignedProfile() {
-        let tccProfileImporter = TCCProfileImporter()
-
-        let resourceURL = getResourceProfile(fileName: "TestTCCProfileSigned")
-
-        tccProfileImporter.decodeTCCProfile(fileUrl: resourceURL, { tccProfileResult in
-            switch tccProfileResult {
-            case .success(let tccProfile):
-                XCTAssertNotNil(tccProfile.content)
-                XCTAssertNotNil(tccProfile.content[0].services)
-            case .failure(let tccProfileError):
-                XCTFail("Unable to read tccProfile \(tccProfileError?.localizedDescription ?? "")")
-            }
-        })
-    }
-
     func testEmptyContentTCCProfile() {
         let tccProfileImporter = TCCProfileImporter()
 

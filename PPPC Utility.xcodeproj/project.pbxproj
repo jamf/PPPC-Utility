@@ -13,7 +13,6 @@
 		5F90EBE42319992B00738D09 /* ModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F90EBE32319992B00738D09 /* ModelTests.swift */; };
 		5F95AE1623158F03002E0A22 /* SwiftyCMSDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F95AE1523158F03002E0A22 /* SwiftyCMSDecoder.swift */; };
 		5F95AE262315A7CB002E0A22 /* TCCProfileImporterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F95AE252315A7CB002E0A22 /* TCCProfileImporterTests.swift */; };
-		5F95AE2D2315B172002E0A22 /* TestTCCProfileSigned.mobileconfig in Resources */ = {isa = PBXBuildFile; fileRef = 5F95AE282315B172002E0A22 /* TestTCCProfileSigned.mobileconfig */; };
 		5F95AE2E2315B172002E0A22 /* TestTCCUnsignedProfile.mobileconfig in Resources */ = {isa = PBXBuildFile; fileRef = 5F95AE292315B172002E0A22 /* TestTCCUnsignedProfile.mobileconfig */; };
 		5F95AE2F2315B172002E0A22 /* TestTCCUnsignedProfile-Broken.mobileconfig in Resources */ = {isa = PBXBuildFile; fileRef = 5F95AE2A2315B172002E0A22 /* TestTCCUnsignedProfile-Broken.mobileconfig */; };
 		5F95AE302315B172002E0A22 /* TestTCCProfileSigned-Broken.mobileconfig in Resources */ = {isa = PBXBuildFile; fileRef = 5F95AE2B2315B172002E0A22 /* TestTCCProfileSigned-Broken.mobileconfig */; };
@@ -56,7 +55,6 @@
 		5F95AE1B2315A6AD002E0A22 /* PPPC UtilityTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PPPC UtilityTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F95AE1F2315A6AD002E0A22 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5F95AE252315A7CB002E0A22 /* TCCProfileImporterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TCCProfileImporterTests.swift; sourceTree = "<group>"; };
-		5F95AE282315B172002E0A22 /* TestTCCProfileSigned.mobileconfig */ = {isa = PBXFileReference; lastKnownFileType = file; path = TestTCCProfileSigned.mobileconfig; sourceTree = "<group>"; };
 		5F95AE292315B172002E0A22 /* TestTCCUnsignedProfile.mobileconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = TestTCCUnsignedProfile.mobileconfig; sourceTree = "<group>"; };
 		5F95AE2A2315B172002E0A22 /* TestTCCUnsignedProfile-Broken.mobileconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "TestTCCUnsignedProfile-Broken.mobileconfig"; sourceTree = "<group>"; };
 		5F95AE2B2315B172002E0A22 /* TestTCCProfileSigned-Broken.mobileconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "TestTCCProfileSigned-Broken.mobileconfig"; sourceTree = "<group>"; };
@@ -151,7 +149,6 @@
 			isa = PBXGroup;
 			children = (
 				5F95AE2B2315B172002E0A22 /* TestTCCProfileSigned-Broken.mobileconfig */,
-				5F95AE282315B172002E0A22 /* TestTCCProfileSigned.mobileconfig */,
 				5F95AE2A2315B172002E0A22 /* TestTCCUnsignedProfile-Broken.mobileconfig */,
 				5F95AE2C2315B172002E0A22 /* TestTCCUnsignedProfile-Empty.mobileconfig */,
 				5F95AE292315B172002E0A22 /* TestTCCUnsignedProfile.mobileconfig */,
@@ -332,7 +329,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5F95AE2D2315B172002E0A22 /* TestTCCProfileSigned.mobileconfig in Resources */,
 				5F95AE2E2315B172002E0A22 /* TestTCCUnsignedProfile.mobileconfig in Resources */,
 				5F95AE312315B172002E0A22 /* TestTCCUnsignedProfile-Empty.mobileconfig in Resources */,
 				5F95AE2F2315B172002E0A22 /* TestTCCUnsignedProfile-Broken.mobileconfig in Resources */,
