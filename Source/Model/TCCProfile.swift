@@ -114,13 +114,13 @@ struct TCCProfile : Codable {
                               displayName: displayName,
                               identifier: identifier,
                               organization: organization,
-                              type: "Configuration",
+                              type: "com.apple.TCC.configuration-profile-policy",
                               uuid: UUID().uuidString,
                               version: 1,
                               services: services)
         self.version = 1
         self.uuid = UUID().uuidString
-        self.type = content.type
+        self.type = "Configuration"
         self.scope = "System"
         self.organization = content.organization
         self.identifier = content.identifier
