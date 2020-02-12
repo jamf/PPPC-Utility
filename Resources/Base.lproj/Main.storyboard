@@ -2743,13 +2743,13 @@
                                     <gridRow id="unn-eA-XYi"/>
                                 </rows>
                                 <columns>
-                                    <gridColumn xPlacement="trailing" width="150" id="beA-7f-m1M"/>
+                                    <gridColumn xPlacement="trailing" width="190" id="beA-7f-m1M"/>
                                     <gridColumn xPlacement="leading" id="ng4-wr-TNn"/>
                                 </columns>
                                 <gridCells>
                                     <gridCell row="eyN-Xe-Uic" column="beA-7f-m1M" id="CC6-6a-qJZ">
                                         <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ra0-qo-Ut0">
-                                            <rect key="frame" x="47" y="212" width="105" height="16"/>
+                                            <rect key="frame" x="56" y="212" width="134" height="16"/>
                                             <textFieldCell key="cell" lineBreakMode="clipping" title="Jamf Pro Server URL:" id="Feg-Ux-zb6">
                                                 <font key="font" usesAppearanceFont="YES"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -2759,7 +2759,7 @@
                                     </gridCell>
                                     <gridCell row="eyN-Xe-Uic" column="ng4-wr-TNn" id="Kiq-ny-Kfr">
                                         <textField key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="QNN-Qc-0rm">
-                                            <rect key="frame" x="156" y="209" width="100" height="21"/>
+                                            <rect key="frame" x="194" y="209" width="100" height="21"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="https://jss.mycompany.com:8443/" drawsBackground="YES" id="KYl-MT-gVo">
                                                 <font key="font" usesAppearanceFont="YES"/>
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -2771,7 +2771,7 @@
                                                         <string key="NSValueTransformerName">NSIsNil</string>
                                                     </dictionary>
                                                 </binding>
-                                                <binding destination="myc-4h-VBq" name="value" keyPath="values.jamfProServer" id="b2i-mX-P1C">
+                                                <binding destination="myc-4h-VBq" name="value" keyPath="values.jamfProServer" id="GMI-De-lhg">
                                                     <dictionary key="options">
                                                         <bool key="NSContinuouslyUpdatesValue" value="YES"/>
                                                         <string key="NSNullPlaceholder">https://jss.mycompany.com:8443/</string>
@@ -2782,8 +2782,8 @@
                                     </gridCell>
                                     <gridCell row="Emd-t3-gyr" column="beA-7f-m1M" id="bKU-WO-nmj">
                                         <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hYJ-lU-5G4">
-                                            <rect key="frame" x="82" y="185" width="70" height="16"/>
-                                            <textFieldCell key="cell" lineBreakMode="clipping" title="Username:" id="Kbo-v0-GL8">
+                                            <rect key="frame" x="62" y="185" width="128" height="16"/>
+                                            <textFieldCell key="cell" lineBreakMode="clipping" title="Jamf Pro Username:" id="Kbo-v0-GL8">
                                                 <font key="font" usesAppearanceFont="YES"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -2792,7 +2792,7 @@
                                     </gridCell>
                                     <gridCell row="Emd-t3-gyr" column="ng4-wr-TNn" id="UaP-dC-NWd">
                                         <textField key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="DGW-Mr-l1f">
-                                            <rect key="frame" x="156" y="182" width="100" height="21"/>
+                                            <rect key="frame" x="194" y="182" width="100" height="21"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Jamf Pro Username" drawsBackground="YES" id="z53-iZ-Bjf">
                                                 <font key="font" usesAppearanceFont="YES"/>
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -2804,7 +2804,7 @@
                                                         <string key="NSValueTransformerName">NSIsNil</string>
                                                     </dictionary>
                                                 </binding>
-                                                <binding destination="HiQ-kk-PBp" name="value" keyPath="self.username" id="w8v-te-pe3">
+                                                <binding destination="HiQ-kk-PBp" name="value" keyPath="self.username" id="kCL-qr-l5a">
                                                     <dictionary key="options">
                                                         <bool key="NSContinuouslyUpdatesValue" value="YES"/>
                                                         <string key="NSNullPlaceholder">Jamf Pro Username</string>
@@ -2815,8 +2815,8 @@
                                     </gridCell>
                                     <gridCell row="4IU-0I-vkZ" column="beA-7f-m1M" id="OEP-Qu-5DO">
                                         <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dcR-EI-uNl">
-                                            <rect key="frame" x="86" y="158" width="66" height="16"/>
-                                            <textFieldCell key="cell" lineBreakMode="clipping" title="Password:" id="K7h-m2-8gB">
+                                            <rect key="frame" x="66" y="158" width="124" height="16"/>
+                                            <textFieldCell key="cell" lineBreakMode="clipping" title="Jamf Pro Password:" id="K7h-m2-8gB">
                                                 <font key="font" usesAppearanceFont="YES"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -2825,7 +2825,7 @@
                                     </gridCell>
                                     <gridCell row="4IU-0I-vkZ" column="ng4-wr-TNn" id="ag3-FY-p51">
                                         <secureTextField key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="P4Q-st-EZg">
-                                            <rect key="frame" x="156" y="155" width="100" height="21"/>
+                                            <rect key="frame" x="194" y="155" width="100" height="21"/>
                                             <secureTextFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Jamf Pro Password" drawsBackground="YES" usesSingleLineMode="YES" id="hfC-hH-J14">
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -2840,7 +2840,7 @@
                                                         <string key="NSValueTransformerName">NSIsNil</string>
                                                     </dictionary>
                                                 </binding>
-                                                <binding destination="HiQ-kk-PBp" name="value" keyPath="self.password" id="0E8-eo-qeJ">
+                                                <binding destination="HiQ-kk-PBp" name="value" keyPath="self.password" id="pO8-If-mBJ">
                                                     <dictionary key="options">
                                                         <bool key="NSContinuouslyUpdatesValue" value="YES"/>
                                                         <string key="NSNullPlaceholder">Jamf Pro Password</string>
@@ -2852,7 +2852,7 @@
                                     <gridCell row="sdF-fi-0XN" column="beA-7f-m1M" id="Ljm-Pb-hEZ"/>
                                     <gridCell row="sdF-fi-0XN" column="ng4-wr-TNn" id="k0i-EA-NaH">
                                         <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6dZ-TF-WgH">
-                                            <rect key="frame" x="154" y="133" width="123" height="18"/>
+                                            <rect key="frame" x="192" y="133" width="123" height="18"/>
                                             <buttonCell key="cell" type="check" title="Save in keychain" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="TiO-gn-NF9">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
@@ -2869,7 +2869,7 @@
                                     </gridCell>
                                     <gridCell row="KO8-Og-ZZG" column="beA-7f-m1M" id="FoJ-Po-X08">
                                         <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="GZe-0l-qOm">
-                                            <rect key="frame" x="67" y="111" width="85" height="16"/>
+                                            <rect key="frame" x="105" y="111" width="85" height="16"/>
                                             <textFieldCell key="cell" lineBreakMode="clipping" title="Organization:" id="AHo-uM-bcF">
                                                 <font key="font" usesAppearanceFont="YES"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -2879,7 +2879,7 @@
                                     </gridCell>
                                     <gridCell row="KO8-Og-ZZG" column="ng4-wr-TNn" id="NTi-H1-UFQ">
                                         <textField key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="B4I-fC-MIn">
-                                            <rect key="frame" x="156" y="108" width="100" height="21"/>
+                                            <rect key="frame" x="194" y="108" width="100" height="21"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Organization Name" drawsBackground="YES" id="IY2-9B-eKY">
                                                 <font key="font" usesAppearanceFont="YES"/>
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -2899,10 +2899,10 @@
                                                         <string key="NSValueTransformerName">NSIsNil</string>
                                                     </dictionary>
                                                 </binding>
-                                                <binding destination="myc-4h-VBq" name="value" keyPath="values.organization" id="2RE-ch-Jmv">
+                                                <binding destination="myc-4h-VBq" name="value" keyPath="values.organization" id="u4i-it-jDV">
                                                     <dictionary key="options">
                                                         <bool key="NSContinuouslyUpdatesValue" value="YES"/>
-                                                        <string key="NSNullPlaceholder">[Required]</string>
+                                                        <string key="NSNullPlaceholder">Organization Name</string>
                                                     </dictionary>
                                                 </binding>
                                             </connections>
@@ -2910,7 +2910,7 @@
                                     </gridCell>
                                     <gridCell row="Svf-O8-ZZU" column="beA-7f-m1M" id="d5i-c0-ujb">
                                         <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ZAh-0r-sLP">
-                                            <rect key="frame" x="57" y="84" width="95" height="16"/>
+                                            <rect key="frame" x="95" y="84" width="95" height="16"/>
                                             <textFieldCell key="cell" lineBreakMode="clipping" title="Payload Name:" id="mZW-o6-3Eg">
                                                 <font key="font" usesAppearanceFont="YES"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -2920,7 +2920,7 @@
                                     </gridCell>
                                     <gridCell row="Svf-O8-ZZU" column="ng4-wr-TNn" id="0CH-SX-fTM">
                                         <textField key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="XrG-J9-cCf">
-                                            <rect key="frame" x="156" y="81" width="100" height="21"/>
+                                            <rect key="frame" x="194" y="81" width="100" height="21"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Payload Name" drawsBackground="YES" id="rpn-z8-eTD">
                                                 <font key="font" usesAppearanceFont="YES"/>
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -2940,10 +2940,10 @@
                                                         <string key="NSValueTransformerName">NSIsNil</string>
                                                     </dictionary>
                                                 </binding>
-                                                <binding destination="HiQ-kk-PBp" name="value" keyPath="self.payloadName" id="g0a-Ru-q6V">
+                                                <binding destination="HiQ-kk-PBp" name="value" keyPath="self.payloadName" id="yjW-wh-6N8">
                                                     <dictionary key="options">
                                                         <bool key="NSContinuouslyUpdatesValue" value="YES"/>
-                                                        <string key="NSNullPlaceholder">[Required]</string>
+                                                        <string key="NSNullPlaceholder">Payload Name</string>
                                                     </dictionary>
                                                 </binding>
                                             </connections>
@@ -2951,7 +2951,7 @@
                                     </gridCell>
                                     <gridCell row="K3R-m6-oz9" column="beA-7f-m1M" id="Lnf-6i-ydK">
                                         <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Lxd-Nx-5HV">
-                                            <rect key="frame" x="39" y="57" width="113" height="16"/>
+                                            <rect key="frame" x="77" y="57" width="113" height="16"/>
                                             <textFieldCell key="cell" lineBreakMode="clipping" title="Payload Identifier:" id="o8W-o9-wgK">
                                                 <font key="font" usesAppearanceFont="YES"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -2961,7 +2961,7 @@
                                     </gridCell>
                                     <gridCell row="K3R-m6-oz9" column="ng4-wr-TNn" id="0Df-cA-lqg">
                                         <textField key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Tzm-C2-rLF">
-                                            <rect key="frame" x="156" y="54" width="100" height="21"/>
+                                            <rect key="frame" x="194" y="54" width="100" height="21"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Payload Identifier" drawsBackground="YES" id="S81-Lm-Re4">
                                                 <font key="font" usesAppearanceFont="YES"/>
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -2981,10 +2981,10 @@
                                                         <string key="NSValueTransformerName">NSIsNil</string>
                                                     </dictionary>
                                                 </binding>
-                                                <binding destination="HiQ-kk-PBp" name="value" keyPath="self.payloadIdentifier" id="Xsh-gS-4hR">
+                                                <binding destination="HiQ-kk-PBp" name="value" keyPath="self.payloadIdentifier" id="1rP-He-jSM">
                                                     <dictionary key="options">
                                                         <bool key="NSContinuouslyUpdatesValue" value="YES"/>
-                                                        <string key="NSNullPlaceholder">[Required]</string>
+                                                        <string key="NSNullPlaceholder">Payload Identifier</string>
                                                     </dictionary>
                                                 </binding>
                                             </connections>
@@ -2992,8 +2992,8 @@
                                     </gridCell>
                                     <gridCell row="Fm8-cc-7hm" column="beA-7f-m1M" id="saX-SX-PGx">
                                         <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ngv-mL-JfJ">
-                                            <rect key="frame" x="23" y="30" width="129" height="16"/>
-                                            <textFieldCell key="cell" lineBreakMode="clipping" title="Payload Description:" id="69h-SR-nML">
+                                            <rect key="frame" x="-2" y="30" width="192" height="16"/>
+                                            <textFieldCell key="cell" lineBreakMode="clipping" title="Payload Description (Optional):" id="69h-SR-nML">
                                                 <font key="font" usesAppearanceFont="YES"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -3002,7 +3002,7 @@
                                     </gridCell>
                                     <gridCell row="Fm8-cc-7hm" column="ng4-wr-TNn" id="a8W-AS-p2Y">
                                         <textField key="contentView" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="IZK-hA-8K2">
-                                            <rect key="frame" x="156" y="27" width="100" height="21"/>
+                                            <rect key="frame" x="194" y="27" width="100" height="21"/>
                                             <textFieldCell key="cell" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Payload Description" drawsBackground="YES" id="Rfz-NV-OcM">
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -3022,10 +3022,10 @@
                                                         <string key="NSValueTransformerName">NSIsNil</string>
                                                     </dictionary>
                                                 </binding>
-                                                <binding destination="HiQ-kk-PBp" name="value" keyPath="self.payloadDescription" id="x1d-qU-gR8">
+                                                <binding destination="HiQ-kk-PBp" name="value" keyPath="self.payloadDescription" id="t6K-Mc-faj">
                                                     <dictionary key="options">
                                                         <bool key="NSContinuouslyUpdatesValue" value="YES"/>
-                                                        <string key="NSNullPlaceholder">[Optional]</string>
+                                                        <string key="NSNullPlaceholder">Payload Description</string>
                                                     </dictionary>
                                                 </binding>
                                             </connections>
@@ -3033,7 +3033,7 @@
                                     </gridCell>
                                     <gridCell row="unn-eA-XYi" column="beA-7f-m1M" id="Za4-2i-cQK">
                                         <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ULa-NG-uZ6">
-                                            <rect key="frame" x="49" y="3" width="103" height="16"/>
+                                            <rect key="frame" x="87" y="3" width="103" height="16"/>
                                             <textFieldCell key="cell" lineBreakMode="clipping" title="Signing Identity:" id="UEB-8c-Zg8">
                                                 <font key="font" usesAppearanceFont="YES"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -3043,7 +3043,7 @@
                                     </gridCell>
                                     <gridCell row="unn-eA-XYi" column="ng4-wr-TNn" id="fZs-Z9-hpE">
                                         <popUpButton key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="nC1-v3-pwn">
-                                            <rect key="frame" x="154" y="-3" width="77" height="25"/>
+                                            <rect key="frame" x="192" y="-3" width="77" height="25"/>
                                             <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="TI3-0t-2MB" id="j64-fe-pJg">
                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="menu"/>
