@@ -2759,8 +2759,8 @@
                                     </gridCell>
                                     <gridCell row="eyN-Xe-Uic" column="ng4-wr-TNn" id="Kiq-ny-Kfr">
                                         <textField key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="QNN-Qc-0rm">
-                                            <rect key="frame" x="194" y="209" width="100" height="21"/>
-                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="https://jss.mycompany.com:8443/" drawsBackground="YES" id="KYl-MT-gVo">
+                                            <rect key="frame" x="196" y="209" width="100" height="21"/>
+                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="https://sample.jamfcloud.com" drawsBackground="YES" id="KYl-MT-gVo">
                                                 <font key="font" usesAppearanceFont="YES"/>
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -2771,10 +2771,10 @@
                                                         <string key="NSValueTransformerName">NSIsNil</string>
                                                     </dictionary>
                                                 </binding>
-                                                <binding destination="myc-4h-VBq" name="value" keyPath="values.jamfProServer" id="GMI-De-lhg">
+                                                <binding destination="myc-4h-VBq" name="value" keyPath="values.jamfProServer" id="pux-L9-AFY">
                                                     <dictionary key="options">
                                                         <bool key="NSContinuouslyUpdatesValue" value="YES"/>
-                                                        <string key="NSNullPlaceholder">https://jss.mycompany.com:8443/</string>
+                                                        <string key="NSNullPlaceholder">https://sample.jamfcloud.com</string>
                                                     </dictionary>
                                                 </binding>
                                             </connections>
@@ -2792,8 +2792,8 @@
                                     </gridCell>
                                     <gridCell row="Emd-t3-gyr" column="ng4-wr-TNn" id="UaP-dC-NWd">
                                         <textField key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="DGW-Mr-l1f">
-                                            <rect key="frame" x="194" y="182" width="100" height="21"/>
-                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Jamf Pro Username" drawsBackground="YES" id="z53-iZ-Bjf">
+                                            <rect key="frame" x="196" y="182" width="100" height="21"/>
+                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="z53-iZ-Bjf">
                                                 <font key="font" usesAppearanceFont="YES"/>
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -2804,10 +2804,9 @@
                                                         <string key="NSValueTransformerName">NSIsNil</string>
                                                     </dictionary>
                                                 </binding>
-                                                <binding destination="HiQ-kk-PBp" name="value" keyPath="self.username" id="kCL-qr-l5a">
+                                                <binding destination="HiQ-kk-PBp" name="value" keyPath="self.username" id="pfW-aH-osK">
                                                     <dictionary key="options">
                                                         <bool key="NSContinuouslyUpdatesValue" value="YES"/>
-                                                        <string key="NSNullPlaceholder">Jamf Pro Username</string>
                                                     </dictionary>
                                                 </binding>
                                             </connections>
@@ -2815,7 +2814,7 @@
                                     </gridCell>
                                     <gridCell row="4IU-0I-vkZ" column="beA-7f-m1M" id="OEP-Qu-5DO">
                                         <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dcR-EI-uNl">
-                                            <rect key="frame" x="66" y="158" width="124" height="16"/>
+                                            <rect key="frame" x="68" y="158" width="124" height="16"/>
                                             <textFieldCell key="cell" lineBreakMode="clipping" title="Jamf Pro Password:" id="K7h-m2-8gB">
                                                 <font key="font" usesAppearanceFont="YES"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -2825,8 +2824,8 @@
                                     </gridCell>
                                     <gridCell row="4IU-0I-vkZ" column="ng4-wr-TNn" id="ag3-FY-p51">
                                         <secureTextField key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="P4Q-st-EZg">
-                                            <rect key="frame" x="194" y="155" width="100" height="21"/>
-                                            <secureTextFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Jamf Pro Password" drawsBackground="YES" usesSingleLineMode="YES" id="hfC-hH-J14">
+                                            <rect key="frame" x="196" y="155" width="100" height="21"/>
+                                            <secureTextFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" usesSingleLineMode="YES" id="hfC-hH-J14">
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -2840,10 +2839,9 @@
                                                         <string key="NSValueTransformerName">NSIsNil</string>
                                                     </dictionary>
                                                 </binding>
-                                                <binding destination="HiQ-kk-PBp" name="value" keyPath="self.password" id="pO8-If-mBJ">
+                                                <binding destination="HiQ-kk-PBp" name="value" keyPath="self.password" id="n12-LO-D6U">
                                                     <dictionary key="options">
                                                         <bool key="NSContinuouslyUpdatesValue" value="YES"/>
-                                                        <string key="NSNullPlaceholder">Jamf Pro Password</string>
                                                     </dictionary>
                                                 </binding>
                                             </connections>
@@ -2879,8 +2877,8 @@
                                     </gridCell>
                                     <gridCell row="KO8-Og-ZZG" column="ng4-wr-TNn" id="NTi-H1-UFQ">
                                         <textField key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="B4I-fC-MIn">
-                                            <rect key="frame" x="194" y="108" width="100" height="21"/>
-                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Organization Name" drawsBackground="YES" id="IY2-9B-eKY">
+                                            <rect key="frame" x="196" y="108" width="100" height="21"/>
+                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="IY2-9B-eKY">
                                                 <font key="font" usesAppearanceFont="YES"/>
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -2899,10 +2897,9 @@
                                                         <string key="NSValueTransformerName">NSIsNil</string>
                                                     </dictionary>
                                                 </binding>
-                                                <binding destination="myc-4h-VBq" name="value" keyPath="values.organization" id="u4i-it-jDV">
+                                                <binding destination="myc-4h-VBq" name="value" keyPath="values.organization" id="dmv-Ls-z9O">
                                                     <dictionary key="options">
                                                         <bool key="NSContinuouslyUpdatesValue" value="YES"/>
-                                                        <string key="NSNullPlaceholder">Organization Name</string>
                                                     </dictionary>
                                                 </binding>
                                             </connections>
@@ -2920,8 +2917,8 @@
                                     </gridCell>
                                     <gridCell row="Svf-O8-ZZU" column="ng4-wr-TNn" id="0CH-SX-fTM">
                                         <textField key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="XrG-J9-cCf">
-                                            <rect key="frame" x="194" y="81" width="100" height="21"/>
-                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Payload Name" drawsBackground="YES" id="rpn-z8-eTD">
+                                            <rect key="frame" x="196" y="81" width="100" height="21"/>
+                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="rpn-z8-eTD">
                                                 <font key="font" usesAppearanceFont="YES"/>
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -2940,10 +2937,9 @@
                                                         <string key="NSValueTransformerName">NSIsNil</string>
                                                     </dictionary>
                                                 </binding>
-                                                <binding destination="HiQ-kk-PBp" name="value" keyPath="self.payloadName" id="yjW-wh-6N8">
+                                                <binding destination="HiQ-kk-PBp" name="value" keyPath="self.payloadName" id="BZM-2Y-qKK">
                                                     <dictionary key="options">
                                                         <bool key="NSContinuouslyUpdatesValue" value="YES"/>
-                                                        <string key="NSNullPlaceholder">Payload Name</string>
                                                     </dictionary>
                                                 </binding>
                                             </connections>
@@ -2961,8 +2957,8 @@
                                     </gridCell>
                                     <gridCell row="K3R-m6-oz9" column="ng4-wr-TNn" id="0Df-cA-lqg">
                                         <textField key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Tzm-C2-rLF">
-                                            <rect key="frame" x="194" y="54" width="100" height="21"/>
-                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Payload Identifier" drawsBackground="YES" id="S81-Lm-Re4">
+                                            <rect key="frame" x="196" y="54" width="100" height="21"/>
+                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="S81-Lm-Re4">
                                                 <font key="font" usesAppearanceFont="YES"/>
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -2981,10 +2977,9 @@
                                                         <string key="NSValueTransformerName">NSIsNil</string>
                                                     </dictionary>
                                                 </binding>
-                                                <binding destination="HiQ-kk-PBp" name="value" keyPath="self.payloadIdentifier" id="1rP-He-jSM">
+                                                <binding destination="HiQ-kk-PBp" name="value" keyPath="self.payloadIdentifier" id="c3a-Ht-Vql">
                                                     <dictionary key="options">
                                                         <bool key="NSContinuouslyUpdatesValue" value="YES"/>
-                                                        <string key="NSNullPlaceholder">Payload Identifier</string>
                                                     </dictionary>
                                                 </binding>
                                             </connections>
@@ -3002,8 +2997,8 @@
                                     </gridCell>
                                     <gridCell row="Fm8-cc-7hm" column="ng4-wr-TNn" id="a8W-AS-p2Y">
                                         <textField key="contentView" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="IZK-hA-8K2">
-                                            <rect key="frame" x="194" y="27" width="100" height="21"/>
-                                            <textFieldCell key="cell" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Payload Description" drawsBackground="YES" id="Rfz-NV-OcM">
+                                            <rect key="frame" x="196" y="27" width="100" height="21"/>
+                                            <textFieldCell key="cell" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="Rfz-NV-OcM">
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -3022,10 +3017,9 @@
                                                         <string key="NSValueTransformerName">NSIsNil</string>
                                                     </dictionary>
                                                 </binding>
-                                                <binding destination="HiQ-kk-PBp" name="value" keyPath="self.payloadDescription" id="t6K-Mc-faj">
+                                                <binding destination="HiQ-kk-PBp" name="value" keyPath="self.payloadDescription" id="9CS-bA-28x">
                                                     <dictionary key="options">
                                                         <bool key="NSContinuouslyUpdatesValue" value="YES"/>
-                                                        <string key="NSNullPlaceholder">Payload Description</string>
                                                     </dictionary>
                                                 </binding>
                                             </connections>
