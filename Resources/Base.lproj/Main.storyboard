@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14865.1" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14865.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15702"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -733,7 +733,7 @@
                                                 </connections>
                                             </textField>
                                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="psY-WF-7Yd">
-                                                <rect key="frame" x="-2" y="36" width="339" height="14"/>
+                                                <rect key="frame" x="-2" y="36" width="338" height="14"/>
                                                 <textFieldCell key="cell" selectable="YES" title="com.example.something.really.long.which.is.somewhat.annoying" id="VMd-UN-MoF">
                                                     <font key="font" metaFont="systemLight" size="11"/>
                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -807,7 +807,7 @@
                                                             </constraints>
                                                             <popUpButtonCell key="cell" type="push" title="-" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="jNh-R9-M22" id="uZP-tO-4EJ">
                                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                                <font key="font" metaFont="menu"/>
+                                                                <font key="font" metaFont="system"/>
                                                                 <menu key="menu" id="NtA-4R-Glq">
                                                                     <items>
                                                                         <menuItem title="-" state="on" id="jNh-R9-M22"/>
@@ -866,7 +866,7 @@
                                                             <rect key="frame" x="379" y="-3" width="70" height="54"/>
                                                             <popUpButtonCell key="cell" type="push" title="-" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="xHC-HW-yVt" id="6Us-f3-jyq">
                                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                                <font key="font" metaFont="menu"/>
+                                                                <font key="font" metaFont="system"/>
                                                                 <menu key="menu" id="f2e-ke-Gdx">
                                                                     <items>
                                                                         <menuItem title="-" state="on" id="xHC-HW-yVt"/>
@@ -924,7 +924,7 @@
                                                             <rect key="frame" x="379" y="-3" width="70" height="54"/>
                                                             <popUpButtonCell key="cell" type="push" title="-" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="JMO-rX-lHD" id="Fk2-Us-Q2u">
                                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                                <font key="font" metaFont="menu"/>
+                                                                <font key="font" metaFont="system"/>
                                                                 <menu key="menu" id="5ac-ZX-Xgu">
                                                                     <items>
                                                                         <menuItem title="-" state="on" id="JMO-rX-lHD"/>
@@ -982,7 +982,7 @@
                                                             <rect key="frame" x="379" y="-3" width="70" height="54"/>
                                                             <popUpButtonCell key="cell" type="push" title="-" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="QYY-1f-X7h" id="hmE-fk-BwT">
                                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                                <font key="font" metaFont="menu"/>
+                                                                <font key="font" metaFont="system"/>
                                                                 <menu key="menu" id="zie-xg-jr9">
                                                                     <items>
                                                                         <menuItem title="-" state="on" id="QYY-1f-X7h"/>
@@ -1042,7 +1042,7 @@
                                                             <rect key="frame" x="379" y="-3" width="70" height="54"/>
                                                             <popUpButtonCell key="cell" type="push" title="-" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="gnT-HC-9jQ" id="RH6-uh-B0i">
                                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                                <font key="font" metaFont="menu"/>
+                                                                <font key="font" metaFont="system"/>
                                                                 <menu key="menu" id="Uw7-JY-FAM">
                                                                     <items>
                                                                         <menuItem title="-" state="on" id="gnT-HC-9jQ"/>
@@ -1100,7 +1100,7 @@
                                                             <rect key="frame" x="379" y="-3" width="70" height="54"/>
                                                             <popUpButtonCell key="cell" type="push" title="-" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="49Y-CL-Jmr" id="BTV-ls-Zns">
                                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                                <font key="font" metaFont="menu"/>
+                                                                <font key="font" metaFont="system"/>
                                                                 <menu key="menu" id="s8f-5D-Ikn">
                                                                     <items>
                                                                         <menuItem title="-" state="on" id="49Y-CL-Jmr"/>
@@ -1158,7 +1158,7 @@
                                                             <rect key="frame" x="379" y="-3" width="70" height="54"/>
                                                             <popUpButtonCell key="cell" type="push" title="-" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="dd4-ok-ZNg" id="b3m-j7-PsZ">
                                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                                <font key="font" metaFont="menu"/>
+                                                                <font key="font" metaFont="system"/>
                                                                 <menu key="menu" id="c1w-K8-AC1">
                                                                     <items>
                                                                         <menuItem title="-" state="on" id="dd4-ok-ZNg"/>
@@ -1216,7 +1216,7 @@
                                                             <rect key="frame" x="379" y="-3" width="70" height="54"/>
                                                             <popUpButtonCell key="cell" type="push" title="-" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="mSA-L6-7QG" id="PMl-Ow-o0m">
                                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                                <font key="font" metaFont="menu"/>
+                                                                <font key="font" metaFont="system"/>
                                                                 <menu key="menu" id="73Z-dX-dec">
                                                                     <items>
                                                                         <menuItem title="-" state="on" id="mSA-L6-7QG"/>
@@ -1274,7 +1274,7 @@
                                                             <rect key="frame" x="379" y="-3" width="70" height="54"/>
                                                             <popUpButtonCell key="cell" type="push" title="-" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="F7s-dB-ccu" id="oLo-5v-B40">
                                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                                <font key="font" metaFont="menu"/>
+                                                                <font key="font" metaFont="system"/>
                                                                 <menu key="menu" id="WAk-jX-QZl">
                                                                     <items>
                                                                         <menuItem title="-" state="on" id="F7s-dB-ccu"/>
@@ -1331,7 +1331,7 @@
                                                             <rect key="frame" x="379" y="-3" width="70" height="54"/>
                                                             <popUpButtonCell key="cell" type="push" title="-" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="8jN-pb-jTw" id="87t-Yf-7J1">
                                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                                <font key="font" metaFont="menu"/>
+                                                                <font key="font" metaFont="system"/>
                                                                 <menu key="menu" id="0B4-rI-y49">
                                                                     <items>
                                                                         <menuItem title="-" state="on" id="8jN-pb-jTw"/>
@@ -1388,7 +1388,7 @@
                                                             <rect key="frame" x="379" y="-3" width="70" height="54"/>
                                                             <popUpButtonCell key="cell" type="push" title="-" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="FIX-n3-lFP" id="0vX-YX-QTC">
                                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                                <font key="font" metaFont="menu"/>
+                                                                <font key="font" metaFont="system"/>
                                                                 <menu key="menu" id="SK1-fH-Bqa">
                                                                     <items>
                                                                         <menuItem title="-" state="on" id="FIX-n3-lFP"/>
@@ -1445,7 +1445,7 @@
                                                             <rect key="frame" x="379" y="-3" width="70" height="54"/>
                                                             <popUpButtonCell key="cell" type="push" title="-" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="V86-LK-5LV" id="9DJ-7D-6AW">
                                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                                <font key="font" metaFont="menu"/>
+                                                                <font key="font" metaFont="system"/>
                                                                 <menu key="menu" id="WO5-H6-1Om">
                                                                     <items>
                                                                         <menuItem title="-" state="on" id="V86-LK-5LV"/>
@@ -1502,7 +1502,7 @@
                                                             <rect key="frame" x="379" y="-3" width="70" height="54"/>
                                                             <popUpButtonCell key="cell" type="push" title="-" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="4ie-PV-k4r" id="aQd-c0-COU">
                                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                                <font key="font" metaFont="menu"/>
+                                                                <font key="font" metaFont="system"/>
                                                                 <menu key="menu" id="8ny-92-gMJ">
                                                                     <items>
                                                                         <menuItem title="-" state="on" id="4ie-PV-k4r"/>
@@ -1559,7 +1559,7 @@
                                                             <rect key="frame" x="379" y="-3" width="70" height="54"/>
                                                             <popUpButtonCell key="cell" type="push" title="-" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="4xV-9U-FNf" id="Oe4-s2-JcM">
                                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                                <font key="font" metaFont="menu"/>
+                                                                <font key="font" metaFont="system"/>
                                                                 <menu key="menu" id="EDV-QM-1Fj">
                                                                     <items>
                                                                         <menuItem title="-" state="on" id="4xV-9U-FNf"/>
@@ -1616,7 +1616,7 @@
                                                             <rect key="frame" x="379" y="-3" width="70" height="54"/>
                                                             <popUpButtonCell key="cell" type="push" title="-" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="gwx-us-L0W" id="Dx3-v9-nfb">
                                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                                <font key="font" metaFont="menu"/>
+                                                                <font key="font" metaFont="system"/>
                                                                 <menu key="menu" id="MAS-PQ-RQw">
                                                                     <items>
                                                                         <menuItem title="-" state="on" id="gwx-us-L0W"/>
@@ -1673,7 +1673,7 @@
                                                             <rect key="frame" x="379" y="-3" width="70" height="54"/>
                                                             <popUpButtonCell key="cell" type="push" title="-" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="FMM-ro-V8b" id="VMH-px-qdz">
                                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                                <font key="font" metaFont="menu"/>
+                                                                <font key="font" metaFont="system"/>
                                                                 <menu key="menu" id="bke-kF-sVp">
                                                                     <items>
                                                                         <menuItem title="-" state="on" id="FMM-ro-V8b"/>
@@ -1730,7 +1730,7 @@
                                                             <rect key="frame" x="379" y="-3" width="70" height="54"/>
                                                             <popUpButtonCell key="cell" type="push" title="-" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="PaS-xa-UD8" id="ulk-2T-V0g">
                                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                                <font key="font" metaFont="menu"/>
+                                                                <font key="font" metaFont="system"/>
                                                                 <menu key="menu" id="cmF-eV-Cmk">
                                                                     <items>
                                                                         <menuItem title="-" state="on" id="PaS-xa-UD8"/>
@@ -1787,7 +1787,7 @@
                                                             <rect key="frame" x="379" y="-3" width="70" height="54"/>
                                                             <popUpButtonCell key="cell" type="push" title="-" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="NIk-oX-DQf" id="6j7-Dt-umk">
                                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                                <font key="font" metaFont="menu"/>
+                                                                <font key="font" metaFont="system"/>
                                                                 <menu key="menu" id="nVX-Zt-hyQ">
                                                                     <items>
                                                                         <menuItem title="-" state="on" id="NIk-oX-DQf"/>
@@ -1844,7 +1844,7 @@
                                                             <rect key="frame" x="379" y="-3" width="70" height="54"/>
                                                             <popUpButtonCell key="cell" type="push" title="-" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="Wlc-5b-ZH6" id="3Yo-n3-2Cq">
                                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                                <font key="font" metaFont="menu"/>
+                                                                <font key="font" metaFont="system"/>
                                                                 <menu key="menu" id="Zdh-6Z-aoJ">
                                                                     <items>
                                                                         <menuItem title="-" state="on" id="Wlc-5b-ZH6"/>
@@ -1901,7 +1901,7 @@
                                                             <rect key="frame" x="379" y="-3" width="70" height="54"/>
                                                             <popUpButtonCell key="cell" type="push" title="-" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="bLI-tr-vzf" id="ZxY-Qi-hwN">
                                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                                <font key="font" metaFont="menu"/>
+                                                                <font key="font" metaFont="system"/>
                                                                 <menu key="menu" id="1Zc-3K-FoR">
                                                                     <items>
                                                                         <menuItem title="-" state="on" id="bLI-tr-vzf"/>
@@ -2081,14 +2081,14 @@
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="48" rowSizeStyle="automatic" viewBased="YES" id="dDB-re-qJn">
                                             <rect key="frame" x="0.0" y="0.0" width="485" height="557"/>
-                                            <autoresizingMask key="autoresizingMask"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
                                                 <tableColumn width="482" minWidth="40" maxWidth="1000" id="ci3-gO-OVp">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
-                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <font key="font" metaFont="menu" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -2137,7 +2137,7 @@
                                                                             </constraints>
                                                                             <popUpButtonCell key="cell" type="push" title="Allow" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="Bu1-mf-M4Z" id="XDn-sQ-YyH">
                                                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                                                <font key="font" metaFont="menu"/>
+                                                                                <font key="font" metaFont="system"/>
                                                                                 <menu key="menu" id="bWX-zi-tfG">
                                                                                     <items>
                                                                                         <menuItem title="Allow" state="on" id="Bu1-mf-M4Z"/>
@@ -2246,14 +2246,14 @@
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="52" rowSizeStyle="automatic" viewBased="YES" id="LpN-jq-LDz">
                                             <rect key="frame" x="0.0" y="0.0" width="198" height="672"/>
-                                            <autoresizingMask key="autoresizingMask"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
                                                 <tableColumn width="195" minWidth="40" maxWidth="1000" id="oNB-rR-rpb">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
-                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <font key="font" metaFont="menu" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -2369,10 +2369,8 @@
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pHR-Fa-o0o">
                                 <rect key="frame" x="21" y="60" width="21" height="23"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="8GD-Jo-swm"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="DuU-Au-9mE"/>
-                                    <constraint firstAttribute="width" constant="21" id="jND-Ta-jbY"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="21" id="lHv-4C-qgj"/>
+                                    <constraint firstAttribute="width" constant="21" id="9fn-Yb-6TC"/>
+                                    <constraint firstAttribute="height" constant="21" id="pyf-ew-djx"/>
                                 </constraints>
                                 <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSAddTemplate" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="NwR-8k-e5Y">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -2385,8 +2383,8 @@
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="SFg-90-Vi7">
                                 <rect key="frame" x="50" y="60" width="21" height="23"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="4gd-0F-gnd"/>
-                                    <constraint firstAttribute="width" constant="21" id="KVN-WV-hm5"/>
+                                    <constraint firstAttribute="height" constant="21" id="QvD-xD-adt"/>
+                                    <constraint firstAttribute="width" constant="21" id="uOR-Cd-IG4"/>
                                 </constraints>
                                 <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSRemoveTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="9Yf-4q-z0z">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -2428,7 +2426,6 @@
                             <constraint firstItem="wba-mI-3Kz" firstAttribute="leading" secondItem="Gwb-6x-mB1" secondAttribute="trailing" constant="12" id="3kg-WV-gTM"/>
                             <constraint firstItem="gXX-Zm-0bB" firstAttribute="leading" secondItem="JSo-Ex-mKB" secondAttribute="leading" id="6hN-SV-YWl"/>
                             <constraint firstItem="VBi-VJ-3w4" firstAttribute="leading" secondItem="3Am-A7-MGr" secondAttribute="leading" id="816-gm-ZER"/>
-                            <constraint firstItem="pHR-Fa-o0o" firstAttribute="leading" secondItem="LpN-jq-LDz" secondAttribute="leading" id="8Gp-LL-wm1"/>
                             <constraint firstAttribute="bottom" secondItem="Gwb-6x-mB1" secondAttribute="bottom" constant="20" id="8SN-fe-Ihh"/>
                             <constraint firstItem="0Bc-Aj-hsp" firstAttribute="leading" secondItem="JSo-Ex-mKB" secondAttribute="leading" id="9pt-Z6-VNA"/>
                             <constraint firstItem="RsL-5g-N88" firstAttribute="centerY" secondItem="v8I-Mx-BrF" secondAttribute="centerY" id="AsU-Vr-IoN"/>
@@ -2436,17 +2433,20 @@
                             <constraint firstItem="5hq-Rl-ues" firstAttribute="leading" secondItem="03S-CM-lPV" secondAttribute="trailing" constant="15" id="EHv-BX-sOY"/>
                             <constraint firstItem="lZv-w5-rrd" firstAttribute="leading" secondItem="JSo-Ex-mKB" secondAttribute="leading" id="EMA-u8-Rgz"/>
                             <constraint firstItem="03S-CM-lPV" firstAttribute="leading" secondItem="3Am-A7-MGr" secondAttribute="trailing" constant="12" id="GSZ-Pk-E5b"/>
-                            <constraint firstItem="SFg-90-Vi7" firstAttribute="leading" secondItem="pHR-Fa-o0o" secondAttribute="trailing" constant="8" id="MK7-4L-bS5"/>
                             <constraint firstItem="UEk-m2-coJ" firstAttribute="centerY" secondItem="Gwb-6x-mB1" secondAttribute="centerY" id="O0c-74-sVd"/>
+                            <constraint firstItem="pHR-Fa-o0o" firstAttribute="leading" secondItem="bKS-CN-KZi" secondAttribute="leading" constant="21" id="PLP-Ah-yi7"/>
                             <constraint firstItem="3Am-A7-MGr" firstAttribute="top" secondItem="bKS-CN-KZi" secondAttribute="top" constant="35" id="Prb-UA-Xca"/>
                             <constraint firstItem="5hq-Rl-ues" firstAttribute="top" secondItem="zBr-K2-oEH" secondAttribute="bottom" constant="5" id="QXd-Jh-Zyw"/>
+                            <constraint firstItem="UEk-m2-coJ" firstAttribute="top" secondItem="pHR-Fa-o0o" secondAttribute="bottom" constant="20" id="Rw0-oZ-k32"/>
                             <constraint firstItem="L3L-II-z9D" firstAttribute="leading" secondItem="03S-CM-lPV" secondAttribute="leading" id="St8-B9-At6"/>
                             <constraint firstItem="5hq-Rl-ues" firstAttribute="bottom" secondItem="03S-CM-lPV" secondAttribute="bottom" id="VaG-RW-D30"/>
+                            <constraint firstItem="SFg-90-Vi7" firstAttribute="leading" secondItem="pHR-Fa-o0o" secondAttribute="trailing" constant="8" id="WWf-Od-a7J"/>
                             <constraint firstItem="n1N-Hx-bP6" firstAttribute="leading" secondItem="JSo-Ex-mKB" secondAttribute="leading" id="Wue-YV-KSd"/>
                             <constraint firstItem="zBr-K2-oEH" firstAttribute="leading" secondItem="5hq-Rl-ues" secondAttribute="leading" id="cBU-bf-KJm"/>
                             <constraint firstItem="mSS-FZ-Sk0" firstAttribute="leading" secondItem="JSo-Ex-mKB" secondAttribute="leading" id="cHj-8V-DtF"/>
                             <constraint firstItem="YNV-Zn-1jp" firstAttribute="leading" secondItem="JSo-Ex-mKB" secondAttribute="leading" id="dB2-pF-h9K"/>
                             <constraint firstAttribute="bottom" secondItem="03S-CM-lPV" secondAttribute="bottom" constant="90" id="dLI-ZX-EdF"/>
+                            <constraint firstItem="UEk-m2-coJ" firstAttribute="top" secondItem="SFg-90-Vi7" secondAttribute="bottom" constant="20" id="e4J-1E-6dh"/>
                             <constraint firstItem="3Am-A7-MGr" firstAttribute="top" secondItem="VBi-VJ-3w4" secondAttribute="bottom" constant="5" id="eKS-9Z-J2D"/>
                             <constraint firstItem="3Am-A7-MGr" firstAttribute="bottom" secondItem="dDB-re-qJn" secondAttribute="bottom" id="fMM-MI-13D"/>
                             <constraint firstItem="03S-CM-lPV" firstAttribute="width" secondItem="5hq-Rl-ues" secondAttribute="width" id="g5s-ug-Y6t"/>
@@ -2459,11 +2459,9 @@
                             <constraint firstItem="UEk-m2-coJ" firstAttribute="leading" secondItem="LpN-jq-LDz" secondAttribute="leading" id="qZR-EJ-bE7"/>
                             <constraint firstAttribute="trailing" secondItem="wba-mI-3Kz" secondAttribute="trailing" constant="18" id="rwL-U7-x5t"/>
                             <constraint firstItem="RsL-5g-N88" firstAttribute="leading" secondItem="dDB-re-qJn" secondAttribute="leading" id="vlB-ox-Uku"/>
-                            <constraint firstItem="pHR-Fa-o0o" firstAttribute="top" secondItem="LpN-jq-LDz" secondAttribute="bottom" constant="10" id="wbG-JA-pT4"/>
                             <constraint firstItem="5hq-Rl-ues" firstAttribute="top" secondItem="03S-CM-lPV" secondAttribute="top" id="xkQ-C1-VJt"/>
                             <constraint firstItem="03S-CM-lPV" firstAttribute="top" secondItem="L3L-II-z9D" secondAttribute="bottom" constant="5" id="xka-Xk-Bmy"/>
                             <constraint firstItem="03S-CM-lPV" firstAttribute="top" secondItem="96P-n0-YO3" secondAttribute="bottom" constant="35" id="xmX-vx-A0O"/>
-                            <constraint firstItem="pHR-Fa-o0o" firstAttribute="centerY" secondItem="SFg-90-Vi7" secondAttribute="centerY" id="xwM-tk-P7q"/>
                             <constraint firstItem="ouS-wx-aBC" firstAttribute="leading" secondItem="JSo-Ex-mKB" secondAttribute="leading" id="zjk-UF-kRZ"/>
                         </constraints>
                     </view>
@@ -2603,14 +2601,14 @@
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="52" rowSizeStyle="automatic" viewBased="YES" id="xsX-cV-kEM">
                                             <rect key="frame" x="0.0" y="0.0" width="198" height="169"/>
-                                            <autoresizingMask key="autoresizingMask"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
                                                 <tableColumn width="195" minWidth="40" maxWidth="1000" id="iR9-ex-Cme">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
-                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <font key="font" metaFont="menu" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -3046,7 +3044,7 @@
                                             <rect key="frame" x="154" y="-3" width="77" height="25"/>
                                             <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="TI3-0t-2MB" id="j64-fe-pJg">
                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" metaFont="menu"/>
+                                                <font key="font" metaFont="system"/>
                                                 <menu key="menu" id="TVZ-hw-jIl">
                                                     <items>
                                                         <menuItem title="Item 1" state="on" id="TI3-0t-2MB"/>
@@ -3326,7 +3324,7 @@ Gw
                                             <rect key="frame" x="154" y="-3" width="77" height="25"/>
                                             <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="b7k-d6-Hiv" id="wjT-vR-DxF">
                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" metaFont="menu"/>
+                                                <font key="font" metaFont="system"/>
                                                 <menu key="menu" id="Afr-tz-KGm">
                                                     <items>
                                                         <menuItem title="Item 1" state="on" id="b7k-d6-Hiv"/>
