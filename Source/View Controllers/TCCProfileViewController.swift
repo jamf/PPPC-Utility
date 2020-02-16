@@ -159,7 +159,9 @@ class TCCProfileViewController: NSViewController {
             if response == .OK {
                 panel.urls.forEach {
                     guard let executable = self.model.loadExecutable(url: $0) else { return }
-                    block(executable)
+                    if self.model.selectedExecutables.firstIndex(of: executable) == nil {
+                        block(executable)
+                    }
                 }
             }
         }
