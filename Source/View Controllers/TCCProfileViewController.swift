@@ -324,7 +324,9 @@ extension TCCProfileViewController : NSTableViewDataSource {
         
         if tableView == executablesTable {
             guard executablesAC.canInsert else { return false }
-            executablesAC.insert(newExecutable, atArrangedObjectIndex: row)
+            if self.model.selectedExecutables.firstIndex(of: newExecutable) == nil {
+                executablesAC.insert(newExecutable, atArrangedObjectIndex: row)
+            }
         } else {
             self.insetIntoAppleEvents(newExecutable)
         }
