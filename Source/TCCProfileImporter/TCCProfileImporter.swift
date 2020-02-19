@@ -26,7 +26,6 @@
 //
 
 import Foundation
-import AppKit
 
 enum TCCProfileImportResult {
     case success(TCCProfile)
@@ -41,62 +40,27 @@ public class TCCProfileImporter {
 
     // MARK: Load TCCProfile
 
-    /// Load TCC Profile data from file
-    ///
-    /// - Parameter completion: TCCProfileImportCompletion - success with TCCProfile or failure with TCCProfileImport Error
-    func loadTCCProfileFromFile(window: NSWindow, _ completion: @escaping TCCProfileImportCompletion) {
-        let openPanel = NSOpenPanel.init()
-        openPanel.allowedFileTypes = ["mobileconfig", "plist"]
-        openPanel.allowsMultipleSelection = false
-        openPanel.canChooseDirectories = false
-        openPanel.canCreateDirectories = false
-        openPanel.canChooseFiles = true
-        openPanel.title = "Open TCCProfile File"
-
-        openPanel.beginSheetModal(for: window) { (response) in
-            if response != .OK {
-                // Cancelled
-                completion(TCCProfileImportResult.failure(nil))
-            } else {
-                if let result = openPanel.url {
-                    self.decodeTCCProfile(fileUrl: result, { tccProfileResult in
-                        return completion(tccProfileResult)
-                    })
-                } else {
-                    completion(TCCProfileImportResult.failure(TCCProfileImportError.unableToOpenFile))
-                }
-            }
-        }
-
-    }
-
     /// Mapping & Decoding tcc profile
     ///
     /// - Parameter fileUrl: path with a file to load, completion: TCCProfileImportCompletion - success with TCCProfile or failure with TCCProfileImport Error
     func decodeTCCProfile(fileUrl: URL, _ completion: @escaping TCCProfileImportCompletion) {
-        let contents: Data
+        let data: Data
         do {
-            contents = try Data(contentsOf: fileUrl)
+            data = try Data(contentsOf: fileUrl)
         } catch {
             return completion(TCCProfileImportResult.failure(TCCProfileImportError.unableToOpenFile))
         }
 
-        var unsignedResult = self.unsignTCCProfile(fileData: contents)
-
-        if unsignedResult == nil {
-            unsignedResult = contents
-        }
-
-        guard let tccProfileData = unsignedResult else {
-            return completion(TCCProfileImportResult.failure(TCCProfileImportError.decodeProfileError))
-        }
-
-        let decoder = PropertyListDecoder()
-
         do {
-            let tccProfile = try decoder.decode(TCCProfile.self, from: tccProfileData)
-            return completion(TCCProfileImportResult.success(tccProfile))
-        } catch let DecodingError.keyNotFound(codingKey, _) {
+            // Note that parse will ignore the signing portion of the data
+            let tccProfile = try TCCProfile.parse(from: data)
+			return completion(TCCProfileImportResult.success(tccProfile))
+        } catch TCCProfile.ParseError.failedToCreateData {
+			return completion(TCCProfileImportResult.failure(TCCProfileImportError.decodeProfileError))
+        } catch TCCProfile.ParseError.failedToCreateDecoder {
+			return completion(TCCProfileImportResult.failure(TCCProfileImportError.decodeProfileError))
+        }
+        catch let DecodingError.keyNotFound(codingKey, _) {
             return completion(TCCProfileImportResult.failure(TCCProfileImportError.invalidProfileFile(description: codingKey.stringValue)))
         } catch let DecodingError.typeMismatch(type, context) {
             let errorDescription = "Type \(type) mismatch: \(context.debugDescription) codingPath: \(context.codingPath)"
@@ -105,20 +69,5 @@ public class TCCProfileImporter {
             let errorDescription = error.userInfo["NSDebugDescription"] as? String
             return completion(TCCProfileImportResult.failure(TCCProfileImportError.invalidProfileFile(description: errorDescription ?? error.localizedDescription)))
         }
-    }
-
-    func unsignTCCProfile(fileData data: Data) -> Data? {
-        guard let swiftyCMSDecoder = SwiftyCMSDecoder() else {
-            return nil
-        }
-
-        swiftyCMSDecoder.updateMessage(data: data as NSData)
-        swiftyCMSDecoder.finaliseMessage()
-
-        guard let data = swiftyCMSDecoder.data else {
-            return nil
-        }
-
-        return data
     }
 }

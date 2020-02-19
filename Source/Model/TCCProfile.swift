@@ -67,7 +67,7 @@ struct TCCPolicy : Codable {
     }
 }
 
-struct TCCProfile : Codable {
+public struct TCCProfile : Codable {
     struct Content: Codable {
         var payloadDescription: String
         var displayName: String

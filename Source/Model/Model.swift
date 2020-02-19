@@ -132,13 +132,13 @@ extension Model {
 
             let mirroredServices = Mirror(reflecting: executable.policy)
 
-            for (_, attr) in mirroredServices.children.enumerated() {
+            for attr in mirroredServices.children {
                 if let key = attr.label, let value = attr.value as? String {
-                    if let policyToAppend = policyFromString(executable: executable, value: value) {
-                        services[key] = services[key] ?? []
-                        services[key]?.append(policyToAppend)
-                    }
-                }
+                     if let policyToAppend = policyFromString(executable: executable, value: value) {
+                         services[key] = services[key] ?? []
+                         services[key]?.append(policyToAppend)
+                     }
+                 }
             }
 
             executable.appleEvents.forEach { event in

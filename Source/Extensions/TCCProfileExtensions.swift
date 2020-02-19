@@ -1,10 +1,10 @@
 //
-//  AppleEventRule.swift
+//  TCCProfileExtensions.swift
 //  PPPC Utility
 //
 //  MIT License
 //
-//  Copyright (c) 2018 Jamf Software
+//  Copyright (c) 2020 Jamf Software
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -25,19 +25,34 @@
 //  SOFTWARE.
 //
 
-import Cocoa
+import Foundation
 
-class AppleEventRule: NSObject {
-    
-    @objc dynamic var source: Executable!
-    @objc dynamic var destination: Executable!
-    @objc dynamic var valueString: String! = "Allow"
-    
-    var value: Bool { return valueString == "Allow" }
+public extension TCCProfile {
 
-    init(source: Executable, destination: Executable, value: Bool) {
-        self.source = source
-        self.destination = destination
-        self.valueString = value ? "Allow" : "Deny"
+    enum ParseError: Error {
+        case failedToCreateDecoder
+        case failedToCreateData
     }
+
+    /// Create a Provisioning Profile object from the file's Data.
+    static func parse(from profileData: Data) throws -> TCCProfile {
+
+        guard let decoder = SwiftyCMSDecoder() else {
+            throw ParseError.failedToCreateDecoder
+        }
+
+        decoder.updateMessage(data: profileData as NSData)
+        decoder.finaliseMessage()
+
+        var data = decoder.data
+
+        if data == nil {
+            // Assume it failed becuase it's not encrypted and move on to deserialize data into TCCProfile object with data as is.
+            data = profileData
+        }
+
+        return try PropertyListDecoder().decode(TCCProfile.self, from: data!)
+
+    }
+
 }

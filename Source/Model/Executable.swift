@@ -57,7 +57,7 @@ class Executable: NSObject {
 
     func generateDisplayName(identifier: String) -> String {
         var separatedBy = "."
-        if  identifier.contains("/") {
+        if identifier.contains("/") {
             separatedBy = "/"
         }
         let partNames = identifier.components(separatedBy: separatedBy)
