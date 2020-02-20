@@ -47,7 +47,7 @@ public extension TCCProfile {
         var data = decoder.data
 
         if data == nil {
-            // Assume it failed becuase it's not encrypted and move on to deserialize data into TCCProfile object with data as is.
+            // Assume it failed because it's not encrypted and move on to deserialize data into TCCProfile object with data as is.
             data = profileData
         }
 

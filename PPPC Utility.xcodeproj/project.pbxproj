@@ -12,7 +12,7 @@
 		34DED4D323FDC77E00C53FB9 /* TCCProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC409F4214D95D200BE4F17 /* TCCProfile.swift */; };
 		34DED4D423FDCAFD00C53FB9 /* SwiftyCMSDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F95AE1523158F03002E0A22 /* SwiftyCMSDecoder.swift */; };
 		34DED4D623FDDB2B00C53FB9 /* TCCProfileConfigurationPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DED4D523FDDB2B00C53FB9 /* TCCProfileConfigurationPanel.swift */; };
-		5F90EBDD2319934F00738D09 /* ArrayExtenstions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F90EBDC2319934F00738D09 /* ArrayExtenstions.swift */; };
+		5F90EBDD2319934F00738D09 /* ArrayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F90EBDC2319934F00738D09 /* ArrayExtensions.swift */; };
 		5F90EBDF2319970000738D09 /* TCCProfileImportError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F90EBDE2319970000738D09 /* TCCProfileImportError.swift */; };
 		5F90EBE12319970500738D09 /* TCCProfileImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F90EBE02319970500738D09 /* TCCProfileImporter.swift */; };
 		5F90EBE42319992B00738D09 /* ModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F90EBE32319992B00738D09 /* ModelTests.swift */; };
@@ -54,7 +54,7 @@
 /* Begin PBXFileReference section */
 		345B01D523FDBF55008838B6 /* TCCProfileExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TCCProfileExtensions.swift; sourceTree = "<group>"; };
 		34DED4D523FDDB2B00C53FB9 /* TCCProfileConfigurationPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TCCProfileConfigurationPanel.swift; sourceTree = "<group>"; };
-		5F90EBDC2319934F00738D09 /* ArrayExtenstions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtenstions.swift; sourceTree = "<group>"; };
+		5F90EBDC2319934F00738D09 /* ArrayExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensions.swift; sourceTree = "<group>"; };
 		5F90EBDE2319970000738D09 /* TCCProfileImportError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TCCProfileImportError.swift; sourceTree = "<group>"; };
 		5F90EBE02319970500738D09 /* TCCProfileImporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TCCProfileImporter.swift; sourceTree = "<group>"; };
 		5F90EBE32319992B00738D09 /* ModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelTests.swift; sourceTree = "<group>"; };
@@ -111,7 +111,7 @@
 		5F90EBDB2319931100738D09 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				5F90EBDC2319934F00738D09 /* ArrayExtenstions.swift */,
+				5F90EBDC2319934F00738D09 /* ArrayExtensions.swift */,
 				345B01D523FDBF55008838B6 /* TCCProfileExtensions.swift */,
 			);
 			path = Extensions;
@@ -377,7 +377,7 @@
 				5F90EBE12319970500738D09 /* TCCProfileImporter.swift in Sources */,
 				5F95AE1623158F03002E0A22 /* SwiftyCMSDecoder.swift in Sources */,
 				6EB86F692151476500FBE634 /* JamfProClient.swift in Sources */,
-				5F90EBDD2319934F00738D09 /* ArrayExtenstions.swift in Sources */,
+				5F90EBDD2319934F00738D09 /* ArrayExtensions.swift in Sources */,
 				6EC40A14214DFB5800BE4F17 /* Model.swift in Sources */,
 				6EC40A1C214EF87800BE4F17 /* SigningIdentity.swift in Sources */,
 				6EC40A18214ECF2C00BE4F17 /* UploadViewController.swift in Sources */,
@@ -426,7 +426,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 483DWKW443;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "PPPC UtilityTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -449,7 +449,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 483DWKW443;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "PPPC UtilityTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
