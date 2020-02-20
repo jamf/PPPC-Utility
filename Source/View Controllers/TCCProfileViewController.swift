@@ -159,7 +159,7 @@ class TCCProfileViewController: NSViewController {
             if response == .OK {
                 panel.urls.forEach {
                     guard let executable = self.model.loadExecutable(url: $0) else { return }
-                    if self.model.selectedExecutables.firstIndex(of: executable) == nil {
+                    if self.shouldExecutableBeAdded(executable) {
                         block(executable)
                     }
                 }
@@ -302,6 +302,10 @@ class TCCProfileViewController: NSViewController {
         self.appleEventsAC.insert(rule, atArrangedObjectIndex: 0)
     }
     
+    func shouldExecutableBeAdded(_ executable: Executable) -> Bool {
+        return self.model.selectedExecutables.firstIndex(of: executable) == nil
+    }
+    
 }
 
 extension TCCProfileViewController : NSTableViewDataSource {
@@ -324,7 +328,7 @@ extension TCCProfileViewController : NSTableViewDataSource {
         
         if tableView == executablesTable {
             guard executablesAC.canInsert else { return false }
-            if self.model.selectedExecutables.firstIndex(of: newExecutable) == nil {
+            if shouldExecutableBeAdded(newExecutable) {
                 executablesAC.insert(newExecutable, atArrangedObjectIndex: row)
             }
         } else {
