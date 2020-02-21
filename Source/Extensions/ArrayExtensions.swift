@@ -1,5 +1,5 @@
 //
-//  Array+appendIfNew.swift
+//  ArrayExtensions.swift
 //  PPPC Utility
 //
 //  MIT License
