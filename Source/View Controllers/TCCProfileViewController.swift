@@ -86,16 +86,16 @@ class TCCProfileViewController: NSViewController {
     @IBOutlet weak var networkVolumesHelpButton: InfoButton!
     @IBOutlet weak var removableVolumesHelpButton: InfoButton!
 
-    @IBOutlet weak var photosStackView: NSStackView!
-    @IBOutlet weak var calendarStackView: NSStackView!
-    @IBOutlet weak var postEventsStackView: NSStackView!
+    @IBOutlet weak var addressBookStackView: NSStackView!
     @IBOutlet weak var allFilesStackView: NSStackView!
-    @IBOutlet weak var microphoneStackView: NSStackView!
-    @IBOutlet weak var listenEventStackView: NSStackView!
-    @IBOutlet weak var screenCaptureStackView: NSStackView!
-    @IBOutlet weak var desktopFolderStackView: NSStackView!
-    @IBOutlet weak var downloadsFolderStackView: NSStackView!
+    @IBOutlet weak var cameraStackView: NSStackView!
+    @IBOutlet weak var documentsFolderStackView: NSStackView!
+    @IBOutlet weak var fileProviderStackView: NSStackView!
+    @IBOutlet weak var mediaLibraryStackView: NSStackView!
+    @IBOutlet weak var networkVolumesStackView: NSStackView!
+    @IBOutlet weak var postEventsStackView: NSStackView!
     @IBOutlet weak var removableVolumesStackView: NSStackView!
+    @IBOutlet weak var speechRecognitionStackView: NSStackView!
 
     @IBOutlet weak var addressBookPopUpAC: NSArrayController!
     @IBOutlet weak var photosPopUpAC: NSArrayController!
@@ -199,16 +199,16 @@ class TCCProfileViewController: NSViewController {
 
         setupDescriptions()
 
-        setupStackViewsWithBackground(stackViews: [photosStackView,
-                                                   calendarStackView,
-                                                   postEventsStackView,
+        setupStackViewsWithBackground(stackViews: [addressBookStackView,
                                                    allFilesStackView,
-                                                   microphoneStackView,
-                                                   listenEventStackView,
-                                                   screenCaptureStackView,
-                                                   desktopFolderStackView,
-                                                   downloadsFolderStackView,
-                                                   removableVolumesStackView])
+                                                   cameraStackView,
+                                                   documentsFolderStackView,
+                                                   fileProviderStackView,
+                                                   mediaLibraryStackView,
+                                                   networkVolumesStackView,
+                                                   postEventsStackView,
+                                                   removableVolumesStackView,
+                                                   speechRecognitionStackView])
 
         //  Setup table views
         executablesTable.registerForDraggedTypes([.fileURL])
