@@ -2060,7 +2060,7 @@
                                     <rect key="frame" x="1" y="542" width="485" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
-                                <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="0.11286681715575619" horizontal="NO" id="emx-h0-Wbi">
+                                <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="0.99548532731376971" horizontal="NO" id="emx-h0-Wbi">
                                     <rect key="frame" x="470" y="1" width="16" height="557"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
@@ -2199,7 +2199,7 @@
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
-                                    <binding destination="ZfI-PN-mks" name="enabled2" keyPath="canEdit" previousBinding="Tyh-kR-x77" id="QpF-JL-NEt">
+                                    <binding destination="ZfI-PN-mks" name="enabled" keyPath="canEdit" id="ugH-VM-mUH">
                                         <dictionary key="options">
                                             <integer key="NSMultipleValuesPlaceholder" value="-1"/>
                                             <integer key="NSNoSelectionPlaceholder" value="-1"/>
@@ -2207,7 +2207,6 @@
                                             <integer key="NSNullPlaceholder" value="-1"/>
                                         </dictionary>
                                     </binding>
-                                    <binding destination="qId-iR-fmq" name="enabled" keyPath="canRemove" id="Tyh-kR-x77"/>
                                     <segue destination="HiQ-kk-PBp" kind="sheet" identifier="UploadSegue" id="P4k-E0-f9D"/>
                                 </connections>
                             </button>
@@ -2218,7 +2217,7 @@
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
-                                    <binding destination="ZfI-PN-mks" name="enabled2" keyPath="canEdit" previousBinding="Obq-1B-Xjr" id="qhC-zz-Wxm">
+                                    <binding destination="ZfI-PN-mks" name="enabled" keyPath="canEdit" id="cxN-0Y-d8P">
                                         <dictionary key="options">
                                             <integer key="NSMultipleValuesPlaceholder" value="-1"/>
                                             <integer key="NSNoSelectionPlaceholder" value="-1"/>
@@ -2226,7 +2225,6 @@
                                             <integer key="NSNullPlaceholder" value="-1"/>
                                         </dictionary>
                                     </binding>
-                                    <binding destination="qId-iR-fmq" name="enabled" keyPath="canRemove" id="Obq-1B-Xjr"/>
                                     <segue destination="mUH-Fz-fcT" kind="sheet" identifier="SaveSegue" id="Voo-Oy-5J9"/>
                                 </connections>
                             </button>
