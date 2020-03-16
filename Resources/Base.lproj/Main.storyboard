@@ -815,7 +815,7 @@
                                                             </popUpButtonCell>
                                                             <connections>
                                                                 <binding destination="2QJ-da-IYc" name="content" keyPath="arrangedObjects" id="ovE-1e-jkz"/>
-                                                                <binding destination="qId-iR-fmq" name="selectedObject" keyPath="selection.accessibilityPolicyString" previousBinding="ovE-1e-jkz" id="NVf-wf-tqU"/>
+                                                                <binding destination="qId-iR-fmq" name="selectedObject" keyPath="selection.policy.Accessibility" previousBinding="ovE-1e-jkz" id="NVf-wf-tqU"/>
                                                             </connections>
                                                         </popUpButton>
                                                         <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LCo-0b-3VH" customClass="InfoButton" customModule="PPPC_Utility" customModuleProvider="target">
@@ -876,7 +876,7 @@
                                                             </popUpButtonCell>
                                                             <connections>
                                                                 <binding destination="XZw-vD-zUR" name="content" keyPath="arrangedObjects" id="Rwd-KX-3mh"/>
-                                                                <binding destination="qId-iR-fmq" name="selectedObject" keyPath="selection.addressBookPolicyString" previousBinding="Rwd-KX-3mh" id="IOU-5g-O2T"/>
+                                                                <binding destination="qId-iR-fmq" name="selectedObject" keyPath="selection.policy.AddressBook" previousBinding="Rwd-KX-3mh" id="IOU-5g-O2T"/>
                                                             </connections>
                                                         </popUpButton>
                                                         <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9ei-Pc-bwm" customClass="InfoButton" customModule="PPPC_Utility" customModuleProvider="target">
@@ -935,7 +935,7 @@
                                                             </popUpButtonCell>
                                                             <connections>
                                                                 <binding destination="tid-Bp-2ho" name="content" keyPath="arrangedObjects" id="okx-vY-Ybg"/>
-                                                                <binding destination="qId-iR-fmq" name="selectedObject" keyPath="selection.adminFilesPolicyString" previousBinding="okx-vY-Ybg" id="5wn-VI-gFe"/>
+                                                                <binding destination="qId-iR-fmq" name="selectedObject" keyPath="selection.policy.SystemPolicySysAdminFiles" previousBinding="okx-vY-Ybg" id="5wn-VI-gFe"/>
                                                             </connections>
                                                         </popUpButton>
                                                         <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pLo-RM-uFJ" customClass="InfoButton" customModule="PPPC_Utility" customModuleProvider="target">
@@ -993,7 +993,7 @@
                                                             </popUpButtonCell>
                                                             <connections>
                                                                 <binding destination="gIb-t4-0XL" name="content" keyPath="arrangedObjects" id="BHg-6e-Cab"/>
-                                                                <binding destination="qId-iR-fmq" name="selectedObject" keyPath="selection.allFilesPolicyString" previousBinding="BHg-6e-Cab" id="hIQ-hA-xgQ"/>
+                                                                <binding destination="qId-iR-fmq" name="selectedObject" keyPath="selection.policy.SystemPolicyAllFiles" previousBinding="BHg-6e-Cab" id="hIQ-hA-xgQ"/>
                                                             </connections>
                                                         </popUpButton>
                                                         <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="URO-T0-544" customClass="InfoButton" customModule="PPPC_Utility" customModuleProvider="target">
@@ -1053,7 +1053,7 @@
                                                             </popUpButtonCell>
                                                             <connections>
                                                                 <binding destination="2dL-gR-cae" name="content" keyPath="arrangedObjects" id="mf6-97-4cD"/>
-                                                                <binding destination="qId-iR-fmq" name="selectedObject" keyPath="selection.calendarPolicyString" previousBinding="mf6-97-4cD" id="4Mq-JM-FiE"/>
+                                                                <binding destination="qId-iR-fmq" name="selectedObject" keyPath="selection.policy.Calendar" previousBinding="mf6-97-4cD" id="4Mq-JM-FiE"/>
                                                             </connections>
                                                         </popUpButton>
                                                         <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tva-g6-iKu" customClass="InfoButton" customModule="PPPC_Utility" customModuleProvider="target">
@@ -1110,7 +1110,7 @@
                                                             </popUpButtonCell>
                                                             <connections>
                                                                 <binding destination="gFl-fe-LHc" name="content" keyPath="arrangedObjects" id="ob1-62-3ic"/>
-                                                                <binding destination="qId-iR-fmq" name="selectedObject" keyPath="selection.cameraPolicyString" previousBinding="ob1-62-3ic" id="ryH-9o-Hcw"/>
+                                                                <binding destination="qId-iR-fmq" name="selectedObject" keyPath="selection.policy.Camera" previousBinding="ob1-62-3ic" id="ryH-9o-Hcw"/>
                                                             </connections>
                                                         </popUpButton>
                                                         <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="K84-eC-N2o" customClass="InfoButton" customModule="PPPC_Utility" customModuleProvider="target">
@@ -1167,7 +1167,7 @@
                                                             </popUpButtonCell>
                                                             <connections>
                                                                 <binding destination="mD8-Sp-mTy" name="content" keyPath="arrangedObjects" id="QUR-1M-T0S"/>
-                                                                <binding destination="qId-iR-fmq" name="selectedObject" keyPath="selection.desktopFolderPolicyString" previousBinding="QUR-1M-T0S" id="7nr-vE-viy"/>
+                                                                <binding destination="qId-iR-fmq" name="selectedObject" keyPath="selection.policy.SystemPolicyDesktopFolder" previousBinding="QUR-1M-T0S" id="7nr-vE-viy"/>
                                                             </connections>
                                                         </popUpButton>
                                                         <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="o2Q-LB-gdz" customClass="InfoButton" customModule="PPPC_Utility" customModuleProvider="target">
@@ -1224,7 +1224,7 @@
                                                             </popUpButtonCell>
                                                             <connections>
                                                                 <binding destination="odu-WT-B9X" name="content" keyPath="arrangedObjects" id="C1b-RX-gyL"/>
-                                                                <binding destination="qId-iR-fmq" name="selectedObject" keyPath="selection.documentsFolderPolicyString" previousBinding="C1b-RX-gyL" id="Om5-2v-aAB"/>
+                                                                <binding destination="qId-iR-fmq" name="selectedObject" keyPath="selection.policy.SystemPolicyDocumentsFolder" previousBinding="C1b-RX-gyL" id="Om5-2v-aAB"/>
                                                             </connections>
                                                         </popUpButton>
                                                         <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="AWQ-jY-FwH" customClass="InfoButton" customModule="PPPC_Utility" customModuleProvider="target">
@@ -1281,7 +1281,7 @@
                                                             </popUpButtonCell>
                                                             <connections>
                                                                 <binding destination="enB-rh-Zf7" name="content" keyPath="arrangedObjects" id="jaN-zU-GEz"/>
-                                                                <binding destination="qId-iR-fmq" name="selectedObject" keyPath="selection.downloadsFolderPolicyString" previousBinding="jaN-zU-GEz" id="IJG-wq-xZZ"/>
+                                                                <binding destination="qId-iR-fmq" name="selectedObject" keyPath="selection.policy.SystemPolicyDownloadsFolder" previousBinding="jaN-zU-GEz" id="IJG-wq-xZZ"/>
                                                             </connections>
                                                         </popUpButton>
                                                         <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1Ve-3n-a7B" customClass="InfoButton" customModule="PPPC_Utility" customModuleProvider="target">
@@ -1338,7 +1338,7 @@
                                                             </popUpButtonCell>
                                                             <connections>
                                                                 <binding destination="emR-xr-tq1" name="content" keyPath="arrangedObjects" id="UpM-ed-EY4"/>
-                                                                <binding destination="qId-iR-fmq" name="selectedObject" keyPath="selection.fileProviderPolicyString" previousBinding="UpM-ed-EY4" id="W5t-Zo-FQK"/>
+                                                                <binding destination="qId-iR-fmq" name="selectedObject" keyPath="selection.policy.FileProviderPresence" previousBinding="UpM-ed-EY4" id="W5t-Zo-FQK"/>
                                                             </connections>
                                                         </popUpButton>
                                                         <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dRq-MC-7oj" customClass="InfoButton" customModule="PPPC_Utility" customModuleProvider="target">
@@ -1395,7 +1395,7 @@
                                                             </popUpButtonCell>
                                                             <connections>
                                                                 <binding destination="tlm-Wb-zyk" name="content" keyPath="arrangedObjects" id="ncH-Q1-lWI"/>
-                                                                <binding destination="qId-iR-fmq" name="selectedObject" keyPath="selection.listenEventPolicyString" previousBinding="ncH-Q1-lWI" id="sdf-Ca-luF"/>
+                                                                <binding destination="qId-iR-fmq" name="selectedObject" keyPath="selection.policy.ListenEvent" previousBinding="ncH-Q1-lWI" id="sdf-Ca-luF"/>
                                                             </connections>
                                                         </popUpButton>
                                                         <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mFT-P4-Kyb" customClass="InfoButton" customModule="PPPC_Utility" customModuleProvider="target">
@@ -1452,7 +1452,7 @@
                                                             </popUpButtonCell>
                                                             <connections>
                                                                 <binding destination="N4O-bJ-8WN" name="content" keyPath="arrangedObjects" id="zJA-37-OGA"/>
-                                                                <binding destination="qId-iR-fmq" name="selectedObject" keyPath="selection.mediaLibraryPolicyString" previousBinding="zJA-37-OGA" id="Wnb-BX-Dko"/>
+                                                                <binding destination="qId-iR-fmq" name="selectedObject" keyPath="selection.policy.MediaLibrary" previousBinding="zJA-37-OGA" id="Wnb-BX-Dko"/>
                                                             </connections>
                                                         </popUpButton>
                                                         <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="91q-Dn-Rxu" customClass="InfoButton" customModule="PPPC_Utility" customModuleProvider="target">
@@ -1509,7 +1509,7 @@
                                                             </popUpButtonCell>
                                                             <connections>
                                                                 <binding destination="O1H-PB-ZJT" name="content" keyPath="arrangedObjects" id="Zki-h0-SMT"/>
-                                                                <binding destination="qId-iR-fmq" name="selectedObject" keyPath="selection.microphonePolicyString" previousBinding="Zki-h0-SMT" id="ToN-K6-fGa"/>
+                                                                <binding destination="qId-iR-fmq" name="selectedObject" keyPath="selection.policy.Microphone" previousBinding="Zki-h0-SMT" id="ToN-K6-fGa"/>
                                                             </connections>
                                                         </popUpButton>
                                                         <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8Qr-Q4-FYc" customClass="InfoButton" customModule="PPPC_Utility" customModuleProvider="target">
@@ -1566,7 +1566,7 @@
                                                             </popUpButtonCell>
                                                             <connections>
                                                                 <binding destination="lgP-c3-wQo" name="content" keyPath="arrangedObjects" id="Kcq-8C-cQv"/>
-                                                                <binding destination="qId-iR-fmq" name="selectedObject" keyPath="selection.networkVolumesPolicyString" previousBinding="Kcq-8C-cQv" id="h25-OS-amo"/>
+                                                                <binding destination="qId-iR-fmq" name="selectedObject" keyPath="selection.policy.SystemPolicyNetworkVolumes" previousBinding="Kcq-8C-cQv" id="h25-OS-amo"/>
                                                             </connections>
                                                         </popUpButton>
                                                         <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="b55-kc-gGA" customClass="InfoButton" customModule="PPPC_Utility" customModuleProvider="target">
@@ -1624,7 +1624,7 @@
                                                             </popUpButtonCell>
                                                             <connections>
                                                                 <binding destination="zzU-xn-rzc" name="content" keyPath="arrangedObjects" id="EaV-g2-akh"/>
-                                                                <binding destination="qId-iR-fmq" name="selectedObject" keyPath="selection.photosPolicyString" previousBinding="EaV-g2-akh" id="NTz-Rg-iGx"/>
+                                                                <binding destination="qId-iR-fmq" name="selectedObject" keyPath="selection.policy.Photos" previousBinding="EaV-g2-akh" id="NTz-Rg-iGx"/>
                                                             </connections>
                                                         </popUpButton>
                                                         <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Q9j-J1-clR" customClass="InfoButton" customModule="PPPC_Utility" customModuleProvider="target">
@@ -1682,7 +1682,7 @@
                                                             </popUpButtonCell>
                                                             <connections>
                                                                 <binding destination="FRk-mZ-ZAe" name="content" keyPath="arrangedObjects" id="ph0-7W-wm1"/>
-                                                                <binding destination="qId-iR-fmq" name="selectedObject" keyPath="selection.postEventsPolicyString" previousBinding="ph0-7W-wm1" id="Ozf-bI-CIA"/>
+                                                                <binding destination="qId-iR-fmq" name="selectedObject" keyPath="selection.policy.PostEvent" previousBinding="ph0-7W-wm1" id="Ozf-bI-CIA"/>
                                                             </connections>
                                                         </popUpButton>
                                                         <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7Jz-IY-UoU" customClass="InfoButton" customModule="PPPC_Utility" customModuleProvider="target">
@@ -1740,7 +1740,7 @@
                                                             </popUpButtonCell>
                                                             <connections>
                                                                 <binding destination="77T-l2-xeW" name="content" keyPath="arrangedObjects" id="Thx-OU-pq7"/>
-                                                                <binding destination="qId-iR-fmq" name="selectedObject" keyPath="selection.remindersPolicyString" previousBinding="Thx-OU-pq7" id="XH7-V5-Ril"/>
+                                                                <binding destination="qId-iR-fmq" name="selectedObject" keyPath="selection.policy.Reminders" previousBinding="Thx-OU-pq7" id="XH7-V5-Ril"/>
                                                             </connections>
                                                         </popUpButton>
                                                         <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="A1b-sQ-vR9" customClass="InfoButton" customModule="PPPC_Utility" customModuleProvider="target">
@@ -1797,7 +1797,7 @@
                                                             </popUpButtonCell>
                                                             <connections>
                                                                 <binding destination="sRi-eg-n1o" name="content" keyPath="arrangedObjects" id="NYj-34-9b2"/>
-                                                                <binding destination="qId-iR-fmq" name="selectedObject" keyPath="selection.removableVolumesPolicyString" previousBinding="NYj-34-9b2" id="jti-25-gYl"/>
+                                                                <binding destination="qId-iR-fmq" name="selectedObject" keyPath="selection.policy.SystemPolicyRemovableVolumes" previousBinding="NYj-34-9b2" id="jti-25-gYl"/>
                                                             </connections>
                                                         </popUpButton>
                                                         <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tmm-2R-ETS" customClass="InfoButton" customModule="PPPC_Utility" customModuleProvider="target">
@@ -1854,7 +1854,7 @@
                                                             </popUpButtonCell>
                                                             <connections>
                                                                 <binding destination="5Kp-OY-mxt" name="content" keyPath="arrangedObjects" id="LPY-Lt-daF"/>
-                                                                <binding destination="qId-iR-fmq" name="selectedObject" keyPath="selection.screenCapturePolicyString" previousBinding="LPY-Lt-daF" id="reF-Yg-Aqw"/>
+                                                                <binding destination="qId-iR-fmq" name="selectedObject" keyPath="selection.policy.ScreenCapture" previousBinding="LPY-Lt-daF" id="reF-Yg-Aqw"/>
                                                             </connections>
                                                         </popUpButton>
                                                         <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="36m-yh-kC6" customClass="InfoButton" customModule="PPPC_Utility" customModuleProvider="target">
@@ -1911,7 +1911,7 @@
                                                             </popUpButtonCell>
                                                             <connections>
                                                                 <binding destination="IEZ-zf-QjT" name="content" keyPath="arrangedObjects" id="hen-NN-lwW"/>
-                                                                <binding destination="qId-iR-fmq" name="selectedObject" keyPath="selection.speechRecognitionPolicyString" previousBinding="hen-NN-lwW" id="xkq-8d-AR2"/>
+                                                                <binding destination="qId-iR-fmq" name="selectedObject" keyPath="selection.policy.SpeechRecognition" previousBinding="hen-NN-lwW" id="xkq-8d-AR2"/>
                                                             </connections>
                                                         </popUpButton>
                                                         <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="B5K-Rg-tlf" customClass="InfoButton" customModule="PPPC_Utility" customModuleProvider="target">
