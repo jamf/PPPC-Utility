@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15705"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15702"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -112,6 +112,7 @@
                                             </connections>
                                         </menuItem>
                                         <menuItem title="Print…" keyEquivalent="p" id="aTl-1u-JFS">
+                                            <modifierMask key="keyEquivalentModifierMask" control="YES" option="YES" command="YES"/>
                                             <connections>
                                                 <action selector="print:" target="Ady-hI-5gd" id="qaZ-4w-aoO"/>
                                             </connections>
@@ -2060,7 +2061,7 @@
                                     <rect key="frame" x="1" y="542" width="485" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
-                                <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="0.11286681715575619" horizontal="NO" id="emx-h0-Wbi">
+                                <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="0.99548532731376971" horizontal="NO" id="emx-h0-Wbi">
                                     <rect key="frame" x="470" y="1" width="16" height="557"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
@@ -2088,7 +2089,7 @@
                                             <tableColumns>
                                                 <tableColumn width="482" minWidth="40" maxWidth="1000" id="ci3-gO-OVp">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
-                                                        <font key="font" metaFont="label" size="11"/>
+                                                        <font key="font" metaFont="toolTip"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -2253,7 +2254,7 @@
                                             <tableColumns>
                                                 <tableColumn width="195" minWidth="40" maxWidth="1000" id="oNB-rR-rpb">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
-                                                        <font key="font" metaFont="label" size="11"/>
+                                                        <font key="font" metaFont="toolTip"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -2418,7 +2419,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <button verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DB5-Ps-rWI">
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="DB5-Ps-rWI">
                                 <rect key="frame" x="123" y="61" width="97" height="23"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="RPw-a2-lQP"/>
@@ -2451,9 +2452,11 @@
                             <constraint firstItem="lZv-w5-rrd" firstAttribute="leading" secondItem="JSo-Ex-mKB" secondAttribute="leading" id="EMA-u8-Rgz"/>
                             <constraint firstItem="03S-CM-lPV" firstAttribute="leading" secondItem="3Am-A7-MGr" secondAttribute="trailing" constant="12" id="GSZ-Pk-E5b"/>
                             <constraint firstItem="SFg-90-Vi7" firstAttribute="leading" secondItem="pHR-Fa-o0o" secondAttribute="trailing" constant="8" id="MK7-4L-bS5"/>
+                            <constraint firstItem="DB5-Ps-rWI" firstAttribute="baseline" secondItem="SFg-90-Vi7" secondAttribute="firstBaseline" id="Ntc-ET-tvQ"/>
                             <constraint firstItem="UEk-m2-coJ" firstAttribute="centerY" secondItem="Gwb-6x-mB1" secondAttribute="centerY" id="O0c-74-sVd"/>
                             <constraint firstItem="3Am-A7-MGr" firstAttribute="top" secondItem="bKS-CN-KZi" secondAttribute="top" constant="35" id="Prb-UA-Xca"/>
                             <constraint firstItem="5hq-Rl-ues" firstAttribute="top" secondItem="zBr-K2-oEH" secondAttribute="bottom" constant="5" id="QXd-Jh-Zyw"/>
+                            <constraint firstItem="DB5-Ps-rWI" firstAttribute="leading" secondItem="pHR-Fa-o0o" secondAttribute="trailing" constant="81" id="Qgg-DM-0Sx"/>
                             <constraint firstItem="L3L-II-z9D" firstAttribute="leading" secondItem="03S-CM-lPV" secondAttribute="leading" id="St8-B9-At6"/>
                             <constraint firstItem="5hq-Rl-ues" firstAttribute="bottom" secondItem="03S-CM-lPV" secondAttribute="bottom" id="VaG-RW-D30"/>
                             <constraint firstItem="n1N-Hx-bP6" firstAttribute="leading" secondItem="JSo-Ex-mKB" secondAttribute="leading" id="Wue-YV-KSd"/>
@@ -2624,7 +2627,7 @@
                                             <tableColumns>
                                                 <tableColumn width="195" minWidth="40" maxWidth="1000" id="iR9-ex-Cme">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
-                                                        <font key="font" metaFont="label" size="11"/>
+                                                        <font key="font" metaFont="toolTip"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
