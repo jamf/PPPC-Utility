@@ -172,9 +172,8 @@ class TCCProfileViewController: NSViewController {
             case .success(let tccProfile):
                 self?.model.importProfile(tccProfile: tccProfile)
             case .failure(let tccProfileImportError):
-
-                if let error = tccProfileImportError {
-                    self?.showAlert(error, for: window)
+                if (!tccProfileImportError.isCancelled) {
+                    self?.showAlert(tccProfileImportError, for: window)
                 }
             }
         })

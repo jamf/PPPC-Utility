@@ -27,13 +27,8 @@
 
 import Foundation
 
-enum TCCProfileImportResult {
-    case success(TCCProfile)
-    case failure(TCCProfileImportError?)
-}
-
+typealias TCCProfileImportResult = Result<TCCProfile, TCCProfileImportError>
 typealias TCCProfileImportCompletion = ((TCCProfileImportResult) -> Void)
-
 
 /// Load tcc profiles
 public class TCCProfileImporter {
@@ -48,26 +43,26 @@ public class TCCProfileImporter {
         do {
             data = try Data(contentsOf: fileUrl)
         } catch {
-            return completion(TCCProfileImportResult.failure(TCCProfileImportError.unableToOpenFile))
+            return completion(.failure(.unableToOpenFile))
         }
 
         do {
             // Note that parse will ignore the signing portion of the data
             let tccProfile = try TCCProfile.parse(from: data)
-			return completion(TCCProfileImportResult.success(tccProfile))
+			return completion(.success(tccProfile))
         } catch TCCProfile.ParseError.failedToCreateData {
-			return completion(TCCProfileImportResult.failure(TCCProfileImportError.decodeProfileError))
+			return completion(.failure(.decodeProfileError))
         } catch TCCProfile.ParseError.failedToCreateDecoder {
-			return completion(TCCProfileImportResult.failure(TCCProfileImportError.decodeProfileError))
+			return completion(.failure(.decodeProfileError))
         }
         catch let DecodingError.keyNotFound(codingKey, _) {
-            return completion(TCCProfileImportResult.failure(TCCProfileImportError.invalidProfileFile(description: codingKey.stringValue)))
+            return completion(TCCProfileImportResult.failure(.invalidProfileFile(description: codingKey.stringValue)))
         } catch let DecodingError.typeMismatch(type, context) {
             let errorDescription = "Type \(type) mismatch: \(context.debugDescription) codingPath: \(context.codingPath)"
-            return completion(TCCProfileImportResult.failure(TCCProfileImportError.invalidProfileFile(description: errorDescription)))
+            return completion(.failure(.invalidProfileFile(description: errorDescription)))
         } catch let error as NSError {
             let errorDescription = error.userInfo["NSDebugDescription"] as? String
-            return completion(TCCProfileImportResult.failure(TCCProfileImportError.invalidProfileFile(description: errorDescription ?? error.localizedDescription)))
+            return completion(.failure(.invalidProfileFile(description: errorDescription ?? error.localizedDescription)))
         }
     }
 }

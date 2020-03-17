@@ -42,7 +42,7 @@ class TCCProfileImporterTests: XCTestCase {
             case .success:
                 XCTFail("Broken Signed Profile, it shouldn't be success")
             case .failure(let tccProfileError):
-                XCTAssertTrue(tccProfileError.debugDescription.contains("The given data was not a valid property list."))
+                XCTAssertTrue(tccProfileError.localizedDescription.contains("The given data was not a valid property list."))
             }
         })
     }
@@ -59,7 +59,7 @@ class TCCProfileImporterTests: XCTestCase {
             case .success:
                 XCTFail("Empty Content, it shouldn't be success")
             case .failure(let tccProfileError):
-                XCTAssertEqual(tccProfileError?.localizedDescription, expectedTCCProfileError.localizedDescription)
+                XCTAssertEqual(tccProfileError.localizedDescription, expectedTCCProfileError.localizedDescription)
             }
         })
     }
@@ -75,7 +75,7 @@ class TCCProfileImporterTests: XCTestCase {
                 XCTAssertNotNil(tccProfile.content)
                 XCTAssertNotNil(tccProfile.content[0].services)
             case .failure(let tccProfileError):
-                XCTFail("Unable to read tccProfile \(tccProfileError?.localizedDescription ?? "")")
+                XCTFail("Unable to read tccProfile \(tccProfileError.localizedDescription)")
             }
         })
     }
@@ -92,7 +92,7 @@ class TCCProfileImporterTests: XCTestCase {
             case .success:
                 XCTFail("Broken Unsigned Profile, it shouldn't be success")
             case .failure(let tccProfileError):
-                XCTAssertEqual(tccProfileError?.localizedDescription, expectedTCCProfileError.localizedDescription)
+                XCTAssertEqual(tccProfileError.localizedDescription, expectedTCCProfileError.localizedDescription)
             }
         })
     }

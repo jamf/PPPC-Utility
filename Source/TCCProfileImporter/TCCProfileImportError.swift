@@ -27,6 +27,7 @@
 
 import Foundation
 public enum TCCProfileImportError: Error {
+    case cancelled
     case unableToOpenFile
     case decodeProfileError
     case invalidProfileFile(description: String)
@@ -34,6 +35,8 @@ public enum TCCProfileImportError: Error {
 
     var localizedDescription: String {
         switch self {
+        case .cancelled:
+            return "Cancelled the import."
         case .unableToOpenFile:
             return "Unable to open file. Please make sure that file is correct and try again."
         case .decodeProfileError:
@@ -42,6 +45,15 @@ public enum TCCProfileImportError: Error {
             return "Invalid TCC Profile. Please make sure that required keys are inside profile: \(description)"
         case .emptyFields(let description):
             return "Unable to proceed. The following fields are required: \(description)"
+        }
+    }
+
+    var isCancelled: Bool {
+        switch self {
+        case .cancelled:
+            return true
+        default:
+            return false
         }
     }
 }
