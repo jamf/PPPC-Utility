@@ -2418,6 +2418,20 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <button verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DB5-Ps-rWI">
+                                <rect key="frame" x="123" y="61" width="97" height="23"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="RPw-a2-lQP"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="97" id="ha1-QG-fKS"/>
+                                </constraints>
+                                <buttonCell key="cell" type="smallSquare" title="Import Profile" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="mixed" borderStyle="border" allowsMixedState="YES" imageScaling="proportionallyDown" inset="2" id="Ep1-Yp-TIU">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="importProfile:" target="ZfI-PN-mks" id="CbR-lv-L7N"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="JIN-BO-Fp8" firstAttribute="leading" secondItem="JSo-Ex-mKB" secondAttribute="leading" id="1XB-vJ-xiI"/>
