@@ -149,6 +149,35 @@ class TCCProfileViewController: NSViewController {
             self.insetIntoAppleEvents($0)
         }
     }
+
+    fileprivate func showAlert(_ error: TCCProfileImportError, for window: NSWindow) {
+        let alertWindow: NSAlert = NSAlert()
+        alertWindow.messageText = "Operation Failed"
+        alertWindow.informativeText = error.localizedDescription
+        alertWindow.addButton(withTitle: "OK")
+        alertWindow.alertStyle = .warning
+        alertWindow.beginSheetModal(for: window)
+    }
+
+    @IBAction func importProfile(_ sender: NSButton) {
+        guard let window = self.view.window else {
+            return
+        }
+
+        let tccProfileImporter = TCCProfileImporter()
+        let tccConfigPanel = TCCProfileConfigurationPanel()
+
+        tccConfigPanel.loadTCCProfileFromFile(importer: tccProfileImporter, window: window, { [weak self] tccProfileResult in
+            switch tccProfileResult {
+            case .success(let tccProfile):
+                self?.model.importProfile(tccProfile: tccProfile)
+            case .failure(let tccProfileImportError):
+                if (!tccProfileImportError.isCancelled) {
+                    self?.showAlert(tccProfileImportError, for: window)
+                }
+            }
+        })
+    }
     
     func promptForExecutables(_ block: @escaping (Executable) -> Void) {
         let panel = NSOpenPanel()
@@ -295,9 +324,7 @@ class TCCProfileViewController: NSViewController {
     
     func insetIntoAppleEvents(_ executable: Executable) {
         guard let source = self.executablesAC.selectedObjects.first as? Executable else { return }
-        let rule = AppleEventRule()
-        rule.source = source
-        rule.destination = executable
+        let rule = AppleEventRule(source: source, destination: executable, value: false)
         guard self.appleEventsAC.canInsert else { return }
         self.appleEventsAC.insert(rule, atArrangedObjectIndex: 0)
     }

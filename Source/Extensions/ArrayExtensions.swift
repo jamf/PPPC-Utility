@@ -1,5 +1,5 @@
 //
-//  AppleEventRule.swift
+//  ArrayExtensions.swift
 //  PPPC Utility
 //
 //  MIT License
@@ -25,19 +25,11 @@
 //  SOFTWARE.
 //
 
-import Cocoa
-
-class AppleEventRule: NSObject {
-    
-    @objc dynamic var source: Executable!
-    @objc dynamic var destination: Executable!
-    @objc dynamic var valueString: String! = "Allow"
-    
-    var value: Bool { return valueString == "Allow" }
-
-    init(source: Executable, destination: Executable, value: Bool) {
-        self.source = source
-        self.destination = destination
-        self.valueString = value ? "Allow" : "Deny"
+import Foundation
+extension Array where Element: Equatable {
+    mutating func appendIfNew(_ item: Element) {
+        if !contains(item) {
+            append(item)
+        }
     }
 }
