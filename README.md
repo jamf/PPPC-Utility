@@ -35,4 +35,4 @@ the profile will need to be signed before uploading.
 ## Importing
 Signed and unsigned profiles can be imported.
 
-![alt text](/Images/ImportProfile.png) "Import profiles")
+![alt text](/Images/ImportProfile.png "Import profiles")
