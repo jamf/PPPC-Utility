@@ -32,4 +32,7 @@ To upload the Privacy Preferences Policy Control Payload to Jamf Pro 10.7.0 and 
 the profile will need to be signed before uploading.
 ![alt text](/Images/UploadSigned.png "Upload signed")
 
+## Importing
+Signed and unsigned profiles can be imported.
 
+![alt text](/Images/ImportProfile.png) "Import profiles")
