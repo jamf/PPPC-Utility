@@ -1,4 +1,4 @@
-# ![alt text][logo] Privacy Preferences Policy Control (PPPC) Utility
+# ![PPPC Utility logo][logo] Privacy Preferences Policy Control (PPPC) Utility
 
 [logo]: /Resources/Assets.xcassets/AppIcon.appiconset/PPPC_Logo_32%402x.png "PPPC Utility"
 
