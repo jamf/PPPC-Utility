@@ -37,16 +37,35 @@ class Model : NSObject {
     
     func getAppleEventChoices(executable: Executable) -> [Executable] {
         var executables: [Executable] = []
-        if let executable = loadExecutable(url: URL(fileURLWithPath: "/System/Library/CoreServices/System Events.app")) {
-            executables.append(executable)
+
+        loadExecutable(url: URL(fileURLWithPath: "/System/Library/CoreServices/System Events.app")) {
+            result in
+            switch result{
+            case .success(let executable):
+                executables.append(executable)
+            case .failure(let error):
+                print(error)
+            }
         }
         
-        if let executable = loadExecutable(url: URL(fileURLWithPath: "/System/Library/CoreServices/SystemUIServer.app")) {
-            executables.append(executable)
+        loadExecutable(url: URL(fileURLWithPath: "/System/Library/CoreServices/SystemUIServer.app")) {
+            result in
+            switch result{
+            case .success(let executable):
+                executables.append(executable)
+            case .failure(let error):
+                print(error)
+            }
         }
         
-        if let executable = loadExecutable(url: URL(fileURLWithPath: "/System/Library/CoreServices/Finder.app")) {
-            executables.append(executable)
+        loadExecutable(url: URL(fileURLWithPath: "/System/Library/CoreServices/Finder.app")) {
+            result in
+            switch result{
+            case .success(let executable):
+                executables.append(executable)
+            case .failure(let error):
+                print(error)
+            }
         }
         
         let others = store.values.filter({ $0 != executable && !Set(executables).contains($0) })
@@ -68,13 +87,18 @@ struct IconFilePath {
     static let unknown = "/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/GenericQuestionMarkIcon.icns"
 }
 
+typealias LoadExecutableResult = Result<Executable, LoadExecutableError>
+typealias LoadExecutableCompletion = ((LoadExecutableResult) -> Void)
+
 extension Model {
     
-    func loadExecutable(url: URL) -> Executable? {
+    func loadExecutable(url: URL,completion: @escaping LoadExecutableCompletion) {
         let executable = Executable()
 
         if let bundle = Bundle(url: url) {
-            guard let identifier = bundle.bundleIdentifier else { return nil }
+            guard let identifier = bundle.bundleIdentifier else {
+                return completion(.failure(.identifierNotFound))
+            }
             executable.identifier = identifier
             let info = bundle.infoDictionary
             executable.displayName = (info?["CFBundleName"] as? String) ?? executable.identifier
@@ -98,7 +122,7 @@ extension Model {
                     }
                 }
             } else {
-                return nil
+                return completion(.failure(.resourceURLNotFound))
             }
         } else {
             executable.identifier = url.path
@@ -107,16 +131,15 @@ extension Model {
         }
         
         if let alreadyFoundExecutable = store[executable.identifier] {
-            return alreadyFoundExecutable
+            return completion(.success(alreadyFoundExecutable))
         }
         
         do {
             executable.codeRequirement = try SecurityWrapper.copyDesignatedRequirement(url: url)
             store[executable.identifier] = executable
-            return executable
+            return completion(.success(executable))
         } catch {
-            print("Failed to get designated requirement with error: \(error)")
-            return nil
+            return completion(.failure(.codeRequirementError(description: error.localizedDescription)))
         }
     }
 }
@@ -223,13 +246,20 @@ extension Model {
     
     func getExecutableFrom(identifier: String, codeRequirement: String) -> Executable {
         var executable = Executable(identifier: identifier, codeRequirement: codeRequirement)
-        if let destExecutableFromComputer = findExecutableOnComputerUsing(bundleIdentifier: identifier) {
-            executable = destExecutableFromComputer
+        findExecutableOnComputerUsing(bundleIdentifier: identifier){
+            result in
+            switch result{
+            case .success(let _executable):
+                executable = _executable
+            case .failure(let error):
+                print(error)
+            }
         }
+        
         return executable
     }
 
-    private func findExecutableOnComputerUsing(bundleIdentifier: String) -> Executable?  {
+    private func findExecutableOnComputerUsing(bundleIdentifier: String, completion: @escaping LoadExecutableCompletion) {
         var pathToLoad: String?
         if bundleIdentifier.contains("/") {
             pathToLoad = bundleIdentifier
@@ -240,10 +270,17 @@ extension Model {
         }
 
         if let pathForURL = pathToLoad, let fileURL = URL(string: "file://\(pathForURL)") {
-            let executable = self.loadExecutable(url: fileURL)
-            return executable
+            self.loadExecutable(url: fileURL){
+                result in
+                switch result{
+                case .success(let executable):
+                    return completion(.success(executable))
+                case .failure(let error):
+                    return completion(.failure(error))
+                }
+            }
         }
-        return nil
+        return completion(.failure(.executableNotFound))
     }
 
     private func cleanUpAndRemoveDependencies() {

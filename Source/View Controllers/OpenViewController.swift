@@ -29,12 +29,12 @@ import Cocoa
 
 class OpenViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
     
-    var completionBlock: (([Executable]) -> Void)?
+    var completionBlock: (([LoadExecutableResult]) -> Void)?
     
     var observers: [NSKeyValueObservation] = []
     
     @objc dynamic var current: Executable?
-    @objc dynamic var choices: [Executable] = []
+    var choices: [LoadExecutableResult] = []
     
     @IBOutlet var choicesAC: NSArrayController!
     
@@ -43,10 +43,10 @@ class OpenViewController: NSViewController, NSTableViewDataSource, NSTableViewDe
         //  Reload executables
         current = Model.shared.current
         if let value = current {
-            choices = Model.shared.getAppleEventChoices(executable: value)
+            choices = Model.shared.getAppleEventChoices(executable: value).map { .success($0) }
         }
     }
-    
+
     func tableView(_ tableView: NSTableView, selectionIndexesForProposedSelection proposedSelectionIndexes: IndexSet) -> IndexSet {
         DispatchQueue.main.async {
             guard let index = proposedSelectionIndexes.first else { return }
@@ -64,10 +64,12 @@ class OpenViewController: NSViewController, NSTableViewDataSource, NSTableViewDe
         panel.directoryURL = URL(fileURLWithPath: "/Applications", isDirectory: true)
         panel.begin { response in
             if response == .OK {
-                var selections : [Executable] = []
+                var selections : [LoadExecutableResult] = []
                 panel.urls.forEach {
-                    guard let executable = Model.shared.loadExecutable(url: $0) else { return }
-                    selections.append(executable)
+                    Model.shared.loadExecutable(url: $0){
+                        result in
+                        selections.append(result)
+                    }
                 }
                 block?(selections)
             }

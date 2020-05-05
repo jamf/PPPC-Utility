@@ -32,8 +32,10 @@ public enum TCCProfileImportError: Error {
     case decodeProfileError
     case invalidProfileFile(description: String)
     case emptyFields(description: String)
+}
 
-    var localizedDescription: String {
+extension TCCProfileImportError: LocalizedError{
+    public var errorDescription: String? {
         switch self {
         case .cancelled:
             return "Cancelled the import."

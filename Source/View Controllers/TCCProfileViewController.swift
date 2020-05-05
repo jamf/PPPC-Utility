@@ -150,10 +150,10 @@ class TCCProfileViewController: NSViewController {
         }
     }
 
-    fileprivate func showAlert(_ error: TCCProfileImportError, for window: NSWindow) {
+    fileprivate func showAlert<T: LocalizedError>(_ error: T, for window: NSWindow) {
         let alertWindow: NSAlert = NSAlert()
         alertWindow.messageText = "Operation Failed"
-        alertWindow.informativeText = error.localizedDescription
+        alertWindow.informativeText = error.errorDescription ?? "Unknown"
         alertWindow.addButton(withTitle: "OK")
         alertWindow.alertStyle = .warning
         alertWindow.beginSheetModal(for: window)
@@ -184,12 +184,28 @@ class TCCProfileViewController: NSViewController {
         panel.allowsMultipleSelection = true
         panel.allowedFileTypes = [ kUTTypeBundle, kUTTypeExecutable ] as [String]
         panel.directoryURL = URL(fileURLWithPath: "/Applications", isDirectory: true)
+        
+        guard let window = self.view.window else {
+            return
+        }
+        
         panel.begin { response in
             if response == .OK {
                 panel.urls.forEach {
-                    guard let executable = self.model.loadExecutable(url: $0) else { return }
-                    if self.shouldExecutableBeAdded(executable) {
-                        block(executable)
+                    self.model.loadExecutable(url: $0){
+                        [weak self] result in
+                        switch result{
+                        case .success(let executable):
+                            guard self?.shouldExecutableBeAdded(executable) ?? false else {
+                                let error = LoadExecutableError.executableAlreadyExists
+                                self?.showAlert(error, for: window)
+                                return
+                            }
+                            block(executable)
+                        case .failure(let error):
+                            self?.showAlert(error, for: window)
+                            print(error)
+                        }
                     }
                 }
             }
@@ -314,10 +330,26 @@ class TCCProfileViewController: NSViewController {
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         guard let openVC = segue.destinationController as? OpenViewController else { return }
+        guard let window = self.view.window else {
+            return
+        }
         if let button = sender as? NSButton, button == addAppleEventButton {
             Model.shared.current = executablesAC.selectedObjects.first as? Executable
             openVC.completionBlock = {
-                $0.forEach { self.insetIntoAppleEvents($0) }
+                $0.forEach {
+                    switch $0 {
+                    case .success(let executable):
+                        guard self.shouldExecutableBeAdded(executable) else {
+                            let error = LoadExecutableError.executableAlreadyExists
+                            self.showAlert(error, for: window)
+                            return
+                        }
+                        self.insetIntoAppleEvents(executable)
+                    case .failure(let error):
+                        self.showAlert(error, for: window)
+                        print(error)
+                    }
+                }
             }
         }
     }
@@ -351,17 +383,33 @@ extension TCCProfileViewController : NSTableViewDataSource {
         
         guard let url = urls?.first else { return false  }
         
-        guard let newExecutable = model.loadExecutable(url: url) else { return false }
-        
-        if tableView == executablesTable {
-            guard executablesAC.canInsert else { return false }
-            if shouldExecutableBeAdded(newExecutable) {
-                executablesAC.insert(newExecutable, atArrangedObjectIndex: row)
-            }
-        } else {
-            self.insetIntoAppleEvents(newExecutable)
+        guard let window = self.view.window else {
+            return false
         }
-        return true
+        var canAdd = true
+        model.loadExecutable(url: url) {
+            [weak self] result in
+            switch result{
+            case .success(let newExecutable):
+                if tableView == self?.executablesTable {
+                    guard self?.executablesAC.canInsert ?? false else
+                    {
+                        canAdd=false
+                        return
+                    }
+                    if self?.shouldExecutableBeAdded(newExecutable) ?? false {
+                        self?.executablesAC.insert(newExecutable, atArrangedObjectIndex: row)
+                    }
+                } else {
+                    self?.insetIntoAppleEvents(newExecutable)
+                }
+            case .failure(let error):
+                self?.showAlert(error, for: window)
+                print(error)
+                canAdd=false
+            }
+        }
+        return canAdd
     }
     
 }
