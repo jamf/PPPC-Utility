@@ -166,6 +166,7 @@ class UploadViewController: NSViewController {
         mustSignForUpload = UserDefaults.standard.bool(forKey: "enforceSigning")
         
         loadCredentials()
+        loadImportedTCCProfileInfo()
         updateSiteUI()
     }
     
@@ -318,7 +319,17 @@ class UploadViewController: NSViewController {
         credentialsVerified = false
     }
 
-    
+    func loadImportedTCCProfileInfo() {
+        let model = Model.shared
+
+        if let tccProfile = model.importedTCCProfile {
+            organizationLabel.stringValue = tccProfile.organization
+            payloadName = tccProfile.displayName
+            payloadDescription = tccProfile.payloadDescription
+            payloadIdentifier = tccProfile.identifier
+        }
+    }
+
     func syncronizeCredentials() {
         if saveCredentials {
             if credentialsAvailable {

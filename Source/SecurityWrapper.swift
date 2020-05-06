@@ -128,7 +128,7 @@ struct SecurityWrapper {
         
         let dict = [
             kSecClass as String         : kSecClassIdentity,
-            kSecReturnRef as String     : kCFBooleanTrue,
+            kSecReturnRef as String     : true,
             kSecMatchLimit as String    : kSecMatchLimitAll
         ] as CFDictionary
         
