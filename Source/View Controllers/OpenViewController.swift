@@ -34,7 +34,9 @@ class OpenViewController: NSViewController, NSTableViewDataSource, NSTableViewDe
     var observers: [NSKeyValueObservation] = []
     
     @objc dynamic var current: Executable?
-    var choices: [LoadExecutableResult] = []
+    @objc dynamic var choices: [Executable] = []
+
+//    var choices: [LoadExecutableResult] = []
     
     @IBOutlet var choicesAC: NSArrayController!
     
@@ -43,14 +45,14 @@ class OpenViewController: NSViewController, NSTableViewDataSource, NSTableViewDe
         //  Reload executables
         current = Model.shared.current
         if let value = current {
-            choices = Model.shared.getAppleEventChoices(executable: value).map { .success($0) }
+            choices = Model.shared.getAppleEventChoices(executable: value)
         }
     }
 
     func tableView(_ tableView: NSTableView, selectionIndexesForProposedSelection proposedSelectionIndexes: IndexSet) -> IndexSet {
         DispatchQueue.main.async {
             guard let index = proposedSelectionIndexes.first else { return }
-            self.completionBlock?([self.choices[index]])
+            self.completionBlock?([.success(self.choices[index])])
             self.dismiss(self)
         }
         return proposedSelectionIndexes

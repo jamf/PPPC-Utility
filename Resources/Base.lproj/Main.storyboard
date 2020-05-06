@@ -2362,6 +2362,7 @@
                                 </buttonCell>
                                 <connections>
                                     <binding destination="qGh-WP-H0J" name="enabled" keyPath="canAdd" id="Kfs-O9-cyq"/>
+                                    <segue destination="eVj-qo-4Ob" kind="popover" popoverAnchorView="RsL-5g-N88" popoverBehavior="t" preferredEdge="maxY" id="wg3-Vs-1zo"/>
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pHR-Fa-o0o">
@@ -2722,7 +2723,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="choicesAC" destination="Ahp-qT-sFP" id="cbZ-HT-gsI"/>
+                        <outlet property="choicesAC" destination="Ahp-qT-sFP" id="fdP-mO-Svo"/>
                     </connections>
                 </viewController>
                 <customObject id="6QA-Al-Het" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
