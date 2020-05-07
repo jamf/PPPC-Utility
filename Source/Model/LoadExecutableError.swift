@@ -19,11 +19,11 @@ extension LoadExecutableError: LocalizedError {
     public var errorDescription: String? {
         switch self {
         case .identifierNotFound:
-            return "Bundle identifier could not load."
+            return "Bundle identifier could not be found."
         case .resourceURLNotFound:
-            return "Resource URL could not be loaded from bundle."
-        case .codeRequirementError(let description):
-            return "Failed to get designated requirement with error: \(description)"
+            return "Resource URL could not be found."
+        case .codeRequirementError:
+            return "Failed to get designated code requirement. The executable may not be signed."
         case .executableNotFound:
             return "Could not find executable from url path"
         case .executableAlreadyExists:

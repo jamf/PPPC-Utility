@@ -35,8 +35,6 @@ class OpenViewController: NSViewController, NSTableViewDataSource, NSTableViewDe
     
     @objc dynamic var current: Executable?
     @objc dynamic var choices: [Executable] = []
-
-//    var choices: [LoadExecutableResult] = []
     
     @IBOutlet var choicesAC: NSArrayController!
     

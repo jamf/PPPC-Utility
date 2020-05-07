@@ -153,7 +153,7 @@ class TCCProfileViewController: NSViewController {
     fileprivate func showAlert<T: LocalizedError>(_ error: T, for window: NSWindow) {
         let alertWindow: NSAlert = NSAlert()
         alertWindow.messageText = "Operation Failed"
-        alertWindow.informativeText = error.errorDescription ?? "Unknown"
+        alertWindow.informativeText = error.errorDescription ?? "An unknown error occurred."
         alertWindow.addButton(withTitle: "OK")
         alertWindow.alertStyle = .warning
         alertWindow.beginSheetModal(for: window)
@@ -184,11 +184,9 @@ class TCCProfileViewController: NSViewController {
         panel.allowsMultipleSelection = true
         panel.allowedFileTypes = [ kUTTypeBundle, kUTTypeExecutable ] as [String]
         panel.directoryURL = URL(fileURLWithPath: "/Applications", isDirectory: true)
-        
         guard let window = self.view.window else {
             return
         }
-        
         panel.begin { response in
             if response == .OK {
                 panel.urls.forEach {
@@ -339,11 +337,6 @@ class TCCProfileViewController: NSViewController {
                 $0.forEach {
                     switch $0 {
                     case .success(let executable):
-                        guard self.shouldExecutableBeAdded(executable) else {
-                            let error = LoadExecutableError.executableAlreadyExists
-                            self.showAlert(error, for: window)
-                            return
-                        }
                         self.insetIntoAppleEvents(executable)
                     case .failure(let error):
                         self.showAlert(error, for: window)
@@ -383,9 +376,7 @@ extension TCCProfileViewController : NSTableViewDataSource {
         
         guard let url = urls?.first else { return false  }
         
-        guard let window = self.view.window else {
-            return false
-        }
+        guard let window = self.view.window else { return false }
         var canAdd = true
         model.loadExecutable(url: url) {
             [weak self] result in
@@ -394,7 +385,7 @@ extension TCCProfileViewController : NSTableViewDataSource {
                 if tableView == self?.executablesTable {
                     guard self?.executablesAC.canInsert ?? false else
                     {
-                        canAdd=false
+                        canAdd = false
                         return
                     }
                     if self?.shouldExecutableBeAdded(newExecutable) ?? false {
@@ -406,7 +397,7 @@ extension TCCProfileViewController : NSTableViewDataSource {
             case .failure(let error):
                 self?.showAlert(error, for: window)
                 print(error)
-                canAdd=false
+                canAdd = false
             }
         }
         return canAdd
