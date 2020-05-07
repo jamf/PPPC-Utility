@@ -84,7 +84,7 @@
 		6EC409F2214D8FFA00BE4F17 /* TCCProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TCCProfileViewController.swift; sourceTree = "<group>"; };
 		6EC409F4214D95D200BE4F17 /* TCCProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TCCProfile.swift; sourceTree = "<group>"; };
 		6EC40A0F214DE3B200BE4F17 /* Executable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Executable.swift; sourceTree = "<group>"; };
-		6EC40A11214DF8FE00BE4F17 /* SecurityWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SecurityWrapper.swift; path = "/Users/andrew.pirkl/xcodeGits/PPPC-Utility/Source/SecurityWrapper.swift"; sourceTree = "<absolute>"; };
+		6EC40A11214DF8FE00BE4F17 /* SecurityWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityWrapper.swift; sourceTree = "<group>"; };
 		6EC40A13214DFB5800BE4F17 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		6EC40A15214ECF1E00BE4F17 /* SaveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveViewController.swift; sourceTree = "<group>"; };
 		6EC40A17214ECF2C00BE4F17 /* UploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadViewController.swift; sourceTree = "<group>"; };

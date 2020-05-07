@@ -41,8 +41,8 @@ extension LoadExecutableError: LocalizedError {
             return "Bundle identifier could not be found."
         case .resourceURLNotFound:
             return "Resource URL could not be found."
-        case .codeRequirementError:
-            return "Failed to get designated code requirement. The executable may not be signed."
+        case .codeRequirementError(let description):
+            return "Failed to get designated code requirement. The executable may not be signed. Error: \(description)"
         case .executableNotFound:
             return "Could not find executable from url path"
         case .executableAlreadyExists:

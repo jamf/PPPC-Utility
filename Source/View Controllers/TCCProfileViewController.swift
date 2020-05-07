@@ -335,11 +335,12 @@ class TCCProfileViewController: NSViewController {
             Model.shared.current = executablesAC.selectedObjects.first as? Executable
             openVC.completionBlock = {
                 $0.forEach {
-                    switch $0 {
+                    [weak self] result in
+                    switch result {
                     case .success(let executable):
-                        self.insetIntoAppleEvents(executable)
+                        self?.insetIntoAppleEvents(executable)
                     case .failure(let error):
-                        self.showAlert(error, for: window)
+                        self?.showAlert(error, for: window)
                         print(error)
                     }
                 }
