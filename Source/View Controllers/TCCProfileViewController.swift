@@ -150,7 +150,7 @@ class TCCProfileViewController: NSViewController {
         }
     }
 
-    fileprivate func showAlert<T: LocalizedError>(_ error: T, for window: NSWindow) {
+    fileprivate func showAlert(_ error: LocalizedError, for window: NSWindow) {
         let alertWindow: NSAlert = NSAlert()
         alertWindow.messageText = "Operation Failed"
         alertWindow.informativeText = error.errorDescription ?? "An unknown error occurred."
