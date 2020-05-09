@@ -2199,14 +2199,7 @@
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
-                                    <binding destination="ZfI-PN-mks" name="enabled" keyPath="canEdit" id="ugH-VM-mUH">
-                                        <dictionary key="options">
-                                            <integer key="NSMultipleValuesPlaceholder" value="-1"/>
-                                            <integer key="NSNoSelectionPlaceholder" value="-1"/>
-                                            <integer key="NSNotApplicablePlaceholder" value="-1"/>
-                                            <integer key="NSNullPlaceholder" value="-1"/>
-                                        </dictionary>
-                                    </binding>
+                                    <binding destination="ZfI-PN-mks" name="enabled" keyPath="self.model.selectedExecutables.@count" id="WB0-1R-kyO"/>
                                     <segue destination="HiQ-kk-PBp" kind="sheet" identifier="UploadSegue" id="P4k-E0-f9D"/>
                                 </connections>
                             </button>
