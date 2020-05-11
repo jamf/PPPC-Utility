@@ -56,6 +56,10 @@ class UploadViewController: NSViewController {
     @objc dynamic var payloadIdentifier: String! = UUID().uuidString
     @objc dynamic var payloadDescription: String!
 
+    @objc dynamic var site = false
+    @objc dynamic var siteName: String?
+    @objc dynamic var siteId: String?
+
     @IBOutlet weak var defaultsController: NSUserDefaultsController!
     
     @IBOutlet weak var jamfProServerLabel: NSTextField!
@@ -69,7 +73,9 @@ class UploadViewController: NSViewController {
     @IBOutlet var identitiesPopUpAC: NSArrayController!
     @IBOutlet weak var uploadButton: NSButton!
     @IBOutlet weak var checkConnectionButton: NSButton!
-    
+    @IBOutlet weak var siteIdLabel: NSTextField!
+    @IBOutlet weak var siteNameLabel: NSTextField!
+
     @IBOutlet weak var gridView: NSGridView!
     
     @IBAction func uploadPressed(_ sender: NSButton) {
@@ -86,8 +92,14 @@ class UploadViewController: NSViewController {
             print("Signing profile with \(signingIdentity.displayName)")
             identity = signingIdentity.reference
         }
-        
-        JamfProClient(jamfProServerLabel.stringValue, username, password).uploadProfile(profile, signingIdentity: identity) { (success) in
+
+        var siteIdAndName: (String, String)?
+        if site {
+            if let siteId = siteId, let siteName = siteName, siteId != "", siteName != "" {
+                siteIdAndName = (siteId, siteName)
+            }
+        }
+        JamfProClient(jamfProServerLabel.stringValue, username, password, siteIdAndName).uploadProfile(profile, signingIdentity: identity) { (success) in
             DispatchQueue.main.async {
                 self.handleUploadCompletion(success: success)
             }
@@ -155,6 +167,7 @@ class UploadViewController: NSViewController {
         
         loadCredentials()
         loadImportedTCCProfileInfo()
+        updateSiteUI()
     }
     
     override func viewWillAppear() {
@@ -166,7 +179,11 @@ class UploadViewController: NSViewController {
         addObserver(self, forKeyPath: "payloadName", options: [.new], context: &UploadViewController.uploadKVOContext)
         addObserver(self, forKeyPath: "payloadDescription", options: [.new], context: &UploadViewController.uploadKVOContext)
         addObserver(self, forKeyPath: "payloadIdentifier", options: [.new], context: &UploadViewController.uploadKVOContext)
-    
+
+        addObserver(self, forKeyPath: "site", options: [.new], context: &UploadViewController.uploadKVOContext)
+        addObserver(self, forKeyPath: "siteId", options: [.new], context: &UploadViewController.uploadKVOContext)
+        addObserver(self, forKeyPath: "siteName", options: [.new], context: &UploadViewController.uploadKVOContext)
+
         if organizationLabel.stringValue.isEmpty {
             organizationLabel.becomeFirstResponder()
         } else if credentialsAvailable {
@@ -186,6 +203,9 @@ class UploadViewController: NSViewController {
         removeObserver(self, forKeyPath: "payloadDescription", context: &UploadViewController.uploadKVOContext)
         removeObserver(self, forKeyPath: "payloadIdentifier", context: &UploadViewController.uploadKVOContext)
 
+        removeObserver(self, forKeyPath: "site", context: &UploadViewController.uploadKVOContext)
+        removeObserver(self, forKeyPath: "siteId", context: &UploadViewController.uploadKVOContext)
+        removeObserver(self, forKeyPath: "siteName", context: &UploadViewController.uploadKVOContext)
         
         //  Save keychain
         syncronizeCredentials()
@@ -195,6 +215,7 @@ class UploadViewController: NSViewController {
         if context == &UploadViewController.uploadKVOContext {
             updateCredentialsAvailable()
             updateReadForUpload()
+            updateSiteUI()
         } else {
             super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
         }
@@ -218,8 +239,28 @@ class UploadViewController: NSViewController {
             && (payloadName != nil)
             && !payloadName.isEmpty
             && (payloadIdentifier != nil)
-            && !payloadIdentifier.isEmpty) else { return }
+            && !payloadIdentifier.isEmpty
+            && isSiteReadyToUpload())
+            else { return }
+
         readyForUpload = !readyForUpload
+    }
+
+    func isSiteReadyToUpload() -> Bool {
+        if site {
+            if let siteId = siteId, let siteName = siteName, siteId != "", siteName != "" {
+                return true
+            } else {
+                return false
+            }
+        } else {
+            return true
+        }
+    }
+
+    func updateSiteUI() {
+        siteIdLabel.isHidden = !site
+        siteNameLabel.isHidden = !site
     }
     
     func handleCheckConnectionFailure(enforceSigning: Bool?) {
