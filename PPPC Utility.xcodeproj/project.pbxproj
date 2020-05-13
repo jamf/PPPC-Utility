@@ -39,6 +39,7 @@
 		6EC40A16214ECF1E00BE4F17 /* SaveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC40A15214ECF1E00BE4F17 /* SaveViewController.swift */; };
 		6EC40A18214ECF2C00BE4F17 /* UploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC40A17214ECF2C00BE4F17 /* UploadViewController.swift */; };
 		6EC40A1C214EF87800BE4F17 /* SigningIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC40A1B214EF87800BE4F17 /* SigningIdentity.swift */; };
+		71061E54246106C800822D35 /* LoadExecutableError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71061E53246106C800822D35 /* LoadExecutableError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,6 +89,7 @@
 		6EC40A15214ECF1E00BE4F17 /* SaveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveViewController.swift; sourceTree = "<group>"; };
 		6EC40A17214ECF2C00BE4F17 /* UploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadViewController.swift; sourceTree = "<group>"; };
 		6EC40A1B214EF87800BE4F17 /* SigningIdentity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigningIdentity.swift; sourceTree = "<group>"; };
+		71061E53246106C800822D35 /* LoadExecutableError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadExecutableError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -232,6 +234,7 @@
 				6EC409F4214D95D200BE4F17 /* TCCProfile.swift */,
 				6EB4582F214FFCCB00BE5749 /* AppleEventRule.swift */,
 				6E651CC423143890001CC974 /* ProfilesDescriptions.swift */,
+				71061E53246106C800822D35 /* LoadExecutableError.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -379,6 +382,7 @@
 				6EB86F692151476500FBE634 /* JamfProClient.swift in Sources */,
 				5F90EBDD2319934F00738D09 /* ArrayExtensions.swift in Sources */,
 				6EC40A14214DFB5800BE4F17 /* Model.swift in Sources */,
+				71061E54246106C800822D35 /* LoadExecutableError.swift in Sources */,
 				6EC40A1C214EF87800BE4F17 /* SigningIdentity.swift in Sources */,
 				6EC40A18214ECF2C00BE4F17 /* UploadViewController.swift in Sources */,
 				6E651CC523143890001CC974 /* ProfilesDescriptions.swift in Sources */,

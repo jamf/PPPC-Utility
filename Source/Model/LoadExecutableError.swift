@@ -1,5 +1,5 @@
 //
-//  ConfigProfileImportError.swift
+//  LoadExecutableError.swift
 //  PPPC Utility
 //
 //  MIT License
@@ -26,36 +26,27 @@
 //
 
 import Foundation
-public enum TCCProfileImportError: Error {
-    case cancelled
-    case unableToOpenFile
-    case decodeProfileError
-    case invalidProfileFile(description: String)
-    case emptyFields(description: String)
+public enum LoadExecutableError: Error {
+    case identifierNotFound
+    case resourceURLNotFound
+    case codeRequirementError(description: String)
+    case executableNotFound
+    case executableAlreadyExists
 }
 
-extension TCCProfileImportError: LocalizedError{
+extension LoadExecutableError: LocalizedError {
     public var errorDescription: String? {
         switch self {
-        case .cancelled:
-            return "Cancelled the import."
-        case .unableToOpenFile:
-            return "Unable to open file. Please make sure that file is correct and try again."
-        case .decodeProfileError:
-            return "Unable to read configuration profile. Please make sure the file is correct and try again."
-        case .invalidProfileFile(let description):
-            return "Invalid TCC Profile. Please make sure that required keys are inside profile: \(description)"
-        case .emptyFields(let description):
-            return "Unable to proceed. The following fields are required: \(description)"
-        }
-    }
-
-    var isCancelled: Bool {
-        switch self {
-        case .cancelled:
-            return true
-        default:
-            return false
+        case .identifierNotFound:
+            return "Bundle identifier could not be found."
+        case .resourceURLNotFound:
+            return "Resource URL could not be found."
+        case .codeRequirementError(let description):
+            return "Failed to get designated code requirement. The executable may not be signed. Error: \(description)"
+        case .executableNotFound:
+            return "Could not find executable from url path"
+        case .executableAlreadyExists:
+            return "The executable is already loaded."
         }
     }
 }
