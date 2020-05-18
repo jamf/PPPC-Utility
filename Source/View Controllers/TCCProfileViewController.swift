@@ -339,9 +339,7 @@ class TCCProfileViewController: NSViewController {
         var found = false
         let selectedExe = self.model.selectedExecutables[self.executablesAC.selectionIndex]
         for existingRule in selectedExe.appleEvents {
-            if (existingRule.destination == rule.destination &&
-                existingRule.source == rule.source &&
-                existingRule.value == rule.value) {
+            if (existingRule.destination == rule.destination) {
                 found = true
             }
         }
