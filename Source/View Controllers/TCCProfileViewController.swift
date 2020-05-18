@@ -325,14 +325,28 @@ class TCCProfileViewController: NSViewController {
     func insetIntoAppleEvents(_ executable: Executable) {
         guard let source = self.executablesAC.selectedObjects.first as? Executable else { return }
         let rule = AppleEventRule(source: source, destination: executable, value: false)
-        guard self.appleEventsAC.canInsert else { return }
-        self.appleEventsAC.insert(rule, atArrangedObjectIndex: 0)
+        if (self.shouldAppleEventRuleBeAdded(rule)) {
+            guard self.appleEventsAC.canInsert else { return }
+            self.appleEventsAC.insert(rule, atArrangedObjectIndex: 0)
+        }
     }
     
     func shouldExecutableBeAdded(_ executable: Executable) -> Bool {
         return self.model.selectedExecutables.firstIndex(of: executable) == nil
     }
     
+    func shouldAppleEventRuleBeAdded(_ rule: AppleEventRule) -> Bool {
+        var found = false
+        let selectedExe = self.model.selectedExecutables[self.executablesAC.selectionIndex]
+        for existingRule in selectedExe.appleEvents {
+            if (existingRule.destination == rule.destination &&
+                existingRule.source == rule.source &&
+                existingRule.value == rule.value) {
+                found = true
+            }
+        }
+        return !found
+    }
 }
 
 extension TCCProfileViewController : NSTableViewDataSource {
