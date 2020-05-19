@@ -146,7 +146,7 @@ class TCCProfileViewController: NSViewController {
 
     @IBAction func addToExecutable(_ sender: NSButton) {
         promptForExecutables {
-            self.insetIntoAppleEvents($0)
+            self.insertIntoAppleEvents($0)
         }
     }
 
@@ -338,7 +338,7 @@ class TCCProfileViewController: NSViewController {
                     [weak self] result in
                     switch result {
                     case .success(let executable):
-                        self?.insetIntoAppleEvents(executable)
+                        self?.insertIntoAppleEvents(executable)
                     case .failure(let error):
                         self?.showAlert(error, for: window)
                         print(error)
@@ -348,10 +348,11 @@ class TCCProfileViewController: NSViewController {
         }
     }
     
-    func insetIntoAppleEvents(_ executable: Executable) {
+    func insertIntoAppleEvents(_ executable: Executable) {
         guard let source = self.executablesAC.selectedObjects.first as? Executable else { return }
         let rule = AppleEventRule(source: source, destination: executable, value: false)
-        guard self.appleEventsAC.canInsert else { return }
+        guard self.appleEventsAC.canInsert,
+            self.shouldAppleEventRuleBeAdded(rule) else { return }
         self.appleEventsAC.insert(rule, atArrangedObjectIndex: 0)
     }
     
@@ -359,6 +360,13 @@ class TCCProfileViewController: NSViewController {
         return self.model.selectedExecutables.firstIndex(of: executable) == nil
     }
     
+    func shouldAppleEventRuleBeAdded(_ rule: AppleEventRule) -> Bool {
+        let selectedExe = self.model.selectedExecutables[self.executablesAC.selectionIndex]
+        let foundRule = selectedExe.appleEvents.first {
+            $0.destination == rule.destination
+        }
+        return foundRule == nil
+    }
 }
 
 extension TCCProfileViewController : NSTableViewDataSource {
@@ -393,7 +401,7 @@ extension TCCProfileViewController : NSTableViewDataSource {
                         self?.executablesAC.insert(newExecutable, atArrangedObjectIndex: row)
                     }
                 } else {
-                    self?.insetIntoAppleEvents(newExecutable)
+                    self?.insertIntoAppleEvents(newExecutable)
                 }
             case .failure(let error):
                 self?.showAlert(error, for: window)
