@@ -54,8 +54,7 @@ public class TCCProfileImporter {
 			return completion(.failure(.decodeProfileError))
         } catch TCCProfile.ParseError.failedToCreateDecoder {
 			return completion(.failure(.decodeProfileError))
-        }
-        catch let DecodingError.keyNotFound(codingKey, _) {
+        } catch let DecodingError.keyNotFound(codingKey, _) {
             return completion(TCCProfileImportResult.failure(.invalidProfileFile(description: codingKey.stringValue)))
         } catch let DecodingError.typeMismatch(type, context) {
             let errorDescription = "Type \(type) mismatch: \(context.debugDescription) codingPath: \(context.codingPath)"

@@ -38,7 +38,7 @@ class ModelTests: XCTestCase {
             let codeRequirement = "testCodeRequirement"
 
             let model = Model()
-            
+
         //when
             let executable = model.getExecutableFrom(identifier: identifier, codeRequirement: codeRequirement)
 
@@ -129,6 +129,5 @@ class ModelTests: XCTestCase {
         //then
         XCTAssertNil(existingExecutable)
     }
-
 
 }

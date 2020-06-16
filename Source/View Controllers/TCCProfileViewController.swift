@@ -28,21 +28,21 @@
 import Cocoa
 
 class TCCProfileViewController: NSViewController {
-    
+
     @objc dynamic var model = Model.shared
     @objc dynamic var canEdit = true
 
     @IBOutlet weak var executablesTable: NSTableView!
     @IBOutlet weak var executablesAC: NSArrayController!
-    
+
     @IBOutlet weak var appleEventsTable: NSTableView!
     @IBOutlet weak var appleEventsAC: NSArrayController!
-    
+
     @IBOutlet weak var nameLabel: NSTextField!
     @IBOutlet weak var iconView: NSImageView!
     @IBOutlet weak var identifierLabel: NSTextField!
     @IBOutlet weak var codeRequirementLabel: NSTextField!
-    
+
     @IBOutlet weak var addressBookPopUp: NSPopUpButton!
     @IBOutlet weak var photosPopUp: NSPopUpButton!
     @IBOutlet weak var remindersPopUp: NSPopUpButton!
@@ -122,7 +122,7 @@ class TCCProfileViewController: NSViewController {
     @IBOutlet weak var uploadButton: NSButton!
     @IBOutlet weak var addAppleEventButton: NSButton!
     @IBOutlet weak var removeAppleEventButton: NSButton!
-    
+
     @IBOutlet weak var recordButton: NSButton!
 
     @IBAction func recordPressed(_ sender: NSButton) {
@@ -133,13 +133,13 @@ class TCCProfileViewController: NSViewController {
             recordButton.title = "Stop"
         }
     }
-    
+
     @IBAction func addToProfile(_ sender: NSButton) {
         promptForExecutables {
             self.model.selectedExecutables.append($0)
         }
     }
-    
+
     //  Binding currently deletes at index
     @IBAction func removeButtonPressed(_ sender: NSButton) {
     }
@@ -178,7 +178,7 @@ class TCCProfileViewController: NSViewController {
             }
         })
     }
-    
+
     func promptForExecutables(_ block: @escaping (Executable) -> Void) {
         let panel = NSOpenPanel()
         panel.allowsMultipleSelection = true
@@ -190,9 +190,9 @@ class TCCProfileViewController: NSViewController {
         panel.begin { response in
             if response == .OK {
                 panel.urls.forEach {
-                    self.model.loadExecutable(url: $0){
+                    self.model.loadExecutable(url: $0) {
                         [weak self] result in
-                        switch result{
+                        switch result {
                         case .success(let executable):
                             guard self?.shouldExecutableBeAdded(executable) ?? false else {
                                 let error = LoadExecutableError.executableAlreadyExists
@@ -209,14 +209,14 @@ class TCCProfileViewController: NSViewController {
             }
         }
     }
-    
-    let pasteboardOptions: [NSPasteboard.ReadingOptionKey : Any] = [
+
+    let pasteboardOptions: [NSPasteboard.ReadingOptionKey: Any] = [
         .urlReadingContentsConformToTypes: [ kUTTypeBundle, kUTTypeExecutable ]
     ]
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         //  Setup policy pop up
         setupAllowDeny(policies: [addressBookPopUpAC,
                                   photosPopUpAC,
@@ -258,7 +258,7 @@ class TCCProfileViewController: NSViewController {
         executablesTable.dataSource = self
         appleEventsTable.registerForDraggedTypes([.fileURL])
         appleEventsTable.dataSource = self
-        
+
         //  Record button
     }
 
@@ -347,7 +347,7 @@ class TCCProfileViewController: NSViewController {
             }
         }
     }
-    
+
     func insertIntoAppleEvents(_ executable: Executable) {
         guard let source = self.executablesAC.selectedObjects.first as? Executable else { return }
         let rule = AppleEventRule(source: source, destination: executable, value: false)
@@ -355,11 +355,11 @@ class TCCProfileViewController: NSViewController {
             self.shouldAppleEventRuleBeAdded(rule) else { return }
         self.appleEventsAC.insert(rule, atArrangedObjectIndex: 0)
     }
-    
+
     func shouldExecutableBeAdded(_ executable: Executable) -> Bool {
         return self.model.selectedExecutables.firstIndex(of: executable) == nil
     }
-    
+
     func shouldAppleEventRuleBeAdded(_ rule: AppleEventRule) -> Bool {
         let selectedExe = self.model.selectedExecutables[self.executablesAC.selectionIndex]
         let foundRule = selectedExe.appleEvents.first {
@@ -369,31 +369,30 @@ class TCCProfileViewController: NSViewController {
     }
 }
 
-extension TCCProfileViewController : NSTableViewDataSource {
-    
+extension TCCProfileViewController: NSTableViewDataSource {
+
     func tableView(_ tableView: NSTableView, validateDrop info: NSDraggingInfo, proposedRow row: Int, proposedDropOperation dropOperation: NSTableView.DropOperation) -> NSDragOperation {
         let accept = info.draggingPasteboard.canReadObject(forClasses: [NSURL.self], options: pasteboardOptions)
         return accept ? .copy : NSDragOperation()
     }
-    
+
     func tableView(_ tableView: NSTableView, acceptDrop info: NSDraggingInfo, row: Int, dropOperation: NSTableView.DropOperation) -> Bool {
         let pasteboard = info.draggingPasteboard
-        
+
         guard let urls = pasteboard.readObjects(forClasses: [NSURL.self], options: pasteboardOptions) as? [URL]? else {
             return false
         }
-        
+
         guard let url = urls?.first else { return false  }
-        
+
         guard let window = self.view.window else { return false }
         var canAdd = true
         model.loadExecutable(url: url) {
             [weak self] result in
-            switch result{
+            switch result {
             case .success(let newExecutable):
                 if tableView == self?.executablesTable {
-                    guard self?.executablesAC.canInsert ?? false else
-                    {
+                    guard self?.executablesAC.canInsert ?? false else {
                         canAdd = false
                         return
                     }
@@ -411,6 +410,5 @@ extension TCCProfileViewController : NSTableViewDataSource {
         }
         return canAdd
     }
-    
-}
 
+}

@@ -27,58 +27,58 @@
 
 import Cocoa
 
-class Model : NSObject {
-    
+class Model: NSObject {
+
     @objc dynamic var current: Executable?
-    
+
     @objc dynamic static let shared = Model()
     @objc dynamic var identities: [SigningIdentity] = []
     @objc dynamic var selectedExecutables: [Executable] = []
-    
+
     func getAppleEventChoices(executable: Executable) -> [Executable] {
         var executables: [Executable] = []
 
         loadExecutable(url: URL(fileURLWithPath: "/System/Library/CoreServices/System Events.app")) {
             result in
-            switch result{
+            switch result {
             case .success(let executable):
                 executables.append(executable)
             case .failure(let error):
                 print(error)
             }
         }
-        
+
         loadExecutable(url: URL(fileURLWithPath: "/System/Library/CoreServices/SystemUIServer.app")) {
             result in
-            switch result{
+            switch result {
             case .success(let executable):
                 executables.append(executable)
             case .failure(let error):
                 print(error)
             }
         }
-        
+
         loadExecutable(url: URL(fileURLWithPath: "/System/Library/CoreServices/Finder.app")) {
             result in
-            switch result{
+            switch result {
             case .success(let executable):
                 executables.append(executable)
             case .failure(let error):
                 print(error)
             }
         }
-        
+
         let others = store.values.filter({ $0 != executable && !Set(executables).contains($0) })
         executables.append(contentsOf: others)
 
         return executables
     }
 
-    var store: [String:Executable] = [:]
+    var store: [String: Executable] = [:]
     public var importedTCCProfile: TCCProfile?
 }
 
-//  MARK: Loading executable
+// MARK: Loading executable
 
 struct IconFilePath {
     static let binary = "/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/ExecutableBinaryIcon.icns"
@@ -91,8 +91,8 @@ typealias LoadExecutableResult = Result<Executable, LoadExecutableError>
 typealias LoadExecutableCompletion = ((LoadExecutableResult) -> Void)
 
 extension Model {
-    
-    func loadExecutable(url: URL,completion: @escaping LoadExecutableCompletion) {
+
+    func loadExecutable(url: URL, completion: @escaping LoadExecutableCompletion) {
         let executable = Executable()
 
         if let bundle = Bundle(url: url) {
@@ -112,7 +112,7 @@ extension Model {
                 } else {
                     executable.iconPath = resourcesURL.appendingPathComponent("DefaultAppIcon.icns").path
                 }
-                
+
                 if !FileManager.default.fileExists(atPath: executable.iconPath) {
                     switch url.pathExtension {
                     case "app":     executable.iconPath = IconFilePath.application
@@ -129,11 +129,11 @@ extension Model {
             executable.displayName = url.lastPathComponent
             executable.iconPath = IconFilePath.binary
         }
-        
+
         if let alreadyFoundExecutable = store[executable.identifier] {
             return completion(.success(alreadyFoundExecutable))
         }
-        
+
         do {
             executable.codeRequirement = try SecurityWrapper.copyDesignatedRequirement(url: url)
             store[executable.identifier] = executable
@@ -144,13 +144,13 @@ extension Model {
     }
 }
 
-//  MARK: Exporting Profile
+// MARK: Exporting Profile
 
 extension Model {
-    
+
     func exportProfile(organization: String, identifier: String, displayName: String, payloadDescription: String) -> TCCProfile {
         var services = [String: [TCCPolicy]]()
-        
+
         selectedExecutables.forEach { executable in
 
             let mirroredServices = Mirror(reflecting: executable.policy)
@@ -173,10 +173,10 @@ extension Model {
                 let appleEventsKey = ServicesKeys.appleEvents.rawValue
                 services[appleEventsKey] = services[appleEventsKey] ?? []
                 services[appleEventsKey]?.append(policy)
-                
+
             }
         }
-        
+
         return TCCProfile(organization: organization,
                           identifier: identifier,
                           displayName: displayName,
@@ -243,19 +243,18 @@ extension Model {
         return nil
     }
 
-    
     func getExecutableFrom(identifier: String, codeRequirement: String) -> Executable {
         var executable = Executable(identifier: identifier, codeRequirement: codeRequirement)
-        findExecutableOnComputerUsing(bundleIdentifier: identifier){
+        findExecutableOnComputerUsing(bundleIdentifier: identifier) {
             result in
-            switch result{
+            switch result {
             case .success(let _executable):
                 executable = _executable
             case .failure(let error):
                 print(error)
             }
         }
-        
+
         return executable
     }
 
@@ -270,9 +269,9 @@ extension Model {
         }
 
         if let pathForURL = pathToLoad, let fileURL = URL(string: "file://\(pathForURL)") {
-            self.loadExecutable(url: fileURL){
+            self.loadExecutable(url: fileURL) {
                 result in
-                switch result{
+                switch result {
                 case .success(let executable):
                     return completion(.success(executable))
                 case .failure(let error):

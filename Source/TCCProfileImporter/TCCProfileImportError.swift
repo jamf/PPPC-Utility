@@ -34,7 +34,7 @@ public enum TCCProfileImportError: Error {
     case emptyFields(description: String)
 }
 
-extension TCCProfileImportError: LocalizedError{
+extension TCCProfileImportError: LocalizedError {
     public var errorDescription: String? {
         switch self {
         case .cancelled:

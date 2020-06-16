@@ -28,16 +28,16 @@
 import Cocoa
 
 class OpenViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
-    
+
     var completionBlock: (([LoadExecutableResult]) -> Void)?
-    
+
     var observers: [NSKeyValueObservation] = []
-    
+
     @objc dynamic var current: Executable?
     @objc dynamic var choices: [Executable] = []
-    
+
     @IBOutlet var choicesAC: NSArrayController!
-    
+
     override func viewWillAppear() {
         super.viewWillAppear()
         //  Reload executables
@@ -64,9 +64,9 @@ class OpenViewController: NSViewController, NSTableViewDataSource, NSTableViewDe
         panel.directoryURL = URL(fileURLWithPath: "/Applications", isDirectory: true)
         panel.begin { response in
             if response == .OK {
-                var selections : [LoadExecutableResult] = []
+                var selections: [LoadExecutableResult] = []
                 panel.urls.forEach {
-                    Model.shared.loadExecutable(url: $0){
+                    Model.shared.loadExecutable(url: $0) {
                         result in
                         selections.append(result)
                     }

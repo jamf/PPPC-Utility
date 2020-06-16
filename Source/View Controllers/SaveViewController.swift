@@ -28,23 +28,23 @@
 import Cocoa
 
 class SaveViewController: NSViewController {
-    
+
     private static var saveProfileKVOContext = 0
 
     @objc dynamic var isReadyToSave: Bool = false
-    
+
     @objc dynamic var payloadName: String! {
         didSet {
             updateIsReadyToSave()
         }
     }
-    
+
     @objc dynamic var payloadIdentifier: String! {
         didSet {
             updateIsReadyToSave()
         }
     }
-    
+
     @objc dynamic var payloadDescription: String! {
         didSet {
             updateIsReadyToSave()
@@ -57,9 +57,9 @@ class SaveViewController: NSViewController {
     @IBOutlet weak var identitiesPopUp: NSPopUpButton!
     @IBOutlet var identitiesPopUpAC: NSArrayController!
     @IBOutlet weak var saveButton: NSButton!
-    
+
     var defaultsController = NSUserDefaultsController.shared
-    
+
     func updateIsReadyToSave() {
         guard isReadyToSave != (
             !organizationLabel.stringValue.isEmpty
@@ -69,7 +69,7 @@ class SaveViewController: NSViewController {
             && !payloadIdentifier.isEmpty ) else { return }
         isReadyToSave = !isReadyToSave
     }
-    
+
     @IBAction func savePressed(_ sender: NSButton) {
         let panel = NSSavePanel()
         panel.allowedFileTypes = ["mobileconfig"]
@@ -87,7 +87,7 @@ class SaveViewController: NSViewController {
             }
         }
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         payloadIdentifier = UUID().uuidString
@@ -101,7 +101,7 @@ class SaveViewController: NSViewController {
 
         loadImportedTCCProfileInfo()
     }
-    
+
     override func viewWillAppear() {
         super.viewWillAppear()
         defaultsController.addObserver(self, forKeyPath: "values.organization", options: [.new], context: &SaveViewController.saveProfileKVOContext)
@@ -109,20 +109,20 @@ class SaveViewController: NSViewController {
             payloadNameLabel.becomeFirstResponder()
         }
     }
-    
+
     override func viewWillDisappear() {
         super.viewWillDisappear()
         defaultsController.removeObserver(self, forKeyPath: "values.organization", context: &SaveViewController.saveProfileKVOContext)
     }
-    
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
         if context == &SaveViewController.saveProfileKVOContext {
             updateIsReadyToSave()
         } else {
             super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
         }
     }
-    
+
     func saveTo(url: URL) {
         print("Saving to \(url)")
         let model = Model.shared
