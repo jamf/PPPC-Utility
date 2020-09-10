@@ -90,7 +90,7 @@ struct JamfProClient {
         }
     }
 
-    struct Version {
+    struct JamfProVersion {
         let major: Int
         let minor: Int
         let patch: Int
@@ -98,9 +98,9 @@ struct JamfProClient {
 
     // This method returns version only for Jamf Pro version <= 10.22
     // for the newer version we would need to use API to check version
-    func getJamfProVersionLegacy(completionBlock: @escaping (Version?, Bool) -> Void) {
+    func getJamfProVersionLegacy(completionBlock: @escaping (_ connectionOk: Bool, _ version: JamfProVersion?) -> Void) {
         sendRequest(endpoint: nil, data: nil) { (statusCode, data) in
-            var version: Version?
+            var version: JamfProVersion?
             if let text = String(data: data, encoding: .utf8),
                 // we take version from HTML response body
                 let startRange = text.range(of: "<meta name=\"version\" content=\""),
@@ -111,15 +111,15 @@ struct JamfProClient {
                     let major = Int(versionParts[0]),
                     let minor = Int(versionParts[1]),
                     let patch = Int(versionParts[2]) {
-                    version = Version(major: major, minor: minor, patch: patch)
+                    version = JamfProVersion(major: major, minor: minor, patch: patch)
                 }
             }
-            let connectionOk = statusCode == 200 || statusCode == 401
-            completionBlock(version, connectionOk)
+            let connectionOk = statusCode == 200 || statusCode == 401 // server returns 401 (unauthorized because it is login pate)
+            completionBlock(connectionOk, version)
         }
     }
     
-    func getOrganizationName(completionBlock: @escaping (_ httpStatus: Int, _ organizationName: String?)->Void) {
+    func getOrganizationName(completionBlock: @escaping (_ httpStatus: Int, _ organizationName: String?) -> Void) {
         sendRequest(endpoint: "activationcode", data: nil) { (statusCode, data) in
             var orgName: String? = nil
             if let doc = try? XMLDocument(data: data, options: []),

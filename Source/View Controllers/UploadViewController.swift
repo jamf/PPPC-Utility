@@ -112,8 +112,8 @@ class UploadViewController: NSViewController {
         
         let client = JamfProClient(jamfProServerLabel.stringValue, username, password)
         
-        client.getJamfProVersionLegacy { (possibleVersion, connectionOk) in
-            if (!connectionOk) {
+        client.getJamfProVersionLegacy { (connectionSuccessful, possibleVersion) in
+            if (!connectionSuccessful) {
                 print("Jamf Pro server is unavailable")
                 DispatchQueue.main.async {
                     self.handleCheckConnectionFailure(enforceSigning: nil)
