@@ -100,7 +100,7 @@ struct JamfProClient {
     // for the newer version we would need to use API to check version
     func getJamfProVersionLegacy(completionBlock: @escaping (Version?, Bool) -> Void) {
         sendRequest(endpoint: nil, data: nil) { (statusCode, data) in
-            var version: Version? = nil
+            var version: Version?
             if let text = String(data: data, encoding: .utf8),
                 // we take version from HTML response body
                 let startRange = text.range(of: "<meta name=\"version\" content=\""),
