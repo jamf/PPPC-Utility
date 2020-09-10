@@ -77,6 +77,8 @@ public struct TCCProfile: Codable {
         var uuid: String
         var version: Int
         var services: [String: [TCCPolicy]]
+
+        // swiftlint:disable:next nesting
         enum CodingKeys: String, CodingKey {
             case payloadDescription = "PayloadDescription"
             case displayName = "PayloadDisplayName"

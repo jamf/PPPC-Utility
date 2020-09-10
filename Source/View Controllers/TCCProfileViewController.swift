@@ -167,16 +167,16 @@ class TCCProfileViewController: NSViewController {
         let tccProfileImporter = TCCProfileImporter()
         let tccConfigPanel = TCCProfileConfigurationPanel()
 
-        tccConfigPanel.loadTCCProfileFromFile(importer: tccProfileImporter, window: window, { [weak self] tccProfileResult in
+        tccConfigPanel.loadTCCProfileFromFile(importer: tccProfileImporter, window: window) { [weak self] tccProfileResult in
             switch tccProfileResult {
             case .success(let tccProfile):
                 self?.model.importProfile(tccProfile: tccProfile)
             case .failure(let tccProfileImportError):
-                if (!tccProfileImportError.isCancelled) {
+                if !tccProfileImportError.isCancelled {
                     self?.showAlert(tccProfileImportError, for: window)
                 }
             }
-        })
+        }
     }
 
     func promptForExecutables(_ block: @escaping (Executable) -> Void) {
@@ -190,8 +190,7 @@ class TCCProfileViewController: NSViewController {
         panel.begin { response in
             if response == .OK {
                 panel.urls.forEach {
-                    self.model.loadExecutable(url: $0) {
-                        [weak self] result in
+                    self.model.loadExecutable(url: $0) { [weak self] result in
                         switch result {
                         case .success(let executable):
                             guard self?.shouldExecutableBeAdded(executable) ?? false else {
@@ -334,8 +333,7 @@ class TCCProfileViewController: NSViewController {
         if let button = sender as? NSButton, button == addAppleEventButton {
             Model.shared.current = executablesAC.selectedObjects.first as? Executable
             openVC.completionBlock = {
-                $0.forEach {
-                    [weak self] result in
+                $0.forEach { [weak self] result in
                     switch result {
                     case .success(let executable):
                         self?.insertIntoAppleEvents(executable)
@@ -387,8 +385,7 @@ extension TCCProfileViewController: NSTableViewDataSource {
 
         guard let window = self.view.window else { return false }
         var canAdd = true
-        model.loadExecutable(url: url) {
-            [weak self] result in
+        model.loadExecutable(url: url) { [weak self] result in
             switch result {
             case .success(let newExecutable):
                 if tableView == self?.executablesTable {

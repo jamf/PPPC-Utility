@@ -90,6 +90,7 @@ struct JamfProClient {
         }
     }
 
+    // swiftlint:disable:next large_tuple
     func getJamfProVersion(completionBlock: @escaping ((major: Int, minor: Int, patch: Int)?) -> Void) {
         sendRequest(endpoint: nil, data: nil) { (_, data) in
             var result: (major: Int, minor: Int, patch: Int)?

@@ -1,0 +1,11 @@
+opt_in_rules:
+  - sorted_imports
+  - trailing_closure
+
+file_length:
+  ignore_comment_only_lines: true
+
+disabled_rules:
+  - line_length
+  - type_body_length
+  - todo

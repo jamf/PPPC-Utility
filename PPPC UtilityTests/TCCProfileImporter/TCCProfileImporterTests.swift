@@ -37,14 +37,14 @@ class TCCProfileImporterTests: XCTestCase {
 
         let resourceURL = getResourceProfile(fileName: "TestTCCProfileSigned-Broken")
 
-        tccProfileImporter.decodeTCCProfile(fileUrl: resourceURL, { tccProfileResult in
+        tccProfileImporter.decodeTCCProfile(fileUrl: resourceURL) { tccProfileResult in
             switch tccProfileResult {
             case .success:
                 XCTFail("Broken Signed Profile, it shouldn't be success")
             case .failure(let tccProfileError):
                 XCTAssertTrue(tccProfileError.localizedDescription.contains("The given data was not a valid property list."))
             }
-        })
+        }
     }
 
     func testEmptyContentTCCProfile() {
@@ -54,14 +54,14 @@ class TCCProfileImporterTests: XCTestCase {
 
         let expectedTCCProfileError = TCCProfileImportError.invalidProfileFile(description: "PayloadContent")
 
-        tccProfileImporter.decodeTCCProfile(fileUrl: resourceURL, { tccProfileResult in
+        tccProfileImporter.decodeTCCProfile(fileUrl: resourceURL) { tccProfileResult in
             switch tccProfileResult {
             case .success:
                 XCTFail("Empty Content, it shouldn't be success")
             case .failure(let tccProfileError):
                 XCTAssertEqual(tccProfileError.localizedDescription, expectedTCCProfileError.localizedDescription)
             }
-        })
+        }
     }
 
     func testCorrectUnsignedProfileContentData() {
@@ -69,7 +69,7 @@ class TCCProfileImporterTests: XCTestCase {
 
         let resourceURL = getResourceProfile(fileName: "TestTCCUnsignedProfile")
 
-        tccProfileImporter.decodeTCCProfile(fileUrl: resourceURL, { tccProfileResult in
+        tccProfileImporter.decodeTCCProfile(fileUrl: resourceURL) { tccProfileResult in
             switch tccProfileResult {
             case .success(let tccProfile):
                 XCTAssertNotNil(tccProfile.content)
@@ -77,7 +77,7 @@ class TCCProfileImporterTests: XCTestCase {
             case .failure(let tccProfileError):
                 XCTFail("Unable to read tccProfile \(tccProfileError.localizedDescription)")
             }
-        })
+        }
     }
 
     func testBrokenUnsignedProfile() {
@@ -87,14 +87,14 @@ class TCCProfileImporterTests: XCTestCase {
 
         let expectedTCCProfileError = TCCProfileImportError.invalidProfileFile(description: "The given data was not a valid property list.")
 
-        tccProfileImporter.decodeTCCProfile(fileUrl: resourceURL, { tccProfileResult in
+        tccProfileImporter.decodeTCCProfile(fileUrl: resourceURL) { tccProfileResult in
             switch tccProfileResult {
             case .success:
                 XCTFail("Broken Unsigned Profile, it shouldn't be success")
             case .failure(let tccProfileError):
                 XCTAssertEqual(tccProfileError.localizedDescription, expectedTCCProfileError.localizedDescription)
             }
-        })
+        }
     }
 
     private func getResourceProfile(fileName: String) -> URL {

@@ -75,6 +75,7 @@ class Executable: NSObject {
 }
 
 class Policy: NSObject {
+    // swiftlint:disable identifier_name
     @objc dynamic var AddressBook: String = "-"
     @objc dynamic var Calendar: String = "-"
     @objc dynamic var Reminders: String = "-"
@@ -95,4 +96,5 @@ class Policy: NSObject {
     @objc dynamic var SystemPolicyDownloadsFolder: String = "-"
     @objc dynamic var SystemPolicyNetworkVolumes: String = "-"
     @objc dynamic var SystemPolicyRemovableVolumes: String = "-"
+    // swiftlint:enable identifier_name
 }

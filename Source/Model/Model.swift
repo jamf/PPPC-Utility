@@ -38,8 +38,7 @@ class Model: NSObject {
     func getAppleEventChoices(executable: Executable) -> [Executable] {
         var executables: [Executable] = []
 
-        loadExecutable(url: URL(fileURLWithPath: "/System/Library/CoreServices/System Events.app")) {
-            result in
+        loadExecutable(url: URL(fileURLWithPath: "/System/Library/CoreServices/System Events.app")) { result in
             switch result {
             case .success(let executable):
                 executables.append(executable)
@@ -48,8 +47,7 @@ class Model: NSObject {
             }
         }
 
-        loadExecutable(url: URL(fileURLWithPath: "/System/Library/CoreServices/SystemUIServer.app")) {
-            result in
+        loadExecutable(url: URL(fileURLWithPath: "/System/Library/CoreServices/SystemUIServer.app")) { result in
             switch result {
             case .success(let executable):
                 executables.append(executable)
@@ -58,8 +56,7 @@ class Model: NSObject {
             }
         }
 
-        loadExecutable(url: URL(fileURLWithPath: "/System/Library/CoreServices/Finder.app")) {
-            result in
+        loadExecutable(url: URL(fileURLWithPath: "/System/Library/CoreServices/Finder.app")) { result in
             switch result {
             case .success(let executable):
                 executables.append(executable)
@@ -68,7 +65,7 @@ class Model: NSObject {
             }
         }
 
-        let others = store.values.filter({ $0 != executable && !Set(executables).contains($0) })
+        let others = store.values.filter { $0 != executable && !Set(executables).contains($0) }
         executables.append(contentsOf: others)
 
         return executables
@@ -92,6 +89,8 @@ typealias LoadExecutableCompletion = ((LoadExecutableResult) -> Void)
 
 extension Model {
 
+    // TODO - refactor this method so it isn't so complex
+    // swiftlint:disable:next cyclomatic_complexity
     func loadExecutable(url: URL, completion: @escaping LoadExecutableCompletion) {
         let executable = Executable()
 
@@ -235,21 +234,18 @@ extension Model {
     }
 
     func getExecutableFromSelectedExecutables(bundleIdentifier: String) -> Executable? {
-        for executable in selectedExecutables {
-            if (executable.identifier == bundleIdentifier) {
-                return executable
-            }
+        for executable in selectedExecutables where executable.identifier == bundleIdentifier {
+            return executable
         }
         return nil
     }
 
     func getExecutableFrom(identifier: String, codeRequirement: String) -> Executable {
         var executable = Executable(identifier: identifier, codeRequirement: codeRequirement)
-        findExecutableOnComputerUsing(bundleIdentifier: identifier) {
-            result in
+        findExecutableOnComputerUsing(bundleIdentifier: identifier) { result in
             switch result {
-            case .success(let _executable):
-                executable = _executable
+            case .success(let goodExecutable):
+                executable = goodExecutable
             case .failure(let error):
                 print(error)
             }
@@ -269,8 +265,7 @@ extension Model {
         }
 
         if let pathForURL = pathToLoad, let fileURL = URL(string: "file://\(pathForURL)") {
-            self.loadExecutable(url: fileURL) {
-                result in
+            self.loadExecutable(url: fileURL) { result in
                 switch result {
                 case .success(let executable):
                     return completion(.success(executable))

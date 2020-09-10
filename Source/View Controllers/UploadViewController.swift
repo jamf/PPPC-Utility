@@ -211,6 +211,7 @@ class UploadViewController: NSViewController {
         syncronizeCredentials()
     }
 
+    // swiftlint:disable:next block_based_kvo
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
         if context == &UploadViewController.uploadKVOContext {
             updateCredentialsAvailable()

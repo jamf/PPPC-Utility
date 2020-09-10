@@ -137,10 +137,10 @@ struct SecurityWrapper {
 
         guard let secIdentities = result as? [SecIdentity] else { return [] }
 
-        return secIdentities.map({
+        return secIdentities.map {
             let name = try? getCertificateCommonName(for: $0)
             return SigningIdentity(name: name ?? "Unknown \($0.hashValue)", reference: $0)
-        })
+        }
     }
 
     static func getCertificateCommonName(for identity: SecIdentity) throws -> String {

@@ -66,8 +66,7 @@ class OpenViewController: NSViewController, NSTableViewDataSource, NSTableViewDe
             if response == .OK {
                 var selections: [LoadExecutableResult] = []
                 panel.urls.forEach {
-                    Model.shared.loadExecutable(url: $0) {
-                        result in
+                    Model.shared.loadExecutable(url: $0) { result in
                         selections.append(result)
                     }
                 }
