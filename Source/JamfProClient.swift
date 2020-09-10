@@ -89,11 +89,20 @@ struct JamfProClient {
             completionBlock(success)
         }
     }
-    
-    func getJamfProVersion(completionBlock: @escaping ((major: Int, minor: Int, patch: Int)?)->Void) {
-        sendRequest(endpoint: nil, data: nil) { (_, data) in
-            var result: (major: Int, minor: Int, patch: Int)? = nil
+
+    struct Version {
+        let major: Int
+        let minor: Int
+        let patch: Int
+    }
+
+    // This method returns version only for Jamf Pro version <= 10.22
+    // for the newer version we would need to use API to check version
+    func getJamfProVersionLegacy(completionBlock: @escaping (Version?, Bool)->Void) {
+        sendRequest(endpoint: nil, data: nil) { (statusCode, data) in
+            var version: Version? = nil
             if let text = String(data: data, encoding: .utf8),
+                // we take version from HTML response body
                 let startRange = text.range(of: "<meta name=\"version\" content=\""),
                 let endRange = text.range(of: "-", options: [], range: startRange.upperBound..<text.endIndex, locale: nil) {
                 let val = text[startRange.upperBound..<endRange.lowerBound]
@@ -102,10 +111,11 @@ struct JamfProClient {
                     let major = Int(versionParts[0]),
                     let minor = Int(versionParts[1]),
                     let patch = Int(versionParts[2]) {
-                    result = (major: major, minor: minor, patch: patch)
+                    version = Version(major: major, minor: minor, patch: patch)
                 }
             }
-            completionBlock(result)
+            let connectionOk = statusCode == 200 || statusCode == 401
+            completionBlock(version, connectionOk)
         }
     }
     

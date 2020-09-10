@@ -112,36 +112,40 @@ class UploadViewController: NSViewController {
         
         let client = JamfProClient(jamfProServerLabel.stringValue, username, password)
         
-        client.getJamfProVersion { (possibleVersion) in
-            if let version = possibleVersion {
-                print("Jamf Pro Server: \(version.major).\(version.minor).\(version.patch)")
-                let mustSign: Bool =
-                    (version.major < 10 ||
-                        (version.major == 10 &&
-                            (version.minor < 7 ||
-                                (version.minor == 7 && version.patch == 0))))
-                client.getOrganizationName { (statusCode, orgName) in
-                    if statusCode == 401 {
-                        print("Invalid username/password")
-                        DispatchQueue.main.async {
-                            self.handleCheckConnectionFailure(enforceSigning: mustSign)
-                        }
-                    } else if let name = orgName {
-                        DispatchQueue.main.async {
-                            self.handleCheckConnection(enforceSigning: mustSign,
-                                                       organization: name)
-                        }
-                    } else {
-                        print("Unable to read organization name")
-                        DispatchQueue.main.async {
-                            self.handleCheckConnectionFailure(enforceSigning: mustSign)
-                        }
-                    }
-                }
-            } else {
+        client.getJamfProVersionLegacy { (possibleVersion, connectionOk) in
+            if (!connectionOk) {
                 print("Jamf Pro server is unavailable")
                 DispatchQueue.main.async {
                     self.handleCheckConnectionFailure(enforceSigning: nil)
+                }
+                return
+            }
+            var mustSign: Bool
+            if let version = possibleVersion {
+                print("Jamf Pro Server: \(version.major).\(version.minor).\(version.patch)")
+                mustSign = (version.major < 10 ||
+                        (version.major == 10 && (version.minor < 7 || (version.minor == 7 && version.patch == 0))))
+            } else {
+                // nil means version >= 10.23 so singing not required
+                print("Jamf Pro Server version >= 10.23")
+                mustSign = false
+            }
+            client.getOrganizationName { (statusCode, orgName) in
+                if statusCode == 401 {
+                    print("Invalid username/password")
+                    DispatchQueue.main.async {
+                        self.handleCheckConnectionFailure(enforceSigning: mustSign)
+                    }
+                } else if let name = orgName {
+                    DispatchQueue.main.async {
+                        self.handleCheckConnection(enforceSigning: mustSign,
+                                                   organization: name)
+                    }
+                } else {
+                    print("Unable to read organization name")
+                    DispatchQueue.main.async {
+                        self.handleCheckConnectionFailure(enforceSigning: mustSign)
+                    }
                 }
             }
         }
