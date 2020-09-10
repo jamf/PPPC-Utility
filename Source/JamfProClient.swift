@@ -114,7 +114,7 @@ struct JamfProClient {
                     version = JamfProVersion(major: major, minor: minor, patch: patch)
                 }
             }
-            let connectionOk = statusCode == 200 || statusCode == 401 // server returns 401 (unauthorized because it is login pate)
+            let connectionOk = statusCode == 200 || statusCode == 401 // server returns 401 (unauthorized because it is login page)
             completionBlock(connectionOk, version)
         }
     }
