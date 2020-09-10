@@ -98,7 +98,7 @@ struct JamfProClient {
 
     // This method returns version only for Jamf Pro version <= 10.22
     // for the newer version we would need to use API to check version
-    func getJamfProVersionLegacy(completionBlock: @escaping (Version?, Bool)->Void) {
+    func getJamfProVersionLegacy(completionBlock: @escaping (Version?, Bool) -> Void) {
         sendRequest(endpoint: nil, data: nil) { (statusCode, data) in
             var version: Version? = nil
             if let text = String(data: data, encoding: .utf8),
