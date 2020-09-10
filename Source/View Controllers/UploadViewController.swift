@@ -123,8 +123,9 @@ class UploadViewController: NSViewController {
             var mustSign: Bool
             if let version = possibleVersion {
                 print("Jamf Pro Server: \(version.major).\(version.minor).\(version.patch)")
-                mustSign = (version.major < 10 ||
-                        (version.major == 10 && (version.minor < 7 || (version.minor == 7 && version.patch == 0))))
+                mustSign = version.major < 10
+                        || version.major == 10 && version.minor < 7
+                        || version.major == 10 && version.minor == 7 && version.patch == 0
             } else {
                 // nil means version >= 10.23 so singing not required
                 print("Jamf Pro Server version >= 10.23")
