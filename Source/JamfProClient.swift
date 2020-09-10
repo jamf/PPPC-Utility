@@ -54,7 +54,7 @@ struct JamfProClient {
             completionBlock(false)
             return
         }
-
+        
         let root = XMLElement(name: "os_x_configuration_profile")
         let general = XMLElement(name: "general")
         root.addChild(general)
@@ -84,17 +84,25 @@ struct JamfProClient {
                 } else {
                     print("Unknown error: \(statusCode)")
                 }
-
+                
             }
             completionBlock(success)
         }
     }
 
-    // swiftlint:disable:next large_tuple
-    func getJamfProVersion(completionBlock: @escaping ((major: Int, minor: Int, patch: Int)?) -> Void) {
-        sendRequest(endpoint: nil, data: nil) { (_, data) in
-            var result: (major: Int, minor: Int, patch: Int)?
+    struct JamfProVersion {
+        let major: Int
+        let minor: Int
+        let patch: Int
+    }
+
+    // This method returns version only for Jamf Pro version <= 10.22
+    // for the newer version we would need to use API to check version
+    func getJamfProVersionLegacy(completionBlock: @escaping (_ connectionOk: Bool, _ version: JamfProVersion?) -> Void) {
+        sendRequest(endpoint: nil, data: nil) { (statusCode, data) in
+            var version: JamfProVersion?
             if let text = String(data: data, encoding: .utf8),
+                // we take version from HTML response body
                 let startRange = text.range(of: "<meta name=\"version\" content=\""),
                 let endRange = text.range(of: "-", options: [], range: startRange.upperBound..<text.endIndex, locale: nil) {
                 let val = text[startRange.upperBound..<endRange.lowerBound]
@@ -103,13 +111,14 @@ struct JamfProClient {
                     let major = Int(versionParts[0]),
                     let minor = Int(versionParts[1]),
                     let patch = Int(versionParts[2]) {
-                    result = (major: major, minor: minor, patch: patch)
+                    version = JamfProVersion(major: major, minor: minor, patch: patch)
                 }
             }
-            completionBlock(result)
+            let connectionOk = statusCode == 200 || statusCode == 401 // server returns 401 (unauthorized because it is login page)
+            completionBlock(connectionOk, version)
         }
     }
-
+    
     func getOrganizationName(completionBlock: @escaping (_ httpStatus: Int, _ organizationName: String?) -> Void) {
         sendRequest(endpoint: "activationcode", data: nil) { (statusCode, data) in
             var orgName: String?
@@ -121,13 +130,13 @@ struct JamfProClient {
             completionBlock(statusCode, orgName)
         }
     }
-
+    
     func sendRequest(endpoint: String?, data: Data?, completionHandler: @escaping (_ statusCode: Int, _ output: Data) -> Void) {
         let failureBlock: (String) -> Void = {
             print("\($0)")
             completionHandler(0, Data())
         }
-
+        
         guard let serverURL = URL(string: urlString) else {
             failureBlock("Failed to create url for: \(urlString)")
             return
@@ -145,7 +154,7 @@ struct JamfProClient {
         }
         var request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 60.0)
         request.allHTTPHeaderFields = headers
-
+       
         if let body = data {
             request.httpMethod = "POST"
             request.httpBody = body

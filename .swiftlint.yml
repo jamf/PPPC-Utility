@@ -6,6 +6,7 @@ file_length:
   ignore_comment_only_lines: true
 
 disabled_rules:
+  - trailing_whitespace
   - line_length
   - type_body_length
   - todo
