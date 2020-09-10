@@ -127,7 +127,7 @@ class UploadViewController: NSViewController {
                         || version.major == 10 && version.minor < 7
                         || version.major == 10 && version.minor == 7 && version.patch == 0
             } else {
-                // nil means version >= 10.23 so singing not required
+                // nil means version >= 10.23 so signing not required
                 print("Jamf Pro Server version >= 10.23")
                 mustSign = false
             }
