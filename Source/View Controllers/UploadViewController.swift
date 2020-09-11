@@ -115,7 +115,6 @@ class UploadViewController: NSViewController {
         client.getJamfProVersionLegacy { (connectionSuccessful, possibleVersion) in
             if (!connectionSuccessful) {
                 print("Jamf Pro server is unavailable")
-                Alert().display(header: "Attention:", message: "Jamf Pro server is unavailable")
                 DispatchQueue.main.async {
                     self.handleCheckConnectionFailure(enforceSigning: nil)
                 }
@@ -135,7 +134,6 @@ class UploadViewController: NSViewController {
             client.getOrganizationName { (statusCode, orgName) in
                 if statusCode == 401 {
                     print("Invalid username/password")
-                    Alert().display(header: "Attention:", message: "Invalid username/password")
                     DispatchQueue.main.async {
                         self.handleCheckConnectionFailure(enforceSigning: mustSign)
                     }
