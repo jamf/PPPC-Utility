@@ -40,6 +40,7 @@
 		6EC40A18214ECF2C00BE4F17 /* UploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC40A17214ECF2C00BE4F17 /* UploadViewController.swift */; };
 		6EC40A1C214EF87800BE4F17 /* SigningIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC40A1B214EF87800BE4F17 /* SigningIdentity.swift */; };
 		71061E54246106C800822D35 /* LoadExecutableError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71061E53246106C800822D35 /* LoadExecutableError.swift */; };
+		B5E09548250BCCFC00A40409 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E09547250BCCFC00A40409 /* Alert.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,6 +91,7 @@
 		6EC40A17214ECF2C00BE4F17 /* UploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadViewController.swift; sourceTree = "<group>"; };
 		6EC40A1B214EF87800BE4F17 /* SigningIdentity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigningIdentity.swift; sourceTree = "<group>"; };
 		71061E53246106C800822D35 /* LoadExecutableError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadExecutableError.swift; sourceTree = "<group>"; };
+		B5E09547250BCCFC00A40409 /* Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -228,6 +230,7 @@
 		6EC40A1D214EF87E00BE4F17 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				B5E09547250BCCFC00A40409 /* Alert.swift */,
 				6EC40A1B214EF87800BE4F17 /* SigningIdentity.swift */,
 				6EC40A13214DFB5800BE4F17 /* Model.swift */,
 				6EC40A0F214DE3B200BE4F17 /* Executable.swift */,
@@ -379,6 +382,7 @@
 				34DED4D623FDDB2B00C53FB9 /* TCCProfileConfigurationPanel.swift in Sources */,
 				5F90EBE12319970500738D09 /* TCCProfileImporter.swift in Sources */,
 				5F95AE1623158F03002E0A22 /* SwiftyCMSDecoder.swift in Sources */,
+				B5E09548250BCCFC00A40409 /* Alert.swift in Sources */,
 				6EB86F692151476500FBE634 /* JamfProClient.swift in Sources */,
 				5F90EBDD2319934F00738D09 /* ArrayExtensions.swift in Sources */,
 				6EC40A14214DFB5800BE4F17 /* Model.swift in Sources */,
