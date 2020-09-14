@@ -37,5 +37,5 @@ class Alert: NSObject {
             dialog.addButton(withTitle: "OK")
             dialog.runModal()
         }
-    }   // func alert_dialog - end
+    }
 }
