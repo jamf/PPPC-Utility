@@ -12,5 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - name: GitHub Action for SwiftLint
+      - name: Swiftlint verification
         uses: norio-nomura/action-swiftlint@master
+        with:
+          args: --strict
