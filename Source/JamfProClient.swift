@@ -54,12 +54,13 @@ struct JamfProClient {
             completionBlock(false)
             return
         }
-        
+
         let root = XMLElement(name: "os_x_configuration_profile")
         let general = XMLElement(name: "general")
         root.addChild(general)
 
         let payloads = XMLElement(name: "payloads", stringValue: profileText)
+
         general.addChild(payloads)
 
         if let site = self.site {
@@ -84,7 +85,6 @@ struct JamfProClient {
                 } else {
                     print("Unknown error: \(statusCode)")
                 }
-                
             }
             completionBlock(success)
         }
@@ -118,7 +118,7 @@ struct JamfProClient {
             completionBlock(connectionOk, version)
         }
     }
-    
+
     func getOrganizationName(completionBlock: @escaping (_ httpStatus: Int, _ organizationName: String?) -> Void) {
         sendRequest(endpoint: "activationcode", data: nil) { (statusCode, data) in
             var orgName: String?
@@ -130,13 +130,13 @@ struct JamfProClient {
             completionBlock(statusCode, orgName)
         }
     }
-    
+
     func sendRequest(endpoint: String?, data: Data?, completionHandler: @escaping (_ statusCode: Int, _ output: Data) -> Void) {
         let failureBlock: (String) -> Void = {
             print("\($0)")
             completionHandler(0, Data())
         }
-        
+
         guard let serverURL = URL(string: urlString) else {
             failureBlock("Failed to create url for: \(urlString)")
             return
@@ -154,7 +154,7 @@ struct JamfProClient {
         }
         var request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 60.0)
         request.allHTTPHeaderFields = headers
-       
+
         if let body = data {
             request.httpMethod = "POST"
             request.httpBody = body
