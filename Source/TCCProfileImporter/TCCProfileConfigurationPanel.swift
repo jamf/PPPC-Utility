@@ -25,8 +25,8 @@
 //  SOFTWARE.
 //
 
-import Foundation
 import AppKit
+import Foundation
 
 class TCCProfileConfigurationPanel {
     /// Load TCC Profile data from file
@@ -46,9 +46,9 @@ class TCCProfileConfigurationPanel {
                 completion(.failure(.cancelled))
              } else {
                  if let result = openPanel.url {
-                     importer.decodeTCCProfile(fileUrl: result, { tccProfileResult in
+                     importer.decodeTCCProfile(fileUrl: result) { tccProfileResult in
                          return completion(tccProfileResult)
-                     })
+                     }
                  } else {
                      completion(.failure(TCCProfileImportError.unableToOpenFile))
                  }

@@ -275,6 +275,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6EC409EA214D65BD00BE4F17 /* Build configuration list for PBXNativeTarget "PPPC Utility" */;
 			buildPhases = (
+				49DB95D624991AA800F433CA /* SwiftLint */,
 				6EC409D6214D65BC00BE4F17 /* Sources */,
 				6EC409D7214D65BC00BE4F17 /* Frameworks */,
 				6EC409D8214D65BC00BE4F17 /* Resources */,
@@ -295,7 +296,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1020;
-				LastUpgradeCheck = 1000;
+				LastUpgradeCheck = 1160;
 				ORGANIZATIONNAME = Jamf;
 				TargetAttributes = {
 					5F95AE1A2315A6AD002E0A22 = {
@@ -358,6 +359,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		49DB95D624991AA800F433CA /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		5F95AE172315A6AD002E0A22 /* Sources */ = {
@@ -586,6 +608,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Resources/PPPC Utility.entitlements";
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = "";
@@ -608,6 +631,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Resources/PPPC Utility.entitlements";
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = "";

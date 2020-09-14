@@ -28,11 +28,11 @@
 import Cocoa
 
 class AppleEventRule: NSObject {
-    
+
     @objc dynamic var source: Executable!
     @objc dynamic var destination: Executable!
     @objc dynamic var valueString: String! = "Allow"
-    
+
     var value: Bool { return valueString == "Allow" }
 
     init(source: Executable, destination: Executable, value: Bool) {
