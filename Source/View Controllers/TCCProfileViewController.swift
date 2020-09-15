@@ -150,9 +150,6 @@ class TCCProfileViewController: NSViewController {
         }
     }
 
-
-
-    
     fileprivate func showAlert(_ error: LocalizedError, for window: NSWindow) {
         let alertWindow: NSAlert = NSAlert()
         alertWindow.messageText = "Operation Failed"
