@@ -11,7 +11,8 @@ jobs:
   SwiftLint:
     runs-on: ubuntu-latest
     steps:
-      - name: GitHub Action for SwiftLint (Only files changed in the PR)
+      - uses: actions/checkout@v1
+      - name: Swiftlint verification
         uses: norio-nomura/action-swiftlint@3.1.0
-        env:
-          DIFF_BASE: ${{ github.base_ref }}
+        with:
+          args: --strict
