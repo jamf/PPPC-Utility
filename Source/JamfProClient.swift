@@ -80,11 +80,14 @@ struct JamfProClient {
         sendRequest(endpoint: "osxconfigurationprofiles", data: xml.xmlData) { (statusCode, resultData) in
             let success: Bool = (200 <= statusCode && statusCode <= 299)
             if !success {
+                var errMessage = ""
                 if let text = String(data: resultData, encoding: .utf8) {
-                    print("Error (\(statusCode)):\n\(text)")
+                    errMessage = "Error (\(statusCode)):\n\(text)"
                 } else {
-                    print("Unknown error: \(statusCode)")
+                    errMessage = "Unknown error: \(statusCode)"
                 }
+                print(errMessage)
+                Alert().display(header: "Upload failed", message: errMessage)
             }
             completionBlock(success)
         }
