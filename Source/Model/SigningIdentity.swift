@@ -28,7 +28,7 @@
 import Cocoa
 
 class SigningIdentity: NSObject {
-    
+
     @objc dynamic var displayName: String
     var reference: SecIdentity?
 

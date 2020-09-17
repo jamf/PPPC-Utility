@@ -34,7 +34,7 @@ class Executable: NSObject {
     @objc dynamic var displayName: String!
     @objc dynamic var identifier: String!
     @objc dynamic var codeRequirement: String!
-    
+
     @objc dynamic var policy: Policy = Policy()
     @objc dynamic var appleEvents: [AppleEventRule] = []
 
@@ -74,8 +74,8 @@ class Executable: NSObject {
     }
 }
 
-
 class Policy: NSObject {
+    // swiftlint:disable identifier_name
     @objc dynamic var AddressBook: String = "-"
     @objc dynamic var Calendar: String = "-"
     @objc dynamic var Reminders: String = "-"
@@ -96,5 +96,5 @@ class Policy: NSObject {
     @objc dynamic var SystemPolicyDownloadsFolder: String = "-"
     @objc dynamic var SystemPolicyNetworkVolumes: String = "-"
     @objc dynamic var SystemPolicyRemovableVolumes: String = "-"
+    // swiftlint:enable identifier_name
 }
-

@@ -34,7 +34,7 @@ extension TCCPolicyIdentifierType {
     static let path = "path"
 }
 
-struct TCCPolicy : Codable {
+struct TCCPolicy: Codable {
     var comment: String
     var identifier: String
     var identifierType: TCCPolicyIdentifierType
@@ -67,7 +67,7 @@ struct TCCPolicy : Codable {
     }
 }
 
-public struct TCCProfile : Codable {
+public struct TCCProfile: Codable {
     struct Content: Codable {
         var payloadDescription: String
         var displayName: String
@@ -77,6 +77,8 @@ public struct TCCProfile : Codable {
         var uuid: String
         var version: Int
         var services: [String: [TCCPolicy]]
+
+        // swiftlint:disable:next nesting
         enum CodingKeys: String, CodingKey {
             case payloadDescription = "PayloadDescription"
             case displayName = "PayloadDisplayName"
@@ -88,7 +90,7 @@ public struct TCCProfile : Codable {
             case services = "Services"
         }
     }
-    
+
     var version: Int
     var uuid: String
     var type: String
@@ -128,14 +130,13 @@ public struct TCCProfile : Codable {
         self.payloadDescription = content.payloadDescription
         self.content = [content]
     }
-    
+
     func xmlData() throws -> Data {
         let encoder = PropertyListEncoder()
         encoder.outputFormat = .xml
         return try encoder.encode(self)
     }
 }
-
 
 enum ServicesKeys: String {
     case addressBook = "AddressBook"
@@ -160,5 +161,3 @@ enum ServicesKeys: String {
     case removableVolumes = "SystemPolicyRemovableVolumes"
     case appleEvents = "AppleEvents"
 }
-
-

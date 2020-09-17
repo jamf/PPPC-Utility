@@ -1,10 +1,10 @@
 //
-//  AppleEventRule.swift
+//  Alert.swift
 //  PPPC Utility
 //
 //  MIT License
 //
-//  Copyright (c) 2018 Jamf Software
+//  Copyright (c) 2020 Jamf Software
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -27,17 +27,15 @@
 
 import Cocoa
 
-class AppleEventRule: NSObject {
-
-    @objc dynamic var source: Executable!
-    @objc dynamic var destination: Executable!
-    @objc dynamic var valueString: String! = "Allow"
-
-    var value: Bool { return valueString == "Allow" }
-
-    init(source: Executable, destination: Executable, value: Bool) {
-        self.source = source
-        self.destination = destination
-        self.valueString = value ? "Allow" : "Deny"
+class Alert: NSObject {
+    func display(header: String, message: String) {
+        DispatchQueue.main.async {
+            let dialog: NSAlert = NSAlert()
+            dialog.messageText = header
+            dialog.informativeText = message
+            dialog.alertStyle = NSAlert.Style.warning
+            dialog.addButton(withTitle: "OK")
+            dialog.runModal()
+        }
     }
 }

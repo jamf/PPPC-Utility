@@ -29,9 +29,9 @@ import Cocoa
 import CoreGraphics
 
 class UploadViewController: NSViewController {
-    
+
     private static var uploadKVOContext = 0
-    
+
     @objc dynamic var networkOperationsTitle: String! = nil
     @objc dynamic var mustSignForUpload: Bool = true {
         didSet {
@@ -61,7 +61,7 @@ class UploadViewController: NSViewController {
     @objc dynamic var siteId: String?
 
     @IBOutlet weak var defaultsController: NSUserDefaultsController!
-    
+
     @IBOutlet weak var jamfProServerLabel: NSTextField!
     @IBOutlet weak var usernameLabel: NSTextField!
     @IBOutlet weak var passwordLabel: NSSecureTextField!
@@ -77,7 +77,7 @@ class UploadViewController: NSViewController {
     @IBOutlet weak var siteNameLabel: NSTextField!
 
     @IBOutlet weak var gridView: NSGridView!
-    
+
     @IBAction func uploadPressed(_ sender: NSButton) {
         print("Uploading profile: \(payloadName ?? "?")")
         self.networkOperationsTitle = "Uploading \(payloadName ?? "profile")"
@@ -105,48 +105,55 @@ class UploadViewController: NSViewController {
             }
         }
     }
-    
+
     @IBAction func checkConnectionPressed(_ sender: NSButton) {
         print("Checking connection")
         self.networkOperationsTitle = "Checking Jamf Pro server"
-        
+
         let client = JamfProClient(jamfProServerLabel.stringValue, username, password)
-        
-        client.getJamfProVersion { (possibleVersion) in
-            if let version = possibleVersion {
-                print("Jamf Pro Server: \(version.major).\(version.minor).\(version.patch)")
-                let mustSign: Bool =
-                    (version.major < 10 ||
-                        (version.major == 10 &&
-                            (version.minor < 7 ||
-                                (version.minor == 7 && version.patch == 0))))
-                client.getOrganizationName { (statusCode, orgName) in
-                    if statusCode == 401 {
-                        print("Invalid username/password")
-                        DispatchQueue.main.async {
-                            self.handleCheckConnectionFailure(enforceSigning: mustSign)
-                        }
-                    } else if let name = orgName {
-                        DispatchQueue.main.async {
-                            self.handleCheckConnection(enforceSigning: mustSign,
-                                                       organization: name)
-                        }
-                    } else {
-                        print("Unable to read organization name")
-                        DispatchQueue.main.async {
-                            self.handleCheckConnectionFailure(enforceSigning: mustSign)
-                        }
-                    }
-                }
-            } else {
+
+        client.getJamfProVersionLegacy { (connectionSuccessful, possibleVersion) in
+            if !connectionSuccessful {
                 print("Jamf Pro server is unavailable")
+                Alert().display(header: "Attention:", message: "Jamf Pro server is unavailable")
                 DispatchQueue.main.async {
                     self.handleCheckConnectionFailure(enforceSigning: nil)
+                }
+                return
+            }
+            var mustSign: Bool
+            if let version = possibleVersion {
+                print("Jamf Pro Server: \(version.major).\(version.minor).\(version.patch)")
+                mustSign = version.major < 10
+                        || version.major == 10 && version.minor < 7
+                        || version.major == 10 && version.minor == 7 && version.patch == 0
+            } else {
+                // nil means version >= 10.23 so signing not required
+                print("Jamf Pro Server version >= 10.23")
+                mustSign = false
+            }
+            client.getOrganizationName { (statusCode, orgName) in
+                if statusCode == 401 {
+                    print("Invalid username/password")
+                    Alert().display(header: "Attention:", message: "Invalid username/password")
+                    DispatchQueue.main.async {
+                        self.handleCheckConnectionFailure(enforceSigning: mustSign)
+                    }
+                } else if let name = orgName {
+                    DispatchQueue.main.async {
+                        self.handleCheckConnection(enforceSigning: mustSign,
+                                                   organization: name)
+                    }
+                } else {
+                    print("Unable to read organization name")
+                    DispatchQueue.main.async {
+                        self.handleCheckConnectionFailure(enforceSigning: mustSign)
+                    }
                 }
             }
         }
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         checkConnectionButton.isEnabled = false
@@ -154,7 +161,7 @@ class UploadViewController: NSViewController {
         payloadNameLabel.isEnabled = false
         payloadIdentifierLabel.isEnabled = false
         payloadDescriptionLabel.isEnabled = false
-        
+
         do {
             let identities = try SecurityWrapper.loadSigningIdentities()
             identitiesPopUpAC.add(contentsOf: identities)
@@ -162,14 +169,14 @@ class UploadViewController: NSViewController {
             identitiesPopUpAC.add(contentsOf: [])
             print("Error loading identities: \(error)")
         }
-        
+
         mustSignForUpload = UserDefaults.standard.bool(forKey: "enforceSigning")
-        
+
         loadCredentials()
         loadImportedTCCProfileInfo()
         updateSiteUI()
     }
-    
+
     override func viewWillAppear() {
         super.viewWillAppear()
         defaultsController.addObserver(self, forKeyPath: "values.jamfProServer", options: [.new], context: &UploadViewController.uploadKVOContext)
@@ -192,7 +199,7 @@ class UploadViewController: NSViewController {
             usernameLabel.becomeFirstResponder()
         }
     }
-    
+
     override func viewWillDisappear() {
         super.viewWillDisappear()
         defaultsController.removeObserver(self, forKeyPath: "values.jamfProServer", context: &UploadViewController.uploadKVOContext)
@@ -206,12 +213,13 @@ class UploadViewController: NSViewController {
         removeObserver(self, forKeyPath: "site", context: &UploadViewController.uploadKVOContext)
         removeObserver(self, forKeyPath: "siteId", context: &UploadViewController.uploadKVOContext)
         removeObserver(self, forKeyPath: "siteName", context: &UploadViewController.uploadKVOContext)
-        
+
         //  Save keychain
         syncronizeCredentials()
     }
-    
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+
+    // swiftlint:disable:next block_based_kvo
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
         if context == &UploadViewController.uploadKVOContext {
             updateCredentialsAvailable()
             updateReadForUpload()
@@ -220,7 +228,7 @@ class UploadViewController: NSViewController {
             super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
         }
     }
-    
+
     func updateCredentialsAvailable() {
         guard credentialsAvailable != (
             !jamfProServerLabel.stringValue.isEmpty
@@ -230,7 +238,7 @@ class UploadViewController: NSViewController {
             && !password.isEmpty) else { return }
         credentialsAvailable = !credentialsAvailable
     }
-    
+
     func updateReadForUpload() {
         guard readyForUpload != (
             credentialsVerified
@@ -262,7 +270,7 @@ class UploadViewController: NSViewController {
         siteIdLabel.isHidden = !site
         siteNameLabel.isHidden = !site
     }
-    
+
     func handleCheckConnectionFailure(enforceSigning: Bool?) {
         identitiesPopUp.isEnabled = enforceSigning ?? false
         networkOperationsTitle = nil
@@ -270,7 +278,7 @@ class UploadViewController: NSViewController {
         updateReadForUpload()
         passwordLabel.becomeFirstResponder()
     }
-    
+
     func handleCheckConnection(enforceSigning: Bool, organization: String) {
         defaultsController.setValue(organization, forKeyPath: "values.organization")
         UserDefaults.standard.set(enforceSigning, forKey: "enforceSigning")
@@ -281,22 +289,22 @@ class UploadViewController: NSViewController {
         payloadNameLabel.becomeFirstResponder()
         updateReadForUpload()
     }
-    
+
     func handleUploadCompletion(success: Bool) {
         guard !success else {
             print("Uploaded successfully")
             self.dismiss(nil)
             return
         }
-        
+
         print("Failed to upload")
-        
+
         networkOperationsTitle = nil
         credentialsVerified = false
         passwordLabel.becomeFirstResponder()
         updateReadForUpload()
     }
-    
+
     func loadCredentials() {
         if let server = UserDefaults.standard.string(forKey: "jamfProServer") {
             do {
@@ -312,7 +320,7 @@ class UploadViewController: NSViewController {
                 print("Error loading credentials: \(error)")
             }
         }
-        
+
         username = nil
         password = nil
         credentialsAvailable = false
