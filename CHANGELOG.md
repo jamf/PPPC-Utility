@@ -8,6 +8,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 <!-- Add any information here about changes in master that have yet to be released -->
 
+### Added
+
+- Added this changelog file
+
 ## [1.2.1] - 2020-09-17
 
 Thank you to all the contributors in this release!
