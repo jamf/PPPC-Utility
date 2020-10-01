@@ -12,6 +12,7 @@
 		34DED4D323FDC77E00C53FB9 /* TCCProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC409F4214D95D200BE4F17 /* TCCProfile.swift */; };
 		34DED4D423FDCAFD00C53FB9 /* SwiftyCMSDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F95AE1523158F03002E0A22 /* SwiftyCMSDecoder.swift */; };
 		34DED4D623FDDB2B00C53FB9 /* TCCProfileConfigurationPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DED4D523FDDB2B00C53FB9 /* TCCProfileConfigurationPanel.swift */; };
+		59206D6925265F0C00B94795 /* TCCProfileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59206D6825265F0C00B94795 /* TCCProfileTests.swift */; };
 		5F90EBDD2319934F00738D09 /* ArrayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F90EBDC2319934F00738D09 /* ArrayExtensions.swift */; };
 		5F90EBDF2319970000738D09 /* TCCProfileImportError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F90EBDE2319970000738D09 /* TCCProfileImportError.swift */; };
 		5F90EBE12319970500738D09 /* TCCProfileImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F90EBE02319970500738D09 /* TCCProfileImporter.swift */; };
@@ -56,6 +57,7 @@
 /* Begin PBXFileReference section */
 		345B01D523FDBF55008838B6 /* TCCProfileExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TCCProfileExtensions.swift; sourceTree = "<group>"; };
 		34DED4D523FDDB2B00C53FB9 /* TCCProfileConfigurationPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TCCProfileConfigurationPanel.swift; sourceTree = "<group>"; };
+		59206D6825265F0C00B94795 /* TCCProfileTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TCCProfileTests.swift; sourceTree = "<group>"; };
 		5F90EBDC2319934F00738D09 /* ArrayExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensions.swift; sourceTree = "<group>"; };
 		5F90EBDE2319970000738D09 /* TCCProfileImportError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TCCProfileImportError.swift; sourceTree = "<group>"; };
 		5F90EBE02319970500738D09 /* TCCProfileImporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TCCProfileImporter.swift; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 				5F95AE2C2315B172002E0A22 /* TestTCCUnsignedProfile-Empty.mobileconfig */,
 				5F95AE292315B172002E0A22 /* TestTCCUnsignedProfile.mobileconfig */,
 				5F95AE252315A7CB002E0A22 /* TCCProfileImporterTests.swift */,
+				59206D6825265F0C00B94795 /* TCCProfileTests.swift */,
 			);
 			path = TCCProfileImporter;
 			sourceTree = "<group>";
@@ -391,6 +394,7 @@
 			files = (
 				34DED4D423FDCAFD00C53FB9 /* SwiftyCMSDecoder.swift in Sources */,
 				5F95AE262315A7CB002E0A22 /* TCCProfileImporterTests.swift in Sources */,
+				59206D6925265F0C00B94795 /* TCCProfileTests.swift in Sources */,
 				5F90EBE42319992B00738D09 /* ModelTests.swift in Sources */,
 				34DED4D323FDC77E00C53FB9 /* TCCProfile.swift in Sources */,
 				345B01D723FDBF55008838B6 /* TCCProfileExtensions.swift in Sources */,
@@ -454,9 +458,10 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 483DWKW443;
 				INFOPLIST_FILE = "PPPC UtilityTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -466,6 +471,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jamf.PPPC-UtilityTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PPPC Utility.app/Contents/MacOS/PPPC Utility";
@@ -477,9 +483,10 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 483DWKW443;
 				INFOPLIST_FILE = "PPPC UtilityTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -489,6 +496,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jamf.PPPC-UtilityTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PPPC Utility.app/Contents/MacOS/PPPC Utility";
 			};
@@ -612,9 +620,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Resources/PPPC Utility.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 483DWKW443;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -634,9 +643,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Resources/PPPC Utility.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 483DWKW443;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
