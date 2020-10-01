@@ -28,10 +28,50 @@
 import Foundation
 
 typealias TCCPolicyIdentifierType = String
+typealias TCCPolicyAuthorizationValue = String
 
 extension TCCPolicyIdentifierType {
     static let bundleID = "bundleID"
     static let path = "path"
+}
+
+extension TCCPolicyAuthorizationValue {
+    static let allow = "Allow"
+    static let deny = "Deny"
+    static let allowStandardUserToSetSystemService = "AllowStandardUserToSetSystemService"
+}
+
+struct TCCPolicy2: Codable {
+    var comment: String
+    var identifier: String
+    var identifierType: TCCPolicyIdentifierType
+    var codeRequirement: String
+    var authorization: TCCPolicyAuthorizationValue
+    var receiverIdentifier: String?
+    var receiverIdentifierType: TCCPolicyIdentifierType?
+    var receiverCodeRequirement: String?
+    enum CodingKeys: String, CodingKey {
+        case identifier = "Identifier"
+        case identifierType = "IdentifierType"
+        case authorization = "Authorization"
+        case codeRequirement = "CodeRequirement"
+        case comment = "Comment"
+        case receiverIdentifier = "AEReceiverIdentifier"
+        case receiverIdentifierType = "AEReceiverIdentifierType"
+        case receiverCodeRequirement = "AEReceiverCodeRequirement"
+    }
+    init(identifier: String, codeRequirement: String, authorization: TCCPolicyAuthorizationValue, receiverIdentifier: String? = nil, receiverCodeRequirement: String? = nil) {
+        self.authorization = authorization
+        self.comment = ""
+        self.identifier = identifier
+        self.identifierType = identifier.contains("/") ? .path : .bundleID
+        self.codeRequirement = codeRequirement
+        self.receiverIdentifier = receiverIdentifier
+        if let otherIdentifier = receiverIdentifier {
+            self.receiverIdentifierType = otherIdentifier.contains("/") ? .path : .bundleID
+        }
+        self.receiverCodeRequirement = receiverCodeRequirement
+    }
 }
 
 struct TCCPolicy: Codable {
