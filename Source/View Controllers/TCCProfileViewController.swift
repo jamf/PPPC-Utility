@@ -348,7 +348,7 @@ class TCCProfileViewController: NSViewController {
 
     func insertIntoAppleEvents(_ executable: Executable) {
         guard let source = self.executablesAC.selectedObjects.first as? Executable else { return }
-        let rule = AppleEventRule(source: source, destination: executable, value: false)
+        let rule = AppleEventRule(source: source, destination: executable, value: true)
         guard self.appleEventsAC.canInsert,
             self.shouldAppleEventRuleBeAdded(rule) else { return }
         self.appleEventsAC.insert(rule, atArrangedObjectIndex: 0)
