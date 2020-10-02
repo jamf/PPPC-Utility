@@ -164,11 +164,11 @@ extension Model {
             }
 
             executable.appleEvents.forEach { event in
-                let policy = TCCPolicy(identifier: executable.identifier,
+                var policy = TCCPolicy(identifier: executable.identifier,
                                        codeRequirement: executable.codeRequirement,
-                                       allowed: event.value,
                                        receiverIdentifier: event.destination.identifier,
                                        receiverCodeRequirement: event.destination.codeRequirement)
+                policy.allowed = event.value
                 let appleEventsKey = ServicesKeys.appleEvents.rawValue
                 services[appleEventsKey] = services[appleEventsKey] ?? []
                 services[appleEventsKey]?.append(policy)
@@ -197,11 +197,11 @@ extension Model {
                     if key == ServicesKeys.appleEvents.rawValue {
                         if let source = executable, let rIdentifier = policy.receiverIdentifier, let rCodeRequirement = policy.receiverCodeRequirement {
                             let destination = getExecutableFrom(identifier: rIdentifier, codeRequirement: rCodeRequirement)
-                            let appleEvent = AppleEventRule(source: source, destination: destination, value: policy.allowed)
+                            let appleEvent = AppleEventRule(source: source, destination: destination, value: policy.allowed!)
                             executable?.appleEvents.appendIfNew(appleEvent)
                         }
                     } else {
-                        if policy.allowed {
+                        if policy.allowed! {
                             executable?.policy.setValue("Allow", forKey: key)
                         } else {
                             executable?.policy.setValue("Deny", forKey: key)
@@ -219,9 +219,10 @@ extension Model {
         case "Deny":    allowed = false
         default:        return nil
         }
-        return TCCPolicy(identifier: executable.identifier,
-                         codeRequirement: executable.codeRequirement,
-                         allowed: allowed)
+        var policy = TCCPolicy(identifier: executable.identifier,
+                         codeRequirement: executable.codeRequirement)
+        policy.allowed = allowed
+        return policy
     }
 
     func getExecutablesFromAllPolicies(policies: [TCCPolicy]) {

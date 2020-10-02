@@ -41,45 +41,13 @@ extension TCCPolicyAuthorizationValue {
     static let allowStandardUserToSetSystemService = "AllowStandardUserToSetSystemService"
 }
 
-struct TCCPolicy2: Codable {
-    var comment: String
-    var identifier: String
-    var identifierType: TCCPolicyIdentifierType
-    var codeRequirement: String
-    var authorization: TCCPolicyAuthorizationValue
-    var receiverIdentifier: String?
-    var receiverIdentifierType: TCCPolicyIdentifierType?
-    var receiverCodeRequirement: String?
-    enum CodingKeys: String, CodingKey {
-        case identifier = "Identifier"
-        case identifierType = "IdentifierType"
-        case authorization = "Authorization"
-        case codeRequirement = "CodeRequirement"
-        case comment = "Comment"
-        case receiverIdentifier = "AEReceiverIdentifier"
-        case receiverIdentifierType = "AEReceiverIdentifierType"
-        case receiverCodeRequirement = "AEReceiverCodeRequirement"
-    }
-    init(identifier: String, codeRequirement: String, authorization: TCCPolicyAuthorizationValue, receiverIdentifier: String? = nil, receiverCodeRequirement: String? = nil) {
-        self.authorization = authorization
-        self.comment = ""
-        self.identifier = identifier
-        self.identifierType = identifier.contains("/") ? .path : .bundleID
-        self.codeRequirement = codeRequirement
-        self.receiverIdentifier = receiverIdentifier
-        if let otherIdentifier = receiverIdentifier {
-            self.receiverIdentifierType = otherIdentifier.contains("/") ? .path : .bundleID
-        }
-        self.receiverCodeRequirement = receiverCodeRequirement
-    }
-}
-
 struct TCCPolicy: Codable {
     var comment: String
     var identifier: String
     var identifierType: TCCPolicyIdentifierType
     var codeRequirement: String
-    var allowed: Bool
+    var allowed: Bool?
+    var authorization: TCCPolicyAuthorizationValue?
     var receiverIdentifier: String?
     var receiverIdentifierType: TCCPolicyIdentifierType?
     var receiverCodeRequirement: String?
@@ -87,14 +55,14 @@ struct TCCPolicy: Codable {
         case identifier = "Identifier"
         case identifierType = "IdentifierType"
         case allowed = "Allowed"
+        case authorization = "Authorization"
         case codeRequirement = "CodeRequirement"
         case comment = "Comment"
         case receiverIdentifier = "AEReceiverIdentifier"
         case receiverIdentifierType = "AEReceiverIdentifierType"
         case receiverCodeRequirement = "AEReceiverCodeRequirement"
     }
-    init(identifier: String, codeRequirement: String, allowed: Bool, receiverIdentifier: String? = nil, receiverCodeRequirement: String? = nil) {
-        self.allowed = allowed
+    init(identifier: String, codeRequirement: String, receiverIdentifier: String? = nil, receiverCodeRequirement: String? = nil) {
         self.comment = ""
         self.identifier = identifier
         self.identifierType = identifier.contains("/") ? .path : .bundleID
