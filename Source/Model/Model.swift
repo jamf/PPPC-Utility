@@ -212,16 +212,23 @@ extension Model {
         }
     }
 
-    func policyFromString(executable: Executable, value: String) -> TCCPolicy? {
-        let allowed: Bool
-        switch value {
-        case "Allow":   allowed = true
-        case "Deny":    allowed = false
-        default:        return nil
-        }
+    func policyFromString(executable: Executable, value: String, usingLegacyAllow: Bool = false) -> TCCPolicy? {
         var policy = TCCPolicy(identifier: executable.identifier,
                          codeRequirement: executable.codeRequirement)
-        policy.allowed = allowed
+        if usingLegacyAllow {
+            switch value {
+            case "Allow":   policy.allowed = true
+            case "Deny":    policy.allowed = false
+            default:        return nil
+            }
+        } else {
+            switch value {
+            case "Allow":   policy.authorization = .allow
+            case "Deny":    policy.authorization = .deny
+            case "Let Standard Users Approve":    policy.authorization = .allowStandardUserToSetSystemService
+            default:        return nil
+            }
+        }
         return policy
     }
 

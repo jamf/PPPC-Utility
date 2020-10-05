@@ -150,6 +150,60 @@ class TCCProfileTests: XCTestCase {
         }
     }
 
+    func testSerializationOfProfileWhenBothAllowedAndAuthorizationUsed() throws {
+        // when we export to xml and reimport it should still have the same attributes
+        let plistData = try buildProfile(allowed: false, authorization: .allow).xmlData()
+        let profile = try TCCProfile.parse(from: plistData)
+
+        // then verify the config profile top level
+        XCTAssertEqual("the type", profile.type)
+
+        // then verify the payload content top level
+        XCTAssertEqual(1, profile.content.count)
+        profile.content.forEach { content in
+            XCTAssertEqual("Content UUID 1", content.uuid)
+            XCTAssertEqual(1, content.version)
+
+            // then verify the services key
+            XCTAssertEqual(1, content.services.count)
+            content.services.forEach { event, policies in
+                // then verify the policies for each event
+                XCTAssertEqual("one", event)
+                XCTAssertEqual(1, policies.count)
+                policies.forEach { policy in
+                    XCTAssertEqual(false, policy.allowed)
+                    XCTAssertEqual(policy.authorization, TCCPolicyAuthorizationValue.allow)
+                }
+            }
+        }
+    }
+
     // unit tests for handling both Auth and allowed keys should fail?
+
+    func testSettingLegacyAllowValueNullifiesAuthorization() {
+        // given
+        var tccPolicy = TCCPolicy(identifier: "id", codeRequirement: "req", receiverIdentifier: "recId", receiverCodeRequirement: "recreq")
+        tccPolicy.authorization = .allow
+
+        // when
+        tccPolicy.allowed = true
+
+        // then
+        XCTAssertNil(tccPolicy.authorization)
+        XCTAssertTrue(tccPolicy.allowed!)
+    }
+
+    func testSettingAuthorizationValueDoesNotNullifyAllowed() {
+        // given
+        var tccPolicy = TCCPolicy(identifier: "id", codeRequirement: "req", receiverIdentifier: "recId", receiverCodeRequirement: "recreq")
+        tccPolicy.allowed = false
+
+        // when
+        tccPolicy.authorization = .allowStandardUserToSetSystemService
+
+        // then
+        XCTAssertEqual(tccPolicy.allowed, false, "we don't have to nil this out because we use authorization by default if present")
+        XCTAssertEqual(tccPolicy.authorization, TCCPolicyAuthorizationValue.allowStandardUserToSetSystemService)
+    }
 
 }

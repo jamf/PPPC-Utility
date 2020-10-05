@@ -32,12 +32,14 @@ import XCTest
 
 class ModelTests: XCTestCase {
 
+    var model = Model()
+
+    // MARK: - tests for getExecutableFrom*
+
     func testGetExecutableBasedOnIdentifierAndCodeRequirement_BundleIdentifierType() {
         //given
             let identifier = "com.example.App"
             let codeRequirement = "testCodeRequirement"
-
-            let model = Model()
 
         //when
             let executable = model.getExecutableFrom(identifier: identifier, codeRequirement: codeRequirement)
@@ -53,8 +55,6 @@ class ModelTests: XCTestCase {
         let identifier = "/myGreatPath/Awesome/Binary"
         let codeRequirement = "testCodeRequirement"
 
-        let model = Model()
-
         //when
         let executable = model.getExecutableFrom(identifier: identifier, codeRequirement: codeRequirement)
 
@@ -69,7 +69,6 @@ class ModelTests: XCTestCase {
             let identifier = "com.apple.Safari"
             let codeRequirement = "randomReq"
 
-            let model = Model()
         //when
             let executable = model.getExecutableFrom(identifier: identifier, codeRequirement: codeRequirement)
 
@@ -81,8 +80,6 @@ class ModelTests: XCTestCase {
 
     func testGetExecutableFromSelectedExecutables() {
         //given
-        let model = Model()
-
         let expectedIdentifier = "com.something.1"
         let executable = model.getExecutableFrom(identifier: expectedIdentifier, codeRequirement: "testReq")
         let executableSecond = model.getExecutableFrom(identifier: "com.something.2", codeRequirement: "testReq2")
@@ -100,10 +97,7 @@ class ModelTests: XCTestCase {
 
     func testGetExecutableFromSelectedExecutables_Path() {
         //given
-        let model = Model()
-
         let expectedIdentifier = "/path/something/Special"
-
         let executableOneMore = model.getExecutableFrom(identifier: "/path/something/Special1", codeRequirement: "testReq")
         let executable = model.getExecutableFrom(identifier: expectedIdentifier, codeRequirement: "testReq")
         let executableSecond = model.getExecutableFrom(identifier: "com.something.2", codeRequirement: "testReq2")
@@ -120,14 +114,96 @@ class ModelTests: XCTestCase {
     }
 
     func testGetExecutableFromSelectedExecutables_Empty() {
-        // given
-        let model = Model()
-
         //when
         let existingExecutable = model.getExecutableFromSelectedExecutables(bundleIdentifier: "com.something.1")
 
         //then
         XCTAssertNil(existingExecutable)
+    }
+
+    // MARK: - tests for profileToString
+
+    func testPolicyWhenUsingAllow() {
+        // given
+        let app = Executable(identifier: "id", codeRequirement: "req")
+
+        // when
+        let policy = model.policyFromString(executable: app, value: "Allow")
+
+        // then
+        XCTAssertEqual(policy?.authorization, TCCPolicyAuthorizationValue.allow)
+        XCTAssertNil(policy?.allowed)
+    }
+
+    func testPolicyWhenUsingDeny() {
+        // given
+        let app = Executable(identifier: "id", codeRequirement: "req")
+
+        // when
+        let policy = model.policyFromString(executable: app, value: "Deny")
+
+        // then
+        XCTAssertEqual(policy?.authorization, TCCPolicyAuthorizationValue.deny)
+        XCTAssertNil(policy?.allowed)
+    }
+
+    func testPolicyWhenUsingAllowForStandardUsers() {
+        // given
+        let app = Executable(identifier: "id", codeRequirement: "req")
+
+        // when
+        let policy = model.policyFromString(executable: app, value: "Let Standard Users Approve")
+
+        // then
+        XCTAssertEqual(policy?.authorization, TCCPolicyAuthorizationValue.allowStandardUserToSetSystemService)
+        XCTAssertNil(policy?.allowed)
+    }
+
+    func testPolicyWhenUsingUnknownValue() {
+        // given
+        let app = Executable(identifier: "id", codeRequirement: "req")
+
+        // when
+        let policy = model.policyFromString(executable: app, value: "For MDM Admins Only")
+
+        // then
+        XCTAssertNil(policy, "should have not created the policy with an unknown value")
+    }
+
+    func testPolicyWhenUsingLegacyDeny() {
+        // given
+        let app = Executable(identifier: "id", codeRequirement: "req")
+
+        // when
+        let policy = model.policyFromString(executable: app, value: "Deny", usingLegacyAllow: true)
+
+        // then
+        XCTAssertNil(policy?.authorization, "should not set authorization when in legacy mode")
+        XCTAssertEqual(policy?.allowed, false)
+    }
+
+    func testPolicyWhenUsingLegacyAllow() {
+        // given
+        let app = Executable(identifier: "id", codeRequirement: "req")
+
+        // when
+        let policy = model.policyFromString(executable: app, value: "Allow", usingLegacyAllow: true)
+
+        // then
+        XCTAssertNil(policy?.authorization, "should not set authorization when in legacy mode")
+        XCTAssertEqual(policy?.allowed, true)
+    }
+
+    // test for the unrecognized strings for both legacy and normal
+    func testPolicyWhenUsingLegacyAllowButNonLegacyValueUsed() {
+        // given
+        let app = Executable(identifier: "id", codeRequirement: "req")
+
+        // when
+        let policy = model.policyFromString(executable: app, value: "Let Standard Users Approve", usingLegacyAllow: true)
+
+        // then
+        XCTAssertNil(policy, "should have errored out because of an invalid value")
     }
 
 }
