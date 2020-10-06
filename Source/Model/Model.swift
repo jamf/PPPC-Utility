@@ -164,15 +164,12 @@ extension Model {
             }
 
             executable.appleEvents.forEach { event in
-                var policy = TCCPolicy(identifier: executable.identifier,
-                                       codeRequirement: executable.codeRequirement,
-                                       receiverIdentifier: event.destination.identifier,
-                                       receiverCodeRequirement: event.destination.codeRequirement)
-                policy.allowed = event.value
-                let appleEventsKey = ServicesKeys.appleEvents.rawValue
-                services[appleEventsKey] = services[appleEventsKey] ?? []
-                services[appleEventsKey]?.append(policy)
-
+                let policy = policyFromString(executable: executable, value: event.valueString, event: event)
+                if let policy = policy {
+                    let appleEventsKey = ServicesKeys.appleEvents.rawValue
+                    services[appleEventsKey] = services[appleEventsKey] ?? []
+                    services[appleEventsKey]?.append(policy)
+                }
             }
         }
 
@@ -212,9 +209,11 @@ extension Model {
         }
     }
 
-    func policyFromString(executable: Executable, value: String, usingLegacyAllow: Bool = false) -> TCCPolicy? {
+    func policyFromString(executable: Executable, value: String, event: AppleEventRule? = nil, usingLegacyAllow: Bool = false) -> TCCPolicy? {
         var policy = TCCPolicy(identifier: executable.identifier,
-                         codeRequirement: executable.codeRequirement)
+                         codeRequirement: executable.codeRequirement,
+                         receiverIdentifier: event?.destination.identifier,
+                         receiverCodeRequirement: event?.destination.codeRequirement)
         if usingLegacyAllow {
             switch value {
             case "Allow":   policy.allowed = true
