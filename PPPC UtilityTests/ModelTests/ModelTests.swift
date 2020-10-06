@@ -177,6 +177,82 @@ class ModelTests: XCTestCase {
         }
     }
 
+    // MARK: - tests for importProfile
+
+    func testImportProfileUsingAuthorizationKeyAllow() {
+        // given
+        let profile = TCCProfileBuilder().buildProfile(authorization: .allow)
+
+        // when
+        model.importProfile(tccProfile: profile)
+
+        // then
+        XCTAssertEqual(1, model.selectedExecutables.count)
+        XCTAssertEqual("Allow", model.selectedExecutables.first?.policy.SystemPolicyAllFiles)
+    }
+
+    func testImportProfileUsingAuthorizationKeyDeny() {
+        // given
+        let profile = TCCProfileBuilder().buildProfile(authorization: .deny)
+
+        // when
+        model.importProfile(tccProfile: profile)
+
+        // then
+        XCTAssertEqual(1, model.selectedExecutables.count)
+        XCTAssertEqual("Deny", model.selectedExecutables.first?.policy.SystemPolicyAllFiles)
+    }
+
+    func testImportProfileUsingAuthorizationKeyAllowStandardUsers() {
+        // given
+        let profile = TCCProfileBuilder().buildProfile(authorization: .allowStandardUserToSetSystemService)
+
+        // when
+        model.importProfile(tccProfile: profile)
+
+        // then
+        XCTAssertEqual(1, model.selectedExecutables.count)
+        XCTAssertEqual("Let Standard Users Approve", model.selectedExecutables.first?.policy.SystemPolicyAllFiles)
+    }
+
+    func testImportProfileUsingLegacyAllowKeyTrue() {
+        // given
+        let profile = TCCProfileBuilder().buildProfile(allowed: true)
+
+        // when
+        model.importProfile(tccProfile: profile)
+
+        // then
+        XCTAssertEqual(1, model.selectedExecutables.count)
+        XCTAssertEqual("Allow", model.selectedExecutables.first?.policy.SystemPolicyAllFiles)
+    }
+
+    func testImportProfileUsingLegacyAllowKeyFalse() {
+        // given
+        let profile = TCCProfileBuilder().buildProfile(allowed: false)
+
+        // when
+        model.importProfile(tccProfile: profile)
+
+        // then
+        XCTAssertEqual(1, model.selectedExecutables.count)
+        XCTAssertEqual("Deny", model.selectedExecutables.first?.policy.SystemPolicyAllFiles)
+    }
+
+    func testImportProfileUsingAuthorizationKeyThatIsInvalid() {
+        // given
+        let profile = TCCProfileBuilder().buildProfile(authorization: "invalidkey")
+
+        // when
+        model.importProfile(tccProfile: profile)
+
+        // then
+        XCTAssertEqual(1, model.selectedExecutables.count)
+        XCTAssertEqual("Deny", model.selectedExecutables.first?.policy.SystemPolicyAllFiles)
+    }
+
+    // test for not recognized and only standard users should apply to a certain keyset
+
     // MARK: - tests for profileToString
 
     func testPolicyWhenUsingAllow() {
@@ -229,9 +305,10 @@ class ModelTests: XCTestCase {
     func testPolicyWhenUsingLegacyDeny() {
         // given
         let app = Executable(identifier: "id", codeRequirement: "req")
+        model.usingLegacyAllowKey = true
 
         // when
-        let policy = model.policyFromString(executable: app, value: "Deny", usingLegacyAllow: true)
+        let policy = model.policyFromString(executable: app, value: "Deny")
 
         // then
         XCTAssertNil(policy?.authorization, "should not set authorization when in legacy mode")
@@ -241,9 +318,10 @@ class ModelTests: XCTestCase {
     func testPolicyWhenUsingLegacyAllow() {
         // given
         let app = Executable(identifier: "id", codeRequirement: "req")
+        model.usingLegacyAllowKey = true
 
         // when
-        let policy = model.policyFromString(executable: app, value: "Allow", usingLegacyAllow: true)
+        let policy = model.policyFromString(executable: app, value: "Allow")
 
         // then
         XCTAssertNil(policy?.authorization, "should not set authorization when in legacy mode")
@@ -254,9 +332,10 @@ class ModelTests: XCTestCase {
     func testPolicyWhenUsingLegacyAllowButNonLegacyValueUsed() {
         // given
         let app = Executable(identifier: "id", codeRequirement: "req")
+        model.usingLegacyAllowKey = true
 
         // when
-        let policy = model.policyFromString(executable: app, value: "Let Standard Users Approve", usingLegacyAllow: true)
+        let policy = model.policyFromString(executable: app, value: "Let Standard Users Approve")
 
         // then
         XCTAssertNil(policy, "should have errored out because of an invalid value")

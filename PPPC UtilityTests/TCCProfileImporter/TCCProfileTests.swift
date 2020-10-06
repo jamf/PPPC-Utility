@@ -1,71 +1,46 @@
 //
 //  TCCProfileTests.swift
-//  PPPC UtilityTests
 //
-//  Created by Tony Eichelberger on 10/1/20.
-//  Copyright © 2020 Jamf. All rights reserved.
+//  MIT License
 //
-
+//  Copyright (c) 2019 Jamf Software
+//
+//  Permission is hereby granted, free of charge, to any person obtaining a copy
+//  of this software and associated documentation files (the "Software"), to deal
+//  in the Software without restriction, including without limitation the rights
+//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//  copies of the Software, and to permit persons to whom the Software is
+//  furnished to do so, subject to the following conditions:
+//
+//  The above copyright notice and this permission notice shall be included in all
+//  copies or substantial portions of the Software.
+//
+//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+//  SOFTWARE.
+//
 import XCTest
 
 @testable import PPPC_Utility
 
 class TCCProfileTests: XCTestCase {
 
-    // MARK: - build testing objects 
-
-    func buildTCCPolicy(allowed: Bool?, authorization: TCCPolicyAuthorizationValue?) -> TCCPolicy {
-        var policy = TCCPolicy(identifier: "policy id", codeRequirement: "policy code req",
-                               receiverIdentifier: "policy receiver id", receiverCodeRequirement: "policy receiver code req")
-        policy.comment = "policy comment"
-        policy.identifierType = "policy id type"
-        policy.receiverIdentifierType = "policy receiver id type"
-        policy.allowed = allowed
-        policy.authorization = authorization
-        return policy
-    }
-
-    func buildTCCPolicies(allowed: Bool?, authorization: TCCPolicyAuthorizationValue?) -> [String: [TCCPolicy]] {
-        return ["one": [buildTCCPolicy(allowed: allowed, authorization: authorization)]]
-    }
-
-    func buildTCCContent(_ contentIndex: Int, allowed: Bool?, authorization: TCCPolicyAuthorizationValue?) -> TCCProfile.Content {
-        return TCCProfile.Content(payloadDescription: "Content Desc \(contentIndex)",
-                                  displayName: "Content Name \(contentIndex)",
-                                  identifier: "Content ID \(contentIndex)",
-                                  organization: "Content Org \(contentIndex)",
-                                  type: "Content type \(contentIndex)",
-                                  uuid: "Content UUID \(contentIndex)",
-                                  version: contentIndex,
-                                  services: buildTCCPolicies(allowed: allowed, authorization: authorization))
-    }
-
-    func buildProfile(allowed: Bool? = nil, authorization: TCCPolicyAuthorizationValue? = nil) -> TCCProfile {
-        var profile = TCCProfile(organization: "Test Org",
-                                 identifier: "Test ID",
-                                 displayName: "Test Name",
-                                 payloadDescription: "Test Desc",
-                                 services: [:])
-        profile.content = [buildTCCContent(1, allowed: allowed, authorization: authorization)]
-        profile.type = "the type"
-        profile.version = 100
-        profile.uuid = "the uuid"
-        profile.scope = "the scope"
-        return profile
-    }
-
     // MARK: - tests for serializing to and from xml
 
     func testSerializationOfComplexProfileUsingAuthorization() throws {
         // when we export to xml and reimport it should still have the same attributes
-        let plistData = try buildProfile(authorization: .allowStandardUserToSetSystemService).xmlData()
+        let plistData = try TCCProfileBuilder().buildProfile(authorization: .allowStandardUserToSetSystemService).xmlData()
         let profile = try TCCProfile.parse(from: plistData)
 
         // then verify the config profile top level
-        XCTAssertEqual("the type", profile.type)
+        XCTAssertEqual("Configuration", profile.type)
         XCTAssertEqual(100, profile.version)
         XCTAssertEqual("the uuid", profile.uuid)
-        XCTAssertEqual("the scope", profile.scope)
+        XCTAssertEqual("System", profile.scope)
         XCTAssertEqual("Test Org", profile.organization)
         XCTAssertEqual("Test ID", profile.identifier)
         XCTAssertEqual("Test Name", profile.displayName)
@@ -86,7 +61,7 @@ class TCCProfileTests: XCTestCase {
             XCTAssertEqual(1, content.services.count)
             content.services.forEach { event, policies in
                 // then verify the policies for each event
-                XCTAssertEqual("one", event)
+                XCTAssertEqual("SystemPolicyAllFiles", event)
                 XCTAssertEqual(1, policies.count)
                 policies.forEach { policy in
                     XCTAssertEqual("policy id", policy.identifier)
@@ -105,14 +80,14 @@ class TCCProfileTests: XCTestCase {
 
     func testSerializationOfProfileUsingLegacyAllowedKey() throws {
         // when we export to xml and reimport it should still have the same attributes
-        let plistData = try buildProfile(allowed: true).xmlData()
+        let plistData = try TCCProfileBuilder().buildProfile(allowed: true).xmlData()
         let profile = try TCCProfile.parse(from: plistData)
 
         // then verify the config profile top level
-        XCTAssertEqual("the type", profile.type)
+        XCTAssertEqual("Configuration", profile.type)
         XCTAssertEqual(100, profile.version)
         XCTAssertEqual("the uuid", profile.uuid)
-        XCTAssertEqual("the scope", profile.scope)
+        XCTAssertEqual("System", profile.scope)
         XCTAssertEqual("Test Org", profile.organization)
         XCTAssertEqual("Test ID", profile.identifier)
         XCTAssertEqual("Test Name", profile.displayName)
@@ -133,7 +108,7 @@ class TCCProfileTests: XCTestCase {
             XCTAssertEqual(1, content.services.count)
             content.services.forEach { event, policies in
                 // then verify the policies for each event
-                XCTAssertEqual("one", event)
+                XCTAssertEqual("SystemPolicyAllFiles", event)
                 XCTAssertEqual(1, policies.count)
                 policies.forEach { policy in
                     XCTAssertEqual("policy id", policy.identifier)
@@ -152,11 +127,11 @@ class TCCProfileTests: XCTestCase {
 
     func testSerializationOfProfileWhenBothAllowedAndAuthorizationUsed() throws {
         // when we export to xml and reimport it should still have the same attributes
-        let plistData = try buildProfile(allowed: false, authorization: .allow).xmlData()
+        let plistData = try TCCProfileBuilder().buildProfile(allowed: false, authorization: .allow).xmlData()
         let profile = try TCCProfile.parse(from: plistData)
 
         // then verify the config profile top level
-        XCTAssertEqual("the type", profile.type)
+        XCTAssertEqual("Configuration", profile.type)
 
         // then verify the payload content top level
         XCTAssertEqual(1, profile.content.count)
@@ -168,7 +143,7 @@ class TCCProfileTests: XCTestCase {
             XCTAssertEqual(1, content.services.count)
             content.services.forEach { event, policies in
                 // then verify the policies for each event
-                XCTAssertEqual("one", event)
+                XCTAssertEqual("SystemPolicyAllFiles", event)
                 XCTAssertEqual(1, policies.count)
                 policies.forEach { policy in
                     XCTAssertEqual(false, policy.allowed)

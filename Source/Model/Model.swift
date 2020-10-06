@@ -29,6 +29,7 @@ import Cocoa
 
 class Model: NSObject {
 
+    var usingLegacyAllowKey = false
     @objc dynamic var current: Executable?
 
     @objc dynamic static let shared = Model()
@@ -198,8 +199,10 @@ extension Model {
                             executable?.appleEvents.appendIfNew(appleEvent)
                         }
                     } else {
-                        if policy.allowed! {
+                        if policy.authorization == .allow || policy.allowed == true {
                             executable?.policy.setValue("Allow", forKey: key)
+                        } else if policy.authorization == .allowStandardUserToSetSystemService {
+                            executable?.policy.setValue("Let Standard Users Approve", forKey: key)
                         } else {
                             executable?.policy.setValue("Deny", forKey: key)
                         }
@@ -209,12 +212,12 @@ extension Model {
         }
     }
 
-    func policyFromString(executable: Executable, value: String, event: AppleEventRule? = nil, usingLegacyAllow: Bool = false) -> TCCPolicy? {
+    func policyFromString(executable: Executable, value: String, event: AppleEventRule? = nil) -> TCCPolicy? {
         var policy = TCCPolicy(identifier: executable.identifier,
                          codeRequirement: executable.codeRequirement,
                          receiverIdentifier: event?.destination.identifier,
                          receiverCodeRequirement: event?.destination.codeRequirement)
-        if usingLegacyAllow {
+        if usingLegacyAllowKey {
             switch value {
             case "Allow":   policy.allowed = true
             case "Deny":    policy.allowed = false
