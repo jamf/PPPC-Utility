@@ -44,7 +44,8 @@ class TCCProfileBuilder: NSObject {
     }
 
     func buildTCCPolicies(allowed: Bool?, authorization: TCCPolicyAuthorizationValue?) -> [String: [TCCPolicy]] {
-        return ["SystemPolicyAllFiles": [buildTCCPolicy(allowed: allowed, authorization: authorization)]]
+        return ["SystemPolicyAllFiles": [buildTCCPolicy(allowed: allowed, authorization: authorization)],
+                "AppleEvents": [buildTCCPolicy(allowed: allowed, authorization: authorization)]]
     }
 
     func buildTCCContent(_ contentIndex: Int, allowed: Bool?, authorization: TCCPolicyAuthorizationValue?) -> TCCProfile.Content {

@@ -193,9 +193,12 @@ extension Model {
                 for policy in policies {
                     let executable = getExecutableFromSelectedExecutables(bundleIdentifier: policy.identifier)
                     if key == ServicesKeys.appleEvents.rawValue {
-                        if let source = executable, let rIdentifier = policy.receiverIdentifier, let rCodeRequirement = policy.receiverCodeRequirement {
+                        if let source = executable,
+                            let rIdentifier = policy.receiverIdentifier,
+                            let rCodeRequirement = policy.receiverCodeRequirement {
                             let destination = getExecutableFrom(identifier: rIdentifier, codeRequirement: rCodeRequirement)
-                            let appleEvent = AppleEventRule(source: source, destination: destination, value: policy.allowed!)
+                            let allowed: Bool = (policy.allowed == true || policy.authorization == TCCPolicyAuthorizationValue.allow)
+                            let appleEvent = AppleEventRule(source: source, destination: destination, value: allowed)
                             executable?.appleEvents.appendIfNew(appleEvent)
                         }
                     } else {

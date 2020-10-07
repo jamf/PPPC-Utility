@@ -58,22 +58,19 @@ class TCCProfileTests: XCTestCase {
             XCTAssertEqual(1, content.version)
 
             // then verify the services key
-            XCTAssertEqual(1, content.services.count)
-            content.services.forEach { event, policies in
-                // then verify the policies for each event
-                XCTAssertEqual("SystemPolicyAllFiles", event)
-                XCTAssertEqual(1, policies.count)
-                policies.forEach { policy in
-                    XCTAssertEqual("policy id", policy.identifier)
-                    XCTAssertEqual("policy id type", policy.identifierType)
-                    XCTAssertEqual("policy code req", policy.codeRequirement)
-                    XCTAssertNil(policy.allowed)
-                    XCTAssertEqual(TCCPolicyAuthorizationValue.allowStandardUserToSetSystemService, policy.authorization)
-                    XCTAssertEqual("policy comment", policy.comment)
-                    XCTAssertEqual("policy receiver id", policy.receiverIdentifier)
-                    XCTAssertEqual("policy receiver id type", policy.receiverIdentifierType)
-                    XCTAssertEqual("policy receiver code req", policy.receiverCodeRequirement)
-                }
+            XCTAssertEqual(2, content.services.count)
+            let allFiles = content.services["SystemPolicyAllFiles"]
+            XCTAssertEqual(1, allFiles?.count)
+            allFiles?.forEach { policy in
+                XCTAssertEqual("policy id", policy.identifier)
+                XCTAssertEqual("policy id type", policy.identifierType)
+                XCTAssertEqual("policy code req", policy.codeRequirement)
+                XCTAssertNil(policy.allowed)
+                XCTAssertEqual(TCCPolicyAuthorizationValue.allowStandardUserToSetSystemService, policy.authorization)
+                XCTAssertEqual("policy comment", policy.comment)
+                XCTAssertEqual("policy receiver id", policy.receiverIdentifier)
+                XCTAssertEqual("policy receiver id type", policy.receiverIdentifierType)
+                XCTAssertEqual("policy receiver code req", policy.receiverCodeRequirement)
             }
         }
     }
@@ -105,22 +102,19 @@ class TCCProfileTests: XCTestCase {
             XCTAssertEqual(1, content.version)
 
             // then verify the services key
-            XCTAssertEqual(1, content.services.count)
-            content.services.forEach { event, policies in
-                // then verify the policies for each event
-                XCTAssertEqual("SystemPolicyAllFiles", event)
-                XCTAssertEqual(1, policies.count)
-                policies.forEach { policy in
-                    XCTAssertEqual("policy id", policy.identifier)
-                    XCTAssertEqual("policy id type", policy.identifierType)
-                    XCTAssertEqual("policy code req", policy.codeRequirement)
-                    XCTAssertEqual(true, policy.allowed)
-                    XCTAssertNil(policy.authorization)
-                    XCTAssertEqual("policy comment", policy.comment)
-                    XCTAssertEqual("policy receiver id", policy.receiverIdentifier)
-                    XCTAssertEqual("policy receiver id type", policy.receiverIdentifierType)
-                    XCTAssertEqual("policy receiver code req", policy.receiverCodeRequirement)
-                }
+            XCTAssertEqual(2, content.services.count)
+            let allFiles = content.services["SystemPolicyAllFiles"]
+            XCTAssertEqual(1, allFiles?.count)
+            allFiles?.forEach { policy in
+                XCTAssertEqual("policy id", policy.identifier)
+                XCTAssertEqual("policy id type", policy.identifierType)
+                XCTAssertEqual("policy code req", policy.codeRequirement)
+                XCTAssertEqual(true, policy.allowed)
+                XCTAssertNil(policy.authorization)
+                XCTAssertEqual("policy comment", policy.comment)
+                XCTAssertEqual("policy receiver id", policy.receiverIdentifier)
+                XCTAssertEqual("policy receiver id type", policy.receiverIdentifierType)
+                XCTAssertEqual("policy receiver code req", policy.receiverCodeRequirement)
             }
         }
     }
@@ -140,15 +134,12 @@ class TCCProfileTests: XCTestCase {
             XCTAssertEqual(1, content.version)
 
             // then verify the services key
-            XCTAssertEqual(1, content.services.count)
-            content.services.forEach { event, policies in
-                // then verify the policies for each event
-                XCTAssertEqual("SystemPolicyAllFiles", event)
-                XCTAssertEqual(1, policies.count)
-                policies.forEach { policy in
-                    XCTAssertEqual(false, policy.allowed)
-                    XCTAssertEqual(policy.authorization, TCCPolicyAuthorizationValue.allow)
-                }
+            XCTAssertEqual(2, content.services.count)
+            let allFiles = content.services["SystemPolicyAllFiles"]
+            XCTAssertEqual(1, allFiles?.count)
+            allFiles?.forEach { policy in
+                XCTAssertEqual(false, policy.allowed)
+                XCTAssertEqual(policy.authorization, TCCPolicyAuthorizationValue.allow)
             }
         }
     }

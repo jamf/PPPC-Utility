@@ -313,8 +313,17 @@ class ModelTests: XCTestCase {
         XCTAssertEqual("Deny", model.selectedExecutables.first?.policy.SystemPolicyAllFiles)
     }
 
-    // TODO - tests for not recognized and only standard users should apply to a certain keyset
-    // TODO - tests for when setting the legacyAllowed flag for import, export and others
+    func testImportProfileUsingAuthorizationKeyTranslatesToAppleEvents() {
+        // given
+        let profile = TCCProfileBuilder().buildProfile(authorization: "deny")
+
+        // when
+        model.importProfile(tccProfile: profile)
+
+        // then
+        XCTAssertEqual(1, model.selectedExecutables.count)
+        XCTAssertEqual("Deny", model.selectedExecutables.first?.policy.SystemPolicyAllFiles)
+    }
 
     // MARK: - tests for profileToString
 
