@@ -27,6 +27,12 @@
 
 import Cocoa
 
+enum TCCProfileDisplayValue: String {
+    case allow = "Allow"
+    case deny = "Deny"
+    case allowStandardUsersToApprove = "Let Standard Users Approve"
+}
+
 class TCCProfileViewController: NSViewController {
 
     @objc dynamic var model = Model.shared
@@ -267,13 +273,13 @@ class TCCProfileViewController: NSViewController {
 
     private func setupAllowDeny(policies: [NSArrayController]) {
         for policy in policies {
-            policy.add(contentsOf: ["-", "Allow", "Deny"])
+            policy.add(contentsOf: ["-", TCCProfileDisplayValue.allow.rawValue, TCCProfileDisplayValue.deny.rawValue])
         }
     }
 
     private func setupDenyOnly(policies: [NSArrayController]) {
         for policy in policies {
-            policy.add(contentsOf: ["-", "Deny"])
+            policy.add(contentsOf: ["-", TCCProfileDisplayValue.deny.rawValue])
         }
     }
 

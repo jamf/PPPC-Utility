@@ -123,13 +123,13 @@ class ModelTests: XCTestCase {
 
     // MARK: - tests for exportProfile
 
-    func testExportProfileWithAppleEventsHappyPath() {
+    func testExportProfileWithAppleEventsAndAuthorization() {
         // given
         let exe1 = Executable(identifier: "one", codeRequirement: "oneReq")
         let exe2 = Executable(identifier: "two", codeRequirement: "twoReq")
 
         exe1.appleEvents = [AppleEventRule(source: exe1, destination: exe2, value: true)]
-        exe2.policy.SystemPolicyAllFiles = "Allow"
+        exe2.policy.SystemPolicyAllFiles = "Let Standard Users Approve"
 
         model.selectedExecutables = [exe1, exe2]
 
@@ -164,6 +164,7 @@ class ModelTests: XCTestCase {
             XCTAssertEqual("two", appleEventsPolicy?.receiverIdentifier)
             XCTAssertEqual("twoReq", appleEventsPolicy?.receiverCodeRequirement)
             XCTAssertEqual("bundleID", appleEventsPolicy?.receiverIdentifierType)
+            XCTAssertTrue(appleEventsPolicy?.authorization == .allow)
 
             let allFiles = content.services["SystemPolicyAllFiles"]
             XCTAssertNotNil(allFiles)
@@ -174,6 +175,67 @@ class ModelTests: XCTestCase {
             XCTAssertNil(allFilesPolicy?.receiverIdentifier)
             XCTAssertNil(allFilesPolicy?.receiverCodeRequirement)
             XCTAssertNil(allFilesPolicy?.receiverIdentifierType)
+            XCTAssertTrue(allFilesPolicy?.authorization == .allowStandardUserToSetSystemService)
+        }
+    }
+
+    //swiftlint:disable:next function_body_length
+    func testExportProfileWithAppleEventsAndLegacyAllowed() {
+        // given
+        let exe1 = Executable(identifier: "one", codeRequirement: "oneReq")
+        let exe2 = Executable(identifier: "two", codeRequirement: "twoReq")
+
+        exe1.appleEvents = [AppleEventRule(source: exe1, destination: exe2, value: true)]
+        exe2.policy.SystemPolicyAllFiles = "Allow"
+
+        model.selectedExecutables = [exe1, exe2]
+        model.usingLegacyAllowKey = true
+
+        // when
+        let profile = model.exportProfile(organization: "Org", identifier: "ID", displayName: "Name", payloadDescription: "Desc")
+
+        // then check top level settings
+        XCTAssertEqual("Org", profile.organization)
+        XCTAssertEqual("ID", profile.identifier)
+        XCTAssertEqual("Name", profile.displayName)
+        XCTAssertEqual("Desc", profile.payloadDescription)
+        XCTAssertEqual("System", profile.scope)
+        XCTAssertEqual("Configuration", profile.type)
+        XCTAssertNotNil(profile.uuid)
+        XCTAssertEqual(1, profile.version)
+
+        // then check policy settings
+        // then verify the payload content top level
+        XCTAssertEqual(1, profile.content.count)
+        profile.content.forEach { content in
+            XCTAssertNotNil(content.uuid)
+            XCTAssertEqual(1, content.version)
+
+            // then verify the services
+            XCTAssertEqual(2, content.services.count)
+            let appleEvents = content.services["AppleEvents"]
+            XCTAssertNotNil(appleEvents)
+            let appleEventsPolicy = appleEvents?.first
+            XCTAssertEqual("one", appleEventsPolicy?.identifier)
+            XCTAssertEqual("oneReq", appleEventsPolicy?.codeRequirement)
+            XCTAssertEqual("bundleID", appleEventsPolicy?.identifierType)
+            XCTAssertEqual("two", appleEventsPolicy?.receiverIdentifier)
+            XCTAssertEqual("twoReq", appleEventsPolicy?.receiverCodeRequirement)
+            XCTAssertEqual("bundleID", appleEventsPolicy?.receiverIdentifierType)
+            XCTAssertTrue(appleEventsPolicy?.allowed == true)
+            XCTAssertNil(appleEventsPolicy?.authorization)
+
+            let allFiles = content.services["SystemPolicyAllFiles"]
+            XCTAssertNotNil(allFiles)
+            let allFilesPolicy = allFiles?.first
+            XCTAssertEqual("two", allFilesPolicy?.identifier)
+            XCTAssertEqual("twoReq", allFilesPolicy?.codeRequirement)
+            XCTAssertEqual("bundleID", allFilesPolicy?.identifierType)
+            XCTAssertNil(allFilesPolicy?.receiverIdentifier)
+            XCTAssertNil(allFilesPolicy?.receiverCodeRequirement)
+            XCTAssertNil(allFilesPolicy?.receiverIdentifierType)
+            XCTAssertTrue(allFilesPolicy?.allowed == true)
+            XCTAssertNil(allFilesPolicy?.authorization)
         }
     }
 
@@ -251,7 +313,8 @@ class ModelTests: XCTestCase {
         XCTAssertEqual("Deny", model.selectedExecutables.first?.policy.SystemPolicyAllFiles)
     }
 
-    // test for not recognized and only standard users should apply to a certain keyset
+    // TODO - tests for not recognized and only standard users should apply to a certain keyset
+    // TODO - tests for when setting the legacyAllowed flag for import, export and others
 
     // MARK: - tests for profileToString
 

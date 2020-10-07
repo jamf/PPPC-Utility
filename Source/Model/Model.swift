@@ -200,11 +200,11 @@ extension Model {
                         }
                     } else {
                         if policy.authorization == .allow || policy.allowed == true {
-                            executable?.policy.setValue("Allow", forKey: key)
+                            executable?.policy.setValue(TCCProfileDisplayValue.allow.rawValue, forKey: key)
                         } else if policy.authorization == .allowStandardUserToSetSystemService {
-                            executable?.policy.setValue("Let Standard Users Approve", forKey: key)
+                            executable?.policy.setValue(TCCProfileDisplayValue.allowStandardUsersToApprove.rawValue, forKey: key)
                         } else {
-                            executable?.policy.setValue("Deny", forKey: key)
+                            executable?.policy.setValue(TCCProfileDisplayValue.deny.rawValue, forKey: key)
                         }
                     }
                 }
@@ -219,15 +219,15 @@ extension Model {
                          receiverCodeRequirement: event?.destination.codeRequirement)
         if usingLegacyAllowKey {
             switch value {
-            case "Allow":   policy.allowed = true
-            case "Deny":    policy.allowed = false
+            case TCCProfileDisplayValue.allow.rawValue:   policy.allowed = true
+            case TCCProfileDisplayValue.deny.rawValue:    policy.allowed = false
             default:        return nil
             }
         } else {
             switch value {
-            case "Allow":   policy.authorization = .allow
-            case "Deny":    policy.authorization = .deny
-            case "Let Standard Users Approve":    policy.authorization = .allowStandardUserToSetSystemService
+            case TCCProfileDisplayValue.allow.rawValue: policy.authorization = .allow
+            case TCCProfileDisplayValue.deny.rawValue: policy.authorization = .deny
+            case TCCProfileDisplayValue.allowStandardUsersToApprove.rawValue: policy.authorization = .allowStandardUserToSetSystemService
             default:        return nil
             }
         }
