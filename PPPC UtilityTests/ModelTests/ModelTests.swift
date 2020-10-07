@@ -413,4 +413,38 @@ class ModelTests: XCTestCase {
         XCTAssertNil(policy, "should have errored out because of an invalid value")
     }
 
+    /// MARK: - tests for requiresAuthorizationKey
+
+    func testWhenServiceIsUsingAllowStandarUsersToApprove() {
+        // given
+        let profile = TCCProfileBuilder().buildProfile(authorization: .allowStandardUserToSetSystemService)
+
+        // when
+        model.importProfile(tccProfile: profile)
+
+        // then
+        XCTAssertTrue(model.requiresAuthorizationKey())
+    }
+
+    func testWhenServiceIsUsingOnlyAllowKey() {
+        // given
+        let profile = TCCProfileBuilder().buildProfile(authorization: .allow)
+
+        // when
+        model.importProfile(tccProfile: profile)
+
+        // then
+        XCTAssertFalse(model.requiresAuthorizationKey())
+    }
+
+    func testWhenServiceIsUsingOnlyDenyKey() {
+        // given
+        let profile = TCCProfileBuilder().buildProfile(authorization: .deny)
+
+        // when
+        model.importProfile(tccProfile: profile)
+
+        // then
+        XCTAssertFalse(model.requiresAuthorizationKey())
+    }
 }

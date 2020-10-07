@@ -27,11 +27,11 @@
 
 import Cocoa
 
-class Model: NSObject {
+@objc class Model: NSObject {
 
     var usingLegacyAllowKey = false
-    @objc dynamic var current: Executable?
 
+    @objc dynamic var current: Executable?
     @objc dynamic static let shared = Model()
     @objc dynamic var identities: [SigningIdentity] = []
     @objc dynamic var selectedExecutables: [Executable] = []
@@ -89,6 +89,14 @@ typealias LoadExecutableResult = Result<Executable, LoadExecutableError>
 typealias LoadExecutableCompletion = ((LoadExecutableResult) -> Void)
 
 extension Model {
+
+    func requiresAuthorizationKey() -> Bool {
+        return selectedExecutables.contains { exe -> Bool in
+            return exe.policy.allPolicyValues().contains { value -> Bool in
+                return value == TCCProfileDisplayValue.allowStandardUsersToApprove.rawValue
+            }
+        }
+    }
 
     // TODO - refactor this method so it isn't so complex
     // swiftlint:disable:next cyclomatic_complexity

@@ -2380,19 +2380,6 @@
                                     <binding destination="qId-iR-fmq" name="enabled" keyPath="canRemove" id="Rc1-zx-BZh"/>
                                 </connections>
                             </button>
-                            <button hidden="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UEk-m2-coJ">
-                                <rect key="frame" x="15" y="13" width="83" height="32"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="71" id="Azy-1R-K2D"/>
-                                </constraints>
-                                <buttonCell key="cell" type="push" title="Record" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="5OS-W8-49v">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="recordPressed:" target="ZfI-PN-mks" id="xch-3L-FAh"/>
-                                </connections>
-                            </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="L3L-II-z9D">
                                 <rect key="frame" x="230" y="654" width="80" height="19"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Properties" id="BL7-a9-Wo0">
@@ -2415,6 +2402,15 @@
                                     <action selector="importProfile:" target="ZfI-PN-mks" id="CbR-lv-L7N"/>
                                 </connections>
                             </button>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="14r-fe-OXJ">
+                                <rect key="frame" x="46" y="11" width="859" height="39"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" alignment="center" id="XZb-T8-8Se">
+                                    <font key="font" metaFont="system" size="16"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                         <constraints>
                             <constraint firstItem="JIN-BO-Fp8" firstAttribute="leading" secondItem="JSo-Ex-mKB" secondAttribute="leading" id="1XB-vJ-xiI"/>
@@ -2436,7 +2432,6 @@
                             <constraint firstItem="03S-CM-lPV" firstAttribute="leading" secondItem="3Am-A7-MGr" secondAttribute="trailing" constant="12" id="GSZ-Pk-E5b"/>
                             <constraint firstItem="SFg-90-Vi7" firstAttribute="leading" secondItem="pHR-Fa-o0o" secondAttribute="trailing" constant="8" id="MK7-4L-bS5"/>
                             <constraint firstItem="DB5-Ps-rWI" firstAttribute="baseline" secondItem="SFg-90-Vi7" secondAttribute="firstBaseline" id="Ntc-ET-tvQ"/>
-                            <constraint firstItem="UEk-m2-coJ" firstAttribute="centerY" secondItem="Gwb-6x-mB1" secondAttribute="centerY" id="O0c-74-sVd"/>
                             <constraint firstItem="3Am-A7-MGr" firstAttribute="top" secondItem="bKS-CN-KZi" secondAttribute="top" constant="35" id="Prb-UA-Xca"/>
                             <constraint firstItem="5hq-Rl-ues" firstAttribute="top" secondItem="zBr-K2-oEH" secondAttribute="bottom" constant="5" id="QXd-Jh-Zyw"/>
                             <constraint firstItem="DB5-Ps-rWI" firstAttribute="leading" secondItem="pHR-Fa-o0o" secondAttribute="trailing" constant="81" id="Qgg-DM-0Sx"/>
@@ -2444,12 +2439,10 @@
                             <constraint firstItem="5hq-Rl-ues" firstAttribute="bottom" secondItem="03S-CM-lPV" secondAttribute="bottom" id="VaG-RW-D30"/>
                             <constraint firstItem="SFg-90-Vi7" firstAttribute="baseline" secondItem="v8I-Mx-BrF" secondAttribute="baseline" id="WcE-XK-GJk"/>
                             <constraint firstItem="n1N-Hx-bP6" firstAttribute="leading" secondItem="JSo-Ex-mKB" secondAttribute="leading" id="Wue-YV-KSd"/>
-                            <constraint firstAttribute="bottom" secondItem="UEk-m2-coJ" secondAttribute="bottom" constant="20" id="ZMJ-yC-Aya"/>
                             <constraint firstItem="zBr-K2-oEH" firstAttribute="leading" secondItem="5hq-Rl-ues" secondAttribute="leading" id="cBU-bf-KJm"/>
                             <constraint firstItem="mSS-FZ-Sk0" firstAttribute="leading" secondItem="JSo-Ex-mKB" secondAttribute="leading" id="cHj-8V-DtF"/>
                             <constraint firstItem="YNV-Zn-1jp" firstAttribute="leading" secondItem="JSo-Ex-mKB" secondAttribute="leading" id="dB2-pF-h9K"/>
                             <constraint firstAttribute="bottom" secondItem="03S-CM-lPV" secondAttribute="bottom" constant="90" id="dLI-ZX-EdF"/>
-                            <constraint firstItem="UEk-m2-coJ" firstAttribute="leading" secondItem="bKS-CN-KZi" secondAttribute="leading" constant="21" id="eFh-JA-kqH"/>
                             <constraint firstItem="3Am-A7-MGr" firstAttribute="top" secondItem="VBi-VJ-3w4" secondAttribute="bottom" constant="5" id="eKS-9Z-J2D"/>
                             <constraint firstItem="3Am-A7-MGr" firstAttribute="bottom" secondItem="dDB-re-qJn" secondAttribute="bottom" id="fMM-MI-13D"/>
                             <constraint firstItem="03S-CM-lPV" firstAttribute="width" secondItem="5hq-Rl-ues" secondAttribute="width" id="g5s-ug-Y6t"/>
@@ -2459,7 +2452,6 @@
                             <constraint firstAttribute="bottom" secondItem="RsL-5g-N88" secondAttribute="bottom" constant="61" id="jX5-qu-b9A"/>
                             <constraint firstItem="RsL-5g-N88" firstAttribute="top" secondItem="5hq-Rl-ues" secondAttribute="bottom" constant="8" id="pHo-Rk-OrR"/>
                             <constraint firstItem="v8I-Mx-BrF" firstAttribute="leading" secondItem="RsL-5g-N88" secondAttribute="trailing" constant="8" id="pVT-22-VSY"/>
-                            <constraint firstItem="UEk-m2-coJ" firstAttribute="leading" secondItem="LpN-jq-LDz" secondAttribute="leading" id="qZR-EJ-bE7"/>
                             <constraint firstAttribute="trailing" secondItem="wba-mI-3Kz" secondAttribute="trailing" constant="18" id="rwL-U7-x5t"/>
                             <constraint firstItem="RsL-5g-N88" firstAttribute="leading" secondItem="dDB-re-qJn" secondAttribute="leading" id="vlB-ox-Uku"/>
                             <constraint firstItem="5hq-Rl-ues" firstAttribute="top" secondItem="03S-CM-lPV" secondAttribute="top" id="xkQ-C1-VJt"/>
@@ -2513,6 +2505,7 @@
                         <outlet property="fileProviderStackView" destination="woU-j8-E1d" id="WSS-Il-gtT"/>
                         <outlet property="iconView" destination="tCz-dw-VgH" id="cab-NC-Mg0"/>
                         <outlet property="identifierLabel" destination="psY-WF-7Yd" id="SN9-yB-GEa"/>
+                        <outlet property="infoMessageLabel" destination="14r-fe-OXJ" id="M0E-KD-nAB"/>
                         <outlet property="listenEventHelpButton" destination="mFT-P4-Kyb" id="sXD-gm-erZ"/>
                         <outlet property="listenEventPopUp" destination="ouS-wx-aBC" id="07d-IY-dbD"/>
                         <outlet property="listenEventPopUpAC" destination="tlm-Wb-zyk" id="Opg-Q4-2lj"/>
@@ -2535,7 +2528,6 @@
                         <outlet property="postEventsPopUp" destination="EAK-oq-60p" id="to6-VI-Rt6"/>
                         <outlet property="postEventsPopUpAC" destination="FRk-mZ-ZAe" id="IDR-k5-oMf"/>
                         <outlet property="postEventsStackView" destination="M89-Vw-gT3" id="x8d-QU-b7b"/>
-                        <outlet property="recordButton" destination="UEk-m2-coJ" id="VgX-Ge-uDk"/>
                         <outlet property="remindersHelpButton" destination="A1b-sQ-vR9" id="Kr1-JR-ZA6"/>
                         <outlet property="remindersPopUp" destination="6su-LE-zAT" id="rDG-Qq-Js1"/>
                         <outlet property="remindersPopUpAC" destination="77T-l2-xeW" id="pC4-LE-8ry"/>
@@ -2544,6 +2536,7 @@
                         <outlet property="removableVolumesPopUpAC" destination="sRi-eg-n1o" id="tk4-Eo-Caa"/>
                         <outlet property="removableVolumesStackView" destination="vzO-oY-aP0" id="Eg0-fA-AzS"/>
                         <outlet property="removeAppleEventButton" destination="v8I-Mx-BrF" id="Cp6-PC-kJg"/>
+                        <outlet property="removeExecutableButton" destination="SFg-90-Vi7" id="H5X-h0-Xce"/>
                         <outlet property="saveButton" destination="Gwb-6x-mB1" id="1QM-S1-nRS"/>
                         <outlet property="screenCaptureHelpButton" destination="36m-yh-kC6" id="bw3-3e-Lld"/>
                         <outlet property="screenCapturePopUp" destination="mSS-FZ-Sk0" id="VfM-we-bww"/>
@@ -2587,7 +2580,7 @@
                     </connections>
                 </arrayController>
             </objects>
-            <point key="canvasLocation" x="907" y="386.5"/>
+            <point key="canvasLocation" x="907" y="386"/>
         </scene>
         <!--Open View Controller-->
         <scene sceneID="Ekk-cD-NPJ">

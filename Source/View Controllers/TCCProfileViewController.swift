@@ -48,6 +48,7 @@ class TCCProfileViewController: NSViewController {
     @IBOutlet weak var iconView: NSImageView!
     @IBOutlet weak var identifierLabel: NSTextField!
     @IBOutlet weak var codeRequirementLabel: NSTextField!
+    @IBOutlet weak var infoMessageLabel: NSTextField!
 
     @IBOutlet weak var addressBookPopUp: NSPopUpButton!
     @IBOutlet weak var photosPopUp: NSPopUpButton!
@@ -128,26 +129,12 @@ class TCCProfileViewController: NSViewController {
     @IBOutlet weak var uploadButton: NSButton!
     @IBOutlet weak var addAppleEventButton: NSButton!
     @IBOutlet weak var removeAppleEventButton: NSButton!
-
-    @IBOutlet weak var recordButton: NSButton!
-
-    @IBAction func recordPressed(_ sender: NSButton) {
-        canEdit = !canEdit
-        if canEdit {
-            recordButton.title = "Record"
-        } else {
-            recordButton.title = "Stop"
-        }
-    }
+    @IBOutlet weak var removeExecutableButton: NSButton!
 
     @IBAction func addToProfile(_ sender: NSButton) {
         promptForExecutables {
             self.model.selectedExecutables.append($0)
         }
-    }
-
-    //  Binding currently deletes at index
-    @IBAction func removeButtonPressed(_ sender: NSButton) {
     }
 
     @IBAction func addToExecutable(_ sender: NSButton) {
@@ -219,6 +206,18 @@ class TCCProfileViewController: NSViewController {
         .urlReadingContentsConformToTypes: [ kUTTypeBundle, kUTTypeExecutable ]
     ]
 
+    @IBAction func checkForAuthorizationFeaturesUsed(_ sender: NSPopUpButton) {
+        if model.requiresAuthorizationKey() {
+            let message = """
+            Warning: The option '\(TCCProfileDisplayValue.allowStandardUsersToApprove.rawValue)' is only available on macOS 11.0 and higher.
+            Deploying this profile to devices running less than 11.0 will be treated as 'Deny'
+            """
+            infoMessageLabel.stringValue = message
+        } else {
+            infoMessageLabel.stringValue = ""
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -242,6 +241,7 @@ class TCCProfileViewController: NSViewController {
 
         setupStandardUserAllowAndDeny(policies: [screenCapturePopUpAC,
                                                  listenEventPopUpAC])
+        setupActionForStandardUserAllowedDropDowns(dropDowns: [listenEventPopUp, screenCapturePopUp])
 
         setupDenyOnly(policies: [cameraPopUpAC,
                                  microphonePopUpAC])
@@ -264,12 +264,19 @@ class TCCProfileViewController: NSViewController {
         executablesTable.dataSource = self
         appleEventsTable.registerForDraggedTypes([.fileURL])
         appleEventsTable.dataSource = self
-
-        //  Record button
     }
 
     @IBAction func showHelpMessage(_ sender: InfoButton) {
         sender.showHelpMessage()
+    }
+
+    /// Setup actions to display a warning when certain values are selected
+    /// that are not supported on all macOS versions
+    /// - Parameter dropDowns: NSPopupButtons to add the action to
+    private func setupActionForStandardUserAllowedDropDowns(dropDowns: [NSPopUpButton]) {
+        dropDowns.forEach { popup in
+            popup.action = #selector(self.checkForAuthorizationFeaturesUsed(_:))
+        }
     }
 
     private func setupStandardUserAllowAndDeny(policies: [NSArrayController]) {
