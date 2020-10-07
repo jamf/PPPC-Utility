@@ -240,10 +240,11 @@ class TCCProfileViewController: NSViewController {
                                   networkVolumesPopUpAC,
                                   removableVolumesPopUpAC])
 
+        setupStandardUserAllowAndDeny(policies: [screenCapturePopUpAC,
+                                                 listenEventPopUpAC])
+
         setupDenyOnly(policies: [cameraPopUpAC,
-                                 microphonePopUpAC,
-                                 listenEventPopUpAC,
-                                 screenCapturePopUpAC])
+                                 microphonePopUpAC])
 
         setupDescriptions()
 
@@ -269,6 +270,14 @@ class TCCProfileViewController: NSViewController {
 
     @IBAction func showHelpMessage(_ sender: InfoButton) {
         sender.showHelpMessage()
+    }
+
+    private func setupStandardUserAllowAndDeny(policies: [NSArrayController]) {
+        for policy in policies {
+            policy.add(contentsOf: ["-",
+                                    TCCProfileDisplayValue.allowStandardUsersToApprove.rawValue,
+                                    TCCProfileDisplayValue.deny.rawValue])
+        }
     }
 
     private func setupAllowDeny(policies: [NSArrayController]) {
