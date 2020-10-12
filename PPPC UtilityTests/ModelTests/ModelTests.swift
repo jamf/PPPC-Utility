@@ -447,4 +447,63 @@ class ModelTests: XCTestCase {
         // then
         XCTAssertFalse(model.requiresAuthorizationKey())
     }
+
+    // MARK: - tests for changeToUseAuthorizationKey
+
+    // MARK: - tests for changeToUseLegacyAllowKey
+
+    func testChangingFromAuthorizationKeyToLegacyAllowKey() {
+        // given
+        let allowStandard = TCCProfileDisplayValue.allowStandardUsersToApprove.rawValue
+        let exeSettings = ["AddressBook": "Allow", "ListenEvent": allowStandard, "ScreenCapture": allowStandard]
+        let model = ModelBuilder().addExecutable(settings: exeSettings).build()
+        model.usingLegacyAllowKey = false
+
+        // when
+        model.changeToUseLegacyAllowKey()
+
+        // then
+        XCTAssertEqual(1, model.selectedExecutables.count, "should have only one exe")
+        let policy = model.selectedExecutables.first?.policy
+        XCTAssertEqual("Allow", policy?.AddressBook)
+        XCTAssertEqual("-", policy?.Camera)
+        XCTAssertEqual("-", policy?.ListenEvent)
+        XCTAssertEqual("-", policy?.ScreenCapture)
+        XCTAssertTrue(model.usingLegacyAllowKey)
+    }
+
+    func testChangingFromAuthorizationKeyToLegacyAllowKeyWithMoreComplexVaues() {
+        // given
+        let allowStandard = TCCProfileDisplayValue.allowStandardUsersToApprove.rawValue
+        let p1Settings = ["SystemPolicyAllFiles": "Allow",
+                           "ListenEvent": allowStandard,
+                           "ScreenCapture": "Deny",
+                           "Camera": "Deny"]
+
+        let p2Settings = ["SystemPolicyAllFiles": "Deny",
+                           "ScreenCapture": allowStandard,
+                           "Calendar": "Allow"]
+        let builder = ModelBuilder().addExecutable(settings: p1Settings)
+        model = builder.addExecutable(settings: p2Settings).build()
+        model.usingLegacyAllowKey = false
+
+        // when
+        model.changeToUseLegacyAllowKey()
+
+        // then
+        XCTAssertEqual(2, model.selectedExecutables.count, "should have only one exe")
+        let policy1 = model.selectedExecutables[0].policy
+        XCTAssertEqual("Allow", policy1.SystemPolicyAllFiles)
+        XCTAssertEqual("-", policy1.ListenEvent)
+        XCTAssertEqual("Deny", policy1.ScreenCapture)
+        XCTAssertEqual("Deny", policy1.Camera)
+
+        let policy2 = model.selectedExecutables[1].policy
+        XCTAssertEqual("Deny", policy2.SystemPolicyAllFiles)
+        XCTAssertEqual("-", policy2.ListenEvent)
+        XCTAssertEqual("-", policy2.ScreenCapture)
+        XCTAssertEqual("Allow", policy2.Calendar)
+        XCTAssertTrue(model.usingLegacyAllowKey)
+    }
+
 }

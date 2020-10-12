@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
-        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16097.2"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -2411,6 +2410,13 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <switch horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" baseWritingDirection="leftToRight" alignment="left" translatesAutoresizingMaskIntoConstraints="NO" id="SiC-OP-K6P">
+                                <rect key="frame" x="1133" y="655" width="42" height="24"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <connections>
+                                    <action selector="toggleAuthorizationKeyUsage:" target="ZfI-PN-mks" id="8uJ-TA-vPn"/>
+                                </connections>
+                            </switch>
                         </subviews>
                         <constraints>
                             <constraint firstItem="JIN-BO-Fp8" firstAttribute="leading" secondItem="JSo-Ex-mKB" secondAttribute="leading" id="1XB-vJ-xiI"/>
@@ -2479,6 +2485,7 @@
                         <outlet property="allFilesStackView" destination="PKW-Wz-1vE" id="ZUk-ek-82t"/>
                         <outlet property="appleEventsAC" destination="qGh-WP-H0J" id="Yxo-OD-XI3"/>
                         <outlet property="appleEventsTable" destination="dDB-re-qJn" id="5g0-oE-XOS"/>
+                        <outlet property="authorizationKeySwitch" destination="SiC-OP-K6P" id="Y1H-fD-vIY"/>
                         <outlet property="calendarHelpButton" destination="tva-g6-iKu" id="l9S-mU-Mea"/>
                         <outlet property="calendarPopUp" destination="bSe-hT-Ah8" id="mjo-yN-eWq"/>
                         <outlet property="calendarPopUpAC" destination="2dL-gR-cae" id="I88-mv-eOh"/>

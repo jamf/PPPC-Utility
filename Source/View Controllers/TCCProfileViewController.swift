@@ -130,6 +130,7 @@ class TCCProfileViewController: NSViewController {
     @IBOutlet weak var addAppleEventButton: NSButton!
     @IBOutlet weak var removeAppleEventButton: NSButton!
     @IBOutlet weak var removeExecutableButton: NSButton!
+    @IBOutlet weak var authorizationKeySwitch: NSSwitch!
 
     @IBAction func addToProfile(_ sender: NSButton) {
         promptForExecutables {
@@ -140,6 +141,24 @@ class TCCProfileViewController: NSViewController {
     @IBAction func addToExecutable(_ sender: NSButton) {
         promptForExecutables {
             self.insertIntoAppleEvents($0)
+        }
+    }
+
+    @IBAction func toggleAuthorizationKeyUsage(_ sender: NSSwitch) {
+        switch sender.state {
+        case .on:
+            let message = """
+            By enabling this option the profile built will only be compatible with macOS 11.0 and higher.
+            Deploying this profile to devices running less than 11.0 will result in an error.
+            """
+            Alert().display(header: "Compatibility Warning", message: message)
+            model.changeToUseAuthorizationKey()
+        default:
+            if model.requiresAuthorizationKey() {
+                let message = "Some payloads are using features that will be lost."
+                Alert().display(header: "Downgrade warning", message: message)
+            }
+            model.changeToUseLegacyAllowKey()
         }
     }
 
@@ -208,13 +227,8 @@ class TCCProfileViewController: NSViewController {
 
     @IBAction func checkForAuthorizationFeaturesUsed(_ sender: NSPopUpButton) {
         if model.requiresAuthorizationKey() {
-            let message = """
-            Warning: The option '\(TCCProfileDisplayValue.allowStandardUsersToApprove.rawValue)' is only available on macOS 11.0 and higher.
-            Deploying this profile to devices running less than 11.0 will be treated as 'Deny'
-            """
-            infoMessageLabel.stringValue = message
-        } else {
-            infoMessageLabel.stringValue = ""
+            authorizationKeySwitch.state = .on
+            toggleAuthorizationKeyUsage(authorizationKeySwitch)
         }
     }
 
@@ -314,12 +328,9 @@ class TCCProfileViewController: NSViewController {
 
     private func isDarkModeEnabled() -> Bool {
         var darkModeEnabled = false
-        if #available(OSX 10.14, *) {
-            if view.effectiveAppearance.name == .darkAqua {
-                darkModeEnabled = true
-            }
+        if view.effectiveAppearance.name == .darkAqua {
+            darkModeEnabled = true
         }
-
         return darkModeEnabled
     }
 
