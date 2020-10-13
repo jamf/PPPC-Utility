@@ -125,6 +125,7 @@ class ModelTests: XCTestCase {
 
     func testExportProfileWithAppleEventsAndAuthorization() {
         // given
+        model.usingLegacyAllowKey = false
         let exe1 = Executable(identifier: "one", codeRequirement: "oneReq")
         let exe2 = Executable(identifier: "two", codeRequirement: "twoReq")
 
@@ -327,8 +328,9 @@ class ModelTests: XCTestCase {
 
     // MARK: - tests for profileToString
 
-    func testPolicyWhenUsingAllow() {
+    func testPolicyWhenUsingAllowAndAuthorizationKey() {
         // given
+        model.usingLegacyAllowKey = false
         let app = Executable(identifier: "id", codeRequirement: "req")
 
         // when
@@ -341,6 +343,7 @@ class ModelTests: XCTestCase {
 
     func testPolicyWhenUsingDeny() {
         // given
+        model.usingLegacyAllowKey = false
         let app = Executable(identifier: "id", codeRequirement: "req")
 
         // when
@@ -353,6 +356,7 @@ class ModelTests: XCTestCase {
 
     func testPolicyWhenUsingAllowForStandardUsers() {
         // given
+        model.usingLegacyAllowKey = false
         let app = Executable(identifier: "id", codeRequirement: "req")
 
         // when
