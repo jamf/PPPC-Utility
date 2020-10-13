@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16097.3"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16097.2"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -787,7 +787,7 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kz4-ht-2cC">
-                                            <rect key="frame" x="-278" y="-443" width="485" height="1000"/>
+                                            <rect key="frame" x="-199" y="-443" width="485" height="1000"/>
                                             <subviews>
                                                 <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZGr-iF-K0I" userLabel="Accessibility Stack View">
                                                     <rect key="frame" x="0.0" y="950" width="485" height="50"/>
@@ -1146,7 +1146,7 @@
                                                     <rect key="frame" x="0.0" y="650" width="485" height="50"/>
                                                     <subviews>
                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="3DS-i5-rT9">
-                                                            <rect key="frame" x="8" y="17" width="367" height="16"/>
+                                                            <rect key="frame" x="8" y="17" width="288" height="16"/>
                                                             <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="Desktop Folder:" id="Fec-rg-Gn1">
                                                                 <font key="font" usesAppearanceFont="YES"/>
                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1154,7 +1154,7 @@
                                                             </textFieldCell>
                                                         </textField>
                                                         <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JIN-BO-Fp8">
-                                                            <rect key="frame" x="379" y="-3" width="70" height="54"/>
+                                                            <rect key="frame" x="300" y="-3" width="70" height="54"/>
                                                             <popUpButtonCell key="cell" type="push" title="-" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="FMM-ro-V8b" id="VMH-px-qdz">
                                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                                 <font key="font" metaFont="system"/>
@@ -1171,7 +1171,7 @@
                                                             </connections>
                                                         </popUpButton>
                                                         <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="o2Q-LB-gdz" customClass="InfoButton" customModule="PPPC_Utility" customModuleProvider="target">
-                                                            <rect key="frame" x="452" y="11" width="25" height="25"/>
+                                                            <rect key="frame" x="373" y="11" width="104" height="25"/>
                                                             <buttonCell key="cell" type="help" bezelStyle="helpButton" alignment="center" borderStyle="border" inset="2" id="kBI-qQ-5K5">
                                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                 <font key="font" metaFont="system"/>
@@ -1203,7 +1203,7 @@
                                                     <rect key="frame" x="0.0" y="600" width="485" height="50"/>
                                                     <subviews>
                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sSA-ZV-lYH">
-                                                            <rect key="frame" x="8" y="17" width="367" height="16"/>
+                                                            <rect key="frame" x="8" y="17" width="288" height="16"/>
                                                             <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="Documents Folder:" id="D0w-Hq-kpn">
                                                                 <font key="font" usesAppearanceFont="YES"/>
                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1211,7 +1211,7 @@
                                                             </textFieldCell>
                                                         </textField>
                                                         <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YNV-Zn-1jp">
-                                                            <rect key="frame" x="379" y="-3" width="70" height="54"/>
+                                                            <rect key="frame" x="300" y="-3" width="70" height="54"/>
                                                             <popUpButtonCell key="cell" type="push" title="-" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="PaS-xa-UD8" id="ulk-2T-V0g">
                                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                                 <font key="font" metaFont="system"/>
@@ -1228,7 +1228,7 @@
                                                             </connections>
                                                         </popUpButton>
                                                         <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="AWQ-jY-FwH" customClass="InfoButton" customModule="PPPC_Utility" customModuleProvider="target">
-                                                            <rect key="frame" x="452" y="11" width="25" height="25"/>
+                                                            <rect key="frame" x="373" y="11" width="104" height="25"/>
                                                             <buttonCell key="cell" type="help" bezelStyle="helpButton" alignment="center" borderStyle="border" inset="2" id="ISy-Xs-hDX">
                                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                 <font key="font" metaFont="system"/>
@@ -1260,7 +1260,7 @@
                                                     <rect key="frame" x="0.0" y="550" width="485" height="50"/>
                                                     <subviews>
                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xMN-Jt-QPv">
-                                                            <rect key="frame" x="8" y="17" width="367" height="16"/>
+                                                            <rect key="frame" x="8" y="17" width="288" height="16"/>
                                                             <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="Downloads Folder:" id="BNO-0A-q85">
                                                                 <font key="font" usesAppearanceFont="YES"/>
                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1268,7 +1268,7 @@
                                                             </textFieldCell>
                                                         </textField>
                                                         <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gXX-Zm-0bB">
-                                                            <rect key="frame" x="379" y="-3" width="70" height="54"/>
+                                                            <rect key="frame" x="300" y="-3" width="70" height="54"/>
                                                             <popUpButtonCell key="cell" type="push" title="-" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="NIk-oX-DQf" id="6j7-Dt-umk">
                                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                                 <font key="font" metaFont="system"/>
@@ -1285,7 +1285,7 @@
                                                             </connections>
                                                         </popUpButton>
                                                         <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1Ve-3n-a7B" customClass="InfoButton" customModule="PPPC_Utility" customModuleProvider="target">
-                                                            <rect key="frame" x="452" y="11" width="25" height="25"/>
+                                                            <rect key="frame" x="373" y="11" width="104" height="25"/>
                                                             <buttonCell key="cell" type="help" bezelStyle="helpButton" alignment="center" borderStyle="border" inset="2" id="Dlw-02-OX0">
                                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                 <font key="font" metaFont="system"/>
@@ -1317,7 +1317,7 @@
                                                     <rect key="frame" x="0.0" y="500" width="485" height="50"/>
                                                     <subviews>
                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="99h-fH-EoJ">
-                                                            <rect key="frame" x="8" y="17" width="367" height="16"/>
+                                                            <rect key="frame" x="8" y="17" width="288" height="16"/>
                                                             <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="File Provider:" id="zcl-kP-VRA">
                                                                 <font key="font" usesAppearanceFont="YES"/>
                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1325,7 +1325,7 @@
                                                             </textFieldCell>
                                                         </textField>
                                                         <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lZv-w5-rrd">
-                                                            <rect key="frame" x="379" y="-3" width="70" height="54"/>
+                                                            <rect key="frame" x="300" y="-3" width="170" height="54"/>
                                                             <popUpButtonCell key="cell" type="push" title="-" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="FIX-n3-lFP" id="0vX-YX-QTC">
                                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                                 <font key="font" metaFont="system"/>
@@ -1342,7 +1342,7 @@
                                                             </connections>
                                                         </popUpButton>
                                                         <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dRq-MC-7oj" customClass="InfoButton" customModule="PPPC_Utility" customModuleProvider="target">
-                                                            <rect key="frame" x="452" y="11" width="25" height="25"/>
+                                                            <rect key="frame" x="473" y="11" width="4" height="25"/>
                                                             <buttonCell key="cell" type="help" bezelStyle="helpButton" alignment="center" borderStyle="border" inset="2" id="ctB-5D-aCL">
                                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                 <font key="font" metaFont="system"/>
@@ -1374,7 +1374,7 @@
                                                     <rect key="frame" x="0.0" y="450" width="485" height="50"/>
                                                     <subviews>
                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2AH-a5-Lqb">
-                                                            <rect key="frame" x="8" y="17" width="367" height="16"/>
+                                                            <rect key="frame" x="8" y="17" width="288" height="16"/>
                                                             <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="Listen Event:" id="Ze0-2e-eEp">
                                                                 <font key="font" usesAppearanceFont="YES"/>
                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1382,7 +1382,7 @@
                                                             </textFieldCell>
                                                         </textField>
                                                         <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ouS-wx-aBC">
-                                                            <rect key="frame" x="379" y="-3" width="70" height="54"/>
+                                                            <rect key="frame" x="300" y="-3" width="70" height="54"/>
                                                             <popUpButtonCell key="cell" type="push" title="-" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="V86-LK-5LV" id="9DJ-7D-6AW">
                                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                                 <font key="font" metaFont="system"/>
@@ -1399,7 +1399,7 @@
                                                             </connections>
                                                         </popUpButton>
                                                         <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mFT-P4-Kyb" customClass="InfoButton" customModule="PPPC_Utility" customModuleProvider="target">
-                                                            <rect key="frame" x="452" y="11" width="25" height="25"/>
+                                                            <rect key="frame" x="373" y="11" width="104" height="25"/>
                                                             <buttonCell key="cell" type="help" bezelStyle="helpButton" alignment="center" borderStyle="border" inset="2" id="6xj-pM-fzL">
                                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                 <font key="font" metaFont="system"/>
@@ -1431,7 +1431,7 @@
                                                     <rect key="frame" x="0.0" y="400" width="485" height="50"/>
                                                     <subviews>
                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="A89-LG-pOK">
-                                                            <rect key="frame" x="8" y="17" width="367" height="16"/>
+                                                            <rect key="frame" x="8" y="17" width="288" height="16"/>
                                                             <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="Media Library:" id="4c9-rY-Uz6">
                                                                 <font key="font" usesAppearanceFont="YES"/>
                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1439,7 +1439,7 @@
                                                             </textFieldCell>
                                                         </textField>
                                                         <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="n1N-Hx-bP6">
-                                                            <rect key="frame" x="379" y="-3" width="70" height="54"/>
+                                                            <rect key="frame" x="300" y="-3" width="70" height="54"/>
                                                             <popUpButtonCell key="cell" type="push" title="-" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="4ie-PV-k4r" id="aQd-c0-COU">
                                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                                 <font key="font" metaFont="system"/>
@@ -1456,7 +1456,7 @@
                                                             </connections>
                                                         </popUpButton>
                                                         <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="91q-Dn-Rxu" customClass="InfoButton" customModule="PPPC_Utility" customModuleProvider="target">
-                                                            <rect key="frame" x="452" y="11" width="25" height="25"/>
+                                                            <rect key="frame" x="373" y="11" width="104" height="25"/>
                                                             <buttonCell key="cell" type="help" bezelStyle="helpButton" alignment="center" borderStyle="border" inset="2" id="GLm-u3-5ib">
                                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                 <font key="font" metaFont="system"/>
@@ -1488,7 +1488,7 @@
                                                     <rect key="frame" x="0.0" y="350" width="485" height="50"/>
                                                     <subviews>
                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0j7-Vk-jJg">
-                                                            <rect key="frame" x="8" y="17" width="367" height="16"/>
+                                                            <rect key="frame" x="8" y="17" width="267" height="16"/>
                                                             <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="Microphone:" id="zOF-fr-IeZ">
                                                                 <font key="font" usesAppearanceFont="YES"/>
                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1496,7 +1496,7 @@
                                                             </textFieldCell>
                                                         </textField>
                                                         <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="C7K-fV-5UL">
-                                                            <rect key="frame" x="379" y="-3" width="70" height="54"/>
+                                                            <rect key="frame" x="279" y="-3" width="170" height="54"/>
                                                             <popUpButtonCell key="cell" type="push" title="-" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="8jN-pb-jTw" id="87t-Yf-7J1">
                                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                                 <font key="font" metaFont="system"/>
@@ -1545,7 +1545,7 @@
                                                     <rect key="frame" x="0.0" y="300" width="485" height="50"/>
                                                     <subviews>
                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LHa-uF-1av">
-                                                            <rect key="frame" x="8" y="17" width="367" height="16"/>
+                                                            <rect key="frame" x="8" y="17" width="288" height="16"/>
                                                             <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="Network Volumes:" id="32o-b1-htW">
                                                                 <font key="font" usesAppearanceFont="YES"/>
                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1553,7 +1553,7 @@
                                                             </textFieldCell>
                                                         </textField>
                                                         <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="uD1-1Z-8OR">
-                                                            <rect key="frame" x="379" y="-3" width="70" height="54"/>
+                                                            <rect key="frame" x="300" y="-3" width="70" height="54"/>
                                                             <popUpButtonCell key="cell" type="push" title="-" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="Wlc-5b-ZH6" id="3Yo-n3-2Cq">
                                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                                 <font key="font" metaFont="system"/>
@@ -1570,7 +1570,7 @@
                                                             </connections>
                                                         </popUpButton>
                                                         <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="b55-kc-gGA" customClass="InfoButton" customModule="PPPC_Utility" customModuleProvider="target">
-                                                            <rect key="frame" x="452" y="11" width="25" height="25"/>
+                                                            <rect key="frame" x="373" y="11" width="104" height="25"/>
                                                             <buttonCell key="cell" type="help" bezelStyle="helpButton" alignment="center" borderStyle="border" inset="2" id="OxH-4z-VDn">
                                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                 <font key="font" metaFont="system"/>
@@ -1776,7 +1776,7 @@
                                                     <rect key="frame" x="0.0" y="100" width="485" height="50"/>
                                                     <subviews>
                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ddi-gN-7lS">
-                                                            <rect key="frame" x="8" y="17" width="367" height="16"/>
+                                                            <rect key="frame" x="8" y="17" width="288" height="16"/>
                                                             <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="Removable Volumes:" id="HZO-Vv-fHb">
                                                                 <font key="font" usesAppearanceFont="YES"/>
                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1784,7 +1784,7 @@
                                                             </textFieldCell>
                                                         </textField>
                                                         <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="27r-Jg-Rxp">
-                                                            <rect key="frame" x="379" y="-3" width="70" height="54"/>
+                                                            <rect key="frame" x="300" y="-3" width="70" height="54"/>
                                                             <popUpButtonCell key="cell" type="push" title="-" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="bLI-tr-vzf" id="ZxY-Qi-hwN">
                                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                                 <font key="font" metaFont="system"/>
@@ -1801,7 +1801,7 @@
                                                             </connections>
                                                         </popUpButton>
                                                         <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tmm-2R-ETS" customClass="InfoButton" customModule="PPPC_Utility" customModuleProvider="target">
-                                                            <rect key="frame" x="452" y="11" width="25" height="25"/>
+                                                            <rect key="frame" x="373" y="11" width="104" height="25"/>
                                                             <buttonCell key="cell" type="help" bezelStyle="helpButton" alignment="center" borderStyle="border" inset="2" id="pr7-fl-X5A">
                                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                 <font key="font" metaFont="system"/>
@@ -1833,7 +1833,7 @@
                                                     <rect key="frame" x="0.0" y="50" width="485" height="50"/>
                                                     <subviews>
                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="o5Q-No-Cpy">
-                                                            <rect key="frame" x="8" y="17" width="367" height="16"/>
+                                                            <rect key="frame" x="8" y="17" width="288" height="16"/>
                                                             <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="Screen Capture:" id="OZp-QI-a9L">
                                                                 <font key="font" usesAppearanceFont="YES"/>
                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1841,7 +1841,7 @@
                                                             </textFieldCell>
                                                         </textField>
                                                         <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mSS-FZ-Sk0">
-                                                            <rect key="frame" x="379" y="-3" width="70" height="54"/>
+                                                            <rect key="frame" x="300" y="-3" width="70" height="54"/>
                                                             <popUpButtonCell key="cell" type="push" title="-" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="4xV-9U-FNf" id="Oe4-s2-JcM">
                                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                                 <font key="font" metaFont="system"/>
@@ -1858,7 +1858,7 @@
                                                             </connections>
                                                         </popUpButton>
                                                         <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="36m-yh-kC6" customClass="InfoButton" customModule="PPPC_Utility" customModuleProvider="target">
-                                                            <rect key="frame" x="452" y="11" width="25" height="25"/>
+                                                            <rect key="frame" x="373" y="11" width="104" height="25"/>
                                                             <buttonCell key="cell" type="help" bezelStyle="helpButton" alignment="center" borderStyle="border" inset="2" id="R8E-jj-lfX">
                                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                 <font key="font" metaFont="system"/>
@@ -1890,7 +1890,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="485" height="50"/>
                                                     <subviews>
                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="q76-IZ-qo2">
-                                                            <rect key="frame" x="8" y="17" width="367" height="16"/>
+                                                            <rect key="frame" x="8" y="17" width="288" height="16"/>
                                                             <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="Speech Recognition:" id="N6t-0N-wFj">
                                                                 <font key="font" usesAppearanceFont="YES"/>
                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1898,7 +1898,7 @@
                                                             </textFieldCell>
                                                         </textField>
                                                         <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0Bc-Aj-hsp">
-                                                            <rect key="frame" x="379" y="-3" width="70" height="54"/>
+                                                            <rect key="frame" x="300" y="-3" width="70" height="54"/>
                                                             <popUpButtonCell key="cell" type="push" title="-" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="gwx-us-L0W" id="Dx3-v9-nfb">
                                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                                 <font key="font" metaFont="system"/>
@@ -1915,7 +1915,7 @@
                                                             </connections>
                                                         </popUpButton>
                                                         <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="B5K-Rg-tlf" customClass="InfoButton" customModule="PPPC_Utility" customModuleProvider="target">
-                                                            <rect key="frame" x="452" y="11" width="25" height="25"/>
+                                                            <rect key="frame" x="373" y="11" width="104" height="25"/>
                                                             <buttonCell key="cell" type="help" bezelStyle="helpButton" alignment="center" borderStyle="border" inset="2" id="o7q-ij-eTY">
                                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                 <font key="font" metaFont="system"/>
@@ -1969,7 +1969,7 @@
                                                 <constraint firstItem="ARp-oy-MF9" firstAttribute="width" secondItem="kz4-ht-2cC" secondAttribute="width" id="Na6-xM-RtZ"/>
                                                 <constraint firstItem="0Bc-Aj-hsp" firstAttribute="width" secondItem="kIP-RZ-a35" secondAttribute="width" id="O8c-qX-i2E"/>
                                                 <constraint firstItem="fWh-0P-IiR" firstAttribute="width" secondItem="kz4-ht-2cC" secondAttribute="width" id="Rta-zk-lSa"/>
-                                                <constraint firstItem="C7K-fV-5UL" firstAttribute="width" secondItem="kIP-RZ-a35" secondAttribute="width" id="S77-zQ-dIY"/>
+                                                <constraint firstItem="C7K-fV-5UL" firstAttribute="width" secondItem="kIP-RZ-a35" secondAttribute="width" constant="100" id="S77-zQ-dIY"/>
                                                 <constraint firstItem="HAW-s8-s0x" firstAttribute="height" secondItem="9iO-vL-Pwi" secondAttribute="height" id="SU2-dl-Uay"/>
                                                 <constraint firstItem="FlL-qy-KET" firstAttribute="width" secondItem="kz4-ht-2cC" secondAttribute="width" id="SWd-TN-Khf"/>
                                                 <constraint firstItem="9iO-vL-Pwi" firstAttribute="width" secondItem="kz4-ht-2cC" secondAttribute="width" id="T6v-0P-zR8"/>
@@ -1996,7 +1996,7 @@
                                                 <constraint firstItem="thb-Gy-Auo" firstAttribute="height" secondItem="9iO-vL-Pwi" secondAttribute="height" id="pTN-IF-RXl"/>
                                                 <constraint firstItem="gu9-0B-Z7P" firstAttribute="height" secondItem="9iO-vL-Pwi" secondAttribute="height" id="qLf-po-aOu"/>
                                                 <constraint firstItem="EAK-oq-60p" firstAttribute="width" secondItem="kIP-RZ-a35" secondAttribute="width" id="sOi-wj-OeY"/>
-                                                <constraint firstItem="lZv-w5-rrd" firstAttribute="width" secondItem="kIP-RZ-a35" secondAttribute="width" id="w8U-RH-JRp"/>
+                                                <constraint firstItem="lZv-w5-rrd" firstAttribute="width" secondItem="kIP-RZ-a35" secondAttribute="width" constant="100" id="w8U-RH-JRp"/>
                                                 <constraint firstItem="kPv-Tl-c0b" firstAttribute="height" secondItem="9iO-vL-Pwi" secondAttribute="height" id="wwJ-BS-g4j"/>
                                                 <constraint firstItem="mSS-FZ-Sk0" firstAttribute="width" secondItem="kIP-RZ-a35" secondAttribute="width" id="xSf-R0-NyN"/>
                                                 <constraint firstItem="FlL-qy-KET" firstAttribute="height" secondItem="9iO-vL-Pwi" secondAttribute="height" id="ygH-90-cmy"/>
@@ -2079,7 +2079,7 @@
                                     <rect key="frame" x="1" y="1" width="485" height="557"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="48" rowSizeStyle="automatic" viewBased="YES" id="dDB-re-qJn">
+                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="48" usesAutomaticRowHeights="YES" viewBased="YES" id="dDB-re-qJn">
                                             <rect key="frame" x="0.0" y="0.0" width="485" height="557"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
@@ -2102,7 +2102,7 @@
                                                             <rect key="frame" x="1" y="1" width="482" height="48"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
-                                                                <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WbE-xX-Aeu">
+                                                                <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" placeholderIntrinsicWidth="466" placeholderIntrinsicHeight="48" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WbE-xX-Aeu">
                                                                     <rect key="frame" x="8" y="0.0" width="466" height="48"/>
                                                                     <subviews>
                                                                         <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="638-Y8-khl">
@@ -2152,6 +2152,7 @@
                                                                     <constraints>
                                                                         <constraint firstItem="tgo-qF-wd4" firstAttribute="top" secondItem="WbE-xX-Aeu" secondAttribute="top" constant="16" id="JRS-dD-Pve"/>
                                                                         <constraint firstItem="FZk-Az-Hgy" firstAttribute="top" secondItem="WbE-xX-Aeu" secondAttribute="top" constant="13" id="Nst-vE-PjT"/>
+                                                                        <constraint firstAttribute="height" constant="48" id="hRt-eQ-xOS"/>
                                                                         <constraint firstItem="tgo-qF-wd4" firstAttribute="centerY" secondItem="FZk-Az-Hgy" secondAttribute="centerY" id="wtm-Hh-3WP"/>
                                                                     </constraints>
                                                                     <visibilityPriorities>
@@ -2409,12 +2410,21 @@
                                 </textFieldCell>
                             </textField>
                             <switch horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" baseWritingDirection="leftToRight" alignment="left" translatesAutoresizingMaskIntoConstraints="NO" id="SiC-OP-K6P">
-                                <rect key="frame" x="1133" y="655" width="42" height="24"/>
+                                <rect key="frame" x="1176" y="652" width="42" height="24"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <connections>
                                     <action selector="toggleAuthorizationKeyUsage:" target="ZfI-PN-mks" id="8uJ-TA-vPn"/>
                                 </connections>
                             </switch>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="P4p-7C-knr">
+                                <rect key="frame" x="1054" y="656" width="123" height="15"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Big Sur Compatibility" id="22F-cE-hwd">
+                                    <font key="font" metaFont="cellTitle"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                         <constraints>
                             <constraint firstItem="JIN-BO-Fp8" firstAttribute="leading" secondItem="JSo-Ex-mKB" secondAttribute="leading" id="1XB-vJ-xiI"/>
@@ -2652,6 +2662,9 @@
                                                                             </connections>
                                                                         </textField>
                                                                     </subviews>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="48" id="EvX-ed-meP"/>
+                                                                    </constraints>
                                                                     <visibilityPriorities>
                                                                         <integer value="1000"/>
                                                                         <integer value="1000"/>

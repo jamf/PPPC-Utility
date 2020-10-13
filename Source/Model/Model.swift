@@ -29,7 +29,7 @@ import Cocoa
 
 @objc class Model: NSObject {
 
-    var usingLegacyAllowKey = false
+    var usingLegacyAllowKey = true
 
     @objc dynamic var current: Executable?
     @objc dynamic static let shared = Model()
@@ -97,12 +97,7 @@ extension Model {
             }
         }
     }
-
-    /// Will convert any Authorization key values to the legacy Allowed key
-    func changeToUseAuthorizationKey() {
-
-    }
-
+    
     /// Will convert any Authorization key values to the legacy Allowed key
     func changeToUseLegacyAllowKey() {
         usingLegacyAllowKey = true

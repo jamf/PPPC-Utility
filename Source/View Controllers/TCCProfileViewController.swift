@@ -147,16 +147,18 @@ class TCCProfileViewController: NSViewController {
     @IBAction func toggleAuthorizationKeyUsage(_ sender: NSSwitch) {
         switch sender.state {
         case .on:
-            let message = """
-            By enabling this option the profile built will only be compatible with macOS 11.0 and higher.
-            Deploying this profile to devices running less than 11.0 will result in an error.
-            """
-            Alert().display(header: "Compatibility Warning", message: message)
-            model.changeToUseAuthorizationKey()
+            if (model.usingLegacyAllowKey) {
+                let message = """
+                Enabling this mode results in a profile only compatible with macOS 11.0 Big Sur and higher.
+                Deploying this profile to devices running less than 11.0 will result in an error.
+                """
+                Alert().display(header: "Compatibility Warning", message: message)
+            }
+            model.usingLegacyAllowKey = false
         default:
             if model.requiresAuthorizationKey() {
                 let message = "Some payloads are using features that will be lost."
-                Alert().display(header: "Downgrade warning", message: message)
+                Alert().display(header: "Compatibility Warning", message: message)
             }
             model.changeToUseLegacyAllowKey()
         }
@@ -171,6 +173,13 @@ class TCCProfileViewController: NSViewController {
         alertWindow.beginSheetModal(for: window)
     }
 
+    func turnOnBigSurCompatibility() {
+        if model.requiresAuthorizationKey() {
+            authorizationKeySwitch.state = .on
+            toggleAuthorizationKeyUsage(authorizationKeySwitch)
+        }
+    }
+
     @IBAction func importProfile(_ sender: NSButton) {
         guard let window = self.view.window else {
             return
@@ -183,6 +192,7 @@ class TCCProfileViewController: NSViewController {
             switch tccProfileResult {
             case .success(let tccProfile):
                 self?.model.importProfile(tccProfile: tccProfile)
+                self?.turnOnBigSurCompatibility()
             case .failure(let tccProfileImportError):
                 if !tccProfileImportError.isCancelled {
                     self?.showAlert(tccProfileImportError, for: window)
@@ -278,6 +288,8 @@ class TCCProfileViewController: NSViewController {
         executablesTable.dataSource = self
         appleEventsTable.registerForDraggedTypes([.fileURL])
         appleEventsTable.dataSource = self
+
+        authorizationKeySwitch.state = model.usingLegacyAllowKey ? .off : .on
     }
 
     @IBAction func showHelpMessage(_ sender: InfoButton) {

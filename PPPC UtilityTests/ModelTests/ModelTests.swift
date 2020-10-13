@@ -448,8 +448,6 @@ class ModelTests: XCTestCase {
         XCTAssertFalse(model.requiresAuthorizationKey())
     }
 
-    // MARK: - tests for changeToUseAuthorizationKey
-
     // MARK: - tests for changeToUseLegacyAllowKey
 
     func testChangingFromAuthorizationKeyToLegacyAllowKey() {
