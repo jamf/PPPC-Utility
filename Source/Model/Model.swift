@@ -241,13 +241,19 @@ extension Model {
                          codeRequirement: executable.codeRequirement,
                          receiverIdentifier: event?.destination.identifier,
                          receiverCodeRequirement: event?.destination.codeRequirement)
-        switch value {
-        case TCCProfileDisplayValue.allow.rawValue: policy.allowed = true
-        case TCCProfileDisplayValue.deny.rawValue: policy.allowed = false
-        case TCCProfileDisplayValue.allowStandardUsersToApprove.rawValue:
-            policy.allowed = true
-            policy.authorization = .allowStandardUserToSetSystemService
-        default: return nil
+        if usingLegacyAllowKey {
+            switch value {
+            case TCCProfileDisplayValue.allow.rawValue:   policy.allowed = true
+            case TCCProfileDisplayValue.deny.rawValue:    policy.allowed = false
+            default:        return nil
+            }
+        } else {
+            switch value {
+            case TCCProfileDisplayValue.allow.rawValue: policy.authorization = .allow
+            case TCCProfileDisplayValue.deny.rawValue: policy.authorization = .deny
+            case TCCProfileDisplayValue.allowStandardUsersToApprove.rawValue: policy.authorization = .allowStandardUserToSetSystemService
+            default:        return nil
+            }
         }
         return policy
     }
