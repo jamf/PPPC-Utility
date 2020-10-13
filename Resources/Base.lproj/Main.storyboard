@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16097.2"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16097.3"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -2227,7 +2227,7 @@
                                     <rect key="frame" x="1" y="1" width="198" height="672"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="52" rowSizeStyle="automatic" viewBased="YES" id="LpN-jq-LDz">
+                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="52" usesAutomaticRowHeights="YES" viewBased="YES" id="LpN-jq-LDz">
                                             <rect key="frame" x="0.0" y="0.0" width="198" height="672"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
@@ -2246,9 +2246,8 @@
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
-                                                        <tableCellView id="tCx-7E-F20">
-                                                            <rect key="frame" x="1" y="1" width="195" height="52"/>
-                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                        <tableCellView translatesAutoresizingMaskIntoConstraints="NO" id="tCx-7E-F20">
+                                                            <rect key="frame" x="0.0" y="0.0" width="195" height="52"/>
                                                             <subviews>
                                                                 <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="J9w-FR-5v2">
                                                                     <rect key="frame" x="8" y="2" width="179" height="48"/>
@@ -2257,8 +2256,6 @@
                                                                             <rect key="frame" x="0.0" y="0.0" width="48" height="48"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" constant="48" id="IVZ-CZ-KYg"/>
-                                                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="48" id="W1i-Fp-EMi"/>
-                                                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="48" id="epU-hx-FBL"/>
                                                                                 <constraint firstAttribute="height" constant="48" id="vcW-ff-Bhw"/>
                                                                             </constraints>
                                                                             <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSApplicationIcon" id="jDk-X1-tnx"/>
@@ -2289,6 +2286,7 @@
                                                                 </stackView>
                                                             </subviews>
                                                             <constraints>
+                                                                <constraint firstAttribute="height" constant="52" id="EYc-oi-LS8"/>
                                                                 <constraint firstItem="J9w-FR-5v2" firstAttribute="centerY" secondItem="tCx-7E-F20" secondAttribute="centerY" id="T9Y-Qe-m22"/>
                                                                 <constraint firstItem="J9w-FR-5v2" firstAttribute="leading" secondItem="tCx-7E-F20" secondAttribute="leading" constant="8" id="aZT-lZ-Z8Y"/>
                                                                 <constraint firstAttribute="trailing" secondItem="J9w-FR-5v2" secondAttribute="trailing" constant="8" id="sWv-ne-D2E"/>
