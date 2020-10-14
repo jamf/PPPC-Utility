@@ -149,6 +149,7 @@ class TCCProfileViewController: NSViewController {
             if model.usingLegacyAllowKey && showAlert {
                 let message = """
                 Enabling Big Sur Compatibility will require the profile to be installed on macOS versions Big Sur (11.0) or greater.
+
                 Deploying this profile to computers with macOS 10.15 or earlier will result in an error.
                 """
                 Alert().display(header: "Compatibility Warning", message: message)
