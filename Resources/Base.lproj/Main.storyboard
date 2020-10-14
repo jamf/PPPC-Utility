@@ -2248,7 +2248,7 @@
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView translatesAutoresizingMaskIntoConstraints="NO" id="tCx-7E-F20">
-                                                            <rect key="frame" x="1" y="1" width="195" height="52"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="195" height="52"/>
                                                             <subviews>
                                                                 <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="J9w-FR-5v2">
                                                                     <rect key="frame" x="8" y="2" width="179" height="48"/>
@@ -2386,20 +2386,6 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="DB5-Ps-rWI">
-                                <rect key="frame" x="123" y="61" width="97" height="23"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="RPw-a2-lQP"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="97" id="ha1-QG-fKS"/>
-                                </constraints>
-                                <buttonCell key="cell" type="smallSquare" title="Import Profile" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="mixed" borderStyle="border" allowsMixedState="YES" imageScaling="proportionallyDown" inset="2" id="Ep1-Yp-TIU">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="importProfile:" target="ZfI-PN-mks" id="CbR-lv-L7N"/>
-                                </connections>
-                            </button>
                             <switch horizontalHuggingPriority="750" verticalHuggingPriority="750" baseWritingDirection="leftToRight" alignment="left" translatesAutoresizingMaskIntoConstraints="NO" id="SiC-OP-K6P">
                                 <rect key="frame" x="1176" y="652" width="42" height="24"/>
                                 <connections>
@@ -2414,6 +2400,16 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jIB-Ce-nfY">
+                                <rect key="frame" x="990" y="13" width="80" height="32"/>
+                                <buttonCell key="cell" type="push" title="Import" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="dRT-sQ-hbk">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="importProfile:" target="ZfI-PN-mks" id="J6r-my-CFT"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="JIN-BO-Fp8" firstAttribute="leading" secondItem="JSo-Ex-mKB" secondAttribute="leading" id="1XB-vJ-xiI"/>
@@ -2430,12 +2426,13 @@
                             <constraint firstItem="96P-n0-YO3" firstAttribute="top" secondItem="bKS-CN-KZi" secondAttribute="top" constant="20" id="CWE-BE-Iga"/>
                             <constraint firstItem="SiC-OP-K6P" firstAttribute="leading" secondItem="P4p-7C-knr" secondAttribute="trailing" constant="3" id="D26-B0-eoj"/>
                             <constraint firstItem="5hq-Rl-ues" firstAttribute="leading" secondItem="03S-CM-lPV" secondAttribute="trailing" constant="15" id="EHv-BX-sOY"/>
+                            <constraint firstAttribute="bottom" secondItem="jIB-Ce-nfY" secondAttribute="bottom" constant="20" id="FTZ-cQ-BaB"/>
                             <constraint firstItem="03S-CM-lPV" firstAttribute="leading" secondItem="3Am-A7-MGr" secondAttribute="trailing" constant="12" id="GSZ-Pk-E5b"/>
                             <constraint firstItem="SFg-90-Vi7" firstAttribute="leading" secondItem="pHR-Fa-o0o" secondAttribute="trailing" constant="8" id="MK7-4L-bS5"/>
-                            <constraint firstItem="DB5-Ps-rWI" firstAttribute="baseline" secondItem="SFg-90-Vi7" secondAttribute="firstBaseline" id="Ntc-ET-tvQ"/>
+                            <constraint firstItem="jIB-Ce-nfY" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="bKS-CN-KZi" secondAttribute="leading" constant="20" symbolic="YES" id="ORr-eH-Use"/>
+                            <constraint firstItem="Gwb-6x-mB1" firstAttribute="leading" secondItem="jIB-Ce-nfY" secondAttribute="trailing" constant="12" id="Pn3-Fb-vCD"/>
                             <constraint firstItem="3Am-A7-MGr" firstAttribute="top" secondItem="bKS-CN-KZi" secondAttribute="top" constant="35" id="Prb-UA-Xca"/>
                             <constraint firstItem="5hq-Rl-ues" firstAttribute="top" secondItem="zBr-K2-oEH" secondAttribute="bottom" constant="5" id="QXd-Jh-Zyw"/>
-                            <constraint firstItem="DB5-Ps-rWI" firstAttribute="leading" secondItem="pHR-Fa-o0o" secondAttribute="trailing" constant="81" id="Qgg-DM-0Sx"/>
                             <constraint firstItem="L3L-II-z9D" firstAttribute="leading" secondItem="03S-CM-lPV" secondAttribute="leading" id="St8-B9-At6"/>
                             <constraint firstItem="5hq-Rl-ues" firstAttribute="bottom" secondItem="03S-CM-lPV" secondAttribute="bottom" id="VaG-RW-D30"/>
                             <constraint firstItem="SFg-90-Vi7" firstAttribute="baseline" secondItem="v8I-Mx-BrF" secondAttribute="baseline" id="WcE-XK-GJk"/>
@@ -2457,13 +2454,11 @@
                             <constraint firstItem="v8I-Mx-BrF" firstAttribute="leading" secondItem="RsL-5g-N88" secondAttribute="trailing" constant="8" id="pVT-22-VSY"/>
                             <constraint firstItem="5hq-Rl-ues" firstAttribute="top" secondItem="SiC-OP-K6P" secondAttribute="bottom" constant="5" id="rAP-R8-4al"/>
                             <constraint firstAttribute="trailing" secondItem="wba-mI-3Kz" secondAttribute="trailing" constant="18" id="rwL-U7-x5t"/>
-                            <constraint firstItem="Gwb-6x-mB1" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="bKS-CN-KZi" secondAttribute="leading" constant="20" symbolic="YES" id="s99-qV-118"/>
                             <constraint firstItem="RsL-5g-N88" firstAttribute="leading" secondItem="dDB-re-qJn" secondAttribute="leading" id="vlB-ox-Uku"/>
                             <constraint firstItem="5hq-Rl-ues" firstAttribute="top" secondItem="03S-CM-lPV" secondAttribute="top" id="xkQ-C1-VJt"/>
                             <constraint firstItem="03S-CM-lPV" firstAttribute="top" secondItem="L3L-II-z9D" secondAttribute="bottom" constant="5" id="xka-Xk-Bmy"/>
                             <constraint firstItem="03S-CM-lPV" firstAttribute="top" secondItem="96P-n0-YO3" secondAttribute="bottom" constant="35" id="xmX-vx-A0O"/>
                             <constraint firstItem="pHR-Fa-o0o" firstAttribute="centerY" secondItem="SFg-90-Vi7" secondAttribute="centerY" id="xwM-tk-P7q"/>
-                            <constraint firstItem="RsL-5g-N88" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="DB5-Ps-rWI" secondAttribute="trailing" constant="8" symbolic="YES" id="znI-Fb-Xa6"/>
                         </constraints>
                     </view>
                     <connections>
