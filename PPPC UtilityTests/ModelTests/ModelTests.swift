@@ -417,7 +417,7 @@ class ModelTests: XCTestCase {
         XCTAssertNil(policy, "should have errored out because of an invalid value")
     }
 
-    /// MARK: - tests for requiresAuthorizationKey
+    // MARK: - tests for requiresAuthorizationKey
 
     func testWhenServiceIsUsingAllowStandarUsersToApprove() {
         // given
