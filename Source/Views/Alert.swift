@@ -38,4 +38,24 @@ class Alert: NSObject {
             dialog.runModal()
         }
     }
+
+    /// Displays a message with a cancel button and returns true if OK was pressed
+    /// Assumes this method is called from the main queue.
+    /// 
+    /// - Parameters:
+    ///   - header: The header message
+    ///   - message: The message body
+    /// - Returns: True if the ok button was pressed
+    func displayWithCancel(header: String, message: String) -> Bool {
+        let dialog: NSAlert = NSAlert()
+        dialog.messageText = header
+        dialog.informativeText = message
+        dialog.alertStyle = NSAlert.Style.warning
+        dialog.addButton(withTitle: "OK")
+        dialog.addButton(withTitle: "Cancel")
+        let response = dialog.runModal()
+        let okPressed = (response.rawValue == 1000)
+        return okPressed
+    }
+
 }

@@ -48,7 +48,6 @@ class TCCProfileViewController: NSViewController {
     @IBOutlet weak var iconView: NSImageView!
     @IBOutlet weak var identifierLabel: NSTextField!
     @IBOutlet weak var codeRequirementLabel: NSTextField!
-    @IBOutlet weak var infoMessageLabel: NSTextField!
 
     @IBOutlet weak var addressBookPopUp: NSPopUpButton!
     @IBOutlet weak var photosPopUp: NSPopUpButton!
@@ -144,24 +143,34 @@ class TCCProfileViewController: NSViewController {
         }
     }
 
-    @IBAction func toggleAuthorizationKeyUsage(_ sender: NSSwitch) {
-        switch sender.state {
+    private func toggleAuthorizationKey(theSwitch: NSSwitch, showAlert: Bool) {
+        switch theSwitch.state {
         case .on:
-            if (model.usingLegacyAllowKey) {
+            if model.usingLegacyAllowKey && showAlert {
                 let message = """
-                Enabling this mode results in a profile only compatible with macOS 11.0 Big Sur and higher.
-                Deploying this profile to devices running less than 11.0 will result in an error.
+                Enabling Big Sur Compatibility limits the profile's compatibility macOS versions prior to Big Sur (11.0).
+                Deploying this profile to computers with macOS 10.15 or earlier will result in an error.
                 """
                 Alert().display(header: "Compatibility Warning", message: message)
             }
             model.usingLegacyAllowKey = false
         default:
-            if model.requiresAuthorizationKey() {
-                let message = "Some payloads are using features that will be lost."
-                Alert().display(header: "Compatibility Warning", message: message)
+            var allowToggle = true
+            if model.requiresAuthorizationKey() && showAlert {
+                let message = "Disabling Big Sur Compatiblity will cause some settings you configured to be lost."
+                allowToggle = Alert().displayWithCancel(header: "Compatibility Warning", message: message)
             }
-            model.changeToUseLegacyAllowKey()
+            if allowToggle {
+                model.changeToUseLegacyAllowKey()
+            } else {
+                theSwitch.state = .on
+                model.usingLegacyAllowKey = false
+            }
         }
+    }
+
+    @IBAction func toggleAuthorizationKeyUsage(_ sender: NSSwitch) {
+        toggleAuthorizationKey(theSwitch: sender, showAlert: true)
     }
 
     fileprivate func showAlert(_ error: LocalizedError, for window: NSWindow) {
@@ -176,7 +185,8 @@ class TCCProfileViewController: NSViewController {
     func turnOnBigSurCompatibility() {
         if model.requiresAuthorizationKey() {
             authorizationKeySwitch.state = .on
-            toggleAuthorizationKeyUsage(authorizationKeySwitch)
+            // when importing, we assume they know what they are doing and don't need to see the alert
+            toggleAuthorizationKey(theSwitch: authorizationKeySwitch, showAlert: false)
         }
     }
 
