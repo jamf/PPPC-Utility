@@ -97,7 +97,7 @@ extension Model {
             }
         }
     }
-    
+
     /// Will convert any Authorization key values to the legacy Allowed key
     func changeToUseLegacyAllowKey() {
         usingLegacyAllowKey = true
