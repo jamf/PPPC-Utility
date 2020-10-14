@@ -32,7 +32,12 @@ import XCTest
 
 class ModelTests: XCTestCase {
 
-    var model = Model()
+    var model: Model!
+
+    override func setUp() {
+        super.setUp()
+        model = Model()
+    }
 
     // MARK: - tests for getExecutableFrom*
 
