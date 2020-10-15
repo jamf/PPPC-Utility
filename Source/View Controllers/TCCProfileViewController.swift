@@ -183,10 +183,9 @@ class TCCProfileViewController: NSViewController {
         alertWindow.beginSheetModal(for: window)
     }
 
-    func turnOnBigSurCompatibility() {
+    func turnOnBigSurCompatibilityIfImportedProfileNeedsTo() {
         if model.requiresAuthorizationKey() {
             authorizationKeySwitch.state = .on
-            // when importing, we assume they know what they are doing and don't need to see the alert
             toggleAuthorizationKey(theSwitch: authorizationKeySwitch, showAlert: false)
         }
     }
@@ -203,7 +202,7 @@ class TCCProfileViewController: NSViewController {
             switch tccProfileResult {
             case .success(let tccProfile):
                 self?.model.importProfile(tccProfile: tccProfile)
-                self?.turnOnBigSurCompatibility()
+                self?.turnOnBigSurCompatibilityIfImportedProfileNeedsTo()
             case .failure(let tccProfileImportError):
                 if !tccProfileImportError.isCancelled {
                     self?.showAlert(tccProfileImportError, for: window)
