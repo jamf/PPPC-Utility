@@ -199,13 +199,14 @@ class TCCProfileViewController: NSViewController {
         let tccConfigPanel = TCCProfileConfigurationPanel()
 
         tccConfigPanel.loadTCCProfileFromFile(importer: tccProfileImporter, window: window) { [weak self] tccProfileResult in
+            guard let weakSelf = self else { return }
             switch tccProfileResult {
             case .success(let tccProfile):
-                self?.model.importProfile(tccProfile: tccProfile)
-                self?.turnOnBigSurCompatibilityIfImportedProfileNeedsTo()
+                weakSelf.model.importProfile(tccProfile: tccProfile)
+                weakSelf.turnOnBigSurCompatibilityIfImportedProfileNeedsTo()
             case .failure(let tccProfileImportError):
                 if !tccProfileImportError.isCancelled {
-                    self?.showAlert(tccProfileImportError, for: window)
+                    weakSelf.showAlert(tccProfileImportError, for: window)
                 }
             }
         }
