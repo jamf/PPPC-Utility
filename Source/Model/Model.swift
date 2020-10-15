@@ -136,10 +136,14 @@ extension Model {
 
                 if !FileManager.default.fileExists(atPath: executable.iconPath) {
                     switch url.pathExtension {
-                    case "app":     executable.iconPath = IconFilePath.application
-                    case "bundle":  executable.iconPath = IconFilePath.kext
-                    case "xpc":     executable.iconPath = IconFilePath.kext
-                    default:        executable.iconPath = IconFilePath.unknown
+                    case "app":
+                        executable.iconPath = IconFilePath.application
+                    case "bundle":
+                        executable.iconPath = IconFilePath.kext
+                    case "xpc":
+                        executable.iconPath = IconFilePath.kext
+                    default:
+                        executable.iconPath = IconFilePath.unknown
                     }
                 }
             } else {
@@ -243,16 +247,23 @@ extension Model {
                          receiverCodeRequirement: event?.destination.codeRequirement)
         if usingLegacyAllowKey {
             switch value {
-            case TCCProfileDisplayValue.allow.rawValue:   policy.allowed = true
-            case TCCProfileDisplayValue.deny.rawValue:    policy.allowed = false
-            default:        return nil
+            case TCCProfileDisplayValue.allow.rawValue:
+                policy.allowed = true
+            case TCCProfileDisplayValue.deny.rawValue:
+                policy.allowed = false
+            default:
+                return nil
             }
         } else {
             switch value {
-            case TCCProfileDisplayValue.allow.rawValue: policy.authorization = .allow
-            case TCCProfileDisplayValue.deny.rawValue: policy.authorization = .deny
-            case TCCProfileDisplayValue.allowStandardUsersToApprove.rawValue: policy.authorization = .allowStandardUserToSetSystemService
-            default:        return nil
+            case TCCProfileDisplayValue.allow.rawValue:
+                policy.authorization = .allow
+            case TCCProfileDisplayValue.deny.rawValue:
+                policy.authorization = .deny
+            case TCCProfileDisplayValue.allowStandardUsersToApprove.rawValue:
+                policy.authorization = .allowStandardUserToSetSystemService
+            default:
+                return nil
             }
         }
         return policy
