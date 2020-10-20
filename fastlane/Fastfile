@@ -2,6 +2,7 @@ import('../../fastlane/Fastfile')
 
 platform :mac do
   lane :build do |options|
+    sleep 300
     options[:project] = "PPPC Utility.xcodeproj"
     options[:scheme] = "PPPC Utility"
     options[:output_artifacts] = ["PPPC Utility.app"]
