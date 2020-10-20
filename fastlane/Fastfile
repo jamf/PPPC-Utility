@@ -1,0 +1,19 @@
+import('../../fastlane/Fastfile')
+
+platform :mac do
+  lane :build do |options|
+    options[:project] = "PPPC Utility.xcodeproj"
+    options[:scheme] = "PPPC Utility"
+    options[:output_artifacts] = ["PPPC Utility.app"]
+    options[:zip] = true
+    bamboo_build_mac(options)
+  end
+
+  desc 'Runs the unit tests'
+  lane :run_tests do |options|
+  end
+
+  desc "Notarizes the PPPC Utility"
+  lane :notarize_build do |options|
+  end
+end
