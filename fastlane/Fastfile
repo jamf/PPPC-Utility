@@ -1,8 +1,11 @@
-import('../../fastlane/Fastfile')
+import_from_git(
+  url: ENV['FASTLANE_REPO'],
+  path: "Fastfile",
+  version: "~> 1.0"
+)
 
 platform :mac do
   lane :build do |options|
-    sleep 300
     options[:project] = "PPPC Utility.xcodeproj"
     options[:scheme] = "PPPC Utility"
     options[:output_artifacts] = ["PPPC Utility.app"]
