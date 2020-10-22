@@ -1,10 +1,9 @@
 //
-//  Alert.swift
-//  PPPC Utility
+//  ModelBuilder.swift
 //
 //  MIT License
 //
-//  Copyright (c) 2020 Jamf Software
+//  Copyright (c) 2019 Jamf Software
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -27,15 +26,28 @@
 
 import Cocoa
 
-class Alert: NSObject {
-    func display(header: String, message: String) {
-        DispatchQueue.main.async {
-            let dialog: NSAlert = NSAlert()
-            dialog.messageText = header
-            dialog.informativeText = message
-            dialog.alertStyle = NSAlert.Style.warning
-            dialog.addButton(withTitle: "OK")
-            dialog.runModal()
-        }
+@testable import PPPC_Utility
+
+class ModelBuilder {
+
+    var model: Model
+
+    init() {
+        model = Model()
     }
+
+    func build() -> Model {
+        return model
+    }
+
+    func addExecutable(settings: [String: String]) -> ModelBuilder {
+        let exe = Executable(identifier: "id", codeRequirement: "req", "display")
+        settings.forEach { key, value in
+            exe.policy.setValue(value, forKey: key)
+        }
+        model.selectedExecutables.append(exe)
+
+        return self
+    }
+
 }

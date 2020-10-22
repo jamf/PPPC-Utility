@@ -97,4 +97,12 @@ class Policy: NSObject {
     @objc dynamic var SystemPolicyNetworkVolumes: String = "-"
     @objc dynamic var SystemPolicyRemovableVolumes: String = "-"
     // swiftlint:enable identifier_name
+
+    func allPolicyValues() -> [String] {
+        let mirror = Mirror(reflecting: self)
+        return mirror.children.compactMap { _, value in
+            return value as? String
+        }
+    }
+
 }

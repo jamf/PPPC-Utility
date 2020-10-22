@@ -28,10 +28,17 @@
 import Foundation
 
 typealias TCCPolicyIdentifierType = String
+typealias TCCPolicyAuthorizationValue = String
 
 extension TCCPolicyIdentifierType {
     static let bundleID = "bundleID"
     static let path = "path"
+}
+
+extension TCCPolicyAuthorizationValue {
+    static let allow = "Allow"
+    static let deny = "Deny"
+    static let allowStandardUserToSetSystemService = "AllowStandardUserToSetSystemService"
 }
 
 struct TCCPolicy: Codable {
@@ -39,22 +46,33 @@ struct TCCPolicy: Codable {
     var identifier: String
     var identifierType: TCCPolicyIdentifierType
     var codeRequirement: String
-    var allowed: Bool
+
+    /// legacy value to allow or deny a service. When setting this value, the authorization will be set to nil
+    /// as the values are mutually exclusive. If authorization is present it will always be used, so we have no
+    /// need to nil out this value if authorization is set.
+    var allowed: Bool? {
+        didSet {
+            authorization = nil
+        }
+    }
+    var authorization: TCCPolicyAuthorizationValue?
     var receiverIdentifier: String?
     var receiverIdentifierType: TCCPolicyIdentifierType?
     var receiverCodeRequirement: String?
+
     enum CodingKeys: String, CodingKey {
         case identifier = "Identifier"
         case identifierType = "IdentifierType"
         case allowed = "Allowed"
+        case authorization = "Authorization"
         case codeRequirement = "CodeRequirement"
         case comment = "Comment"
         case receiverIdentifier = "AEReceiverIdentifier"
         case receiverIdentifierType = "AEReceiverIdentifierType"
         case receiverCodeRequirement = "AEReceiverCodeRequirement"
     }
-    init(identifier: String, codeRequirement: String, allowed: Bool, receiverIdentifier: String? = nil, receiverCodeRequirement: String? = nil) {
-        self.allowed = allowed
+
+    init(identifier: String, codeRequirement: String, receiverIdentifier: String? = nil, receiverCodeRequirement: String? = nil) {
         self.comment = ""
         self.identifier = identifier
         self.identifierType = identifier.contains("/") ? .path : .bundleID

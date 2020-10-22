@@ -38,22 +38,15 @@ public class TCCProfileImporter {
     /// Mapping & Decoding tcc profile
     ///
     /// - Parameter fileUrl: path with a file to load, completion: TCCProfileImportCompletion - success with TCCProfile or failure with TCCProfileImport Error
-    func decodeTCCProfile(fileUrl: URL, _ completion: @escaping TCCProfileImportCompletion) {
-        let data: Data
-        do {
-            data = try Data(contentsOf: fileUrl)
-        } catch {
-            return completion(.failure(.unableToOpenFile))
-        }
-
+    func decodeTCCProfile(data: Data, _ completion: @escaping TCCProfileImportCompletion) {
         do {
             // Note that parse will ignore the signing portion of the data
             let tccProfile = try TCCProfile.parse(from: data)
-			return completion(.success(tccProfile))
+            return completion(.success(tccProfile))
         } catch TCCProfile.ParseError.failedToCreateData {
-			return completion(.failure(.decodeProfileError))
+            return completion(.failure(.decodeProfileError))
         } catch TCCProfile.ParseError.failedToCreateDecoder {
-			return completion(.failure(.decodeProfileError))
+            return completion(.failure(.decodeProfileError))
         } catch let DecodingError.keyNotFound(codingKey, _) {
             return completion(TCCProfileImportResult.failure(.invalidProfileFile(description: codingKey.stringValue)))
         } catch let DecodingError.typeMismatch(type, context) {
@@ -63,5 +56,19 @@ public class TCCProfileImporter {
             let errorDescription = error.userInfo["NSDebugDescription"] as? String
             return completion(.failure(.invalidProfileFile(description: errorDescription ?? error.localizedDescription)))
         }
+    }
+
+    /// Mapping & Decoding tcc profile
+    ///
+    /// - Parameter fileUrl: path with a file to load, completion: TCCProfileImportCompletion - success with TCCProfile or failure with TCCProfileImport Error
+    func decodeTCCProfile(fileUrl: URL, _ completion: @escaping TCCProfileImportCompletion) {
+        let data: Data
+        do {
+            data = try Data(contentsOf: fileUrl)
+            return decodeTCCProfile(data: data, completion)
+        } catch {
+            return completion(.failure(.unableToOpenFile))
+        }
+
     }
 }

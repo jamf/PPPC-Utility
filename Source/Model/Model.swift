@@ -27,10 +27,11 @@
 
 import Cocoa
 
-class Model: NSObject {
+@objc class Model: NSObject {
+
+    var usingLegacyAllowKey = true
 
     @objc dynamic var current: Executable?
-
     @objc dynamic static let shared = Model()
     @objc dynamic var identities: [SigningIdentity] = []
     @objc dynamic var selectedExecutables: [Executable] = []
@@ -89,6 +90,27 @@ typealias LoadExecutableCompletion = ((LoadExecutableResult) -> Void)
 
 extension Model {
 
+    func requiresAuthorizationKey() -> Bool {
+        return selectedExecutables.contains { exe -> Bool in
+            return exe.policy.allPolicyValues().contains { value -> Bool in
+                return value == TCCProfileDisplayValue.allowStandardUsersToApprove.rawValue
+            }
+        }
+    }
+
+    /// Will convert any Authorization key values to the legacy Allowed key
+    func changeToUseLegacyAllowKey() {
+        usingLegacyAllowKey = true
+        selectedExecutables.forEach { exe in
+            if exe.policy.ListenEvent == TCCProfileDisplayValue.allowStandardUsersToApprove.rawValue {
+                exe.policy.ListenEvent = "-"
+            }
+            if exe.policy.ScreenCapture == TCCProfileDisplayValue.allowStandardUsersToApprove.rawValue {
+                exe.policy.ScreenCapture = "-"
+            }
+        }
+    }
+
     // TODO - refactor this method so it isn't so complex
     // swiftlint:disable:next cyclomatic_complexity
     func loadExecutable(url: URL, completion: @escaping LoadExecutableCompletion) {
@@ -114,10 +136,14 @@ extension Model {
 
                 if !FileManager.default.fileExists(atPath: executable.iconPath) {
                     switch url.pathExtension {
-                    case "app":     executable.iconPath = IconFilePath.application
-                    case "bundle":  executable.iconPath = IconFilePath.kext
-                    case "xpc":     executable.iconPath = IconFilePath.kext
-                    default:        executable.iconPath = IconFilePath.unknown
+                    case "app":
+                        executable.iconPath = IconFilePath.application
+                    case "bundle":
+                        executable.iconPath = IconFilePath.kext
+                    case "xpc":
+                        executable.iconPath = IconFilePath.kext
+                    default:
+                        executable.iconPath = IconFilePath.unknown
                     }
                 }
             } else {
@@ -164,15 +190,12 @@ extension Model {
             }
 
             executable.appleEvents.forEach { event in
-                let policy = TCCPolicy(identifier: executable.identifier,
-                                       codeRequirement: executable.codeRequirement,
-                                       allowed: event.value,
-                                       receiverIdentifier: event.destination.identifier,
-                                       receiverCodeRequirement: event.destination.codeRequirement)
-                let appleEventsKey = ServicesKeys.appleEvents.rawValue
-                services[appleEventsKey] = services[appleEventsKey] ?? []
-                services[appleEventsKey]?.append(policy)
-
+                let policy = policyFromString(executable: executable, value: event.valueString, event: event)
+                if let policy = policy {
+                    let appleEventsKey = ServicesKeys.appleEvents.rawValue
+                    services[appleEventsKey] = services[appleEventsKey] ?? []
+                    services[appleEventsKey]?.append(policy)
+                }
             }
         }
 
@@ -195,16 +218,21 @@ extension Model {
                 for policy in policies {
                     let executable = getExecutableFromSelectedExecutables(bundleIdentifier: policy.identifier)
                     if key == ServicesKeys.appleEvents.rawValue {
-                        if let source = executable, let rIdentifier = policy.receiverIdentifier, let rCodeRequirement = policy.receiverCodeRequirement {
+                        if let source = executable,
+                            let rIdentifier = policy.receiverIdentifier,
+                            let rCodeRequirement = policy.receiverCodeRequirement {
                             let destination = getExecutableFrom(identifier: rIdentifier, codeRequirement: rCodeRequirement)
-                            let appleEvent = AppleEventRule(source: source, destination: destination, value: policy.allowed)
+                            let allowed: Bool = (policy.allowed == true || policy.authorization == TCCPolicyAuthorizationValue.allow)
+                            let appleEvent = AppleEventRule(source: source, destination: destination, value: allowed)
                             executable?.appleEvents.appendIfNew(appleEvent)
                         }
                     } else {
-                        if policy.allowed {
-                            executable?.policy.setValue("Allow", forKey: key)
+                        if policy.authorization == .allow || policy.allowed == true {
+                            executable?.policy.setValue(TCCProfileDisplayValue.allow.rawValue, forKey: key)
+                        } else if policy.authorization == .allowStandardUserToSetSystemService {
+                            executable?.policy.setValue(TCCProfileDisplayValue.allowStandardUsersToApprove.rawValue, forKey: key)
                         } else {
-                            executable?.policy.setValue("Deny", forKey: key)
+                            executable?.policy.setValue(TCCProfileDisplayValue.deny.rawValue, forKey: key)
                         }
                     }
                 }
@@ -212,16 +240,33 @@ extension Model {
         }
     }
 
-    func policyFromString(executable: Executable, value: String) -> TCCPolicy? {
-        let allowed: Bool
-        switch value {
-        case "Allow":   allowed = true
-        case "Deny":    allowed = false
-        default:        return nil
-        }
-        return TCCPolicy(identifier: executable.identifier,
+    func policyFromString(executable: Executable, value: String, event: AppleEventRule? = nil) -> TCCPolicy? {
+        var policy = TCCPolicy(identifier: executable.identifier,
                          codeRequirement: executable.codeRequirement,
-                         allowed: allowed)
+                         receiverIdentifier: event?.destination.identifier,
+                         receiverCodeRequirement: event?.destination.codeRequirement)
+        if usingLegacyAllowKey {
+            switch value {
+            case TCCProfileDisplayValue.allow.rawValue:
+                policy.allowed = true
+            case TCCProfileDisplayValue.deny.rawValue:
+                policy.allowed = false
+            default:
+                return nil
+            }
+        } else {
+            switch value {
+            case TCCProfileDisplayValue.allow.rawValue:
+                policy.authorization = .allow
+            case TCCProfileDisplayValue.deny.rawValue:
+                policy.authorization = .deny
+            case TCCProfileDisplayValue.allowStandardUsersToApprove.rawValue:
+                policy.authorization = .allowStandardUserToSetSystemService
+            default:
+                return nil
+            }
+        }
+        return policy
     }
 
     func getExecutablesFromAllPolicies(policies: [TCCPolicy]) {

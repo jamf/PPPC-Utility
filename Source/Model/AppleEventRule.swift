@@ -31,13 +31,13 @@ class AppleEventRule: NSObject {
 
     @objc dynamic var source: Executable!
     @objc dynamic var destination: Executable!
-    @objc dynamic var valueString: String! = "Allow"
+    @objc dynamic var valueString: String! = TCCProfileDisplayValue.allow.rawValue
 
-    var value: Bool { return valueString == "Allow" }
+    var value: Bool { return valueString == TCCProfileDisplayValue.allow.rawValue }
 
     init(source: Executable, destination: Executable, value: Bool) {
         self.source = source
         self.destination = destination
-        self.valueString = value ? "Allow" : "Deny"
+        self.valueString = value ? TCCProfileDisplayValue.allow.rawValue : TCCProfileDisplayValue.deny.rawValue
     }
 }

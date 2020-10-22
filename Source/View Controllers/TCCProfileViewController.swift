@@ -27,6 +27,12 @@
 
 import Cocoa
 
+enum TCCProfileDisplayValue: String {
+    case allow = "Allow"
+    case deny = "Deny"
+    case allowStandardUsersToApprove = "Let Standard Users Approve"
+}
+
 class TCCProfileViewController: NSViewController {
 
     @objc dynamic var model = Model.shared
@@ -122,17 +128,8 @@ class TCCProfileViewController: NSViewController {
     @IBOutlet weak var uploadButton: NSButton!
     @IBOutlet weak var addAppleEventButton: NSButton!
     @IBOutlet weak var removeAppleEventButton: NSButton!
-
-    @IBOutlet weak var recordButton: NSButton!
-
-    @IBAction func recordPressed(_ sender: NSButton) {
-        canEdit = !canEdit
-        if canEdit {
-            recordButton.title = "Record"
-        } else {
-            recordButton.title = "Stop"
-        }
-    }
+    @IBOutlet weak var removeExecutableButton: NSButton!
+    @IBOutlet weak var authorizationKeySwitch: NSSwitch!
 
     @IBAction func addToProfile(_ sender: NSButton) {
         promptForExecutables {
@@ -140,14 +137,41 @@ class TCCProfileViewController: NSViewController {
         }
     }
 
-    //  Binding currently deletes at index
-    @IBAction func removeButtonPressed(_ sender: NSButton) {
-    }
-
     @IBAction func addToExecutable(_ sender: NSButton) {
         promptForExecutables {
             self.insertIntoAppleEvents($0)
         }
+    }
+
+    private func toggleAuthorizationKey(theSwitch: NSSwitch, showAlert: Bool) {
+        switch theSwitch.state {
+        case .on:
+            if model.usingLegacyAllowKey && showAlert {
+                let message = """
+                Enabling Big Sur Compatibility will require the profile to be installed on macOS versions Big Sur (11.0) or greater.
+
+                Deploying this profile to computers with macOS 10.15 or earlier will result in an error.
+                """
+                Alert().display(header: "Compatibility Warning", message: message)
+            }
+            model.usingLegacyAllowKey = false
+        default:
+            var allowToggle = true
+            if model.requiresAuthorizationKey() && showAlert {
+                let message = "Disabling Big Sur Compatibility will cause some settings you configured to be lost."
+                allowToggle = Alert().displayWithCancel(header: "Compatibility Warning", message: message)
+            }
+            if allowToggle {
+                model.changeToUseLegacyAllowKey()
+            } else {
+                theSwitch.state = .on
+                model.usingLegacyAllowKey = false
+            }
+        }
+    }
+
+    @IBAction func toggleAuthorizationKeyUsage(_ sender: NSSwitch) {
+        toggleAuthorizationKey(theSwitch: sender, showAlert: true)
     }
 
     fileprivate func showAlert(_ error: LocalizedError, for window: NSWindow) {
@@ -159,6 +183,13 @@ class TCCProfileViewController: NSViewController {
         alertWindow.beginSheetModal(for: window)
     }
 
+    func turnOnBigSurCompatibilityIfImportedProfileNeedsTo() {
+        if model.requiresAuthorizationKey() {
+            authorizationKeySwitch.state = .on
+            toggleAuthorizationKey(theSwitch: authorizationKeySwitch, showAlert: false)
+        }
+    }
+
     @IBAction func importProfile(_ sender: NSButton) {
         guard let window = self.view.window else {
             return
@@ -168,12 +199,14 @@ class TCCProfileViewController: NSViewController {
         let tccConfigPanel = TCCProfileConfigurationPanel()
 
         tccConfigPanel.loadTCCProfileFromFile(importer: tccProfileImporter, window: window) { [weak self] tccProfileResult in
+            guard let weakSelf = self else { return }
             switch tccProfileResult {
             case .success(let tccProfile):
-                self?.model.importProfile(tccProfile: tccProfile)
+                weakSelf.model.importProfile(tccProfile: tccProfile)
+                weakSelf.turnOnBigSurCompatibilityIfImportedProfileNeedsTo()
             case .failure(let tccProfileImportError):
                 if !tccProfileImportError.isCancelled {
-                    self?.showAlert(tccProfileImportError, for: window)
+                    weakSelf.showAlert(tccProfileImportError, for: window)
                 }
             }
         }
@@ -213,6 +246,13 @@ class TCCProfileViewController: NSViewController {
         .urlReadingContentsConformToTypes: [ kUTTypeBundle, kUTTypeExecutable ]
     ]
 
+    @IBAction func checkForAuthorizationFeaturesUsed(_ sender: NSPopUpButton) {
+        if model.requiresAuthorizationKey() {
+            authorizationKeySwitch.state = .on
+            toggleAuthorizationKeyUsage(authorizationKeySwitch)
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -234,10 +274,12 @@ class TCCProfileViewController: NSViewController {
                                   networkVolumesPopUpAC,
                                   removableVolumesPopUpAC])
 
+        setupStandardUserAllowAndDeny(policies: [screenCapturePopUpAC,
+                                                 listenEventPopUpAC])
+        setupActionForStandardUserAllowedDropDowns(dropDowns: [listenEventPopUp, screenCapturePopUp])
+
         setupDenyOnly(policies: [cameraPopUpAC,
-                                 microphonePopUpAC,
-                                 listenEventPopUpAC,
-                                 screenCapturePopUpAC])
+                                 microphonePopUpAC])
 
         setupDescriptions()
 
@@ -258,22 +300,39 @@ class TCCProfileViewController: NSViewController {
         appleEventsTable.registerForDraggedTypes([.fileURL])
         appleEventsTable.dataSource = self
 
-        //  Record button
+        authorizationKeySwitch.state = model.usingLegacyAllowKey ? .off : .on
     }
 
     @IBAction func showHelpMessage(_ sender: InfoButton) {
         sender.showHelpMessage()
     }
 
+    /// Setup actions to display a warning when certain values are selected
+    /// that are not supported on all macOS versions
+    /// - Parameter dropDowns: NSPopupButtons to add the action to
+    private func setupActionForStandardUserAllowedDropDowns(dropDowns: [NSPopUpButton]) {
+        dropDowns.forEach { popup in
+            popup.action = #selector(self.checkForAuthorizationFeaturesUsed(_:))
+        }
+    }
+
+    private func setupStandardUserAllowAndDeny(policies: [NSArrayController]) {
+        for policy in policies {
+            policy.add(contentsOf: ["-",
+                                    TCCProfileDisplayValue.allowStandardUsersToApprove.rawValue,
+                                    TCCProfileDisplayValue.deny.rawValue])
+        }
+    }
+
     private func setupAllowDeny(policies: [NSArrayController]) {
         for policy in policies {
-            policy.add(contentsOf: ["-", "Allow", "Deny"])
+            policy.add(contentsOf: ["-", TCCProfileDisplayValue.allow.rawValue, TCCProfileDisplayValue.deny.rawValue])
         }
     }
 
     private func setupDenyOnly(policies: [NSArrayController]) {
         for policy in policies {
-            policy.add(contentsOf: ["-", "Deny"])
+            policy.add(contentsOf: ["-", TCCProfileDisplayValue.deny.rawValue])
         }
     }
 
@@ -292,12 +351,9 @@ class TCCProfileViewController: NSViewController {
 
     private func isDarkModeEnabled() -> Bool {
         var darkModeEnabled = false
-        if #available(OSX 10.14, *) {
-            if view.effectiveAppearance.name == .darkAqua {
-                darkModeEnabled = true
-            }
+        if view.effectiveAppearance.name == .darkAqua {
+            darkModeEnabled = true
         }
-
         return darkModeEnabled
     }
 

@@ -2,7 +2,7 @@
 
 [logo]: /Resources/Assets.xcassets/AppIcon.appiconset/PPPC_Logo_32%402x.png "PPPC Utility"
 
-PPPC Utility is a macOS (10.13 and newer) application for creating configuration profiles containing the Privacy Preferences Policy Control payload for macOS. The profiles can be saved locally, signed or unsigned. Profiles can also be uploaded directly to a Jamf Pro server.
+PPPC Utility is a macOS (10.15 and newer) application for creating configuration profiles containing the Privacy Preferences Policy Control payload for macOS. The profiles can be saved locally, signed or unsigned. Profiles can also be uploaded directly to a Jamf Pro server.
 
 All changes to the application are tracked in [the changelog](https://github.com/jamf/PPPC-Utility/blob/master/CHANGELOG.md).
 
