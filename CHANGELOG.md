@@ -9,8 +9,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 <!-- Add any information here about changes in master that have yet to be released -->
 
 ### Added
+- @(author) description
 
-- Added this changelog file
+## [1.3.0]
+
+### Added
+
+- (@hisaac) Added this changelog file
+- (@ty-wilson) Fixed issue #72 changing the default value on Apple Events to "Allow"
+- (@watkyn) Added support for the new Authorization key in Big Sur
+- (@watkyn) Changed minimum deployment target to macOS 10.15
+
 
 ## [1.2.1] - 2020-09-17
 
