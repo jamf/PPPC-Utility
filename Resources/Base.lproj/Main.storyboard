@@ -982,7 +982,7 @@
                                                     <subviews>
                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VVZ-4w-pac">
                                                             <rect key="frame" x="8" y="17" width="227" height="16"/>
-                                                            <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="All Files:" id="V29-FR-cfE">
+                                                            <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="Full Disk Access" id="V29-FR-cfE">
                                                                 <font key="font" usesAppearanceFont="YES"/>
                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
