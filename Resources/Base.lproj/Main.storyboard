@@ -2189,6 +2189,7 @@
                                             </tableColumns>
                                             <connections>
                                                 <binding destination="qGh-WP-H0J" name="content" keyPath="arrangedObjects" id="Oex-mk-tkg"/>
+                                                <binding destination="qGh-WP-H0J" name="selectionIndexes" keyPath="selectionIndexes" previousBinding="Oex-mk-tkg" id="JpG-KD-Xxw"/>
                                             </connections>
                                         </tableView>
                                     </subviews>
