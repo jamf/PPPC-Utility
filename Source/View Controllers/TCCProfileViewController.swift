@@ -92,11 +92,11 @@ class TCCProfileViewController: NSViewController {
     @IBOutlet weak var networkVolumesHelpButton: InfoButton!
     @IBOutlet weak var removableVolumesHelpButton: InfoButton!
 
-    @IBOutlet weak var addressBookStackView: NSStackView!
-    @IBOutlet weak var allFilesStackView: NSStackView!
+    @IBOutlet weak var adminFilesStackView: NSStackView!
     @IBOutlet weak var cameraStackView: NSStackView!
-    @IBOutlet weak var documentsFolderStackView: NSStackView!
-    @IBOutlet weak var fileProviderStackView: NSStackView!
+    @IBOutlet weak var desktopFolderStackView: NSStackView!
+    @IBOutlet weak var downloadsFolderStackView: NSStackView!
+    @IBOutlet weak var allFilesStackView: NSStackView!
     @IBOutlet weak var mediaLibraryStackView: NSStackView!
     @IBOutlet weak var networkVolumesStackView: NSStackView!
     @IBOutlet weak var postEventsStackView: NSStackView!
@@ -283,11 +283,11 @@ class TCCProfileViewController: NSViewController {
 
         setupDescriptions()
 
-        setupStackViewsWithBackground(stackViews: [addressBookStackView,
-                                                   allFilesStackView,
+        setupStackViewsWithBackground(stackViews: [adminFilesStackView,
                                                    cameraStackView,
-                                                   documentsFolderStackView,
-                                                   fileProviderStackView,
+                                                   desktopFolderStackView,
+                                                   downloadsFolderStackView,
+                                                   allFilesStackView,
                                                    mediaLibraryStackView,
                                                    networkVolumesStackView,
                                                    postEventsStackView,
