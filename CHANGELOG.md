@@ -7,9 +7,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ## [Unreleased]
 
 <!-- Add any information here about changes in master that have yet to be released -->
-
 ### Added
-- @(author) description
+- (@ty-wilson) Issue #79 Changed the property labels to match System Preferces with the MDM key listed in the help
+
+### Fixed
+- (@ty-wilson) Fixed issue #54 where the code signing label was truncated
+- (@ty-wilson) Fixed issue #83 where removing an apple event always removed the first one in the list instead of the selected item
+
 
 ## [1.3.0]
 
