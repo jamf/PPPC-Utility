@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16097.2"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17156"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -744,18 +745,27 @@
                                                 </connections>
                                             </textField>
                                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="bEE-Oo-wyb">
-                                                <rect key="frame" x="-2" y="0.0" width="904" height="28"/>
-                                                <textFieldCell key="cell" selectable="YES" id="3f9-Xq-tJZ">
+                                                <rect key="frame" x="-2" y="0.0" width="889" height="28"/>
+                                                <textFieldCell key="cell" truncatesLastVisibleLine="YES" selectable="YES" id="3f9-Xq-tJZ">
                                                     <font key="font" metaFont="systemLight" size="11"/>
                                                     <string key="title">identifier "com.jamfsoftware.jamf" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = "483DWKW443"</string>
                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="maximumNumberOfLines">
+                                                        <integer key="value" value="2"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <binding destination="qId-iR-fmq" name="value" keyPath="selection.codeRequirement" id="W7i-A1-fCf"/>
+                                                    <binding destination="qId-iR-fmq" name="toolTip" keyPath="selection.codeRequirement" id="tRu-OG-caY"/>
                                                 </connections>
                                             </textField>
                                         </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="bEE-Oo-wyb" secondAttribute="trailing" constant="15" id="eCI-sh-lej"/>
+                                        </constraints>
                                         <visibilityPriorities>
                                             <integer value="1000"/>
                                             <integer value="1000"/>
@@ -804,7 +814,7 @@
                                                             <rect key="frame" x="239" y="-3" width="210" height="54"/>
                                                             <popUpButtonCell key="cell" type="push" title="-" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="gnT-HC-9jQ" id="RH6-uh-B0i">
                                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                                <font key="font" metaFont="system"/>
+                                                                <font key="font" metaFont="menu"/>
                                                                 <menu key="menu" id="Uw7-JY-FAM">
                                                                     <items>
                                                                         <menuItem title="-" state="on" id="gnT-HC-9jQ"/>
@@ -847,70 +857,8 @@
                                                         <real value="3.4028234663852886e+38"/>
                                                     </customSpacing>
                                                 </stackView>
-                                                <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9iO-vL-Pwi" userLabel="Address Book Stack View">
-                                                    <rect key="frame" x="0.0" y="900" width="485" height="50"/>
-                                                    <subviews>
-                                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fwE-q7-wGs">
-                                                            <rect key="frame" x="8" y="17" width="227" height="16"/>
-                                                            <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="Address Book:" id="LpH-qV-2cA">
-                                                                <font key="font" usesAppearanceFont="YES"/>
-                                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                            </textFieldCell>
-                                                        </textField>
-                                                        <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kIP-RZ-a35">
-                                                            <rect key="frame" x="239" y="-3" width="210" height="54"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="width" constant="205" id="kHf-fg-wPa"/>
-                                                            </constraints>
-                                                            <popUpButtonCell key="cell" type="push" title="-" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="jNh-R9-M22" id="uZP-tO-4EJ">
-                                                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                                <font key="font" metaFont="system"/>
-                                                                <menu key="menu" id="NtA-4R-Glq">
-                                                                    <items>
-                                                                        <menuItem title="-" state="on" id="jNh-R9-M22"/>
-                                                                        <menuItem title="Allow" id="DEt-yN-NbD"/>
-                                                                        <menuItem title="Deny" id="vj5-HP-ar1"/>
-                                                                    </items>
-                                                                </menu>
-                                                            </popUpButtonCell>
-                                                            <connections>
-                                                                <binding destination="XZw-vD-zUR" name="content" keyPath="arrangedObjects" id="Rwd-KX-3mh"/>
-                                                                <binding destination="qId-iR-fmq" name="selectedObject" keyPath="selection.policy.AddressBook" previousBinding="Rwd-KX-3mh" id="IOU-5g-O2T"/>
-                                                            </connections>
-                                                        </popUpButton>
-                                                        <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9ei-Pc-bwm" customClass="InfoButton" customModule="PPPC_Utility" customModuleProvider="target">
-                                                            <rect key="frame" x="452" y="11" width="25" height="25"/>
-                                                            <buttonCell key="cell" type="help" bezelStyle="helpButton" alignment="center" borderStyle="border" inset="2" id="fdO-ZY-waE">
-                                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                                <font key="font" metaFont="system"/>
-                                                            </buttonCell>
-                                                            <connections>
-                                                                <action selector="showHelpMessage:" target="ZfI-PN-mks" id="mMu-xe-1Ay"/>
-                                                            </connections>
-                                                        </button>
-                                                    </subviews>
-                                                    <edgeInsets key="edgeInsets" left="10" right="10" top="0.0" bottom="0.0"/>
-                                                    <constraints>
-                                                        <constraint firstItem="fwE-q7-wGs" firstAttribute="centerY" secondItem="kIP-RZ-a35" secondAttribute="centerY" id="557-br-Zag"/>
-                                                        <constraint firstItem="9ei-Pc-bwm" firstAttribute="centerY" secondItem="kIP-RZ-a35" secondAttribute="centerY" id="S2y-uL-Hdj"/>
-                                                        <constraint firstAttribute="bottom" secondItem="kIP-RZ-a35" secondAttribute="bottom" id="aJu-2w-P6B"/>
-                                                        <constraint firstItem="kIP-RZ-a35" firstAttribute="top" secondItem="9iO-vL-Pwi" secondAttribute="top" id="h6d-IH-Ody"/>
-                                                        <constraint firstAttribute="height" constant="50" id="zvX-fJ-Yyf"/>
-                                                    </constraints>
-                                                    <visibilityPriorities>
-                                                        <integer value="1000"/>
-                                                        <integer value="1000"/>
-                                                        <integer value="1000"/>
-                                                    </visibilityPriorities>
-                                                    <customSpacing>
-                                                        <real value="3.4028234663852886e+38"/>
-                                                        <real value="3.4028234663852886e+38"/>
-                                                        <real value="3.4028234663852886e+38"/>
-                                                    </customSpacing>
-                                                </stackView>
                                                 <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xxW-i4-8Ul" userLabel="Admin Files Stack View">
-                                                    <rect key="frame" x="0.0" y="850" width="485" height="50"/>
+                                                    <rect key="frame" x="0.0" y="900" width="485" height="50"/>
                                                     <subviews>
                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YqG-2a-LjM">
                                                             <rect key="frame" x="8" y="17" width="227" height="16"/>
@@ -924,7 +872,7 @@
                                                             <rect key="frame" x="239" y="-3" width="210" height="54"/>
                                                             <popUpButtonCell key="cell" type="push" title="-" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="dd4-ok-ZNg" id="b3m-j7-PsZ">
                                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                                <font key="font" metaFont="system"/>
+                                                                <font key="font" metaFont="menu"/>
                                                                 <menu key="menu" id="c1w-K8-AC1">
                                                                     <items>
                                                                         <menuItem title="-" state="on" id="dd4-ok-ZNg"/>
@@ -967,70 +915,12 @@
                                                         <real value="3.4028234663852886e+38"/>
                                                     </customSpacing>
                                                 </stackView>
-                                                <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PKW-Wz-1vE">
-                                                    <rect key="frame" x="0.0" y="800" width="485" height="50"/>
-                                                    <subviews>
-                                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VVZ-4w-pac">
-                                                            <rect key="frame" x="8" y="17" width="227" height="16"/>
-                                                            <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="All Files:" id="V29-FR-cfE">
-                                                                <font key="font" usesAppearanceFont="YES"/>
-                                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                            </textFieldCell>
-                                                        </textField>
-                                                        <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="58v-wg-6Ru">
-                                                            <rect key="frame" x="239" y="-3" width="210" height="54"/>
-                                                            <popUpButtonCell key="cell" type="push" title="-" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="mSA-L6-7QG" id="PMl-Ow-o0m">
-                                                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                                <font key="font" metaFont="system"/>
-                                                                <menu key="menu" id="73Z-dX-dec">
-                                                                    <items>
-                                                                        <menuItem title="-" state="on" id="mSA-L6-7QG"/>
-                                                                        <menuItem title="Allow" id="tSo-rU-rpD"/>
-                                                                        <menuItem title="Deny" id="gql-rW-q40"/>
-                                                                    </items>
-                                                                </menu>
-                                                            </popUpButtonCell>
-                                                            <connections>
-                                                                <binding destination="gIb-t4-0XL" name="content" keyPath="arrangedObjects" id="BHg-6e-Cab"/>
-                                                                <binding destination="qId-iR-fmq" name="selectedObject" keyPath="selection.policy.SystemPolicyAllFiles" previousBinding="BHg-6e-Cab" id="hIQ-hA-xgQ"/>
-                                                            </connections>
-                                                        </popUpButton>
-                                                        <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="URO-T0-544" customClass="InfoButton" customModule="PPPC_Utility" customModuleProvider="target">
-                                                            <rect key="frame" x="452" y="11" width="25" height="25"/>
-                                                            <buttonCell key="cell" type="help" bezelStyle="helpButton" alignment="center" borderStyle="border" inset="2" id="TL1-WR-vaO">
-                                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                                <font key="font" metaFont="system"/>
-                                                            </buttonCell>
-                                                            <connections>
-                                                                <action selector="showHelpMessage:" target="ZfI-PN-mks" id="c3d-5w-Gf0"/>
-                                                            </connections>
-                                                        </button>
-                                                    </subviews>
-                                                    <edgeInsets key="edgeInsets" left="10" right="10" top="0.0" bottom="0.0"/>
-                                                    <constraints>
-                                                        <constraint firstItem="58v-wg-6Ru" firstAttribute="top" secondItem="PKW-Wz-1vE" secondAttribute="top" id="Hut-Ry-cif"/>
-                                                        <constraint firstItem="URO-T0-544" firstAttribute="centerY" secondItem="58v-wg-6Ru" secondAttribute="centerY" id="JTS-P2-qqa"/>
-                                                        <constraint firstItem="VVZ-4w-pac" firstAttribute="centerY" secondItem="58v-wg-6Ru" secondAttribute="centerY" id="RSE-8c-Pfi"/>
-                                                        <constraint firstAttribute="bottom" secondItem="58v-wg-6Ru" secondAttribute="bottom" id="r6W-wD-VXb"/>
-                                                    </constraints>
-                                                    <visibilityPriorities>
-                                                        <integer value="1000"/>
-                                                        <integer value="1000"/>
-                                                        <integer value="1000"/>
-                                                    </visibilityPriorities>
-                                                    <customSpacing>
-                                                        <real value="3.4028234663852886e+38"/>
-                                                        <real value="3.4028234663852886e+38"/>
-                                                        <real value="3.4028234663852886e+38"/>
-                                                    </customSpacing>
-                                                </stackView>
                                                 <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7Go-DV-ssf">
-                                                    <rect key="frame" x="0.0" y="750" width="485" height="50"/>
+                                                    <rect key="frame" x="0.0" y="850" width="485" height="50"/>
                                                     <subviews>
                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="nGq-tk-4FO">
                                                             <rect key="frame" x="8" y="17" width="227" height="16"/>
-                                                            <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="Calendar:" id="XMX-Bo-y4c">
+                                                            <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="Calendars:" id="XMX-Bo-y4c">
                                                                 <font key="font" usesAppearanceFont="YES"/>
                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1040,7 +930,7 @@
                                                             <rect key="frame" x="239" y="-3" width="210" height="54"/>
                                                             <popUpButtonCell key="cell" type="push" title="-" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="QYY-1f-X7h" id="hmE-fk-BwT">
                                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                                <font key="font" metaFont="system"/>
+                                                                <font key="font" metaFont="menu"/>
                                                                 <menu key="menu" id="zie-xg-jr9">
                                                                     <items>
                                                                         <menuItem title="-" state="on" id="QYY-1f-X7h"/>
@@ -1086,7 +976,7 @@
                                                     </customSpacing>
                                                 </stackView>
                                                 <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LPV-zN-38T" userLabel="Camera Stack View">
-                                                    <rect key="frame" x="0.0" y="700" width="485" height="50"/>
+                                                    <rect key="frame" x="0.0" y="800" width="485" height="50"/>
                                                     <subviews>
                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xmP-OB-ADb">
                                                             <rect key="frame" x="8" y="17" width="227" height="16"/>
@@ -1100,7 +990,7 @@
                                                             <rect key="frame" x="239" y="-3" width="210" height="54"/>
                                                             <popUpButtonCell key="cell" type="push" title="-" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="F7s-dB-ccu" id="oLo-5v-B40">
                                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                                <font key="font" metaFont="system"/>
+                                                                <font key="font" metaFont="menu"/>
                                                                 <menu key="menu" id="WAk-jX-QZl">
                                                                     <items>
                                                                         <menuItem title="-" state="on" id="F7s-dB-ccu"/>
@@ -1142,8 +1032,70 @@
                                                         <real value="3.4028234663852886e+38"/>
                                                     </customSpacing>
                                                 </stackView>
+                                                <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9iO-vL-Pwi" userLabel="Address Book Stack View">
+                                                    <rect key="frame" x="0.0" y="750" width="485" height="50"/>
+                                                    <subviews>
+                                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fwE-q7-wGs">
+                                                            <rect key="frame" x="8" y="17" width="227" height="16"/>
+                                                            <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="Contacts:" id="LpH-qV-2cA">
+                                                                <font key="font" usesAppearanceFont="YES"/>
+                                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                            </textFieldCell>
+                                                        </textField>
+                                                        <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kIP-RZ-a35">
+                                                            <rect key="frame" x="239" y="-3" width="210" height="54"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="205" id="kHf-fg-wPa"/>
+                                                            </constraints>
+                                                            <popUpButtonCell key="cell" type="push" title="-" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="jNh-R9-M22" id="uZP-tO-4EJ">
+                                                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                                                <font key="font" metaFont="menu"/>
+                                                                <menu key="menu" id="NtA-4R-Glq">
+                                                                    <items>
+                                                                        <menuItem title="-" state="on" id="jNh-R9-M22"/>
+                                                                        <menuItem title="Allow" id="DEt-yN-NbD"/>
+                                                                        <menuItem title="Deny" id="vj5-HP-ar1"/>
+                                                                    </items>
+                                                                </menu>
+                                                            </popUpButtonCell>
+                                                            <connections>
+                                                                <binding destination="XZw-vD-zUR" name="content" keyPath="arrangedObjects" id="Rwd-KX-3mh"/>
+                                                                <binding destination="qId-iR-fmq" name="selectedObject" keyPath="selection.policy.AddressBook" previousBinding="Rwd-KX-3mh" id="IOU-5g-O2T"/>
+                                                            </connections>
+                                                        </popUpButton>
+                                                        <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9ei-Pc-bwm" customClass="InfoButton" customModule="PPPC_Utility" customModuleProvider="target">
+                                                            <rect key="frame" x="452" y="11" width="25" height="25"/>
+                                                            <buttonCell key="cell" type="help" bezelStyle="helpButton" alignment="center" borderStyle="border" inset="2" id="fdO-ZY-waE">
+                                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                <font key="font" metaFont="system"/>
+                                                            </buttonCell>
+                                                            <connections>
+                                                                <action selector="showHelpMessage:" target="ZfI-PN-mks" id="mMu-xe-1Ay"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
+                                                    <edgeInsets key="edgeInsets" left="10" right="10" top="0.0" bottom="0.0"/>
+                                                    <constraints>
+                                                        <constraint firstItem="fwE-q7-wGs" firstAttribute="centerY" secondItem="kIP-RZ-a35" secondAttribute="centerY" id="557-br-Zag"/>
+                                                        <constraint firstItem="9ei-Pc-bwm" firstAttribute="centerY" secondItem="kIP-RZ-a35" secondAttribute="centerY" id="S2y-uL-Hdj"/>
+                                                        <constraint firstAttribute="bottom" secondItem="kIP-RZ-a35" secondAttribute="bottom" id="aJu-2w-P6B"/>
+                                                        <constraint firstItem="kIP-RZ-a35" firstAttribute="top" secondItem="9iO-vL-Pwi" secondAttribute="top" id="h6d-IH-Ody"/>
+                                                        <constraint firstAttribute="height" constant="50" id="zvX-fJ-Yyf"/>
+                                                    </constraints>
+                                                    <visibilityPriorities>
+                                                        <integer value="1000"/>
+                                                        <integer value="1000"/>
+                                                        <integer value="1000"/>
+                                                    </visibilityPriorities>
+                                                    <customSpacing>
+                                                        <real value="3.4028234663852886e+38"/>
+                                                        <real value="3.4028234663852886e+38"/>
+                                                        <real value="3.4028234663852886e+38"/>
+                                                    </customSpacing>
+                                                </stackView>
                                                 <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HAW-s8-s0x">
-                                                    <rect key="frame" x="0.0" y="650" width="485" height="50"/>
+                                                    <rect key="frame" x="0.0" y="700" width="485" height="50"/>
                                                     <subviews>
                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="3DS-i5-rT9">
                                                             <rect key="frame" x="8" y="17" width="227" height="16"/>
@@ -1157,7 +1109,7 @@
                                                             <rect key="frame" x="239" y="-3" width="210" height="54"/>
                                                             <popUpButtonCell key="cell" type="push" title="-" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="FMM-ro-V8b" id="VMH-px-qdz">
                                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                                <font key="font" metaFont="system"/>
+                                                                <font key="font" metaFont="menu"/>
                                                                 <menu key="menu" id="bke-kF-sVp">
                                                                     <items>
                                                                         <menuItem title="-" state="on" id="FMM-ro-V8b"/>
@@ -1200,7 +1152,7 @@
                                                     </customSpacing>
                                                 </stackView>
                                                 <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pYo-Lq-NzH" userLabel="Documents Folder Stack View">
-                                                    <rect key="frame" x="0.0" y="600" width="485" height="50"/>
+                                                    <rect key="frame" x="0.0" y="650" width="485" height="50"/>
                                                     <subviews>
                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sSA-ZV-lYH">
                                                             <rect key="frame" x="8" y="17" width="227" height="16"/>
@@ -1214,7 +1166,7 @@
                                                             <rect key="frame" x="239" y="-3" width="210" height="54"/>
                                                             <popUpButtonCell key="cell" type="push" title="-" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="PaS-xa-UD8" id="ulk-2T-V0g">
                                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                                <font key="font" metaFont="system"/>
+                                                                <font key="font" metaFont="menu"/>
                                                                 <menu key="menu" id="cmF-eV-Cmk">
                                                                     <items>
                                                                         <menuItem title="-" state="on" id="PaS-xa-UD8"/>
@@ -1257,7 +1209,7 @@
                                                     </customSpacing>
                                                 </stackView>
                                                 <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FlL-qy-KET">
-                                                    <rect key="frame" x="0.0" y="550" width="485" height="50"/>
+                                                    <rect key="frame" x="0.0" y="600" width="485" height="50"/>
                                                     <subviews>
                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xMN-Jt-QPv">
                                                             <rect key="frame" x="8" y="17" width="227" height="16"/>
@@ -1271,7 +1223,7 @@
                                                             <rect key="frame" x="239" y="-3" width="210" height="54"/>
                                                             <popUpButtonCell key="cell" type="push" title="-" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="NIk-oX-DQf" id="6j7-Dt-umk">
                                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                                <font key="font" metaFont="system"/>
+                                                                <font key="font" metaFont="menu"/>
                                                                 <menu key="menu" id="nVX-Zt-hyQ">
                                                                     <items>
                                                                         <menuItem title="-" state="on" id="NIk-oX-DQf"/>
@@ -1314,7 +1266,7 @@
                                                     </customSpacing>
                                                 </stackView>
                                                 <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="woU-j8-E1d" userLabel="File Provider Stack View">
-                                                    <rect key="frame" x="0.0" y="500" width="485" height="50"/>
+                                                    <rect key="frame" x="0.0" y="550" width="485" height="50"/>
                                                     <subviews>
                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="99h-fH-EoJ">
                                                             <rect key="frame" x="8" y="17" width="227" height="16"/>
@@ -1328,7 +1280,7 @@
                                                             <rect key="frame" x="239" y="-3" width="210" height="54"/>
                                                             <popUpButtonCell key="cell" type="push" title="-" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="FIX-n3-lFP" id="0vX-YX-QTC">
                                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                                <font key="font" metaFont="system"/>
+                                                                <font key="font" metaFont="menu"/>
                                                                 <menu key="menu" id="SK1-fH-Bqa">
                                                                     <items>
                                                                         <menuItem title="-" state="on" id="FIX-n3-lFP"/>
@@ -1370,12 +1322,70 @@
                                                         <real value="3.4028234663852886e+38"/>
                                                     </customSpacing>
                                                 </stackView>
+                                                <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PKW-Wz-1vE">
+                                                    <rect key="frame" x="0.0" y="500" width="485" height="50"/>
+                                                    <subviews>
+                                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VVZ-4w-pac">
+                                                            <rect key="frame" x="8" y="17" width="227" height="16"/>
+                                                            <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="Full Disk Access:" id="V29-FR-cfE">
+                                                                <font key="font" usesAppearanceFont="YES"/>
+                                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                            </textFieldCell>
+                                                        </textField>
+                                                        <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="58v-wg-6Ru">
+                                                            <rect key="frame" x="239" y="-3" width="210" height="54"/>
+                                                            <popUpButtonCell key="cell" type="push" title="-" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="mSA-L6-7QG" id="PMl-Ow-o0m">
+                                                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                                                <font key="font" metaFont="menu"/>
+                                                                <menu key="menu" id="73Z-dX-dec">
+                                                                    <items>
+                                                                        <menuItem title="-" state="on" id="mSA-L6-7QG"/>
+                                                                        <menuItem title="Allow" id="tSo-rU-rpD"/>
+                                                                        <menuItem title="Deny" id="gql-rW-q40"/>
+                                                                    </items>
+                                                                </menu>
+                                                            </popUpButtonCell>
+                                                            <connections>
+                                                                <binding destination="gIb-t4-0XL" name="content" keyPath="arrangedObjects" id="BHg-6e-Cab"/>
+                                                                <binding destination="qId-iR-fmq" name="selectedObject" keyPath="selection.policy.SystemPolicyAllFiles" previousBinding="BHg-6e-Cab" id="hIQ-hA-xgQ"/>
+                                                            </connections>
+                                                        </popUpButton>
+                                                        <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="URO-T0-544" customClass="InfoButton" customModule="PPPC_Utility" customModuleProvider="target">
+                                                            <rect key="frame" x="452" y="11" width="25" height="25"/>
+                                                            <buttonCell key="cell" type="help" bezelStyle="helpButton" alignment="center" borderStyle="border" inset="2" id="TL1-WR-vaO">
+                                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                <font key="font" metaFont="system"/>
+                                                            </buttonCell>
+                                                            <connections>
+                                                                <action selector="showHelpMessage:" target="ZfI-PN-mks" id="c3d-5w-Gf0"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
+                                                    <edgeInsets key="edgeInsets" left="10" right="10" top="0.0" bottom="0.0"/>
+                                                    <constraints>
+                                                        <constraint firstItem="58v-wg-6Ru" firstAttribute="top" secondItem="PKW-Wz-1vE" secondAttribute="top" id="Hut-Ry-cif"/>
+                                                        <constraint firstItem="URO-T0-544" firstAttribute="centerY" secondItem="58v-wg-6Ru" secondAttribute="centerY" id="JTS-P2-qqa"/>
+                                                        <constraint firstItem="VVZ-4w-pac" firstAttribute="centerY" secondItem="58v-wg-6Ru" secondAttribute="centerY" id="RSE-8c-Pfi"/>
+                                                        <constraint firstAttribute="bottom" secondItem="58v-wg-6Ru" secondAttribute="bottom" id="r6W-wD-VXb"/>
+                                                    </constraints>
+                                                    <visibilityPriorities>
+                                                        <integer value="1000"/>
+                                                        <integer value="1000"/>
+                                                        <integer value="1000"/>
+                                                    </visibilityPriorities>
+                                                    <customSpacing>
+                                                        <real value="3.4028234663852886e+38"/>
+                                                        <real value="3.4028234663852886e+38"/>
+                                                        <real value="3.4028234663852886e+38"/>
+                                                    </customSpacing>
+                                                </stackView>
                                                 <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Law-1x-mbw">
                                                     <rect key="frame" x="0.0" y="450" width="485" height="50"/>
                                                     <subviews>
-                                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2AH-a5-Lqb">
+                                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2AH-a5-Lqb" userLabel="Input Monitoring:">
                                                             <rect key="frame" x="8" y="17" width="227" height="16"/>
-                                                            <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="Listen Event:" id="Ze0-2e-eEp">
+                                                            <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="Input Monitoring:" id="Ze0-2e-eEp" userLabel="Input Monitoring:">
                                                                 <font key="font" usesAppearanceFont="YES"/>
                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1385,7 +1395,7 @@
                                                             <rect key="frame" x="239" y="-3" width="210" height="54"/>
                                                             <popUpButtonCell key="cell" type="push" title="-" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="V86-LK-5LV" id="9DJ-7D-6AW">
                                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                                <font key="font" metaFont="system"/>
+                                                                <font key="font" metaFont="menu"/>
                                                                 <menu key="menu" id="WO5-H6-1Om">
                                                                     <items>
                                                                         <menuItem title="-" state="on" id="V86-LK-5LV"/>
@@ -1442,7 +1452,7 @@
                                                             <rect key="frame" x="239" y="-3" width="210" height="54"/>
                                                             <popUpButtonCell key="cell" type="push" title="-" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="4ie-PV-k4r" id="aQd-c0-COU">
                                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                                <font key="font" metaFont="system"/>
+                                                                <font key="font" metaFont="menu"/>
                                                                 <menu key="menu" id="8ny-92-gMJ">
                                                                     <items>
                                                                         <menuItem title="-" state="on" id="4ie-PV-k4r"/>
@@ -1499,7 +1509,7 @@
                                                             <rect key="frame" x="239" y="-3" width="210" height="54"/>
                                                             <popUpButtonCell key="cell" type="push" title="-" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="8jN-pb-jTw" id="87t-Yf-7J1">
                                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                                <font key="font" metaFont="system"/>
+                                                                <font key="font" metaFont="menu"/>
                                                                 <menu key="menu" id="0B4-rI-y49">
                                                                     <items>
                                                                         <menuItem title="-" state="on" id="8jN-pb-jTw"/>
@@ -1556,7 +1566,7 @@
                                                             <rect key="frame" x="239" y="-3" width="210" height="54"/>
                                                             <popUpButtonCell key="cell" type="push" title="-" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="Wlc-5b-ZH6" id="3Yo-n3-2Cq">
                                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                                <font key="font" metaFont="system"/>
+                                                                <font key="font" metaFont="menu"/>
                                                                 <menu key="menu" id="Zdh-6Z-aoJ">
                                                                     <items>
                                                                         <menuItem title="-" state="on" id="Wlc-5b-ZH6"/>
@@ -1613,7 +1623,7 @@
                                                             <rect key="frame" x="239" y="-3" width="210" height="54"/>
                                                             <popUpButtonCell key="cell" type="push" title="-" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="xHC-HW-yVt" id="6Us-f3-jyq">
                                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                                <font key="font" metaFont="system"/>
+                                                                <font key="font" metaFont="menu"/>
                                                                 <menu key="menu" id="f2e-ke-Gdx">
                                                                     <items>
                                                                         <menuItem title="-" state="on" id="xHC-HW-yVt"/>
@@ -1671,7 +1681,7 @@
                                                             <rect key="frame" x="239" y="-3" width="210" height="54"/>
                                                             <popUpButtonCell key="cell" type="push" title="-" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="49Y-CL-Jmr" id="BTV-ls-Zns">
                                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                                <font key="font" metaFont="system"/>
+                                                                <font key="font" metaFont="menu"/>
                                                                 <menu key="menu" id="s8f-5D-Ikn">
                                                                     <items>
                                                                         <menuItem title="-" state="on" id="49Y-CL-Jmr"/>
@@ -1729,7 +1739,7 @@
                                                             <rect key="frame" x="239" y="-3" width="210" height="54"/>
                                                             <popUpButtonCell key="cell" type="push" title="-" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="JMO-rX-lHD" id="Fk2-Us-Q2u">
                                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                                <font key="font" metaFont="system"/>
+                                                                <font key="font" metaFont="menu"/>
                                                                 <menu key="menu" id="5ac-ZX-Xgu">
                                                                     <items>
                                                                         <menuItem title="-" state="on" id="JMO-rX-lHD"/>
@@ -1787,7 +1797,7 @@
                                                             <rect key="frame" x="239" y="-3" width="210" height="54"/>
                                                             <popUpButtonCell key="cell" type="push" title="-" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="bLI-tr-vzf" id="ZxY-Qi-hwN">
                                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                                <font key="font" metaFont="system"/>
+                                                                <font key="font" metaFont="menu"/>
                                                                 <menu key="menu" id="1Zc-3K-FoR">
                                                                     <items>
                                                                         <menuItem title="-" state="on" id="bLI-tr-vzf"/>
@@ -1832,9 +1842,9 @@
                                                 <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kPv-Tl-c0b">
                                                     <rect key="frame" x="0.0" y="50" width="485" height="50"/>
                                                     <subviews>
-                                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="o5Q-No-Cpy">
+                                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="o5Q-No-Cpy" userLabel="Screen Recording:">
                                                             <rect key="frame" x="8" y="17" width="227" height="16"/>
-                                                            <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="Screen Capture:" id="OZp-QI-a9L">
+                                                            <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="Screen Recording:" id="OZp-QI-a9L" userLabel="Screen Recording:">
                                                                 <font key="font" usesAppearanceFont="YES"/>
                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1844,7 +1854,7 @@
                                                             <rect key="frame" x="239" y="-3" width="210" height="54"/>
                                                             <popUpButtonCell key="cell" type="push" title="-" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="4xV-9U-FNf" id="Oe4-s2-JcM">
                                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                                <font key="font" metaFont="system"/>
+                                                                <font key="font" metaFont="menu"/>
                                                                 <menu key="menu" id="EDV-QM-1Fj">
                                                                     <items>
                                                                         <menuItem title="-" state="on" id="4xV-9U-FNf"/>
@@ -1901,7 +1911,7 @@
                                                             <rect key="frame" x="239" y="-3" width="210" height="54"/>
                                                             <popUpButtonCell key="cell" type="push" title="-" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="gwx-us-L0W" id="Dx3-v9-nfb">
                                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                                <font key="font" metaFont="system"/>
+                                                                <font key="font" metaFont="menu"/>
                                                                 <menu key="menu" id="MAS-PQ-RQw">
                                                                     <items>
                                                                         <menuItem title="-" state="on" id="gwx-us-L0W"/>
@@ -2060,7 +2070,7 @@
                                     <rect key="frame" x="1" y="542" width="485" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
-                                <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="0.99548532731376971" horizontal="NO" id="emx-h0-Wbi">
+                                <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="0.11286681715575619" horizontal="NO" id="emx-h0-Wbi">
                                     <rect key="frame" x="470" y="1" width="16" height="557"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
@@ -2136,7 +2146,7 @@
                                                                             </constraints>
                                                                             <popUpButtonCell key="cell" type="push" title="Allow" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="Bu1-mf-M4Z" id="XDn-sQ-YyH">
                                                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                                                <font key="font" metaFont="system"/>
+                                                                                <font key="font" metaFont="menu"/>
                                                                                 <menu key="menu" id="bWX-zi-tfG">
                                                                                     <items>
                                                                                         <menuItem title="Allow" state="on" id="Bu1-mf-M4Z"/>
@@ -2179,6 +2189,7 @@
                                             </tableColumns>
                                             <connections>
                                                 <binding destination="qGh-WP-H0J" name="content" keyPath="arrangedObjects" id="Oex-mk-tkg"/>
+                                                <binding destination="qGh-WP-H0J" name="selectionIndexes" keyPath="selectionIndexes" previousBinding="Oex-mk-tkg" id="JpG-KD-Xxw"/>
                                             </connections>
                                         </tableView>
                                     </subviews>
@@ -2248,7 +2259,7 @@
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView translatesAutoresizingMaskIntoConstraints="NO" id="tCx-7E-F20">
-                                                            <rect key="frame" x="0.0" y="0.0" width="195" height="52"/>
+                                                            <rect key="frame" x="1" y="1" width="195" height="52"/>
                                                             <subviews>
                                                                 <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="J9w-FR-5v2">
                                                                     <rect key="frame" x="8" y="2" width="179" height="48"/>
@@ -2473,6 +2484,7 @@
                         <outlet property="adminFilesHelpButton" destination="pLo-RM-uFJ" id="5jk-Ri-8dp"/>
                         <outlet property="adminFilesPopUp" destination="PgW-Ff-mhx" id="IhE-C7-Zmz"/>
                         <outlet property="adminFilesPopUpAC" destination="tid-Bp-2ho" id="ucY-zh-EuJ"/>
+                        <outlet property="adminFilesStackView" destination="xxW-i4-8Ul" id="NLA-cr-anN"/>
                         <outlet property="allFilesHelpButton" destination="URO-T0-544" id="xq1-vV-KtF"/>
                         <outlet property="allFilesPopUp" destination="58v-wg-6Ru" id="6PZ-nW-b1b"/>
                         <outlet property="allFilesPopUpAC" destination="gIb-t4-0XL" id="HLu-5D-I8P"/>
@@ -2491,6 +2503,7 @@
                         <outlet property="dekstopFolderPopUp" destination="JIN-BO-Fp8" id="Ose-bV-0yw"/>
                         <outlet property="dekstopFolderPopUpAC" destination="mD8-Sp-mTy" id="hIC-Zx-Ekv"/>
                         <outlet property="desktopFolderHelpButton" destination="o2Q-LB-gdz" id="poa-07-vLW"/>
+                        <outlet property="desktopFolderStackView" destination="HAW-s8-s0x" id="ZWu-KF-0dH"/>
                         <outlet property="documentsFolderHelpButton" destination="AWQ-jY-FwH" id="ZjF-e6-R2e"/>
                         <outlet property="documentsFolderPopUp" destination="YNV-Zn-1jp" id="MES-qN-mHJ"/>
                         <outlet property="documentsFolderPopUpAC" destination="odu-WT-B9X" id="4eR-ci-0ym"/>
@@ -2498,6 +2511,7 @@
                         <outlet property="downloadsFolderHelpButton" destination="1Ve-3n-a7B" id="SR3-ex-xZe"/>
                         <outlet property="downloadsFolderPopUp" destination="gXX-Zm-0bB" id="jYT-fV-Fdp"/>
                         <outlet property="downloadsFolderPopUpAC" destination="enB-rh-Zf7" id="ceE-fv-Y1e"/>
+                        <outlet property="downloadsFolderStackView" destination="FlL-qy-KET" id="uKW-PU-Sga"/>
                         <outlet property="executablesAC" destination="qId-iR-fmq" id="TA6-j3-i8Q"/>
                         <outlet property="executablesTable" destination="LpN-jq-LDz" id="kq6-kb-h7f"/>
                         <outlet property="fileProviderHelpButton" destination="dRq-MC-7oj" id="hhw-Gd-ZLI"/>
@@ -3044,7 +3058,7 @@
                                             <rect key="frame" x="154" y="25" width="77" height="25"/>
                                             <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="TI3-0t-2MB" id="j64-fe-pJg">
                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" metaFont="system"/>
+                                                <font key="font" metaFont="menu"/>
                                                 <menu key="menu" id="TVZ-hw-jIl">
                                                     <items>
                                                         <menuItem title="Item 1" state="on" id="TI3-0t-2MB"/>
@@ -3401,7 +3415,7 @@ Gw
                                             <rect key="frame" x="154" y="-3" width="77" height="25"/>
                                             <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="b7k-d6-Hiv" id="wjT-vR-DxF">
                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" metaFont="system"/>
+                                                <font key="font" metaFont="menu"/>
                                                 <menu key="menu" id="Afr-tz-KGm">
                                                     <items>
                                                         <menuItem title="Item 1" state="on" id="b7k-d6-Hiv"/>
