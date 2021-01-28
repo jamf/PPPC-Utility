@@ -350,6 +350,7 @@ class UploadViewController: NSViewController {
                 }
             }
         } else {
+            guard username != nil else { return }
             try? SecurityWrapper.removeCredentials(server: jamfProServerLabel.stringValue, username: username)
         }
     }
