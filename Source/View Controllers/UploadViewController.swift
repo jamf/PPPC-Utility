@@ -53,7 +53,7 @@ class UploadViewController: NSViewController {
     @objc dynamic var username: String?
     @objc dynamic var password: String?
     @objc dynamic var payloadName: String?
-    @objc dynamic var payloadIdentifier: String! = UUID().uuidString
+    @objc dynamic var payloadIdentifier = UUID().uuidString
     @objc dynamic var payloadDescription: String?
 
     @objc dynamic var site = false
