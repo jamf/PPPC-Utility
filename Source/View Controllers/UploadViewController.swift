@@ -81,7 +81,7 @@ class UploadViewController: NSViewController {
     @IBAction func uploadPressed(_ sender: NSButton) {
         print("Uploading profile: \(payloadName ?? "?")")
         self.networkOperationsTitle = "Uploading \(payloadName ?? "profile")"
-        
+
         guard let username = username, let password = password else {
             print("Username or password not set")
             Alert().display(header: "Attention:", message: "Username or password not set")
@@ -121,7 +121,7 @@ class UploadViewController: NSViewController {
             }
             return
         }
-        
+
         print("Checking connection")
         self.networkOperationsTitle = "Checking Jamf Pro server"
 
@@ -245,9 +245,9 @@ class UploadViewController: NSViewController {
     }
 
     func updateCredentialsAvailable() {
-        guard let username = username, !username.isEmpty
-              , let password = password, !password.isEmpty
-              , !jamfProServerLabel.stringValue.isEmpty else {
+        guard let username = username, !username.isEmpty,
+              let password = password, !password.isEmpty,
+              !jamfProServerLabel.stringValue.isEmpty else {
             if credentialsAvailable { credentialsAvailable = false }
             return
         }
@@ -260,7 +260,7 @@ class UploadViewController: NSViewController {
             if readyForUpload { readyForUpload = false}
             return
         }
-        
+
         guard readyForUpload != (
             credentialsVerified
             && credentialsAvailable
