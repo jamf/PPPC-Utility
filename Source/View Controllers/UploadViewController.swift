@@ -245,19 +245,18 @@ class UploadViewController: NSViewController {
     }
 
     func updateCredentialsAvailable() {
-        guard let username = username, !username.isEmpty,
-              let password = password, !password.isEmpty,
-              !jamfProServerLabel.stringValue.isEmpty else {
-            if credentialsAvailable { credentialsAvailable = false }
-            return
+        if let username = username, !username.isEmpty,
+           let password = password, !password.isEmpty,
+           !jamfProServerLabel.stringValue.isEmpty {
+            credentialsAvailable = true
+        } else {
+            credentialsAvailable = false
         }
-
-        if !credentialsAvailable { credentialsAvailable = true }
     }
 
     func updateReadForUpload() {
         guard let payloadName = payloadName, !payloadName.isEmpty else {
-            if readyForUpload { readyForUpload = false}
+            readyForUpload = false
             return
         }
 
@@ -359,10 +358,11 @@ class UploadViewController: NSViewController {
 
     func syncronizeCredentials() {
         if saveCredentials {
-            if credentialsAvailable {
+            if let username = username, let password = password, credentialsAvailable {
                 do {
-                    try SecurityWrapper.saveCredentials(username: username!,
-                                                        password: password!,
+
+                    try SecurityWrapper.saveCredentials(username: username,
+                                                        password: password,
                                                         server: jamfProServerLabel.stringValue)
                 } catch {
                     print("Failed to save credentials with error: \(error)")
