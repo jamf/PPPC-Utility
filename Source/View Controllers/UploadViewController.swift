@@ -50,11 +50,11 @@ class UploadViewController: NSViewController {
     @objc dynamic var saveCredentials = true
     @objc dynamic var readyForUpload = false
 
-    @objc dynamic var username: String!
-    @objc dynamic var password: String!
-    @objc dynamic var payloadName: String!
-    @objc dynamic var payloadIdentifier: String! = UUID().uuidString
-    @objc dynamic var payloadDescription: String!
+    @objc dynamic var username: String?
+    @objc dynamic var password: String?
+    @objc dynamic var payloadName: String?
+    @objc dynamic var payloadIdentifier = UUID().uuidString
+    @objc dynamic var payloadDescription: String?
 
     @objc dynamic var site = false
     @objc dynamic var siteName: String?
@@ -82,6 +82,12 @@ class UploadViewController: NSViewController {
         print("Uploading profile: \(payloadName ?? "?")")
         self.networkOperationsTitle = "Uploading \(payloadName ?? "profile")"
 
+        guard let username = username, let password = password else {
+            print("Username or password not set")
+            Alert().display(header: "Attention:", message: "Username or password not set")
+            return
+        }
+
         let model = Model.shared
         let profile = model.exportProfile(organization: organizationLabel.stringValue,
                                           identifier: payloadIdentifierLabel.stringValue,
@@ -107,6 +113,15 @@ class UploadViewController: NSViewController {
     }
 
     @IBAction func checkConnectionPressed(_ sender: NSButton) {
+        guard let username = username, let password = password else {
+            print("Username or password not set")
+            Alert().display(header: "Attention:", message: "Username or password not set")
+            DispatchQueue.main.async {
+                self.handleCheckConnectionFailure(enforceSigning: nil)
+            }
+            return
+        }
+
         print("Checking connection")
         self.networkOperationsTitle = "Checking Jamf Pro server"
 
@@ -230,23 +245,25 @@ class UploadViewController: NSViewController {
     }
 
     func updateCredentialsAvailable() {
-        guard credentialsAvailable != (
-            !jamfProServerLabel.stringValue.isEmpty
-            && (username != nil)
-            && !username.isEmpty
-            && (password != nil)
-            && !password.isEmpty) else { return }
-        credentialsAvailable = !credentialsAvailable
+        if let username = username, !username.isEmpty,
+           let password = password, !password.isEmpty,
+           !jamfProServerLabel.stringValue.isEmpty {
+            credentialsAvailable = true
+        } else {
+            credentialsAvailable = false
+        }
     }
 
     func updateReadForUpload() {
+        guard let payloadName = payloadName, !payloadName.isEmpty else {
+            readyForUpload = false
+            return
+        }
+
         guard readyForUpload != (
             credentialsVerified
             && credentialsAvailable
             && !organizationLabel.stringValue.isEmpty
-            && (payloadName != nil)
-            && !payloadName.isEmpty
-            && (payloadIdentifier != nil)
             && !payloadIdentifier.isEmpty
             && isSiteReadyToUpload())
             else { return }
@@ -340,8 +357,9 @@ class UploadViewController: NSViewController {
 
     func syncronizeCredentials() {
         if saveCredentials {
-            if credentialsAvailable {
+            if let username = username, let password = password, credentialsAvailable {
                 do {
+
                     try SecurityWrapper.saveCredentials(username: username,
                                                         password: password,
                                                         server: jamfProServerLabel.stringValue)
@@ -350,6 +368,7 @@ class UploadViewController: NSViewController {
                 }
             }
         } else {
+            guard let username = username else { return }
             try? SecurityWrapper.removeCredentials(server: jamfProServerLabel.stringValue, username: username)
         }
     }
