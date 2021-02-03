@@ -264,7 +264,6 @@ class UploadViewController: NSViewController {
             credentialsVerified
             && credentialsAvailable
             && !organizationLabel.stringValue.isEmpty
-            && (payloadIdentifier != nil)
             && !payloadIdentifier.isEmpty
             && isSiteReadyToUpload())
             else { return }
