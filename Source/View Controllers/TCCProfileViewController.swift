@@ -437,31 +437,33 @@ extension TCCProfileViewController: NSTableViewDataSource {
             return false
         }
 
-        guard let url = urls?.first else { return false  }
-
         guard let window = self.view.window else { return false }
-        var canAdd = true
-        model.loadExecutable(url: url) { [weak self] result in
-            switch result {
-            case .success(let newExecutable):
-                if tableView == self?.executablesTable {
-                    guard self?.executablesAC.canInsert ?? false else {
-                        canAdd = false
-                        return
+
+        var addedAny = false
+        urls?.forEach { (url) in
+            model.loadExecutable(url: url) { [weak self] result in
+                switch result {
+                case .success(let newExecutable):
+                    if tableView == self?.executablesTable {
+                        guard self?.executablesAC.canInsert ?? false else {
+                            return
+                        }
+                        if self?.shouldExecutableBeAdded(newExecutable) ?? false {
+                            self?.executablesAC.insert(newExecutable, atArrangedObjectIndex: row)
+                            addedAny = true
+                        }
+                    } else {
+                        self?.insertIntoAppleEvents(newExecutable)
+                        addedAny = true
                     }
-                    if self?.shouldExecutableBeAdded(newExecutable) ?? false {
-                        self?.executablesAC.insert(newExecutable, atArrangedObjectIndex: row)
-                    }
-                } else {
-                    self?.insertIntoAppleEvents(newExecutable)
+                case .failure(let error):
+                    self?.showAlert(error, for: window)
+                    print(error)
                 }
-            case .failure(let error):
-                self?.showAlert(error, for: window)
-                print(error)
-                canAdd = false
             }
         }
-        return canAdd
+
+        return addedAny
     }
 
 }
