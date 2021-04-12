@@ -42,58 +42,58 @@ class ModelTests: XCTestCase {
     // MARK: - tests for getExecutableFrom*
 
     func testGetExecutableBasedOnIdentifierAndCodeRequirement_BundleIdentifierType() {
-        //given
+        // given
             let identifier = "com.example.App"
             let codeRequirement = "testCodeRequirement"
 
-        //when
+        // when
             let executable = model.getExecutableFrom(identifier: identifier, codeRequirement: codeRequirement)
 
-        //then
+        // then
             XCTAssertEqual(executable.displayName, "App")
             XCTAssertEqual(executable.codeRequirement, codeRequirement)
             XCTAssertEqual(executable.iconPath, IconFilePath.application)
     }
 
     func testGetExecutableBasedOnIdentifierAndCodeRequirement_PathIdentifierType() {
-        //given
+        // given
         let identifier = "/myGreatPath/Awesome/Binary"
         let codeRequirement = "testCodeRequirement"
 
-        //when
+        // when
         let executable = model.getExecutableFrom(identifier: identifier, codeRequirement: codeRequirement)
 
-        //then
+        // then
         XCTAssertEqual(executable.displayName, "Binary")
         XCTAssertEqual(executable.codeRequirement, codeRequirement)
         XCTAssertEqual(executable.iconPath, IconFilePath.binary)
     }
 
     func testGetExecutableFromComputerBasedOnIdentifier() {
-        //given
+        // given
             let identifier = "com.apple.Safari"
             let codeRequirement = "randomReq"
 
-        //when
+        // when
             let executable = model.getExecutableFrom(identifier: identifier, codeRequirement: codeRequirement)
 
-        //then
+        // then
             XCTAssertEqual(executable.displayName, "Safari")
             XCTAssertNotEqual(executable.iconPath, IconFilePath.application)
             XCTAssertNotEqual(codeRequirement, executable.codeRequirement)
     }
 
     func testGetExecutableFromSelectedExecutables() {
-        //given
+        // given
         let expectedIdentifier = "com.something.1"
         let executable = model.getExecutableFrom(identifier: expectedIdentifier, codeRequirement: "testReq")
         let executableSecond = model.getExecutableFrom(identifier: "com.something.2", codeRequirement: "testReq2")
         model.selectedExecutables = [executable, executableSecond]
 
-        //when
+        // when
         let existingExecutable = model.getExecutableFromSelectedExecutables(bundleIdentifier: "com.something.1")
 
-        //then
+        // then
         XCTAssertNotNil(existingExecutable)
         XCTAssertEqual(existingExecutable?.identifier, expectedIdentifier)
         XCTAssertEqual(existingExecutable?.displayName, "1")
@@ -101,17 +101,17 @@ class ModelTests: XCTestCase {
     }
 
     func testGetExecutableFromSelectedExecutables_Path() {
-        //given
+        // given
         let expectedIdentifier = "/path/something/Special"
         let executableOneMore = model.getExecutableFrom(identifier: "/path/something/Special1", codeRequirement: "testReq")
         let executable = model.getExecutableFrom(identifier: expectedIdentifier, codeRequirement: "testReq")
         let executableSecond = model.getExecutableFrom(identifier: "com.something.2", codeRequirement: "testReq2")
         model.selectedExecutables = [executableOneMore, executable, executableSecond]
 
-        //when
+        // when
         let existingExecutable = model.getExecutableFromSelectedExecutables(bundleIdentifier: "/path/something/Special")
 
-        //then
+        // then
         XCTAssertNotNil(existingExecutable)
         XCTAssertEqual(existingExecutable?.identifier, expectedIdentifier)
         XCTAssertEqual(existingExecutable?.displayName, "Special")
@@ -119,10 +119,10 @@ class ModelTests: XCTestCase {
     }
 
     func testGetExecutableFromSelectedExecutables_Empty() {
-        //when
+        // when
         let existingExecutable = model.getExecutableFromSelectedExecutables(bundleIdentifier: "com.something.1")
 
-        //then
+        // then
         XCTAssertNil(existingExecutable)
     }
 
@@ -185,7 +185,7 @@ class ModelTests: XCTestCase {
         }
     }
 
-    //swiftlint:disable:next function_body_length
+    // swiftlint:disable:next function_body_length
     func testExportProfileWithAppleEventsAndLegacyAllowed() {
         // given
         let exe1 = Executable(identifier: "one", codeRequirement: "oneReq")

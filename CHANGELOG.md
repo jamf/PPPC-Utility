@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 <!-- Add any information here about changes in master that have yet to be released -->
 ### Added
 - (@ty-wilson) Issue #79 Changed the property labels to match System Preferces with the MDM key listed in the help
+- (@macblazer) Issue #85 Application list and Apple Events app list both support multiple apps being dragged into the list.
 
 ### Fixed
 - (@ty-wilson) Fixed issue #54 where the code signing label was truncated
