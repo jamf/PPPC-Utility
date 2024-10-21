@@ -18,7 +18,6 @@ extension Logger {
     static let PPPCServicesManager = Logger(subsystem: subsystem, category: "PPPCServicesManager")
     static let Model = Logger(subsystem: subsystem, category: "Model")
     static let SaveViewController = Logger(subsystem: subsystem, category: "SaveViewController")
-    static let Main = Logger(subsystem: subsystem, category: "Main")
     static let UploadInfoView = Logger(subsystem: subsystem, category: "UploadInfoView")
     static let UploadManager = Logger(subsystem: subsystem, category: "UploadManager")
 }
