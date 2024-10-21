@@ -52,7 +52,7 @@ struct UploadManager {
 	}
 
 	func upload(profile: TCCProfile, authMgr: NetworkAuthManager, siteInfo: (String, String)?, signingIdentity: SigningIdentity?, completionHandler: @escaping (Error?) -> Void) {
-        logger.info("Uploading profile: \(profile.displayName)")
+        logger.info("Uploading profile: \(profile.displayName, privacy: .public)")
 
 		let networking = JamfProAPIClient(serverUrlString: serverURL, tokenManager: authMgr)
 		Task {
