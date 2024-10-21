@@ -26,6 +26,7 @@
 //
 
 import Cocoa
+import OSLog
 
 class SaveViewController: NSViewController {
 
@@ -57,6 +58,8 @@ class SaveViewController: NSViewController {
     @IBOutlet weak var identitiesPopUp: NSPopUpButton!
     @IBOutlet var identitiesPopUpAC: NSArrayController!
     @IBOutlet weak var saveButton: NSButton!
+    
+    let logger = Logger.SaveViewController
 
     var defaultsController = NSUserDefaultsController.shared
 
@@ -96,7 +99,7 @@ class SaveViewController: NSViewController {
             identities.insert(SigningIdentity(name: "Not signed", reference: nil), at: 0)
             identitiesPopUpAC.add(contentsOf: identities)
         } catch {
-            print("Error loading identities: \(error)")
+            logger.error("Error loading identities: \(error)")
         }
 
         loadImportedTCCProfileInfo()
@@ -125,7 +128,7 @@ class SaveViewController: NSViewController {
     }
 
     func saveTo(url: URL) {
-        print("Saving to \(url)")
+        logger.info("Saving to \(url)")
         let model = Model.shared
         let profile = model.exportProfile(organization: organizationLabel.stringValue,
                                           identifier: payloadIdentifier,
@@ -134,13 +137,13 @@ class SaveViewController: NSViewController {
         do {
             var outputData = try profile.xmlData()
             if let identity = identitiesPopUpAC.selectedObjects.first as? SigningIdentity, let ref = identity.reference {
-                print("Signing profile with \(identity.displayName)")
+                logger.info("Signing profile with \(identity.displayName)")
                 outputData = try SecurityWrapper.sign(data: outputData, using: ref)
             }
             try outputData.write(to: url)
-            print("Saved successfully")
+            logger.info("Saved successfully")
         } catch {
-            print("Error: \(error)")
+            logger.error("Error: \(error)")
         }
         self.dismiss(nil)
     }

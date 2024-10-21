@@ -5,7 +5,7 @@
 //  SPDX-License-Identifier: MIT
 //  Copyright (c) 2023 Jamf Software
 
-import os.log
+import OSLog
 import SwiftUI
 
 struct UploadInfoView: View {
@@ -37,6 +37,8 @@ struct UploadInfoView: View {
 	@State private var useSite: Bool = false
 	@State private var siteId: Int = -1
 	@State private var siteName: String = ""
+    
+    let logger = Logger.UploadInfoView
 
 	/// The type of authentication the user wants to use.
 	///
@@ -171,7 +173,7 @@ struct UploadInfoView: View {
 
 	private func warning(_ info: StaticString, shouldDisplay: Bool) {
 		if shouldDisplay {
-			os_log(info, type: .default)
+            logger.info("\(info)")
 			warningInfo = "\(info)"
 		}
 	}
@@ -288,8 +290,7 @@ struct UploadInfoView: View {
 															password: password,
 															server: serverURL)
 					} catch {
-						os_log("Failed to save credentials with error: %s",
-							   type: .error, error.localizedDescription)
+                        logger.error("Failed to save credentials with error: \(error.localizedDescription)")
 					}
 				}
 				// Future on macOS 12+: focus on Payload Name field

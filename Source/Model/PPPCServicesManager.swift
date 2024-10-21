@@ -26,9 +26,13 @@
 //
 
 import Foundation
+import OSLog
 
 class PPPCServicesManager {
+    
     typealias MDMServiceKey = String
+    
+    let logger = Logger.PPPCServicesManager
 
     static let shared = PPPCServicesManager()
 
@@ -50,7 +54,7 @@ class PPPCServicesManager {
                 hashed[service.mdmKey] = service
             }
         } catch {
-            print("Error loading PPPCServices.json: \(error)")
+            logger.error("Error loading PPPCServices.json: \(error)")
         }
 
         allServices = hashed

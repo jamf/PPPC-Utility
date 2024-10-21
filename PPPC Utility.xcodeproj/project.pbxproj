@@ -38,6 +38,7 @@
 		6EC40A16214ECF1E00BE4F17 /* SaveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC40A15214ECF1E00BE4F17 /* SaveViewController.swift */; };
 		6EC40A1C214EF87800BE4F17 /* SigningIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC40A1B214EF87800BE4F17 /* SigningIdentity.swift */; };
 		71061E54246106C800822D35 /* LoadExecutableError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71061E53246106C800822D35 /* LoadExecutableError.swift */; };
+		A149C78D2CC68FBF00E0789E /* LoggerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A149C78C2CC68FA100E0789E /* LoggerExtensions.swift */; };
 		B5E09548250BCCFC00A40409 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E09547250BCCFC00A40409 /* Alert.swift */; };
 		C01BEDBA28636F57001B0B3B /* SemanticVersionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01BEDB928636F57001B0B3B /* SemanticVersionTests.swift */; };
 		C03270BA28636330008B38E0 /* SemanticVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03270B928636330008B38E0 /* SemanticVersion.swift */; };
@@ -110,6 +111,7 @@
 		6EC40A1B214EF87800BE4F17 /* SigningIdentity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigningIdentity.swift; sourceTree = "<group>"; };
 		71061E53246106C800822D35 /* LoadExecutableError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadExecutableError.swift; sourceTree = "<group>"; };
 		97227C6726248CD7000F26C1 /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
+		A149C78C2CC68FA100E0789E /* LoggerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerExtensions.swift; sourceTree = "<group>"; };
 		B5E09547250BCCFC00A40409 /* Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		C01BEDB928636F57001B0B3B /* SemanticVersionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SemanticVersionTests.swift; sourceTree = "<group>"; };
 		C03270B928636330008B38E0 /* SemanticVersion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SemanticVersion.swift; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 		5F90EBDB2319931100738D09 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				A149C78C2CC68FA100E0789E /* LoggerExtensions.swift */,
 				5F90EBDC2319934F00738D09 /* ArrayExtensions.swift */,
 				345B01D523FDBF55008838B6 /* TCCProfileExtensions.swift */,
 			);
@@ -509,6 +512,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				34DED4D623FDDB2B00C53FB9 /* TCCProfileConfigurationPanel.swift in Sources */,
+				A149C78D2CC68FBF00E0789E /* LoggerExtensions.swift in Sources */,
 				5F90EBE12319970500738D09 /* TCCProfileImporter.swift in Sources */,
 				5F95AE1623158F03002E0A22 /* SwiftyCMSDecoder.swift in Sources */,
 				C03270C028636397008B38E0 /* Networking.swift in Sources */,
@@ -743,7 +747,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = "1.4.0";
+				MARKETING_VERSION = 1.4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jamf.opensource.pppcutility;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -766,7 +770,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = "1.4.0";
+				MARKETING_VERSION = 1.4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jamf.opensource.pppcutility;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

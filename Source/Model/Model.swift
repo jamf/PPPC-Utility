@@ -26,6 +26,7 @@
 //
 
 import Cocoa
+import OSLog
 
 @objc class Model: NSObject {
 
@@ -35,6 +36,8 @@ import Cocoa
     @objc dynamic static let shared = Model()
     @objc dynamic var identities: [SigningIdentity] = []
     @objc dynamic var selectedExecutables: [Executable] = []
+    
+    let logger = Logger.Model
 
     func getAppleEventChoices(executable: Executable) -> [Executable] {
         var executables: [Executable] = []
@@ -44,7 +47,7 @@ import Cocoa
             case .success(let executable):
                 executables.append(executable)
             case .failure(let error):
-                print(error)
+                self.logger.error("\(error)")
             }
         }
 
@@ -53,7 +56,7 @@ import Cocoa
             case .success(let executable):
                 executables.append(executable)
             case .failure(let error):
-                print(error)
+                self.logger.error("\(error)")
             }
         }
 
@@ -62,7 +65,7 @@ import Cocoa
             case .success(let executable):
                 executables.append(executable)
             case .failure(let error):
-                print(error)
+                self.logger.error("\(error)")
             }
         }
 
@@ -290,7 +293,7 @@ extension Model {
             case .success(let goodExecutable):
                 executable = goodExecutable
             case .failure(let error):
-                print(error)
+                self.logger.error("\(error)")
             }
         }
 

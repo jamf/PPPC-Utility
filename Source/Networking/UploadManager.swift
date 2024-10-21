@@ -7,10 +7,12 @@
 //
 
 import Foundation
-import os.log
+import OSLog
 
 struct UploadManager {
 	let serverURL: String
+    
+    let logger = Logger.UploadManager
 
 	struct VerificationInfo {
 		let mustSign: Bool
@@ -22,7 +24,7 @@ struct UploadManager {
 	}
 
 	func verifyConnection(authManager: NetworkAuthManager, completionHandler: @escaping (Result<VerificationInfo, VerificationError>) -> Void) {
-		os_log("Checking connection to Jamf Pro server", type: .default)
+        logger.info("Checking connection to Jamf Pro server")
 
 		Task {
 			let networking = JamfProAPIClient(serverUrlString: serverURL, tokenManager: authManager)
@@ -38,10 +40,10 @@ struct UploadManager {
 
 				result = .success(VerificationInfo(mustSign: mustSign, organization: orgName))
 			} catch is AuthError {
-				os_log("Invalid credentials.", type: .default)
+                logger.error("Invalid credentials.")
 				result = .failure(VerificationError.anyError("Invalid credentials."))
 			} catch {
-				os_log("Jamf Pro server is unavailable.", type: .default)
+                logger.error("Jamf Pro server is unavailable.")
 				result = .failure(VerificationError.anyError("Jamf Pro server is unavailable."))
 			}
 
@@ -50,14 +52,14 @@ struct UploadManager {
 	}
 
 	func upload(profile: TCCProfile, authMgr: NetworkAuthManager, siteInfo: (String, String)?, signingIdentity: SigningIdentity?, completionHandler: @escaping (Error?) -> Void) {
-		os_log("Uploading profile: %{public}s", profile.displayName)
+        logger.info("Uploading profile: \(profile.displayName)")
 
 		let networking = JamfProAPIClient(serverUrlString: serverURL, tokenManager: authMgr)
 		Task {
 			let success: Error?
 			var identity: SecIdentity?
 			if let signingIdentity = signingIdentity {
-				os_log("Signing profile with \(signingIdentity.displayName)")
+                logger.info("Signing profile with \(signingIdentity.displayName)")
 				identity = signingIdentity.reference
 			}
 
@@ -67,9 +69,9 @@ struct UploadManager {
 				_ = try await networking.upload(computerConfigProfile: profileData)
 
 				success = nil
-				os_log("Uploaded successfully")
+                logger.info("Uploaded successfully")
 			} catch {
-				os_log("Error creating or uploading profile: %s", type: .error, error.localizedDescription)
+                logger.error("Error creating or uploading profile: \(error.localizedDescription)")
 				success = error
 			}
 

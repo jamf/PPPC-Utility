@@ -26,7 +26,7 @@
 //
 
 import Cocoa
-import os.log
+import OSLog
 import SwiftUI
 
 enum TCCProfileDisplayValue: String {
@@ -144,6 +144,8 @@ class TCCProfileViewController: NSViewController {
             self.insertIntoAppleEvents($0)
         }
     }
+    
+    let logger = Logger.TCCProfileViewController
 
     private func toggleAuthorizationKey(theSwitch: NSSwitch, showAlert: Bool) {
         switch theSwitch.state {
@@ -182,7 +184,7 @@ class TCCProfileViewController: NSViewController {
 			identities = try SecurityWrapper.loadSigningIdentities()
 		} catch {
 			identities = []
-			os_log("Error loading identities: %s", type: .error, error.localizedDescription)
+            logger.error("Error loading identities: \(error.localizedDescription)")
 		}
 
 		let uploadView = UploadInfoView(signingIdentities: identities) {
@@ -254,7 +256,7 @@ class TCCProfileViewController: NSViewController {
                             block(executable)
                         case .failure(let error):
                             self?.showAlert(error, for: window)
-                            print(error)
+                            self?.logger.error("\(error)")
                         }
                     }
                 }
@@ -416,7 +418,7 @@ class TCCProfileViewController: NSViewController {
                         self?.insertIntoAppleEvents(executable)
                     case .failure(let error):
                         self?.showAlert(error, for: window)
-                        print(error)
+                        self?.logger.error("\(error)")
                     }
                 }
             }
@@ -479,7 +481,7 @@ extension TCCProfileViewController: NSTableViewDataSource {
                     }
                 case .failure(let error):
                     self?.showAlert(error, for: window)
-                    print(error)
+                    self?.logger.error("\(error)")
                 }
             }
         }
