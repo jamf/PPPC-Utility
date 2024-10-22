@@ -58,7 +58,7 @@ class SaveViewController: NSViewController {
     @IBOutlet weak var identitiesPopUp: NSPopUpButton!
     @IBOutlet var identitiesPopUpAC: NSArrayController!
     @IBOutlet weak var saveButton: NSButton!
-    
+
     let logger = Logger.SaveViewController
 
     var defaultsController = NSUserDefaultsController.shared
