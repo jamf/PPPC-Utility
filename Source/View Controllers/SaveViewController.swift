@@ -128,7 +128,7 @@ class SaveViewController: NSViewController {
     }
 
     func saveTo(url: URL) {
-        logger.info("Saving to \(url)")
+        logger.info("Saving to \(url, privacy: .public)")
         let model = Model.shared
         let profile = model.exportProfile(organization: organizationLabel.stringValue,
                                           identifier: payloadIdentifier,
