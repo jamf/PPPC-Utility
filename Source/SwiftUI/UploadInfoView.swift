@@ -37,8 +37,8 @@ struct UploadInfoView: View {
 	@State private var useSite: Bool = false
 	@State private var siteId: Int = -1
 	@State private var siteName: String = ""
-    
-    let logger = Logger.UploadInfoView
+
+    	let logger = Logger.UploadInfoView
 
 	/// The type of authentication the user wants to use.
 	///
