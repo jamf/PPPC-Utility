@@ -36,7 +36,7 @@ import OSLog
     @objc dynamic static let shared = Model()
     @objc dynamic var identities: [SigningIdentity] = []
     @objc dynamic var selectedExecutables: [Executable] = []
-    
+
     let logger = Logger.Model
 
     func getAppleEventChoices(executable: Executable) -> [Executable] {
