@@ -144,7 +144,7 @@ class TCCProfileViewController: NSViewController {
             self.insertIntoAppleEvents($0)
         }
     }
-    
+
     let logger = Logger.TCCProfileViewController
 
     private func toggleAuthorizationKey(theSwitch: NSSwitch, showAlert: Bool) {
