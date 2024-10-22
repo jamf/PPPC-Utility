@@ -11,7 +11,7 @@ import OSLog
 
 struct UploadManager {
 	let serverURL: String
-    
+
     let logger = Logger.UploadManager
 
 	struct VerificationInfo {
