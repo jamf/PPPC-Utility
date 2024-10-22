@@ -29,9 +29,9 @@ import Foundation
 import OSLog
 
 class PPPCServicesManager {
-    
+
     typealias MDMServiceKey = String
-    
+
     let logger = Logger.PPPCServicesManager
 
     static let shared = PPPCServicesManager()
