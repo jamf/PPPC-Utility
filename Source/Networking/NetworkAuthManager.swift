@@ -121,11 +121,9 @@ actor NetworkAuthManager {
     /// - Returns: The encoded data string for use with Basic Auth.
     nonisolated func basicAuthString() throws -> String {
 		guard case .basicAuth(let username, let password) = authInfo,
-			  !username.isEmpty && !password.isEmpty,
-              let result = "\(username):\(password)".data(using: .utf8)?.base64EncodedString(),
-              !result.isEmpty else {
+			  !username.isEmpty && !password.isEmpty else {
             throw AuthError.invalidUsernamePassword
         }
-        return result
+        return Data("\(username):\(password)".utf8).base64EncodedString()
     }
 }
