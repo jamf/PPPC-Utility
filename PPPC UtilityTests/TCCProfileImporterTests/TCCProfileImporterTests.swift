@@ -32,7 +32,7 @@ import XCTest
 
 class TCCProfileImporterTests: XCTestCase {
 
-    func testBrokenSignedTCCProfile() {
+    func testMalformedTCCProfile() {
         let tccProfileImporter = TCCProfileImporter()
 
         let resourceURL = getResourceProfile(fileName: "TestTCCProfileSigned-Broken")
@@ -40,9 +40,11 @@ class TCCProfileImporterTests: XCTestCase {
         tccProfileImporter.decodeTCCProfile(fileUrl: resourceURL) { tccProfileResult in
             switch tccProfileResult {
             case .success:
-                XCTFail("Broken Signed Profile, it shouldn't be success")
+                XCTFail("Malformed profile should not succeed")
             case .failure(let tccProfileError):
-                XCTAssertTrue(tccProfileError.localizedDescription.contains("The given data was not a valid property list."))
+                if case TCCProfileImportError.invalidProfileFile = tccProfileError { } else {
+                    XCTFail("Expected invalidProfileFile error, got \(tccProfileError)")
+                }
             }
         }
     }
