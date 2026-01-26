@@ -1,0 +1,22 @@
+name: Unit Tests
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/tests.yml'
+      - '**/*.swift'
+
+jobs:
+  test:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run unit tests
+        run: |
+          xcodebuild test \
+            -project "PPPC Utility.xcodeproj" \
+            -scheme "PPPC Utility" \
+            -destination "platform=macOS" \
+            CODE_SIGN_IDENTITY="-" \
+            CODE_SIGNING_REQUIRED=NO
