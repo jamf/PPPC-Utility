@@ -25,29 +25,26 @@
 //  SOFTWARE.
 //
 
-import Cocoa
+import Foundation
 
-class Executable: NSObject {
+@Observable
+class Executable: Identifiable, Equatable, Hashable {
+    let id = UUID()
 
-    @objc dynamic var iconPath: String!
+    var iconPath: String = ""
+    var displayName: String = ""
+    var identifier: String = ""
+    var codeRequirement: String = ""
 
-    @objc dynamic var displayName: String!
-    @objc dynamic var identifier: String!
-    @objc dynamic var codeRequirement: String!
+    var policy: Policy = Policy()
+    var appleEvents: [AppleEventRule] = []
 
-    @objc dynamic var policy: Policy = Policy()
-    @objc dynamic var appleEvents: [AppleEventRule] = []
-
-    override init() {
-        super.init()
-    }
+    init() {}
 
     init(identifier: String, codeRequirement: String, _ displayName: String? = nil) {
-        super.init()
-
         self.identifier = identifier
         self.codeRequirement = codeRequirement
-        if displayName != nil {
+        if let displayName = displayName {
             self.displayName = displayName
         } else {
             self.displayName = generateDisplayName(identifier: identifier)
@@ -72,37 +69,101 @@ class Executable: NSObject {
             return IconFilePath.application
         }
     }
+
+    static func == (lhs: Executable, rhs: Executable) -> Bool {
+        lhs.identifier == rhs.identifier
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(identifier)
+    }
 }
 
-class Policy: NSObject {
+@Observable
+class Policy {
     // swiftlint:disable identifier_name
-    @objc dynamic var AddressBook: String = "-"
-    @objc dynamic var Calendar: String = "-"
-    @objc dynamic var Reminders: String = "-"
-    @objc dynamic var Photos: String = "-"
-    @objc dynamic var Camera: String = "-"
-    @objc dynamic var Microphone: String = "-"
-    @objc dynamic var Accessibility: String = "-"
-    @objc dynamic var PostEvent: String = "-"
-    @objc dynamic var SystemPolicyAllFiles: String = "-"
-    @objc dynamic var SystemPolicySysAdminFiles: String = "-"
-    @objc dynamic var FileProviderPresence: String = "-"
-    @objc dynamic var ListenEvent: String = "-"
-    @objc dynamic var MediaLibrary: String = "-"
-    @objc dynamic var ScreenCapture: String = "-"
-    @objc dynamic var SpeechRecognition: String = "-"
-    @objc dynamic var SystemPolicyDesktopFolder: String = "-"
-    @objc dynamic var SystemPolicyDocumentsFolder: String = "-"
-    @objc dynamic var SystemPolicyDownloadsFolder: String = "-"
-    @objc dynamic var SystemPolicyNetworkVolumes: String = "-"
-    @objc dynamic var SystemPolicyRemovableVolumes: String = "-"
+    var AddressBook: String = "-"
+    var Calendar: String = "-"
+    var Reminders: String = "-"
+    var Photos: String = "-"
+    var Camera: String = "-"
+    var Microphone: String = "-"
+    var Accessibility: String = "-"
+    var PostEvent: String = "-"
+    var SystemPolicyAllFiles: String = "-"
+    var SystemPolicySysAdminFiles: String = "-"
+    var FileProviderPresence: String = "-"
+    var ListenEvent: String = "-"
+    var MediaLibrary: String = "-"
+    var ScreenCapture: String = "-"
+    var SpeechRecognition: String = "-"
+    var SystemPolicyDesktopFolder: String = "-"
+    var SystemPolicyDocumentsFolder: String = "-"
+    var SystemPolicyDownloadsFolder: String = "-"
+    var SystemPolicyNetworkVolumes: String = "-"
+    var SystemPolicyRemovableVolumes: String = "-"
     // swiftlint:enable identifier_name
 
     func allPolicyValues() -> [String] {
-        let mirror = Mirror(reflecting: self)
-        return mirror.children.compactMap { _, value in
-            return value as? String
-        }
+        return [
+            AddressBook, Calendar, Reminders, Photos, Camera, Microphone,
+            Accessibility, PostEvent, SystemPolicyAllFiles, SystemPolicySysAdminFiles,
+            FileProviderPresence, ListenEvent, MediaLibrary, ScreenCapture,
+            SpeechRecognition, SystemPolicyDesktopFolder, SystemPolicyDocumentsFolder,
+            SystemPolicyDownloadsFolder, SystemPolicyNetworkVolumes, SystemPolicyRemovableVolumes
+        ]
     }
 
+    subscript(key: String) -> String {
+        get {
+            switch key {
+            case "AddressBook": return AddressBook
+            case "Calendar": return Calendar
+            case "Reminders": return Reminders
+            case "Photos": return Photos
+            case "Camera": return Camera
+            case "Microphone": return Microphone
+            case "Accessibility": return Accessibility
+            case "PostEvent": return PostEvent
+            case "SystemPolicyAllFiles": return SystemPolicyAllFiles
+            case "SystemPolicySysAdminFiles": return SystemPolicySysAdminFiles
+            case "FileProviderPresence": return FileProviderPresence
+            case "ListenEvent": return ListenEvent
+            case "MediaLibrary": return MediaLibrary
+            case "ScreenCapture": return ScreenCapture
+            case "SpeechRecognition": return SpeechRecognition
+            case "SystemPolicyDesktopFolder": return SystemPolicyDesktopFolder
+            case "SystemPolicyDocumentsFolder": return SystemPolicyDocumentsFolder
+            case "SystemPolicyDownloadsFolder": return SystemPolicyDownloadsFolder
+            case "SystemPolicyNetworkVolumes": return SystemPolicyNetworkVolumes
+            case "SystemPolicyRemovableVolumes": return SystemPolicyRemovableVolumes
+            default: return "-"
+            }
+        }
+        set {
+            switch key {
+            case "AddressBook": AddressBook = newValue
+            case "Calendar": Calendar = newValue
+            case "Reminders": Reminders = newValue
+            case "Photos": Photos = newValue
+            case "Camera": Camera = newValue
+            case "Microphone": Microphone = newValue
+            case "Accessibility": Accessibility = newValue
+            case "PostEvent": PostEvent = newValue
+            case "SystemPolicyAllFiles": SystemPolicyAllFiles = newValue
+            case "SystemPolicySysAdminFiles": SystemPolicySysAdminFiles = newValue
+            case "FileProviderPresence": FileProviderPresence = newValue
+            case "ListenEvent": ListenEvent = newValue
+            case "MediaLibrary": MediaLibrary = newValue
+            case "ScreenCapture": ScreenCapture = newValue
+            case "SpeechRecognition": SpeechRecognition = newValue
+            case "SystemPolicyDesktopFolder": SystemPolicyDesktopFolder = newValue
+            case "SystemPolicyDocumentsFolder": SystemPolicyDocumentsFolder = newValue
+            case "SystemPolicyDownloadsFolder": SystemPolicyDownloadsFolder = newValue
+            case "SystemPolicyNetworkVolumes": SystemPolicyNetworkVolumes = newValue
+            case "SystemPolicyRemovableVolumes": SystemPolicyRemovableVolumes = newValue
+            default: break
+            }
+        }
+    }
 }

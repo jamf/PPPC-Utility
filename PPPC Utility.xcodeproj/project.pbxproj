@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		09F4A4F6D89A277E99354E0E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F4A4F6A19A4748C7974DBF /* ContentView.swift */; };
+		09F4A4F67073E675C7C94850 /* PPPCUtilityApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F4A4F684AC7113CA2C441F /* PPPCUtilityApp.swift */; };
+		A1B2C3D400001005 /* AppCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D400002005 /* AppCommands.swift */; };
+		9E229FF3A41A5DF884DD41C1 /* PolicyPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E229FF300047C3E551A4CC9 /* PolicyPicker.swift */; };
+		9E229FF377ADC1B496B944D6 /* HelpButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E229FF30E1B514578BE4456 /* HelpButtonView.swift */; };
+		9E229FF34877932A996A4DCC /* ExecutableRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E229FF30C83DF58261740D2 /* ExecutableRow.swift */; };
+		9E229FF3CD3E6D9DCFE94C90 /* AppleEventRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E229FF30340E319A75A484D /* AppleEventRow.swift */; };
+		A1B2C3D400001001 /* ExecutablesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D400002001 /* ExecutablesListView.swift */; };
+		A1B2C3D400001002 /* PolicyDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D400002002 /* PolicyDetailView.swift */; };
+		A1B2C3D400001003 /* SaveProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D400002003 /* SaveProfileView.swift */; };
 		345B01D623FDBF55008838B6 /* TCCProfileExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 345B01D523FDBF55008838B6 /* TCCProfileExtensions.swift */; };
 		34DED4D423FDCAFD00C53FB9 /* SwiftyCMSDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F95AE1523158F03002E0A22 /* SwiftyCMSDecoder.swift */; };
 		34DED4D623FDDB2B00C53FB9 /* TCCProfileConfigurationPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DED4D523FDDB2B00C53FB9 /* TCCProfileConfigurationPanel.swift */; };
@@ -23,19 +33,13 @@
 		5F95AE2F2315B172002E0A22 /* TestTCCUnsignedProfile-Broken.mobileconfig in Resources */ = {isa = PBXBuildFile; fileRef = 5F95AE2A2315B172002E0A22 /* TestTCCUnsignedProfile-Broken.mobileconfig */; };
 		5F95AE302315B172002E0A22 /* TestTCCProfileSigned-Broken.mobileconfig in Resources */ = {isa = PBXBuildFile; fileRef = 5F95AE2B2315B172002E0A22 /* TestTCCProfileSigned-Broken.mobileconfig */; };
 		5F95AE312315B172002E0A22 /* TestTCCUnsignedProfile-Empty.mobileconfig in Resources */ = {isa = PBXBuildFile; fileRef = 5F95AE2C2315B172002E0A22 /* TestTCCUnsignedProfile-Empty.mobileconfig */; };
-		6E6216F9215321CE0043DF18 /* OpenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6216F8215321CE0043DF18 /* OpenViewController.swift */; };
-		6E651CC82314397D001CC974 /* FlippedClipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E651CC72314397D001CC974 /* FlippedClipView.swift */; };
-		6E651CCA231439CE001CC974 /* InfoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E651CC9231439CE001CC974 /* InfoButton.swift */; };
 		6EB45830214FFCCB00BE5749 /* AppleEventRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB4582F214FFCCB00BE5749 /* AppleEventRule.swift */; };
 		6EC409DE214D65BC00BE4F17 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC409DD214D65BC00BE4F17 /* AppDelegate.swift */; };
 		6EC409E2214D65BD00BE4F17 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6EC409E1214D65BD00BE4F17 /* Assets.xcassets */; };
-		6EC409E5214D65BD00BE4F17 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6EC409E3214D65BD00BE4F17 /* Main.storyboard */; };
-		6EC409F3214D8FFA00BE4F17 /* TCCProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC409F2214D8FFA00BE4F17 /* TCCProfileViewController.swift */; };
 		6EC409F5214D95D200BE4F17 /* TCCProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC409F4214D95D200BE4F17 /* TCCProfile.swift */; };
 		6EC40A10214DE3B200BE4F17 /* Executable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC40A0F214DE3B200BE4F17 /* Executable.swift */; };
 		6EC40A12214DF8FE00BE4F17 /* SecurityWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC40A11214DF8FE00BE4F17 /* SecurityWrapper.swift */; };
 		6EC40A14214DFB5800BE4F17 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC40A13214DFB5800BE4F17 /* Model.swift */; };
-		6EC40A16214ECF1E00BE4F17 /* SaveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC40A15214ECF1E00BE4F17 /* SaveViewController.swift */; };
 		6EC40A1C214EF87800BE4F17 /* SigningIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC40A1B214EF87800BE4F17 /* SigningIdentity.swift */; };
 		71061E54246106C800822D35 /* LoadExecutableError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71061E53246106C800822D35 /* LoadExecutableError.swift */; };
 		A149C78D2CC68FBF00E0789E /* LoggerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A149C78C2CC68FA100E0789E /* LoggerExtensions.swift */; };
@@ -73,6 +77,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		09F4A4F684AC7113CA2C441F /* PPPCUtilityApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PPPCUtilityApp.swift; sourceTree = "<group>"; };
+		09F4A4F6A19A4748C7974DBF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		A1B2C3D400002005 /* AppCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCommands.swift; sourceTree = "<group>"; };
+		9E229FF300047C3E551A4CC9 /* PolicyPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyPicker.swift; sourceTree = "<group>"; };
+		9E229FF30E1B514578BE4456 /* HelpButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpButtonView.swift; sourceTree = "<group>"; };
+		9E229FF30C83DF58261740D2 /* ExecutableRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExecutableRow.swift; sourceTree = "<group>"; };
+		9E229FF30340E319A75A484D /* AppleEventRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleEventRow.swift; sourceTree = "<group>"; };
+		A1B2C3D400002001 /* ExecutablesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExecutablesListView.swift; sourceTree = "<group>"; };
+		A1B2C3D400002002 /* PolicyDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyDetailView.swift; sourceTree = "<group>"; };
+		A1B2C3D400002003 /* SaveProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveProfileView.swift; sourceTree = "<group>"; };
 		345B01D523FDBF55008838B6 /* TCCProfileExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TCCProfileExtensions.swift; sourceTree = "<group>"; };
 		34DED4D523FDDB2B00C53FB9 /* TCCProfileConfigurationPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TCCProfileConfigurationPanel.swift; sourceTree = "<group>"; };
 		5901A2762534DF1400A1CD2F /* ModelBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelBuilder.swift; sourceTree = "<group>"; };
@@ -91,23 +105,17 @@
 		5F95AE2B2315B172002E0A22 /* TestTCCProfileSigned-Broken.mobileconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "TestTCCProfileSigned-Broken.mobileconfig"; sourceTree = "<group>"; };
 		5F95AE2C2315B172002E0A22 /* TestTCCUnsignedProfile-Empty.mobileconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "TestTCCUnsignedProfile-Empty.mobileconfig"; sourceTree = "<group>"; };
 		6E5D5A1521541B8F00B43312 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		6E6216F8215321CE0043DF18 /* OpenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenViewController.swift; sourceTree = "<group>"; };
-		6E651CC72314397D001CC974 /* FlippedClipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlippedClipView.swift; sourceTree = "<group>"; };
-		6E651CC9231439CE001CC974 /* InfoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoButton.swift; sourceTree = "<group>"; };
 		6E95730721553B650002C30B /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		6E957309215557870002C30B /* PPPC Utility.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "PPPC Utility.entitlements"; sourceTree = "<group>"; };
 		6EB4582F214FFCCB00BE5749 /* AppleEventRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleEventRule.swift; sourceTree = "<group>"; };
 		6EC409DA214D65BC00BE4F17 /* PPPC Utility.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PPPC Utility.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6EC409DD214D65BC00BE4F17 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6EC409E1214D65BD00BE4F17 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		6EC409E4214D65BD00BE4F17 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6EC409E6214D65BD00BE4F17 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6EC409F2214D8FFA00BE4F17 /* TCCProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TCCProfileViewController.swift; sourceTree = "<group>"; };
 		6EC409F4214D95D200BE4F17 /* TCCProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TCCProfile.swift; sourceTree = "<group>"; };
 		6EC40A0F214DE3B200BE4F17 /* Executable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Executable.swift; sourceTree = "<group>"; };
 		6EC40A11214DF8FE00BE4F17 /* SecurityWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityWrapper.swift; sourceTree = "<group>"; };
 		6EC40A13214DFB5800BE4F17 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
-		6EC40A15214ECF1E00BE4F17 /* SaveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveViewController.swift; sourceTree = "<group>"; };
 		6EC40A1B214EF87800BE4F17 /* SigningIdentity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigningIdentity.swift; sourceTree = "<group>"; };
 		71061E53246106C800822D35 /* LoadExecutableError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadExecutableError.swift; sourceTree = "<group>"; };
 		97227C6726248CD7000F26C1 /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
@@ -231,9 +239,8 @@
 		6E651CC623143969001CC974 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A1B2C3D400003001 /* ViewsSwiftUI */,
 				B5E09547250BCCFC00A40409 /* Alert.swift */,
-				6E651CC72314397D001CC974 /* FlippedClipView.swift */,
-				6E651CC9231439CE001CC974 /* InfoButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -264,10 +271,11 @@
 		6EC409DC214D65BC00BE4F17 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				09F4A4F69B83417E8B554EFD /* App */,
+				9E229FF358CA40CE97CF93DC /* Components */,
 				6EC409DD214D65BC00BE4F17 /* AppDelegate.swift */,
 				6EC40A11214DF8FE00BE4F17 /* SecurityWrapper.swift */,
 				6E651CC623143969001CC974 /* Views */,
-				6EC40A1E214EF89600BE4F17 /* View Controllers */,
 				C05844BC2AD45F7900141353 /* SwiftUI */,
 				6EC40A1D214EF87E00BE4F17 /* Model */,
 				C03270BD28636397008B38E0 /* Networking */,
@@ -277,11 +285,41 @@
 			path = Source;
 			sourceTree = "<group>";
 		};
+		09F4A4F69B83417E8B554EFD /* App */ = {
+			isa = PBXGroup;
+			children = (
+				09F4A4F684AC7113CA2C441F /* PPPCUtilityApp.swift */,
+				09F4A4F6A19A4748C7974DBF /* ContentView.swift */,
+				A1B2C3D400002005 /* AppCommands.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		9E229FF358CA40CE97CF93DC /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				9E229FF300047C3E551A4CC9 /* PolicyPicker.swift */,
+				9E229FF30E1B514578BE4456 /* HelpButtonView.swift */,
+				9E229FF30C83DF58261740D2 /* ExecutableRow.swift */,
+				9E229FF30340E319A75A484D /* AppleEventRow.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		A1B2C3D400003001 /* ViewsSwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				A1B2C3D400002001 /* ExecutablesListView.swift */,
+				A1B2C3D400002002 /* PolicyDetailView.swift */,
+				A1B2C3D400002003 /* SaveProfileView.swift */,
+			);
+			path = SwiftUI;
+			sourceTree = "<group>";
+		};
 		6EC409F6214D975A00BE4F17 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 				6EC409E1214D65BD00BE4F17 /* Assets.xcassets */,
-				6EC409E3214D65BD00BE4F17 /* Main.storyboard */,
 				6EC409E6214D65BD00BE4F17 /* Info.plist */,
 				C0E0384127A30D1D00A23FA2 /* PPPCServices.json */,
 				6E957309215557870002C30B /* PPPC Utility.entitlements */,
@@ -305,16 +343,7 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		6EC40A1E214EF89600BE4F17 /* View Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				6EC409F2214D8FFA00BE4F17 /* TCCProfileViewController.swift */,
-				6EC40A15214ECF1E00BE4F17 /* SaveViewController.swift */,
-				6E6216F8215321CE0043DF18 /* OpenViewController.swift */,
-			);
-			path = "View Controllers";
-			sourceTree = "<group>";
-		};
+/* Removed - View Controllers group no longer needed */
 		C03270BD28636397008B38E0 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
@@ -460,7 +489,6 @@
 			files = (
 				6EC409E2214D65BD00BE4F17 /* Assets.xcassets in Resources */,
 				C0E0384227A30D1D00A23FA2 /* PPPCServices.json in Resources */,
-				6EC409E5214D65BD00BE4F17 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -511,6 +539,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				09F4A4F67073E675C7C94850 /* PPPCUtilityApp.swift in Sources */,
+				09F4A4F6D89A277E99354E0E /* ContentView.swift in Sources */,
+				9E229FF3A41A5DF884DD41C1 /* PolicyPicker.swift in Sources */,
+				9E229FF377ADC1B496B944D6 /* HelpButtonView.swift in Sources */,
+				9E229FF34877932A996A4DCC /* ExecutableRow.swift in Sources */,
+				9E229FF3CD3E6D9DCFE94C90 /* AppleEventRow.swift in Sources */,
+				A1B2C3D400001001 /* ExecutablesListView.swift in Sources */,
+				A1B2C3D400001002 /* PolicyDetailView.swift in Sources */,
+				A1B2C3D400001003 /* SaveProfileView.swift in Sources */,
+				A1B2C3D400001005 /* AppCommands.swift in Sources */,
 				34DED4D623FDDB2B00C53FB9 /* TCCProfileConfigurationPanel.swift in Sources */,
 				A149C78D2CC68FBF00E0789E /* LoggerExtensions.swift in Sources */,
 				5F90EBE12319970500738D09 /* TCCProfileImporter.swift in Sources */,
@@ -526,23 +564,18 @@
 				C03270C128636397008B38E0 /* JamfProAPIClient.swift in Sources */,
 				C0E0384027A30C7100A23FA2 /* PPPCServicesManager.swift in Sources */,
 				C07B1FB82AF596D80075E38B /* UploadManager.swift in Sources */,
-				6E651CCA231439CE001CC974 /* InfoButton.swift in Sources */,
 				6EC409F5214D95D200BE4F17 /* TCCProfile.swift in Sources */,
 				6EC40A12214DF8FE00BE4F17 /* SecurityWrapper.swift in Sources */,
 				6EC409DE214D65BC00BE4F17 /* AppDelegate.swift in Sources */,
 				345B01D623FDBF55008838B6 /* TCCProfileExtensions.swift in Sources */,
-				6EC409F3214D8FFA00BE4F17 /* TCCProfileViewController.swift in Sources */,
-				6E6216F9215321CE0043DF18 /* OpenViewController.swift in Sources */,
 				C05844B82AD4512D00141353 /* Token.swift in Sources */,
 				6EC40A10214DE3B200BE4F17 /* Executable.swift in Sources */,
 				C0EE9A832863BEEB00738B6B /* URLSessionAsyncCompatibility.swift in Sources */,
 				C0EE9A812863BE2B00738B6B /* NetworkAuthManager.swift in Sources */,
-				6EC40A16214ECF1E00BE4F17 /* SaveViewController.swift in Sources */,
 				C05844BE2AD45F7900141353 /* UploadInfoView.swift in Sources */,
 				6EB45830214FFCCB00BE5749 /* AppleEventRule.swift in Sources */,
 				5F90EBDF2319970000738D09 /* TCCProfileImportError.swift in Sources */,
 				C03270BA28636330008B38E0 /* SemanticVersion.swift in Sources */,
-				6E651CC82314397D001CC974 /* FlippedClipView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -557,14 +590,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		6EC409E3214D65BD00BE4F17 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				6EC409E4214D65BD00BE4F17 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -667,7 +692,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IBSC_NOTICES = NO;
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -723,7 +748,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IBSC_NOTICES = NO;
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;

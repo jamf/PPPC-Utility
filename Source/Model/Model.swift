@@ -25,17 +25,18 @@
 //  SOFTWARE.
 //
 
-import Cocoa
+import AppKit
 import OSLog
 
-@objc class Model: NSObject {
+@Observable
+class Model {
 
     var usingLegacyAllowKey = true
 
-    @objc dynamic var current: Executable?
-    @objc dynamic static let shared = Model()
-    @objc dynamic var identities: [SigningIdentity] = []
-    @objc dynamic var selectedExecutables: [Executable] = []
+    var current: Executable?
+    static let shared = Model()
+    var identities: [SigningIdentity] = []
+    var selectedExecutables: [Executable] = []
 
     let logger = Logger.Model
 
@@ -114,7 +115,6 @@ extension Model {
         }
     }
 
-    // TODO - refactor this method so it isn't so complex
     // swiftlint:disable:next cyclomatic_complexity
     func loadExecutable(url: URL, completion: @escaping LoadExecutableCompletion) {
         let executable = Executable()
@@ -176,20 +176,25 @@ extension Model {
 
 extension Model {
 
+    // Policy keys for iteration
+    static let policyKeys = [
+        "AddressBook", "Calendar", "Reminders", "Photos", "Camera", "Microphone",
+        "Accessibility", "PostEvent", "SystemPolicyAllFiles", "SystemPolicySysAdminFiles",
+        "FileProviderPresence", "ListenEvent", "MediaLibrary", "ScreenCapture",
+        "SpeechRecognition", "SystemPolicyDesktopFolder", "SystemPolicyDocumentsFolder",
+        "SystemPolicyDownloadsFolder", "SystemPolicyNetworkVolumes", "SystemPolicyRemovableVolumes"
+    ]
+
     func exportProfile(organization: String, identifier: String, displayName: String, payloadDescription: String) -> TCCProfile {
         var services = [String: [TCCPolicy]]()
 
         selectedExecutables.forEach { executable in
-
-            let mirroredServices = Mirror(reflecting: executable.policy)
-
-            for attr in mirroredServices.children {
-                if let key = attr.label, let value = attr.value as? String {
-                     if let policyToAppend = policyFromString(executable: executable, value: value) {
-                         services[key] = services[key] ?? []
-                         services[key]?.append(policyToAppend)
-                     }
-                 }
+            for key in Model.policyKeys {
+                let value = executable.policy[key]
+                if let policyToAppend = policyFromString(executable: executable, value: value) {
+                    services[key] = services[key] ?? []
+                    services[key]?.append(policyToAppend)
+                }
             }
 
             executable.appleEvents.forEach { event in
@@ -231,11 +236,11 @@ extension Model {
                         }
                     } else {
                         if policy.authorization == .allow || policy.allowed == true {
-                            executable?.policy.setValue(TCCProfileDisplayValue.allow.rawValue, forKey: key)
+                            executable?.policy[key] = TCCProfileDisplayValue.allow.rawValue
                         } else if policy.authorization == .allowStandardUserToSetSystemService {
-                            executable?.policy.setValue(TCCProfileDisplayValue.allowStandardUsersToApprove.rawValue, forKey: key)
+                            executable?.policy[key] = TCCProfileDisplayValue.allowStandardUsersToApprove.rawValue
                         } else {
-                            executable?.policy.setValue(TCCProfileDisplayValue.deny.rawValue, forKey: key)
+                            executable?.policy[key] = TCCProfileDisplayValue.deny.rawValue
                         }
                     }
                 }
@@ -274,8 +279,8 @@ extension Model {
 
     func getExecutablesFromAllPolicies(policies: [TCCPolicy]) {
         for tccPolicy in policies where getExecutableFromSelectedExecutables(bundleIdentifier: tccPolicy.identifier) == nil {
-			let executable = getExecutableFrom(identifier: tccPolicy.identifier, codeRequirement: tccPolicy.codeRequirement)
-			self.selectedExecutables.append(executable)
+            let executable = getExecutableFrom(identifier: tccPolicy.identifier, codeRequirement: tccPolicy.codeRequirement)
+            self.selectedExecutables.append(executable)
         }
     }
 
@@ -301,14 +306,14 @@ extension Model {
     }
 
     private func findExecutableOnComputerUsing(bundleIdentifier: String, completion: @escaping LoadExecutableCompletion) {
-		var urlToLoad: URL?
+        var urlToLoad: URL?
         if bundleIdentifier.contains("/") {
-			urlToLoad = URL(string: "file://\(bundleIdentifier)")
+            urlToLoad = URL(string: "file://\(bundleIdentifier)")
         } else {
-			urlToLoad = NSWorkspace.shared.urlForApplication(withBundleIdentifier: bundleIdentifier)
+            urlToLoad = NSWorkspace.shared.urlForApplication(withBundleIdentifier: bundleIdentifier)
         }
 
-		if let fileURL = urlToLoad {
+        if let fileURL = urlToLoad {
             self.loadExecutable(url: fileURL) { result in
                 switch result {
                 case .success(let executable):

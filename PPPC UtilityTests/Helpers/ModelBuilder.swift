@@ -24,7 +24,7 @@
 //  SOFTWARE.
 //
 
-import Cocoa
+import Foundation
 
 @testable import PPPC_Utility
 
@@ -43,7 +43,7 @@ class ModelBuilder {
     func addExecutable(settings: [String: String]) -> ModelBuilder {
         let exe = Executable(identifier: "id", codeRequirement: "req", "display")
         settings.forEach { key, value in
-            exe.policy.setValue(value, forKey: key)
+            exe.policy[key] = value
         }
         model.selectedExecutables.append(exe)
 

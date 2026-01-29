@@ -27,7 +27,7 @@
 
 import Cocoa
 
-@NSApplicationMain
+// Note: @NSApplicationMain removed - using SwiftUI @main in PPPCUtilityApp.swift
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {}

@@ -25,13 +25,22 @@
 //  SOFTWARE.
 //
 
-import Cocoa
+import Foundation
 
-class AppleEventRule: NSObject {
+/// Display values for TCC profile permission settings
+enum TCCProfileDisplayValue: String {
+    case allow = "Allow"
+    case deny = "Deny"
+    case allowStandardUsersToApprove = "Let Standard Users Approve"
+}
 
-    @objc dynamic var source: Executable!
-    @objc dynamic var destination: Executable!
-    @objc dynamic var valueString: String! = TCCProfileDisplayValue.allow.rawValue
+@Observable
+class AppleEventRule: Identifiable, Equatable {
+    let id = UUID()
+
+    var source: Executable
+    var destination: Executable
+    var valueString: String = TCCProfileDisplayValue.allow.rawValue
 
     var value: Bool { return valueString == TCCProfileDisplayValue.allow.rawValue }
 
@@ -39,5 +48,9 @@ class AppleEventRule: NSObject {
         self.source = source
         self.destination = destination
         self.valueString = value ? TCCProfileDisplayValue.allow.rawValue : TCCProfileDisplayValue.deny.rawValue
+    }
+
+    static func == (lhs: AppleEventRule, rhs: AppleEventRule) -> Bool {
+        lhs.destination.identifier == rhs.destination.identifier
     }
 }
