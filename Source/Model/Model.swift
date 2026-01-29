@@ -30,8 +30,6 @@ import OSLog
 
 @objc class Model: NSObject {
 
-    var usingLegacyAllowKey = true
-
     @objc dynamic var current: Executable?
     @objc dynamic static let shared = Model()
     @objc dynamic var identities: [SigningIdentity] = []
@@ -92,27 +90,6 @@ typealias LoadExecutableResult = Result<Executable, LoadExecutableError>
 typealias LoadExecutableCompletion = ((LoadExecutableResult) -> Void)
 
 extension Model {
-
-    func requiresAuthorizationKey() -> Bool {
-        return selectedExecutables.contains { exe -> Bool in
-            return exe.policy.allPolicyValues().contains { value -> Bool in
-                return value == TCCProfileDisplayValue.allowStandardUsersToApprove.rawValue
-            }
-        }
-    }
-
-    /// Will convert any Authorization key values to the legacy Allowed key
-    func changeToUseLegacyAllowKey() {
-        usingLegacyAllowKey = true
-        selectedExecutables.forEach { exe in
-            if exe.policy.ListenEvent == TCCProfileDisplayValue.allowStandardUsersToApprove.rawValue {
-                exe.policy.ListenEvent = "-"
-            }
-            if exe.policy.ScreenCapture == TCCProfileDisplayValue.allowStandardUsersToApprove.rawValue {
-                exe.policy.ScreenCapture = "-"
-            }
-        }
-    }
 
     // TODO - refactor this method so it isn't so complex
     // swiftlint:disable:next cyclomatic_complexity
@@ -248,26 +225,15 @@ extension Model {
                          codeRequirement: executable.codeRequirement,
                          receiverIdentifier: event?.destination.identifier,
                          receiverCodeRequirement: event?.destination.codeRequirement)
-        if usingLegacyAllowKey {
-            switch value {
-            case TCCProfileDisplayValue.allow.rawValue:
-                policy.allowed = true
-            case TCCProfileDisplayValue.deny.rawValue:
-                policy.allowed = false
-            default:
-                return nil
-            }
-        } else {
-            switch value {
-            case TCCProfileDisplayValue.allow.rawValue:
-                policy.authorization = .allow
-            case TCCProfileDisplayValue.deny.rawValue:
-                policy.authorization = .deny
-            case TCCProfileDisplayValue.allowStandardUsersToApprove.rawValue:
-                policy.authorization = .allowStandardUserToSetSystemService
-            default:
-                return nil
-            }
+        switch value {
+        case TCCProfileDisplayValue.allow.rawValue:
+            policy.authorization = .allow
+        case TCCProfileDisplayValue.deny.rawValue:
+            policy.authorization = .deny
+        case TCCProfileDisplayValue.allowStandardUsersToApprove.rawValue:
+            policy.authorization = .allowStandardUserToSetSystemService
+        default:
+            return nil
         }
         return policy
     }
