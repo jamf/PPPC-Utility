@@ -90,7 +90,7 @@
             "com.apple.vm.device-access"
         ],
         "denyOnly": true,
-        "allowStandardUsersMacOS11Plus": true
+        "allowStandardUsers": true
     },
     {
         "mdmKey": "MediaLibrary",
@@ -163,7 +163,7 @@
         "englishName": "Screen Recording",
         "englishDescription": "Deny specified apps access to capture (read) the contents of the system display.",
         "denyOnly": true,
-        "allowStandardUsersMacOS11Plus": true
+        "allowStandardUsers": true
     },
     {
         "mdmKey": "SpeechRecognition",

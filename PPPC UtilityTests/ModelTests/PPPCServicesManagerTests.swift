@@ -82,7 +82,7 @@ class PPPCServicesManagerTests: XCTestCase {
         let service = try XCTUnwrap(services.allServices["ScreenCapture"])
 
         // when
-        let actual = try XCTUnwrap(service.allowStandardUsersMacOS11Plus)
+        let actual = try XCTUnwrap(service.allowStandardUsers)
 
         // then
         XCTAssertTrue(actual)

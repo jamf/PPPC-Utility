@@ -13,7 +13,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Changed
 - Update print and os_log calls to the modern OSLog class calls for updated logging. ([Issue #112](https://github.com/jamf/PPPC-Utility/issues/112)) [@SkylerGodfrey](https://github.com/SkylerGodfrey)
 - Now using [Haversack](https://github.com/jamf/Haversack) for simplified access to the keychain ([Issue #124](https://github.com/jamf/PPPC-Utility/issues/124)) [@macblazer](https://github.com/macblazer).
-- PPPC Utility now requires macOS 11+ to run.  It can still produce profiles usable on older versions of macOS.
+- PPPC Utility now requires macOS 13+ to run.  It can still produce profiles usable on older versions of macOS.
+- Removed Big Sur compatibility toggle and legacy `Allowed` key support.  The `Authorization` key is now always used.
 
 ## [1.5.0] - 2022-10-04
 

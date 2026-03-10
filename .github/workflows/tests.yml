@@ -15,11 +15,18 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Run unit tests
+      - name: Run unit tests with code coverage
         run: |
           xcodebuild test \
             -project "PPPC Utility.xcodeproj" \
             -scheme "PPPC Utility" \
             -destination "platform=macOS" \
+            -enableCodeCoverage YES \
+            -resultBundlePath TestResults.xcresult \
             CODE_SIGN_IDENTITY="-" \
             CODE_SIGNING_REQUIRED=NO
+
+      - name: Display code coverage summary
+        if: always()
+        run: |
+          xcrun xccov view --report TestResults.xcresult | grep -E "^[A-Z].*\.app|PPPC-Utility/Source"
