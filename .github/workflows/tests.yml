@@ -29,4 +29,21 @@ jobs:
       - name: Display code coverage summary
         if: always()
         run: |
-          xcrun xccov view --report TestResults.xcresult | grep -E "^[A-Z].*\.app|PPPC-Utility/Source"
+          if [ ! -d TestResults.xcresult ]; then
+            echo "Coverage bundle 'TestResults.xcresult' not found; skipping coverage summary."
+            exit 0
+          fi
+          # Generate coverage report; capture output while still printing it
+          echo "Generating coverage report from TestResults.xcresult..."
+          if ! xcrun xccov view --report TestResults.xcresult | tee coverage-report.txt; then
+            echo "Failed to generate coverage report with xccov; printing any captured output and continuing."
+            cat coverage-report.txt 2>/dev/null || true
+            exit 0
+          fi
+          echo
+          echo "Filtered coverage summary (matching app targets or PPPC-Utility/Source):"
+          if ! grep -E '^[A-Z].*\.app|PPPC-Utility/Source' coverage-report.txt; then
+            echo
+            echo "No matching coverage lines found; displaying full coverage report instead."
+            cat coverage-report.txt
+          fi
