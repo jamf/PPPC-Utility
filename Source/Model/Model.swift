@@ -91,48 +91,18 @@ typealias LoadExecutableCompletion = ((LoadExecutableResult) -> Void)
 
 extension Model {
 
-    // TODO - refactor this method so it isn't so complex
-    // swiftlint:disable:next cyclomatic_complexity
     func loadExecutable(url: URL, completion: @escaping LoadExecutableCompletion) {
         let executable = Executable()
 
         if let bundle = Bundle(url: url) {
-            guard let identifier = bundle.bundleIdentifier else {
-                return completion(.failure(.identifierNotFound))
-            }
-            executable.identifier = identifier
-            let info = bundle.infoDictionary
-            executable.displayName = (info?["CFBundleName"] as? String) ?? executable.identifier
-            if let resourcesURL = bundle.resourceURL {
-                if let definedIconFile = info?["CFBundleIconFile"] as? String {
-                    var iconURL = resourcesURL.appendingPathComponent(definedIconFile)
-                    if iconURL.pathExtension.isEmpty {
-                        iconURL.appendPathExtension("icns")
-                    }
-                    executable.iconPath = iconURL.path
-                } else {
-                    executable.iconPath = resourcesURL.appendingPathComponent("DefaultAppIcon.icns").path
-                }
-
-                if !FileManager.default.fileExists(atPath: executable.iconPath) {
-                    switch url.pathExtension {
-                    case "app":
-                        executable.iconPath = IconFilePath.application
-                    case "bundle":
-                        executable.iconPath = IconFilePath.kext
-                    case "xpc":
-                        executable.iconPath = IconFilePath.kext
-                    default:
-                        executable.iconPath = IconFilePath.unknown
-                    }
-                }
-            } else {
-                return completion(.failure(.resourceURLNotFound))
+            switch populateFromBundle(executable, bundle: bundle, url: url) {
+            case .failure(let error):
+                return completion(.failure(error))
+            case .success:
+                break
             }
         } else {
-            executable.identifier = url.path
-            executable.displayName = url.lastPathComponent
-            executable.iconPath = IconFilePath.binary
+            populateFromPath(executable, url: url)
         }
 
         if let alreadyFoundExecutable = store[executable.identifier] {
@@ -145,6 +115,60 @@ extension Model {
             return completion(.success(executable))
         } catch {
             return completion(.failure(.codeRequirementError(description: error.localizedDescription)))
+        }
+    }
+
+    private func populateFromBundle(_ executable: Executable, bundle: Bundle, url: URL) -> Result<Void, LoadExecutableError> {
+        guard let identifier = bundle.bundleIdentifier else {
+            return .failure(.identifierNotFound)
+        }
+        executable.identifier = identifier
+
+        let info = bundle.infoDictionary
+        executable.displayName = (info?["CFBundleName"] as? String) ?? executable.identifier
+
+        guard let resourcesURL = bundle.resourceURL else {
+            return .failure(.resourceURLNotFound)
+        }
+
+        executable.iconPath = resolveIconPath(info: info, resourcesURL: resourcesURL, url: url)
+        return .success(())
+    }
+
+    private func populateFromPath(_ executable: Executable, url: URL) {
+        executable.identifier = url.path
+        executable.displayName = url.lastPathComponent
+        executable.iconPath = IconFilePath.binary
+    }
+
+    private func resolveIconPath(info: [String: Any]?, resourcesURL: URL, url: URL) -> String {
+        let candidatePath: String
+
+        if let definedIconFile = info?["CFBundleIconFile"] as? String {
+            var iconURL = resourcesURL.appendingPathComponent(definedIconFile)
+            if iconURL.pathExtension.isEmpty {
+                iconURL.appendPathExtension("icns")
+            }
+            candidatePath = iconURL.path
+        } else {
+            candidatePath = resourcesURL.appendingPathComponent("DefaultAppIcon.icns").path
+        }
+
+        if FileManager.default.fileExists(atPath: candidatePath) {
+            return candidatePath
+        }
+
+        return fallbackIconPath(for: url.pathExtension)
+    }
+
+    private func fallbackIconPath(for pathExtension: String) -> String {
+        switch pathExtension {
+        case "app":
+            return IconFilePath.application
+        case "bundle", "xpc":
+            return IconFilePath.kext
+        default:
+            return IconFilePath.unknown
         }
     }
 }
