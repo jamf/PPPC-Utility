@@ -360,5 +360,5 @@ struct UploadInfoView: View {
 }
 
 #Preview {
-	UploadInfoView(signingIdentities: [], dismissAction: {})
+	UploadInfoView(signingIdentities: []) {}
 }

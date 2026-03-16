@@ -218,9 +218,8 @@ class ModelTests: XCTestCase {
 
             // then verify the services
             XCTAssertEqual(2, content.services.count)
-            let appleEvents = content.services["AppleEvents"]
-            XCTAssertNotNil(appleEvents)
-            let appleEventsPolicy = appleEvents?.first
+            let appleEventsPolicy = content.services["AppleEvents"]?.first
+            XCTAssertNotNil(appleEventsPolicy)
             XCTAssertEqual("one", appleEventsPolicy?.identifier)
             XCTAssertEqual("oneReq", appleEventsPolicy?.codeRequirement)
             XCTAssertEqual("bundleID", appleEventsPolicy?.identifierType)
@@ -230,9 +229,8 @@ class ModelTests: XCTestCase {
             XCTAssertTrue(appleEventsPolicy?.allowed == true)
             XCTAssertNil(appleEventsPolicy?.authorization)
 
-            let allFiles = content.services["SystemPolicyAllFiles"]
-            XCTAssertNotNil(allFiles)
-            let allFilesPolicy = allFiles?.first
+            let allFilesPolicy = content.services["SystemPolicyAllFiles"]?.first
+            XCTAssertNotNil(allFilesPolicy)
             XCTAssertEqual("two", allFilesPolicy?.identifier)
             XCTAssertEqual("twoReq", allFilesPolicy?.codeRequirement)
             XCTAssertEqual("bundleID", allFilesPolicy?.identifierType)

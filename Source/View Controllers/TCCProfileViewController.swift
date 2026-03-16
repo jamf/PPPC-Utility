@@ -188,7 +188,7 @@ class TCCProfileViewController: NSViewController {
 		}
 
 		let hostingController = NSHostingController(
-			rootView: UploadInfoView(signingIdentities: identities, dismissAction: {})
+			rootView: UploadInfoView(signingIdentities: identities) {}
 		)
 		hostingController.rootView = UploadInfoView(signingIdentities: identities) { [weak self, weak hostingController] in
 			guard let self, let controller = hostingController else { return }
