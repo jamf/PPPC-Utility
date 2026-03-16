@@ -12,11 +12,13 @@ struct UploadInfoView: View {
 	/// The signing identities available to be used.
 	let signingIdentities: [SigningIdentity]
 	/// Function to call when this view needs to be removed
-	let dismissAction: (() -> Void)?
+	let dismissAction: () -> Void
 
 	// Communicate this info to the user
 	@State private var warningInfo: String?
 	@State private var networkOperationInfo: String?
+	/// Tracks whether the view has been dismissed to guard async callbacks
+	@State private var isDismissed = false
 	///	Must sign the profile if Jamf Pro is less than v10.7.1
 	@State private var mustSign = false
 	/// The hash of connection info that has been verified with a succesful connection
@@ -280,6 +282,8 @@ struct UploadInfoView: View {
 
 		let uploadMgr = UploadManager(serverURL: serverURL)
 		uploadMgr.verifyConnection(authManager: makeAuthManager()) { result in
+			guard !isDismissed else { return }
+
 			if case .success(let success) = result {
 				mustSign = success.mustSign
 				organization = success.organization
@@ -305,13 +309,13 @@ struct UploadInfoView: View {
 	}
 
 	private func dismissView() {
+		isDismissed = true
+
 		if !saveToKeychain {
 			try? SecurityWrapper.removeCredentials(server: serverURL, username: username)
 		}
 
-		if let dismiss = dismissAction {
-			dismiss()
-		}
+		dismissAction()
 	}
 
 	func performUpload() {
@@ -342,6 +346,8 @@ struct UploadInfoView: View {
 						 authMgr: makeAuthManager(),
 						 siteInfo: siteIdAndName,
 						 signingIdentity: mustSign ? signingId : nil) { possibleError in
+			guard !isDismissed else { return }
+
 			if let error = possibleError {
 				warningInfo = error.localizedDescription
 			} else {
@@ -354,6 +360,5 @@ struct UploadInfoView: View {
 }
 
 #Preview {
-	UploadInfoView(signingIdentities: [],
-				   dismissAction: nil)
+	UploadInfoView(signingIdentities: [], dismissAction: {})
 }

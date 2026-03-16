@@ -24,7 +24,6 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 //
-// swiftlint:disable file_length
 
 import Cocoa
 import OSLog
@@ -188,13 +187,14 @@ class TCCProfileViewController: NSViewController {
             logger.error("Error loading identities: \(error.localizedDescription)")
 		}
 
-		let uploadView = UploadInfoView(signingIdentities: identities) {
-			// Dismiss the sheet when the UploadInfoView decides it is done
-			if let controller = self.presentedViewControllers?.first {
-				self.dismiss(controller)
-			}
+		let hostingController = NSHostingController(
+			rootView: UploadInfoView(signingIdentities: identities, dismissAction: {})
+		)
+		hostingController.rootView = UploadInfoView(signingIdentities: identities) { [weak self, weak hostingController] in
+			guard let self, let controller = hostingController else { return }
+			self.dismiss(controller)
 		}
-		self.presentAsSheet(NSHostingController(rootView: uploadView))
+		self.presentAsSheet(hostingController)
 	}
 
     fileprivate func showAlert(_ error: LocalizedError, for window: NSWindow) {
