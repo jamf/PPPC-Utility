@@ -280,36 +280,42 @@ struct UploadInfoView: View {
 		guard connectionInfoPassesValidation(setWarningInfo: true) else {
 			return
 		}
-
+		let requestHash = hashOfConnectionInfo
 		networkOperationInfo = "Checking Jamf Pro server"
 
 		let uploadMgr = UploadManager(serverURL: serverURL)
 		uploadMgr.verifyConnection(authManager: makeAuthManager()) { result in
-            Task { @MainActor in
-                guard !isDismissed else { return }
+			Task { @MainActor in
+				guard !isDismissed else { return }
 
-                if case .success(let success) = result {
-                    mustSign = success.mustSign
-                    organization = success.organization
-                    verifiedConnectionHash = hashOfConnectionInfo
-                    if saveToKeychain {
-                        do {
-                            try SecurityWrapper.saveCredentials(username: username,
-                                                                password: password,
-                                                                server: serverURL)
-                        } catch {
-                            logger.error("Failed to save credentials with error: \(error.localizedDescription)")
-                        }
-                    }
-                    // Future on macOS 12+: focus on Payload Name field
-                } else if case .failure(let failure) = result,
-                          case .anyError(let errorString) = failure {
-                    warningInfo = errorString
-                    verifiedConnectionHash = 0
-                }
+				switch result {
+				case .success(let success):
+					mustSign = success.mustSign
+					organization = success.organization
+					verifiedConnectionHash = requestHash
+					if saveToKeychain {
+						let user = username
+						let pass = password
+						let server = serverURL
+						Task.detached {
+							do {
+								try SecurityWrapper.saveCredentials(username: user,
+																	password: pass,
+																	server: server)
+							} catch {
+								logger.error("Failed to save credentials with error: \(error.localizedDescription)")
+							}
+						}
+					}
+				case .failure(let failure):
+					if case .anyError(let errorString) = failure {
+						warningInfo = errorString
+					}
+					verifiedConnectionHash = 0
+				}
 
-                networkOperationInfo = nil
-            }
+				networkOperationInfo = nil
+			}
 		}
 	}
 
