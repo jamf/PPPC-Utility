@@ -149,6 +149,9 @@ struct UploadInfoView: View {
 				payloadId = tccProfile.identifier
 			}
 		}
+		.onDisappear {
+			isDismissed = true
+		}
 	}
 
 	/// Creates a hash of the currently entered connection info
@@ -282,29 +285,31 @@ struct UploadInfoView: View {
 
 		let uploadMgr = UploadManager(serverURL: serverURL)
 		uploadMgr.verifyConnection(authManager: makeAuthManager()) { result in
-			guard !isDismissed else { return }
+            Task { @MainActor in
+                guard !isDismissed else { return }
 
-			if case .success(let success) = result {
-				mustSign = success.mustSign
-				organization = success.organization
-				verifiedConnectionHash = hashOfConnectionInfo
-				if saveToKeychain {
-					do {
-						try SecurityWrapper.saveCredentials(username: username,
-															password: password,
-															server: serverURL)
-					} catch {
-                        logger.error("Failed to save credentials with error: \(error.localizedDescription)")
-					}
-				}
-				// Future on macOS 12+: focus on Payload Name field
-			} else if case .failure(let failure) = result,
-					  case .anyError(let errorString) = failure {
-				warningInfo = errorString
-				verifiedConnectionHash = 0
-			}
+                if case .success(let success) = result {
+                    mustSign = success.mustSign
+                    organization = success.organization
+                    verifiedConnectionHash = hashOfConnectionInfo
+                    if saveToKeychain {
+                        do {
+                            try SecurityWrapper.saveCredentials(username: username,
+                                                                password: password,
+                                                                server: serverURL)
+                        } catch {
+                            logger.error("Failed to save credentials with error: \(error.localizedDescription)")
+                        }
+                    }
+                    // Future on macOS 12+: focus on Payload Name field
+                } else if case .failure(let failure) = result,
+                          case .anyError(let errorString) = failure {
+                    warningInfo = errorString
+                    verifiedConnectionHash = 0
+                }
 
-			networkOperationInfo = nil
+                networkOperationInfo = nil
+            }
 		}
 	}
 
@@ -346,15 +351,17 @@ struct UploadInfoView: View {
 						 authMgr: makeAuthManager(),
 						 siteInfo: siteIdAndName,
 						 signingIdentity: mustSign ? signingId : nil) { possibleError in
-			guard !isDismissed else { return }
+            Task { @MainActor in
+                guard !isDismissed else { return }
 
-			if let error = possibleError {
-				warningInfo = error.localizedDescription
-			} else {
-				Alert().display(header: "Success", message: "Profile uploaded succesfully")
-				dismissView()
-			}
-			networkOperationInfo = nil
+                if let error = possibleError {
+                    warningInfo = error.localizedDescription
+                } else {
+                    Alert().display(header: "Success", message: "Profile uploaded succesfully")
+                    dismissView()
+                }
+                networkOperationInfo = nil
+            }
 		}
 	}
 }
