@@ -320,13 +320,21 @@ struct UploadInfoView: View {
 	}
 
 	private func dismissView() {
+        // Capture values needed for potential background credential removal
+        let shouldRemoveCredentials = !saveToKeychain
+        let server = serverURL
+        let user = username
+
 		isDismissed = true
 
-		if !saveToKeychain {
-			try? SecurityWrapper.removeCredentials(server: serverURL, username: username)
-		}
+        // Dismiss the view immediately to keep the UI responsive
+        dismissAction()
 
-		dismissAction()
+		if shouldRemoveCredentials {
+            Task.detached {
+                try? SecurityWrapper.removeCredentials(server: server, username: user)
+            }
+		}
 	}
 
 	func performUpload() {
