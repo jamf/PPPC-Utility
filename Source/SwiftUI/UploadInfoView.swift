@@ -357,17 +357,15 @@ struct UploadInfoView: View {
 						 authMgr: makeAuthManager(),
 						 siteInfo: siteIdAndName,
 						 signingIdentity: mustSign ? signingId : nil) { possibleError in
-            Task { @MainActor in
-                guard !isDismissed else { return }
+            guard !isDismissed else { return }
 
-                if let error = possibleError {
-                    warningInfo = error.localizedDescription
-                } else {
-                    Alert().display(header: "Success", message: "Profile uploaded succesfully")
-                    dismissView()
-                }
-                networkOperationInfo = nil
+            if let error = possibleError {
+                warningInfo = error.localizedDescription
+            } else {
+                Alert().display(header: "Success", message: "Profile uploaded successfully")
+                dismissView()
             }
+            networkOperationInfo = nil
 		}
 	}
 }
