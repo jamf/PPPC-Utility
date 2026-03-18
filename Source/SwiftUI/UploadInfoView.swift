@@ -286,7 +286,7 @@ struct UploadInfoView: View {
 		let uploadMgr = UploadManager(serverURL: serverURL)
 		uploadMgr.verifyConnection(authManager: makeAuthManager()) { result in
 			Task { @MainActor in
-				guard !isDismissed else { return }
+				guard !isDismissed, requestHash == hashOfConnectionInfo else { return }
 
 				switch result {
 				case .success(let success):
@@ -325,16 +325,16 @@ struct UploadInfoView: View {
         let server = serverURL
         let user = username
 
-		isDismissed = true
+        isDismissed = true
 
         // Dismiss the view immediately to keep the UI responsive
         dismissAction()
 
-		if shouldRemoveCredentials {
+        if shouldRemoveCredentials {
             Task.detached {
                 try? SecurityWrapper.removeCredentials(server: server, username: user)
             }
-		}
+        }
 	}
 
 	func performUpload() {
