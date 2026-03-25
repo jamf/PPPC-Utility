@@ -153,10 +153,10 @@ class TCCProfileViewController: NSViewController {
         case .on:
             if model.usingLegacyAllowKey && showAlert {
                 let message = """
-                Enabling Big Sur Compatibility will require the profile to be installed on macOS versions Big Sur (11.0) or greater.
+                    Enabling Big Sur Compatibility will require the profile to be installed on macOS versions Big Sur (11.0) or greater.
 
-                Deploying this profile to computers with macOS 10.15 or earlier will result in an error.
-                """
+                    Deploying this profile to computers with macOS 10.15 or earlier will result in an error.
+                    """
                 Alert().display(header: "Compatibility Warning", message: message)
             }
             model.usingLegacyAllowKey = false
@@ -179,23 +179,23 @@ class TCCProfileViewController: NSViewController {
         toggleAuthorizationKey(theSwitch: sender, showAlert: true)
     }
 
-	@IBAction func uploadAction(_ sender: NSButton) {
-		let identities: [SigningIdentity]
-		do {
-			identities = try SecurityWrapper.loadSigningIdentities()
-		} catch {
-			identities = []
+    @IBAction func uploadAction(_ sender: NSButton) {
+        let identities: [SigningIdentity]
+        do {
+            identities = try SecurityWrapper.loadSigningIdentities()
+        } catch {
+            identities = []
             logger.error("Error loading identities: \(error.localizedDescription)")
-		}
+        }
 
-		let uploadView = UploadInfoView(signingIdentities: identities) {
-			// Dismiss the sheet when the UploadInfoView decides it is done
-			if let controller = self.presentedViewControllers?.first {
-				self.dismiss(controller)
-			}
-		}
-		self.presentAsSheet(NSHostingController(rootView: uploadView))
-	}
+        let uploadView = UploadInfoView(signingIdentities: identities) {
+            // Dismiss the sheet when the UploadInfoView decides it is done
+            if let controller = self.presentedViewControllers?.first {
+                self.dismiss(controller)
+            }
+        }
+        self.presentAsSheet(NSHostingController(rootView: uploadView))
+    }
 
     fileprivate func showAlert(_ error: LocalizedError, for window: NSWindow) {
         let alertWindow: NSAlert = NSAlert()
@@ -238,7 +238,7 @@ class TCCProfileViewController: NSViewController {
     func promptForExecutables(_ block: @escaping (Executable) -> Void) {
         let panel = NSOpenPanel()
         panel.allowsMultipleSelection = true
-        panel.allowedFileTypes = [ kUTTypeBundle, kUTTypeUnixExecutable ] as [String]
+        panel.allowedFileTypes = [kUTTypeBundle, kUTTypeUnixExecutable] as [String]
         panel.directoryURL = URL(fileURLWithPath: "/Applications", isDirectory: true)
         guard let window = self.view.window else {
             return
@@ -266,7 +266,7 @@ class TCCProfileViewController: NSViewController {
     }
 
     let pasteboardOptions: [NSPasteboard.ReadingOptionKey: Any] = [
-        .urlReadingContentsConformToTypes: [ kUTTypeBundle, kUTTypeUnixExecutable ]
+        .urlReadingContentsConformToTypes: [kUTTypeBundle, kUTTypeUnixExecutable]
     ]
 
     @IBAction func checkForAuthorizationFeaturesUsed(_ sender: NSPopUpButton) {
@@ -280,42 +280,50 @@ class TCCProfileViewController: NSViewController {
         super.viewDidLoad()
 
         //  Setup policy pop up
-        setupAllowDeny(policies: [addressBookPopUpAC,
-                                  photosPopUpAC,
-                                  remindersPopUpAC,
-                                  calendarPopUpAC,
-                                  accessibilityPopUpAC,
-                                  postEventsPopUpAC,
-                                  adminFilesPopUpAC,
-                                  allFilesPopUpAC,
-                                  fileProviderPresencePopUpAC,
-                                  mediaLibraryPopUpAC,
-                                  speechRecognitionPopUpAC,
-                                  dekstopFolderPopUpAC,
-                                  documentsFolderPopUpAC,
-                                  downloadsFolderPopUpAC,
-                                  networkVolumesPopUpAC,
-                                  removableVolumesPopUpAC])
+        setupAllowDeny(policies: [
+            addressBookPopUpAC,
+            photosPopUpAC,
+            remindersPopUpAC,
+            calendarPopUpAC,
+            accessibilityPopUpAC,
+            postEventsPopUpAC,
+            adminFilesPopUpAC,
+            allFilesPopUpAC,
+            fileProviderPresencePopUpAC,
+            mediaLibraryPopUpAC,
+            speechRecognitionPopUpAC,
+            dekstopFolderPopUpAC,
+            documentsFolderPopUpAC,
+            downloadsFolderPopUpAC,
+            networkVolumesPopUpAC,
+            removableVolumesPopUpAC,
+        ])
 
-        setupStandardUserAllowAndDeny(policies: [screenCapturePopUpAC,
-                                                 listenEventPopUpAC])
+        setupStandardUserAllowAndDeny(policies: [
+            screenCapturePopUpAC,
+            listenEventPopUpAC,
+        ])
         setupActionForStandardUserAllowedDropDowns(dropDowns: [listenEventPopUp, screenCapturePopUp])
 
-        setupDenyOnly(policies: [cameraPopUpAC,
-                                 microphonePopUpAC])
+        setupDenyOnly(policies: [
+            cameraPopUpAC,
+            microphonePopUpAC,
+        ])
 
         setupDescriptions()
 
-        setupStackViewsWithBackground(stackViews: [adminFilesStackView,
-                                                   cameraStackView,
-                                                   desktopFolderStackView,
-                                                   downloadsFolderStackView,
-                                                   allFilesStackView,
-                                                   mediaLibraryStackView,
-                                                   networkVolumesStackView,
-                                                   postEventsStackView,
-                                                   removableVolumesStackView,
-                                                   speechRecognitionStackView])
+        setupStackViewsWithBackground(stackViews: [
+            adminFilesStackView,
+            cameraStackView,
+            desktopFolderStackView,
+            downloadsFolderStackView,
+            allFilesStackView,
+            mediaLibraryStackView,
+            networkVolumesStackView,
+            postEventsStackView,
+            removableVolumesStackView,
+            speechRecognitionStackView,
+        ])
 
         //  Setup table views
         executablesTable.registerForDraggedTypes([.fileURL])
@@ -341,9 +349,11 @@ class TCCProfileViewController: NSViewController {
 
     private func setupStandardUserAllowAndDeny(policies: [NSArrayController]) {
         for policy in policies {
-            policy.add(contentsOf: ["-",
-                                    TCCProfileDisplayValue.allowStandardUsersToApprove.rawValue,
-                                    TCCProfileDisplayValue.deny.rawValue])
+            policy.add(contentsOf: [
+                "-",
+                TCCProfileDisplayValue.allowStandardUsersToApprove.rawValue,
+                TCCProfileDisplayValue.deny.rawValue,
+            ])
         }
     }
 
@@ -430,7 +440,8 @@ class TCCProfileViewController: NSViewController {
         guard let source = self.executablesAC.selectedObjects.first as? Executable else { return }
         let rule = AppleEventRule(source: source, destination: executable, value: true)
         guard self.appleEventsAC.canInsert,
-            self.shouldAppleEventRuleBeAdded(rule) else { return }
+            self.shouldAppleEventRuleBeAdded(rule)
+        else { return }
         self.appleEventsAC.insert(rule, atArrangedObjectIndex: 0)
     }
 

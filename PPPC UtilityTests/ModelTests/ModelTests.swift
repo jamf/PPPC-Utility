@@ -43,16 +43,16 @@ class ModelTests: XCTestCase {
 
     func testGetExecutableBasedOnIdentifierAndCodeRequirement_BundleIdentifierType() {
         // given
-            let identifier = "com.example.App"
-            let codeRequirement = "testCodeRequirement"
+        let identifier = "com.example.App"
+        let codeRequirement = "testCodeRequirement"
 
         // when
-            let executable = model.getExecutableFrom(identifier: identifier, codeRequirement: codeRequirement)
+        let executable = model.getExecutableFrom(identifier: identifier, codeRequirement: codeRequirement)
 
         // then
-            XCTAssertEqual(executable.displayName, "App")
-            XCTAssertEqual(executable.codeRequirement, codeRequirement)
-            XCTAssertEqual(executable.iconPath, IconFilePath.application)
+        XCTAssertEqual(executable.displayName, "App")
+        XCTAssertEqual(executable.codeRequirement, codeRequirement)
+        XCTAssertEqual(executable.iconPath, IconFilePath.application)
     }
 
     func testGetExecutableBasedOnIdentifierAndCodeRequirement_PathIdentifierType() {
@@ -71,16 +71,16 @@ class ModelTests: XCTestCase {
 
     func testGetExecutableFromComputerBasedOnIdentifier() {
         // given
-            let identifier = "com.apple.Safari"
-            let codeRequirement = "randomReq"
+        let identifier = "com.apple.Safari"
+        let codeRequirement = "randomReq"
 
         // when
-            let executable = model.getExecutableFrom(identifier: identifier, codeRequirement: codeRequirement)
+        let executable = model.getExecutableFrom(identifier: identifier, codeRequirement: codeRequirement)
 
         // then
-            XCTAssertEqual(executable.displayName, "Safari")
-            XCTAssertNotEqual(executable.iconPath, IconFilePath.application)
-            XCTAssertNotEqual(codeRequirement, executable.codeRequirement)
+        XCTAssertEqual(executable.displayName, "Safari")
+        XCTAssertNotEqual(executable.iconPath, IconFilePath.application)
+        XCTAssertNotEqual(codeRequirement, executable.codeRequirement)
     }
 
     func testGetExecutableFromSelectedExecutables() {
@@ -481,14 +481,18 @@ class ModelTests: XCTestCase {
     func testChangingFromAuthorizationKeyToLegacyAllowKeyWithMoreComplexVaues() {
         // given
         let allowStandard = TCCProfileDisplayValue.allowStandardUsersToApprove.rawValue
-        let p1Settings = ["SystemPolicyAllFiles": "Allow",
-                           "ListenEvent": allowStandard,
-                           "ScreenCapture": "Deny",
-                           "Camera": "Deny"]
+        let p1Settings = [
+            "SystemPolicyAllFiles": "Allow",
+            "ListenEvent": allowStandard,
+            "ScreenCapture": "Deny",
+            "Camera": "Deny",
+        ]
 
-        let p2Settings = ["SystemPolicyAllFiles": "Deny",
-                           "ScreenCapture": allowStandard,
-                           "Calendar": "Allow"]
+        let p2Settings = [
+            "SystemPolicyAllFiles": "Deny",
+            "ScreenCapture": allowStandard,
+            "Calendar": "Allow",
+        ]
         let builder = ModelBuilder().addExecutable(settings: p1Settings)
         model = builder.addExecutable(settings: p2Settings).build()
         model.usingLegacyAllowKey = false

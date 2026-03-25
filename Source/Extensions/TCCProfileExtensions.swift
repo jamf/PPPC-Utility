@@ -27,9 +27,9 @@
 
 import Foundation
 
-public extension TCCProfile {
+extension TCCProfile {
 
-    enum ParseError: Error {
+    public enum ParseError: Error {
         case failedToCreateDecoder
     }
 
@@ -37,7 +37,7 @@ public extension TCCProfile {
     /// - Parameter profileData: The raw profile data (generally from a file read operation).  This may be CMS encoded.
     /// - Returns: A ``TCCProfile`` instance.
     /// - Throws: Either a ``TCCProfile.ParseError`` or a `DecodingError`.
-    static func parse(from profileData: Data) throws -> TCCProfile {
+    public static func parse(from profileData: Data) throws -> TCCProfile {
         // The profile may be CMS encoded; let's try to decode it.
         guard let cmsDecoder = SwiftyCMSDecoder() else {
             throw ParseError.failedToCreateDecoder
@@ -73,9 +73,10 @@ public extension TCCProfile {
         // converts it to the standard letter case.
         let conversionBlock = { (codingKey: CodingKey) in
             let requiredString = ">\(codingKey.stringValue)<"
-            newString = newString.replacingOccurrences(of: requiredString,
-                                                       with: requiredString,
-                                                       options: .caseInsensitive)
+            newString = newString.replacingOccurrences(
+                of: requiredString,
+                with: requiredString,
+                options: .caseInsensitive)
         }
 
         // Currently there are three model structs that are used to decode the profile.
