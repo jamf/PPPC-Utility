@@ -24,7 +24,6 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 //
-// swiftlint:disable file_length
 
 import Cocoa
 import OSLog
@@ -296,19 +295,13 @@ class TCCProfileViewController: NSViewController {
             documentsFolderPopUpAC,
             downloadsFolderPopUpAC,
             networkVolumesPopUpAC,
-            removableVolumesPopUpAC,
+            removableVolumesPopUpAC
         ])
 
-        setupStandardUserAllowAndDeny(policies: [
-            screenCapturePopUpAC,
-            listenEventPopUpAC,
-        ])
+        setupStandardUserAllowAndDeny(policies: [screenCapturePopUpAC, listenEventPopUpAC])
         setupActionForStandardUserAllowedDropDowns(dropDowns: [listenEventPopUp, screenCapturePopUp])
 
-        setupDenyOnly(policies: [
-            cameraPopUpAC,
-            microphonePopUpAC,
-        ])
+        setupDenyOnly(policies: [cameraPopUpAC, microphonePopUpAC])
 
         setupDescriptions()
 
@@ -322,7 +315,7 @@ class TCCProfileViewController: NSViewController {
             networkVolumesStackView,
             postEventsStackView,
             removableVolumesStackView,
-            speechRecognitionStackView,
+            speechRecognitionStackView
         ])
 
         //  Setup table views
@@ -352,7 +345,7 @@ class TCCProfileViewController: NSViewController {
             policy.add(contentsOf: [
                 "-",
                 TCCProfileDisplayValue.allowStandardUsersToApprove.rawValue,
-                TCCProfileDisplayValue.deny.rawValue,
+                TCCProfileDisplayValue.deny.rawValue
             ])
         }
     }

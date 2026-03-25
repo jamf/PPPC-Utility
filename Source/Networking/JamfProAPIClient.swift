@@ -63,7 +63,7 @@ class JamfProAPIClient: Networking {
         components.queryItems = [
             URLQueryItem(name: "grant_type", value: "client_credentials"),
             URLQueryItem(name: "client_id", value: clientId),
-            URLQueryItem(name: "client_secret", value: clientSecret),
+            URLQueryItem(name: "client_secret", value: clientSecret)
         ]
 
         request.httpBody = components.percentEncodedQuery?.data(using: .utf8)

@@ -10,3 +10,4 @@ disabled_rules:
   - line_length
   - type_body_length
   - todo
+  - opening_brace
