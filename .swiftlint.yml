@@ -4,6 +4,8 @@ opt_in_rules:
   - orphaned_doc_comment
 
 file_length:
+  warning: 500
+  error: 500
   ignore_comment_only_lines: true
 
 disabled_rules:
