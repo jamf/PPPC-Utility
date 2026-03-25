@@ -3,5 +3,9 @@
   "lineLength": 200,
   "indentation": {
     "spaces": 4
+  },
+  "rules": {
+    "AlwaysUseLowerCamelCase": false,
+    "ReplaceForEachWithForLoop": false
   }
 }
