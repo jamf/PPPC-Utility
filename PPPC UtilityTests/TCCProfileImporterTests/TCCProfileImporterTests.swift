@@ -37,14 +37,12 @@ class TCCProfileImporterTests: XCTestCase {
 
         let resourceURL = getResourceProfile(fileName: "TestTCCProfileSigned-Broken")
 
-        tccProfileImporter.decodeTCCProfile(fileUrl: resourceURL) { tccProfileResult in
-            switch tccProfileResult {
-            case .success:
-                XCTFail("Malformed profile should not succeed")
-            case .failure(let tccProfileError):
-                if case TCCProfileImportError.invalidProfileFile = tccProfileError { } else {
-                    XCTFail("Expected invalidProfileFile error, got \(tccProfileError)")
-                }
+        do {
+            _ = try tccProfileImporter.decodeTCCProfile(fileUrl: resourceURL)
+            XCTFail("Malformed profile should not succeed")
+        } catch {
+            if case TCCProfileImportError.invalidProfileFile = error { } else {
+                XCTFail("Expected invalidProfileFile error, got \(error)")
             }
         }
     }
@@ -56,46 +54,32 @@ class TCCProfileImporterTests: XCTestCase {
 
         let expectedTCCProfileError = TCCProfileImportError.invalidProfileFile(description: "PayloadContent")
 
-        tccProfileImporter.decodeTCCProfile(fileUrl: resourceURL) { tccProfileResult in
-            switch tccProfileResult {
-            case .success:
-                XCTFail("Empty Content, it shouldn't be success")
-            case .failure(let tccProfileError):
-                XCTAssertEqual(tccProfileError.localizedDescription, expectedTCCProfileError.localizedDescription)
-            }
+        do {
+            _ = try tccProfileImporter.decodeTCCProfile(fileUrl: resourceURL)
+            XCTFail("Empty Content, it shouldn't be success")
+        } catch {
+            XCTAssertEqual(error.localizedDescription, expectedTCCProfileError.localizedDescription)
         }
     }
 
-    func testCorrectUnsignedProfileContentData() {
+    func testCorrectUnsignedProfileContentData() throws {
         let tccProfileImporter = TCCProfileImporter()
 
         let resourceURL = getResourceProfile(fileName: "TestTCCUnsignedProfile")
 
-        tccProfileImporter.decodeTCCProfile(fileUrl: resourceURL) { tccProfileResult in
-            switch tccProfileResult {
-            case .success(let tccProfile):
-                XCTAssertNotNil(tccProfile.content)
-                XCTAssertNotNil(tccProfile.content[0].services)
-            case .failure(let tccProfileError):
-                XCTFail("Unable to read tccProfile \(tccProfileError.localizedDescription)")
-            }
-        }
+        let tccProfile = try tccProfileImporter.decodeTCCProfile(fileUrl: resourceURL)
+        XCTAssertNotNil(tccProfile.content)
+        XCTAssertNotNil(tccProfile.content[0].services)
     }
 
-    func testCorrectUnsignedProfileContentDataAllLowercase() {
+    func testCorrectUnsignedProfileContentDataAllLowercase() throws {
         let tccProfileImporter = TCCProfileImporter()
 
         let resourceURL = getResourceProfile(fileName: "TestTCCUnsignedProfile-allLower")
 
-        tccProfileImporter.decodeTCCProfile(fileUrl: resourceURL) { tccProfileResult in
-            switch tccProfileResult {
-            case .success(let tccProfile):
-                XCTAssertNotNil(tccProfile.content)
-                XCTAssertNotNil(tccProfile.content[0].services)
-            case .failure(let tccProfileError):
-                XCTFail("Unable to read tccProfile \(tccProfileError.localizedDescription)")
-            }
-        }
+        let tccProfile = try tccProfileImporter.decodeTCCProfile(fileUrl: resourceURL)
+        XCTAssertNotNil(tccProfile.content)
+        XCTAssertNotNil(tccProfile.content[0].services)
     }
 
     func testBrokenUnsignedProfile() {
@@ -105,13 +89,11 @@ class TCCProfileImporterTests: XCTestCase {
 
         let expectedTCCProfileError = TCCProfileImportError.invalidProfileFile(description: "The given data was not a valid property list.")
 
-        tccProfileImporter.decodeTCCProfile(fileUrl: resourceURL) { tccProfileResult in
-            switch tccProfileResult {
-            case .success:
-                XCTFail("Broken Unsigned Profile, it shouldn't be success")
-            case .failure(let tccProfileError):
-                XCTAssertEqual(tccProfileError.localizedDescription, expectedTCCProfileError.localizedDescription)
-            }
+        do {
+            _ = try tccProfileImporter.decodeTCCProfile(fileUrl: resourceURL)
+            XCTFail("Broken Unsigned Profile, it shouldn't be success")
+        } catch {
+            XCTAssertEqual(error.localizedDescription, expectedTCCProfileError.localizedDescription)
         }
     }
 

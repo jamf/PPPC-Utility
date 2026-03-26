@@ -28,45 +28,44 @@
 import Foundation
 
 typealias TCCProfileImportResult = Result<TCCProfile, TCCProfileImportError>
-typealias TCCProfileImportCompletion = ((TCCProfileImportResult) -> Void)
 
 /// Load tcc profiles
 public class TCCProfileImporter {
 
     // MARK: Load TCCProfile
 
-    /// Mapping & Decoding tcc profile
+    /// Mapping & Decoding tcc profile from data
     ///
-    /// - Parameter fileUrl: path with a file to load, completion: TCCProfileImportCompletion - success with TCCProfile or failure with TCCProfileImport Error
-    func decodeTCCProfile(data: Data, _ completion: @escaping TCCProfileImportCompletion) {
+    /// - Parameter data: The raw data to decode
+    /// - Returns: The decoded TCCProfile
+    func decodeTCCProfile(data: Data) throws -> TCCProfile {
         do {
             // Note that parse will ignore the signing portion of the data
-            let tccProfile = try TCCProfile.parse(from: data)
-            return completion(.success(tccProfile))
+            return try TCCProfile.parse(from: data)
         } catch TCCProfile.ParseError.failedToCreateDecoder {
-            return completion(.failure(.decodeProfileError))
+            throw TCCProfileImportError.decodeProfileError
         } catch let DecodingError.keyNotFound(codingKey, _) {
-            return completion(TCCProfileImportResult.failure(.invalidProfileFile(description: codingKey.stringValue)))
+            throw TCCProfileImportError.invalidProfileFile(description: codingKey.stringValue)
         } catch let DecodingError.typeMismatch(type, context) {
             let errorDescription = "Type \(type) mismatch: \(context.debugDescription) codingPath: \(context.codingPath)"
-            return completion(.failure(.invalidProfileFile(description: errorDescription)))
+            throw TCCProfileImportError.invalidProfileFile(description: errorDescription)
         } catch let error as NSError {
             let errorDescription = error.userInfo["NSDebugDescription"] as? String
-            return completion(.failure(.invalidProfileFile(description: errorDescription ?? error.localizedDescription)))
+            throw TCCProfileImportError.invalidProfileFile(description: errorDescription ?? error.localizedDescription)
         }
     }
 
-    /// Mapping & Decoding tcc profile
+    /// Mapping & Decoding tcc profile from a file URL
     ///
-    /// - Parameter fileUrl: path with a file to load, completion: TCCProfileImportCompletion - success with TCCProfile or failure with TCCProfileImport Error
-    func decodeTCCProfile(fileUrl: URL, _ completion: @escaping TCCProfileImportCompletion) {
+    /// - Parameter fileUrl: path with a file to load
+    /// - Returns: The decoded TCCProfile
+    func decodeTCCProfile(fileUrl: URL) throws -> TCCProfile {
         let data: Data
         do {
             data = try Data(contentsOf: fileUrl)
-            return decodeTCCProfile(data: data, completion)
         } catch {
-            return completion(.failure(.unableToOpenFile))
+            throw TCCProfileImportError.unableToOpenFile
         }
-
+        return try decodeTCCProfile(data: data)
     }
 }

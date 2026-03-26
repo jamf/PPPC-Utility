@@ -31,8 +31,11 @@ import Foundation
 class TCCProfileConfigurationPanel {
     /// Load TCC Profile data from file
      ///
-     /// - Parameter completion: TCCProfileImportCompletion - success with TCCProfile or failure with TCCProfileImport Error
-    func loadTCCProfileFromFile(importer: TCCProfileImporter, window: NSWindow, _ completion: @escaping TCCProfileImportCompletion) {
+     /// - Parameters:
+     ///   - importer: The TCCProfileImporter to use
+     ///   - window: The window to present the open panel in
+     ///   - completion: Called with the result of the import
+    func loadTCCProfileFromFile(importer: TCCProfileImporter, window: NSWindow, _ completion: @escaping (TCCProfileImportResult) -> Void) {
          let openPanel = NSOpenPanel.init()
          openPanel.allowedFileTypes = ["mobileconfig", "plist"]
          openPanel.allowsMultipleSelection = false
@@ -46,8 +49,15 @@ class TCCProfileConfigurationPanel {
                 completion(.failure(.cancelled))
              } else {
                  if let result = openPanel.url {
-                     importer.decodeTCCProfile(fileUrl: result) { tccProfileResult in
-                         return completion(tccProfileResult)
+                     do {
+                         let tccProfile = try importer.decodeTCCProfile(fileUrl: result)
+                         completion(.success(tccProfile))
+                     } catch {
+                         if let importError = error as? TCCProfileImportError {
+                             completion(.failure(importError))
+                         } else {
+                             completion(.failure(.invalidProfileFile(description: error.localizedDescription)))
+                         }
                      }
                  } else {
                      completion(.failure(TCCProfileImportError.unableToOpenFile))
