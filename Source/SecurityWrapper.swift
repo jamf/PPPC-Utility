@@ -70,7 +70,7 @@ struct SecurityWrapper {
 		return nil
     }
 
-    static func copyDesignatedRequirement(url: URL) throws -> String {
+    @concurrent static func copyDesignatedRequirement(url: URL) async throws -> String {
         let flags = SecCSFlags(rawValue: 0)
         var staticCode: SecStaticCode?
         var requirement: SecRequirement?
@@ -83,7 +83,7 @@ struct SecurityWrapper {
         return text! as String
     }
 
-    static func sign(data: Data, using identity: SecIdentity) throws -> Data {
+    @concurrent static func sign(data: Data, using identity: SecIdentity) async throws -> Data {
 
         var outputData: CFData?
         var encoder: CMSEncoder?
@@ -96,7 +96,7 @@ struct SecurityWrapper {
         return outputData! as Data
     }
 
-    static func loadSigningIdentities() throws -> [SigningIdentity] {
+    @concurrent static func loadSigningIdentities() async throws -> [SigningIdentity] {
 		let haversack = Haversack()
 		let query = IdentityQuery().matching(mustBeValidOnDate: Date()).returning(.reference)
 

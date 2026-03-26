@@ -41,13 +41,13 @@ class ModelTests: XCTestCase {
 
     // MARK: - tests for getExecutableFrom*
 
-    func testGetExecutableBasedOnIdentifierAndCodeRequirement_BundleIdentifierType() {
+    func testGetExecutableBasedOnIdentifierAndCodeRequirement_BundleIdentifierType() async {
         // given
             let identifier = "com.example.App"
             let codeRequirement = "testCodeRequirement"
 
         // when
-            let executable = model.getExecutableFrom(identifier: identifier, codeRequirement: codeRequirement)
+            let executable = await model.getExecutableFrom(identifier: identifier, codeRequirement: codeRequirement)
 
         // then
             XCTAssertEqual(executable.displayName, "App")
@@ -55,13 +55,13 @@ class ModelTests: XCTestCase {
             XCTAssertEqual(executable.iconPath, IconFilePath.application)
     }
 
-    func testGetExecutableBasedOnIdentifierAndCodeRequirement_PathIdentifierType() {
+    func testGetExecutableBasedOnIdentifierAndCodeRequirement_PathIdentifierType() async {
         // given
         let identifier = "/myGreatPath/Awesome/Binary"
         let codeRequirement = "testCodeRequirement"
 
         // when
-        let executable = model.getExecutableFrom(identifier: identifier, codeRequirement: codeRequirement)
+        let executable = await model.getExecutableFrom(identifier: identifier, codeRequirement: codeRequirement)
 
         // then
         XCTAssertEqual(executable.displayName, "Binary")
@@ -69,13 +69,13 @@ class ModelTests: XCTestCase {
         XCTAssertEqual(executable.iconPath, IconFilePath.binary)
     }
 
-    func testGetExecutableFromComputerBasedOnIdentifier() {
+    func testGetExecutableFromComputerBasedOnIdentifier() async {
         // given
             let identifier = "com.apple.Safari"
             let codeRequirement = "randomReq"
 
         // when
-            let executable = model.getExecutableFrom(identifier: identifier, codeRequirement: codeRequirement)
+            let executable = await model.getExecutableFrom(identifier: identifier, codeRequirement: codeRequirement)
 
         // then
             XCTAssertEqual(executable.displayName, "Safari")
@@ -83,11 +83,11 @@ class ModelTests: XCTestCase {
             XCTAssertNotEqual(codeRequirement, executable.codeRequirement)
     }
 
-    func testGetExecutableFromSelectedExecutables() {
+    func testGetExecutableFromSelectedExecutables() async {
         // given
         let expectedIdentifier = "com.something.1"
-        let executable = model.getExecutableFrom(identifier: expectedIdentifier, codeRequirement: "testReq")
-        let executableSecond = model.getExecutableFrom(identifier: "com.something.2", codeRequirement: "testReq2")
+        let executable = await model.getExecutableFrom(identifier: expectedIdentifier, codeRequirement: "testReq")
+        let executableSecond = await model.getExecutableFrom(identifier: "com.something.2", codeRequirement: "testReq2")
         model.selectedExecutables = [executable, executableSecond]
 
         // when
@@ -100,12 +100,12 @@ class ModelTests: XCTestCase {
         XCTAssertEqual(existingExecutable?.iconPath, IconFilePath.application)
     }
 
-    func testGetExecutableFromSelectedExecutables_Path() {
+    func testGetExecutableFromSelectedExecutables_Path() async {
         // given
         let expectedIdentifier = "/path/something/Special"
-        let executableOneMore = model.getExecutableFrom(identifier: "/path/something/Special1", codeRequirement: "testReq")
-        let executable = model.getExecutableFrom(identifier: expectedIdentifier, codeRequirement: "testReq")
-        let executableSecond = model.getExecutableFrom(identifier: "com.something.2", codeRequirement: "testReq2")
+        let executableOneMore = await model.getExecutableFrom(identifier: "/path/something/Special1", codeRequirement: "testReq")
+        let executable = await model.getExecutableFrom(identifier: expectedIdentifier, codeRequirement: "testReq")
+        let executableSecond = await model.getExecutableFrom(identifier: "com.something.2", codeRequirement: "testReq2")
         model.selectedExecutables = [executableOneMore, executable, executableSecond]
 
         // when
@@ -186,84 +186,84 @@ class ModelTests: XCTestCase {
 
     // MARK: - tests for importProfile
 
-    func testImportProfileUsingAuthorizationKeyAllow() {
+    func testImportProfileUsingAuthorizationKeyAllow() async {
         // given
         let profile = TCCProfileBuilder().buildProfile(authorization: .allow)
 
         // when
-        model.importProfile(tccProfile: profile)
+        await model.importProfile(tccProfile: profile)
 
         // then
         XCTAssertEqual(1, model.selectedExecutables.count)
         XCTAssertEqual("Allow", model.selectedExecutables.first?.policy.SystemPolicyAllFiles)
     }
 
-    func testImportProfileUsingAuthorizationKeyDeny() {
+    func testImportProfileUsingAuthorizationKeyDeny() async {
         // given
         let profile = TCCProfileBuilder().buildProfile(authorization: .deny)
 
         // when
-        model.importProfile(tccProfile: profile)
+        await model.importProfile(tccProfile: profile)
 
         // then
         XCTAssertEqual(1, model.selectedExecutables.count)
         XCTAssertEqual("Deny", model.selectedExecutables.first?.policy.SystemPolicyAllFiles)
     }
 
-    func testImportProfileUsingAuthorizationKeyAllowStandardUsers() {
+    func testImportProfileUsingAuthorizationKeyAllowStandardUsers() async {
         // given
         let profile = TCCProfileBuilder().buildProfile(authorization: .allowStandardUserToSetSystemService)
 
         // when
-        model.importProfile(tccProfile: profile)
+        await model.importProfile(tccProfile: profile)
 
         // then
         XCTAssertEqual(1, model.selectedExecutables.count)
         XCTAssertEqual("Let Standard Users Approve", model.selectedExecutables.first?.policy.SystemPolicyAllFiles)
     }
 
-    func testImportProfileUsingLegacyAllowKeyTrue() {
+    func testImportProfileUsingLegacyAllowKeyTrue() async {
         // given
         let profile = TCCProfileBuilder().buildProfile(allowed: true)
 
         // when
-        model.importProfile(tccProfile: profile)
+        await model.importProfile(tccProfile: profile)
 
         // then
         XCTAssertEqual(1, model.selectedExecutables.count)
         XCTAssertEqual("Allow", model.selectedExecutables.first?.policy.SystemPolicyAllFiles)
     }
 
-    func testImportProfileUsingLegacyAllowKeyFalse() {
+    func testImportProfileUsingLegacyAllowKeyFalse() async {
         // given
         let profile = TCCProfileBuilder().buildProfile(allowed: false)
 
         // when
-        model.importProfile(tccProfile: profile)
+        await model.importProfile(tccProfile: profile)
 
         // then
         XCTAssertEqual(1, model.selectedExecutables.count)
         XCTAssertEqual("Deny", model.selectedExecutables.first?.policy.SystemPolicyAllFiles)
     }
 
-    func testImportProfileUsingAuthorizationKeyThatIsInvalid() {
+    func testImportProfileUsingAuthorizationKeyThatIsInvalid() async {
         // given
         let profile = TCCProfileBuilder().buildProfile(authorization: "invalidkey")
 
         // when
-        model.importProfile(tccProfile: profile)
+        await model.importProfile(tccProfile: profile)
 
         // then
         XCTAssertEqual(1, model.selectedExecutables.count)
         XCTAssertEqual("Deny", model.selectedExecutables.first?.policy.SystemPolicyAllFiles)
     }
 
-    func testImportProfileUsingAuthorizationKeyTranslatesToAppleEvents() {
+    func testImportProfileUsingAuthorizationKeyTranslatesToAppleEvents() async {
         // given
         let profile = TCCProfileBuilder().buildProfile(authorization: "deny")
 
         // when
-        model.importProfile(tccProfile: profile)
+        await model.importProfile(tccProfile: profile)
 
         // then
         XCTAssertEqual(1, model.selectedExecutables.count)

@@ -91,12 +91,14 @@ class SaveViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         payloadIdentifier = UUID().uuidString
-        do {
-            var identities = try SecurityWrapper.loadSigningIdentities()
-            identities.insert(SigningIdentity(name: "Not signed", reference: nil), at: 0)
-            identitiesPopUpAC.add(contentsOf: identities)
-        } catch {
-            logger.error("Error loading identities: \(error)")
+        Task {
+            do {
+                var identities = try await SecurityWrapper.loadSigningIdentities()
+                identities.insert(SigningIdentity(name: "Not signed", reference: nil), at: 0)
+                identitiesPopUpAC.add(contentsOf: identities)
+            } catch {
+                logger.error("Error loading identities: \(error)")
+            }
         }
 
         loadImportedTCCProfileInfo()
@@ -131,18 +133,20 @@ class SaveViewController: NSViewController {
                                           identifier: payloadIdentifier,
                                           displayName: payloadName,
                                           payloadDescription: payloadDescription ?? payloadName)
-        do {
-            var outputData = try profile.xmlData()
-            if let identity = identitiesPopUpAC.selectedObjects.first as? SigningIdentity, let ref = identity.reference {
-                logger.info("Signing profile with \(identity.displayName)")
-                outputData = try SecurityWrapper.sign(data: outputData, using: ref)
+        Task {
+            do {
+                var outputData = try profile.xmlData()
+                if let identity = identitiesPopUpAC.selectedObjects.first as? SigningIdentity, let ref = identity.reference {
+                    logger.info("Signing profile with \(identity.displayName)")
+                    outputData = try await SecurityWrapper.sign(data: outputData, using: ref)
+                }
+                try outputData.write(to: url)
+                logger.info("Saved successfully")
+            } catch {
+                logger.error("Error: \(error)")
             }
-            try outputData.write(to: url)
-            logger.info("Saved successfully")
-        } catch {
-            logger.error("Error: \(error)")
+            self.dismiss(nil)
         }
-        self.dismiss(nil)
     }
 
     func loadImportedTCCProfileInfo() {
