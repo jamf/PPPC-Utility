@@ -12,7 +12,7 @@ struct UploadInfoView: View {
 	/// The signing identities available to be used.
 	let signingIdentities: [SigningIdentity]
 	/// Function to call when this view needs to be removed
-	let dismissAction: (() -> Void)?
+	let dismissAction: (@MainActor @Sendable () -> Void)?
 
 	// Communicate this info to the user
 	@State private var warningInfo: String?
@@ -43,7 +43,7 @@ struct UploadInfoView: View {
 	/// The type of authentication the user wants to use.
 	///
 	/// `String` type so it can be saved with `@AppStorage` above
-	enum AuthenticationType: String {
+	enum AuthenticationType: String, Sendable {
 		case basicAuth
 		case clientCredentials
 	}

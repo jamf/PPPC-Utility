@@ -96,7 +96,7 @@ struct SecurityWrapper {
         return outputData! as Data
     }
 
-    static func loadSigningIdentities() throws -> [SigningIdentity] {
+    @MainActor static func loadSigningIdentities() throws -> [SigningIdentity] {
 		let haversack = Haversack()
 		let query = IdentityQuery().matching(mustBeValidOnDate: Date()).returning(.reference)
 
