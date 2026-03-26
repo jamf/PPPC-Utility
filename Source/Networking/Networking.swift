@@ -28,7 +28,7 @@
 import Foundation
 
 /// Problems at the networking error throw this type of error.
-enum NetworkingError: Error, Equatable {
+enum NetworkingError: Error, Equatable, Sendable {
     /// The server URL cannot be converted into a standard URL.
     ///
     /// The associated value is the given server URL.
@@ -43,7 +43,7 @@ enum NetworkingError: Error, Equatable {
     case unimplemented
 }
 
-class Networking {
+class Networking: @unchecked Sendable {
     let authManager: NetworkAuthManager
     let serverUrlString: String
 

@@ -26,7 +26,7 @@
 //
 
 import Foundation
-public enum TCCProfileImportError: Error {
+public enum TCCProfileImportError: Error, Sendable {
     case cancelled
     case unableToOpenFile
     case decodeProfileError

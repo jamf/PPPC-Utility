@@ -28,6 +28,7 @@
 import Foundation
 import OSLog
 
+@MainActor
 class PPPCServicesManager {
 
     typealias MDMServiceKey = String

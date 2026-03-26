@@ -27,7 +27,8 @@
 
 import Cocoa
 
-class AppleEventRule: NSObject {
+@MainActor
+class AppleEventRule: NSObject, @unchecked Sendable {
 
     @objc dynamic var source: Executable!
     @objc dynamic var destination: Executable!

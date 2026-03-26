@@ -27,7 +27,8 @@
 
 import Cocoa
 
-class Executable: NSObject {
+@MainActor
+class Executable: NSObject, @unchecked Sendable {
 
     @objc dynamic var iconPath: String!
 
@@ -74,7 +75,8 @@ class Executable: NSObject {
     }
 }
 
-class Policy: NSObject {
+@MainActor
+class Policy: NSObject, @unchecked Sendable {
     // swiftlint:disable identifier_name
     @objc dynamic var AddressBook: String = "-"
     @objc dynamic var Calendar: String = "-"

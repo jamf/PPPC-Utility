@@ -28,6 +28,7 @@
 import AppKit
 import Foundation
 
+@MainActor
 class TCCProfileConfigurationPanel {
     /// Load TCC Profile data from file
      ///

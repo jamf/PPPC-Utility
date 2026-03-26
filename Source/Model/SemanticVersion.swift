@@ -26,7 +26,7 @@
 //
 
 /// A simple struct defining a semantic version number.
-struct SemanticVersion: Comparable {
+struct SemanticVersion: Comparable, Sendable {
     let major: Int
     let minor: Int
     let patch: Int

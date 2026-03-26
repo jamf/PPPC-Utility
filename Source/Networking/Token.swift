@@ -11,7 +11,7 @@ import Foundation
 ///
 /// Decodes network response for authentication tokens from Jamf Pro for both the newer OAuth client credentials flow
 /// and the older basic-auth-based flow.
-struct Token: Decodable {
+struct Token: Decodable, Sendable {
     let value: String
 	let expiresAt: Date?
 

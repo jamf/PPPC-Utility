@@ -30,7 +30,7 @@ import Cocoa
 import OSLog
 import SwiftUI
 
-enum TCCProfileDisplayValue: String {
+enum TCCProfileDisplayValue: String, Sendable {
     case allow = "Allow"
     case deny = "Deny"
     case allowStandardUsersToApprove = "Let Standard Users Approve"

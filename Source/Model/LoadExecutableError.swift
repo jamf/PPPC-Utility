@@ -26,7 +26,7 @@
 //
 
 import Foundation
-public enum LoadExecutableError: Error {
+public enum LoadExecutableError: Error, Sendable {
     case identifierNotFound
     case resourceURLNotFound
     case codeRequirementError(description: String)

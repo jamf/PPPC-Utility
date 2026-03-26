@@ -28,7 +28,7 @@
 import Foundation
 
 /// API authentication errors
-enum AuthError: Error, Equatable {
+enum AuthError: Error, Equatable, Sendable {
     /// When using a bearer token but the bearer token is not accepted by the server for the actual network call.
     case invalidToken
 
@@ -40,7 +40,7 @@ enum AuthError: Error, Equatable {
 }
 
 /// Support two main ways to authenticate to the Jamf Pro API.
-enum AuthenticationInfo {
+enum AuthenticationInfo: Sendable {
 	case basicAuth(username: String, password: String)
 
 	case clientCreds(id: String, secret: String)

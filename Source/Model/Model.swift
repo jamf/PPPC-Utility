@@ -28,7 +28,7 @@
 import Cocoa
 import OSLog
 
-@objc class Model: NSObject {
+@MainActor @objc class Model: NSObject {
 
     var usingLegacyAllowKey = true
 
@@ -81,7 +81,7 @@ import OSLog
 
 // MARK: Loading executable
 
-struct IconFilePath {
+struct IconFilePath: Sendable {
     static let binary = "/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/ExecutableBinaryIcon.icns"
     static let application = "/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/GenericApplicationIcon.icns"
     static let kext = "/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/KEXT.icns"

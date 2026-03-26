@@ -30,6 +30,7 @@ import XCTest
 
 @testable import PPPC_Utility
 
+@MainActor
 class ModelTests: XCTestCase {
 
     var model: Model!

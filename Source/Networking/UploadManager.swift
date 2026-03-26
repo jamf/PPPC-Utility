@@ -9,21 +9,21 @@
 import Foundation
 import OSLog
 
-struct UploadManager {
+struct UploadManager: Sendable {
 	let serverURL: String
 
     let logger = Logger.UploadManager
 
-	struct VerificationInfo {
+	struct VerificationInfo: Sendable {
 		let mustSign: Bool
 		let organization: String
 	}
 
-	enum VerificationError: Error {
+	enum VerificationError: Error, Sendable {
 		case anyError(String)
 	}
 
-	func verifyConnection(authManager: NetworkAuthManager, completionHandler: @escaping (Result<VerificationInfo, VerificationError>) -> Void) {
+	func verifyConnection(authManager: NetworkAuthManager, completionHandler: @MainActor @Sendable @escaping (Result<VerificationInfo, VerificationError>) -> Void) {
         logger.info("Checking connection to Jamf Pro server")
 
 		Task {
@@ -47,21 +47,23 @@ struct UploadManager {
 				result = .failure(VerificationError.anyError("Jamf Pro server is unavailable."))
 			}
 
-			completionHandler(result)
+			await completionHandler(result)
 		}
 	}
 
-	func upload(profile: TCCProfile, authMgr: NetworkAuthManager, siteInfo: (String, String)?, signingIdentity: SigningIdentity?, completionHandler: @escaping (Error?) -> Void) {
+	@MainActor
+	func upload(profile: TCCProfile, authMgr: NetworkAuthManager, siteInfo: (String, String)?, signingIdentity: SigningIdentity?, completionHandler: @MainActor @Sendable @escaping (Error?) -> Void) {
         logger.info("Uploading profile: \(profile.displayName, privacy: .public)")
 
 		let networking = JamfProAPIClient(serverUrlString: serverURL, tokenManager: authMgr)
+		var identity: SecIdentity?
+		if let signingIdentity = signingIdentity {
+			logger.info("Signing profile with \(signingIdentity.displayName)")
+			identity = signingIdentity.reference
+		}
+
 		Task {
 			let success: Error?
-			var identity: SecIdentity?
-			if let signingIdentity = signingIdentity {
-                logger.info("Signing profile with \(signingIdentity.displayName)")
-				identity = signingIdentity.reference
-			}
 
 			do {
 				let profileData = try profile.jamfProAPIData(signingIdentity: identity, site: siteInfo)
@@ -75,9 +77,7 @@ struct UploadManager {
 				success = error
 			}
 
-			DispatchQueue.main.async {
-				completionHandler(success)
-			}
+			await completionHandler(success)
 		}
 	}
 }

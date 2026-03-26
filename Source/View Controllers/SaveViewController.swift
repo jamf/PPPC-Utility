@@ -81,11 +81,11 @@ class SaveViewController: NSViewController {
             panel.directoryURL = URL(fileURLWithPath: path, isDirectory: true)
         }
 
-        panel.begin { response in
+        panel.begin { [weak self] response in
             if response == .OK {
                 // Let the save panel fully close itself before doing any work that may require keychain access.
-                DispatchQueue.main.async {
-                    self.saveTo(url: panel.url!)
+                Task { @MainActor in
+                    self?.saveTo(url: panel.url!)
                 }
             }
         }

@@ -28,7 +28,7 @@
 import Foundation
 
 /// Holds the information about a single PPPC Service provided by Apple.
-struct PPPCServiceInfo: Decodable {
+struct PPPCServiceInfo: Decodable, Sendable {
     let mdmKey: String
     let englishName: String
     let englishDescription: String

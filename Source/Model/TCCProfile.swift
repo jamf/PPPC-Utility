@@ -41,7 +41,7 @@ extension TCCPolicyAuthorizationValue {
     static let allowStandardUserToSetSystemService = "AllowStandardUserToSetSystemService"
 }
 
-struct TCCPolicy: Codable {
+struct TCCPolicy: Codable, Sendable {
     var comment: String
     var identifier: String
     var identifierType: TCCPolicyIdentifierType
@@ -85,8 +85,8 @@ struct TCCPolicy: Codable {
     }
 }
 
-public struct TCCProfile: Codable {
-    struct Content: Codable {
+public struct TCCProfile: Codable, Sendable {
+    struct Content: Codable, Sendable {
         var payloadDescription: String
         var displayName: String
         var identifier: String
@@ -193,7 +193,7 @@ public struct TCCProfile: Codable {
     }
 }
 
-enum ServicesKeys: String {
+enum ServicesKeys: String, Sendable {
     case addressBook = "AddressBook"
     case calendar = "Calendar"
     case reminders = "Reminders"

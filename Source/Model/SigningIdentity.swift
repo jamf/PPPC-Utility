@@ -27,7 +27,8 @@
 
 import Cocoa
 
-class SigningIdentity: NSObject {
+@MainActor
+class SigningIdentity: NSObject, @unchecked Sendable {
 
     @objc dynamic var displayName: String
     var reference: SecIdentity?

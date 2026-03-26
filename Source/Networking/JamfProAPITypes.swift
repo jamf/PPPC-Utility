@@ -27,7 +27,7 @@
 
 import Foundation
 
-struct JamfProVersion: Decodable {
+struct JamfProVersion: Decodable, Sendable {
     let version: String
 
     func mainVersionInfo() -> String {
@@ -65,14 +65,14 @@ struct JamfProVersion: Decodable {
     }
 }
 
-struct ActivationCode: Decodable {
+struct ActivationCode: Decodable, Sendable {
     let activationCode: OrgAndCode
 
     enum CodingKeys: String, CodingKey {
         case activationCode = "activation_code"
     }
 
-    struct OrgAndCode: Decodable {
+    struct OrgAndCode: Decodable, Sendable {
         let organizationName: String
         let code: String
 
