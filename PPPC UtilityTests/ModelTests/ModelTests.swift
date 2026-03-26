@@ -34,9 +34,11 @@ class ModelTests: XCTestCase {
 
     var model: Model!
 
-    override func setUp() {
+    nonisolated override func setUp() {
         super.setUp()
-        model = Model()
+        MainActor.assumeIsolated {
+            model = Model()
+        }
     }
 
     // MARK: - tests for getExecutableFrom*

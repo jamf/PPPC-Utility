@@ -17,13 +17,13 @@ PPPC Utility is on Swift 5.0 with zero concurrency checking. The goal is to adop
 | PR | Stage | Status | Description |
 |----|-------|--------|-------------|
 | 1 | Stage 1 | ✅ Done | Enable Approachable Concurrency build settings |
-| 2 | Stage 2 | Pending | Remove `NetworkAuthManager` actor → class |
-| 3a | Stage 3a | Pending | Remove 3 `DispatchQueue.main.async` wrappers |
-| 3b | Stage 3b | Pending | Convert `UploadManager` to async throws |
-| 3c | Stage 3c | Pending | Convert `Model.loadExecutable` to direct return |
-| 3d | Stage 3d | Pending | Convert `TCCProfileImporter` to direct return |
-| 4 | Stage 4 | Pending | Add `@concurrent` for background I/O |
-| 5 | Stage 5 | Pending | Enable Swift 6 language mode (warnings → errors) |
+| 2 | Stage 2 | ✅ Done | Remove `NetworkAuthManager` actor → class |
+| 3a | Stage 3a | ✅ Done | Remove 3 `DispatchQueue.main.async` wrappers |
+| 3b | Stage 3b | ✅ Done | Convert `UploadManager` to async throws |
+| 3c | Stage 3c | ✅ Done | Convert `Model.loadExecutable` to direct return |
+| 3d | Stage 3d | ✅ Done | Convert `TCCProfileImporter` to direct return |
+| 4 | Stage 4 | ✅ Done | Add `@concurrent` for background I/O |
+| 5 | Stage 5 | ✅ Done | Enable Swift 6 language mode (warnings → errors) |
 
 PRs 3a–3d can be one PR or individual PRs — each is independently functional. PR 4 depends on PR 3c. PR 5 depends on all prior stages.
 
