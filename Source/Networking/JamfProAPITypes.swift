@@ -79,7 +79,6 @@ struct ActivationCode: Decodable {
         let organizationName: String
         let code: String
 
-        // swiftlint:disable:next nesting
         enum CodingKeys: String, CodingKey {
             case organizationName = "organization_name"
             case code

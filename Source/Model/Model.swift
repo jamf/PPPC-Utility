@@ -115,7 +115,6 @@ extension Model {
     }
 
     // TODO - refactor this method so it isn't so complex
-    // swiftlint:disable:next cyclomatic_complexity
     func loadExecutable(url: URL, completion: @escaping LoadExecutableCompletion) {
         let executable = Executable()
 
