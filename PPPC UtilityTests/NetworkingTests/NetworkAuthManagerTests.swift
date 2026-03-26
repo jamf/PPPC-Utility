@@ -88,7 +88,7 @@ class NetworkAuthManagerTests: XCTestCase {
         networking.errorToThrow = NetworkingError.serverResponse(404, "No such page")
 
         // default is that bearer auth is supported.
-        let firstCheckBearerAuthSupported = await authManager.bearerAuthSupported()
+        let firstCheckBearerAuthSupported = authManager.bearerAuthSupported()
         XCTAssertTrue(firstCheckBearerAuthSupported)
 
         // when
@@ -101,7 +101,7 @@ class NetworkAuthManagerTests: XCTestCase {
         }
 
         // The authManager should now know that bearer auth is not supported
-        let secondCheckBearerAuthSupported = await authManager.bearerAuthSupported()
+        let secondCheckBearerAuthSupported = authManager.bearerAuthSupported()
         XCTAssertFalse(secondCheckBearerAuthSupported)
     }
 
