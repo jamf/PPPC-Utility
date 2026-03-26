@@ -56,6 +56,8 @@ struct UploadManager: Sendable {
         logger.info("Uploading profile: \(profile.displayName, privacy: .public)")
 
 		let networking = JamfProAPIClient(serverUrlString: serverURL, tokenManager: authMgr)
+		// Extract the SecIdentity reference on the main actor before entering the Task,
+		// since SigningIdentity is @MainActor-isolated and cannot be accessed from a non-isolated Task.
 		var identity: SecIdentity?
 		if let signingIdentity = signingIdentity {
 			logger.info("Signing profile with \(signingIdentity.displayName)")
