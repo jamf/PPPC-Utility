@@ -83,10 +83,7 @@ class SaveViewController: NSViewController {
 
         panel.begin { response in
             if response == .OK {
-                // Let the save panel fully close itself before doing any work that may require keychain access.
-                DispatchQueue.main.async {
-                    self.saveTo(url: panel.url!)
-                }
+                self.saveTo(url: panel.url!)
             }
         }
     }

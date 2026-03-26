@@ -48,11 +48,9 @@ class OpenViewController: NSViewController, NSTableViewDataSource, NSTableViewDe
     }
 
     func tableView(_ tableView: NSTableView, selectionIndexesForProposedSelection proposedSelectionIndexes: IndexSet) -> IndexSet {
-        DispatchQueue.main.async {
-            guard let index = proposedSelectionIndexes.first else { return }
-            self.completionBlock?([.success(self.choices[index])])
-            self.dismiss(self)
-        }
+        guard let index = proposedSelectionIndexes.first else { return proposedSelectionIndexes }
+        self.completionBlock?([.success(self.choices[index])])
+        self.dismiss(self)
         return proposedSelectionIndexes
     }
 

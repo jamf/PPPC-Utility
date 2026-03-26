@@ -29,14 +29,12 @@ import Cocoa
 
 class Alert: NSObject {
     func display(header: String, message: String) {
-        DispatchQueue.main.async {
-            let dialog: NSAlert = NSAlert()
-            dialog.messageText = header
-            dialog.informativeText = message
-            dialog.alertStyle = NSAlert.Style.warning
-            dialog.addButton(withTitle: "OK")
-            dialog.runModal()
-        }
+        let dialog: NSAlert = NSAlert()
+        dialog.messageText = header
+        dialog.informativeText = message
+        dialog.alertStyle = NSAlert.Style.warning
+        dialog.addButton(withTitle: "OK")
+        dialog.runModal()
     }
 
     /// Displays a message with a cancel button and returns true if OK was pressed
