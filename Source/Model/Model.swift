@@ -40,31 +40,22 @@ import OSLog
     func getAppleEventChoices(executable: Executable) -> [Executable] {
         var executables: [Executable] = []
 
-        loadExecutable(url: URL(fileURLWithPath: "/System/Library/CoreServices/System Events.app")) { result in
-            switch result {
-            case .success(let executable):
-                executables.append(executable)
-            case .failure(let error):
-                self.logger.error("\(error)")
-            }
+        do {
+            executables.append(try loadExecutable(url: URL(fileURLWithPath: "/System/Library/CoreServices/System Events.app")))
+        } catch {
+            self.logger.error("\(error)")
         }
 
-        loadExecutable(url: URL(fileURLWithPath: "/System/Library/CoreServices/SystemUIServer.app")) { result in
-            switch result {
-            case .success(let executable):
-                executables.append(executable)
-            case .failure(let error):
-                self.logger.error("\(error)")
-            }
+        do {
+            executables.append(try loadExecutable(url: URL(fileURLWithPath: "/System/Library/CoreServices/SystemUIServer.app")))
+        } catch {
+            self.logger.error("\(error)")
         }
 
-        loadExecutable(url: URL(fileURLWithPath: "/System/Library/CoreServices/Finder.app")) { result in
-            switch result {
-            case .success(let executable):
-                executables.append(executable)
-            case .failure(let error):
-                self.logger.error("\(error)")
-            }
+        do {
+            executables.append(try loadExecutable(url: URL(fileURLWithPath: "/System/Library/CoreServices/Finder.app")))
+        } catch {
+            self.logger.error("\(error)")
         }
 
         let others = store.values.filter { $0 != executable && !Set(executables).contains($0) }
@@ -87,17 +78,16 @@ struct IconFilePath {
 }
 
 typealias LoadExecutableResult = Result<Executable, LoadExecutableError>
-typealias LoadExecutableCompletion = ((LoadExecutableResult) -> Void)
 
 extension Model {
 
-    func loadExecutable(url: URL, completion: @escaping LoadExecutableCompletion) {
+    func loadExecutable(url: URL) throws -> Executable {
         let executable = Executable()
 
         if let bundle = Bundle(url: url) {
             switch populateFromBundle(executable, bundle: bundle, url: url) {
             case .failure(let error):
-                return completion(.failure(error))
+                throw error
             case .success:
                 break
             }
@@ -106,15 +96,15 @@ extension Model {
         }
 
         if let alreadyFoundExecutable = store[executable.identifier] {
-            return completion(.success(alreadyFoundExecutable))
+            return alreadyFoundExecutable
         }
 
         do {
             executable.codeRequirement = try SecurityWrapper.copyDesignatedRequirement(url: url)
             store[executable.identifier] = executable
-            return completion(.success(executable))
+            return executable
         } catch {
-            return completion(.failure(.codeRequirementError(description: error.localizedDescription)))
+            throw LoadExecutableError.codeRequirementError(description: error.localizedDescription)
         }
     }
 
@@ -278,19 +268,16 @@ extension Model {
 
     func getExecutableFrom(identifier: String, codeRequirement: String) -> Executable {
         var executable = Executable(identifier: identifier, codeRequirement: codeRequirement)
-        findExecutableOnComputerUsing(bundleIdentifier: identifier) { result in
-            switch result {
-            case .success(let goodExecutable):
-                executable = goodExecutable
-            case .failure(let error):
-                self.logger.error("\(error)")
-            }
+        do {
+            executable = try findExecutable(bundleIdentifier: identifier)
+        } catch {
+            self.logger.error("\(error)")
         }
 
         return executable
     }
 
-    private func findExecutableOnComputerUsing(bundleIdentifier: String, completion: @escaping LoadExecutableCompletion) {
+    private func findExecutable(bundleIdentifier: String) throws -> Executable {
 		var urlToLoad: URL?
         if bundleIdentifier.contains("/") {
 			urlToLoad = URL(string: "file://\(bundleIdentifier)")
@@ -299,16 +286,9 @@ extension Model {
         }
 
 		if let fileURL = urlToLoad {
-            self.loadExecutable(url: fileURL) { result in
-                switch result {
-                case .success(let executable):
-                    return completion(.success(executable))
-                case .failure(let error):
-                    return completion(.failure(error))
-                }
-            }
+            return try self.loadExecutable(url: fileURL)
         }
-        return completion(.failure(.executableNotFound))
+        throw LoadExecutableError.executableNotFound
     }
 
     private func cleanUpAndRemoveDependencies() {

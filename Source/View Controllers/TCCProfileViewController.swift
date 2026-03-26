@@ -205,19 +205,19 @@ class TCCProfileViewController: NSViewController {
         panel.begin { response in
             if response == .OK {
                 panel.urls.forEach {
-                    self.model.loadExecutable(url: $0) { [weak self] result in
-                        switch result {
-                        case .success(let executable):
-                            guard self?.shouldExecutableBeAdded(executable) ?? false else {
-                                let error = LoadExecutableError.executableAlreadyExists
-                                self?.showAlert(error, for: window)
-                                return
-                            }
-                            block(executable)
-                        case .failure(let error):
-                            self?.showAlert(error, for: window)
-                            self?.logger.error("\(error)")
+                    do {
+                        let executable = try self.model.loadExecutable(url: $0)
+                        guard self.shouldExecutableBeAdded(executable) else {
+                            let error = LoadExecutableError.executableAlreadyExists
+                            self.showAlert(error, for: window)
+                            return
                         }
+                        block(executable)
+                    } catch {
+                        if let loadError = error as? LoadExecutableError {
+                            self.showAlert(loadError, for: window)
+                        }
+                        self.logger.error("\(error)")
                     }
                 }
             }
@@ -405,25 +405,25 @@ extension TCCProfileViewController: NSTableViewDataSource {
 
         var addedAny = false
         urls?.forEach { (url) in
-            model.loadExecutable(url: url) { [weak self] result in
-                switch result {
-                case .success(let newExecutable):
-                    if tableView == self?.executablesTable {
-                        guard self?.executablesAC.canInsert ?? false else {
-                            return
-                        }
-                        if self?.shouldExecutableBeAdded(newExecutable) ?? false {
-                            self?.executablesAC.insert(newExecutable, atArrangedObjectIndex: row)
-                            addedAny = true
-                        }
-                    } else {
-                        self?.insertIntoAppleEvents(newExecutable)
+            do {
+                let newExecutable = try model.loadExecutable(url: url)
+                if tableView == self.executablesTable {
+                    guard self.executablesAC.canInsert else {
+                        return
+                    }
+                    if self.shouldExecutableBeAdded(newExecutable) {
+                        self.executablesAC.insert(newExecutable, atArrangedObjectIndex: row)
                         addedAny = true
                     }
-                case .failure(let error):
-                    self?.showAlert(error, for: window)
-                    self?.logger.error("\(error)")
+                } else {
+                    self.insertIntoAppleEvents(newExecutable)
+                    addedAny = true
                 }
+            } catch {
+                if let loadError = error as? LoadExecutableError {
+                    self.showAlert(loadError, for: window)
+                }
+                self.logger.error("\(error)")
             }
         }
 
