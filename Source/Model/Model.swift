@@ -115,7 +115,6 @@ extension Model {
     }
 
     // TODO - refactor this method so it isn't so complex
-    // swiftlint:disable:next cyclomatic_complexity
     func loadExecutable(url: URL, completion: @escaping LoadExecutableCompletion) {
         let executable = Executable()
 
@@ -185,11 +184,11 @@ extension Model {
 
             for attr in mirroredServices.children {
                 if let key = attr.label, let value = attr.value as? String {
-                     if let policyToAppend = policyFromString(executable: executable, value: value) {
-                         services[key] = services[key] ?? []
-                         services[key]?.append(policyToAppend)
-                     }
-                 }
+                    if let policyToAppend = policyFromString(executable: executable, value: value) {
+                        services[key] = services[key] ?? []
+                        services[key]?.append(policyToAppend)
+                    }
+                }
             }
 
             executable.appleEvents.forEach { event in
@@ -202,11 +201,12 @@ extension Model {
             }
         }
 
-        return TCCProfile(organization: organization,
-                          identifier: identifier,
-                          displayName: displayName,
-                          payloadDescription: payloadDescription,
-                          services: services)
+        return TCCProfile(
+            organization: organization,
+            identifier: identifier,
+            displayName: displayName,
+            payloadDescription: payloadDescription,
+            services: services)
     }
 
     func importProfile(tccProfile: TCCProfile) {
@@ -223,7 +223,8 @@ extension Model {
                     if key == ServicesKeys.appleEvents.rawValue {
                         if let source = executable,
                             let rIdentifier = policy.receiverIdentifier,
-                            let rCodeRequirement = policy.receiverCodeRequirement {
+                            let rCodeRequirement = policy.receiverCodeRequirement
+                        {
                             let destination = getExecutableFrom(identifier: rIdentifier, codeRequirement: rCodeRequirement)
                             let allowed: Bool = (policy.allowed == true || policy.authorization == TCCPolicyAuthorizationValue.allow)
                             let appleEvent = AppleEventRule(source: source, destination: destination, value: allowed)
@@ -244,10 +245,11 @@ extension Model {
     }
 
     func policyFromString(executable: Executable, value: String, event: AppleEventRule? = nil) -> TCCPolicy? {
-        var policy = TCCPolicy(identifier: executable.identifier,
-                         codeRequirement: executable.codeRequirement,
-                         receiverIdentifier: event?.destination.identifier,
-                         receiverCodeRequirement: event?.destination.codeRequirement)
+        var policy = TCCPolicy(
+            identifier: executable.identifier,
+            codeRequirement: executable.codeRequirement,
+            receiverIdentifier: event?.destination.identifier,
+            receiverCodeRequirement: event?.destination.codeRequirement)
         if usingLegacyAllowKey {
             switch value {
             case TCCProfileDisplayValue.allow.rawValue:
@@ -274,8 +276,8 @@ extension Model {
 
     func getExecutablesFromAllPolicies(policies: [TCCPolicy]) {
         for tccPolicy in policies where getExecutableFromSelectedExecutables(bundleIdentifier: tccPolicy.identifier) == nil {
-			let executable = getExecutableFrom(identifier: tccPolicy.identifier, codeRequirement: tccPolicy.codeRequirement)
-			self.selectedExecutables.append(executable)
+            let executable = getExecutableFrom(identifier: tccPolicy.identifier, codeRequirement: tccPolicy.codeRequirement)
+            self.selectedExecutables.append(executable)
         }
     }
 
@@ -301,14 +303,14 @@ extension Model {
     }
 
     private func findExecutableOnComputerUsing(bundleIdentifier: String, completion: @escaping LoadExecutableCompletion) {
-		var urlToLoad: URL?
+        var urlToLoad: URL?
         if bundleIdentifier.contains("/") {
-			urlToLoad = URL(string: "file://\(bundleIdentifier)")
+            urlToLoad = URL(string: "file://\(bundleIdentifier)")
         } else {
-			urlToLoad = NSWorkspace.shared.urlForApplication(withBundleIdentifier: bundleIdentifier)
+            urlToLoad = NSWorkspace.shared.urlForApplication(withBundleIdentifier: bundleIdentifier)
         }
 
-		if let fileURL = urlToLoad {
+        if let fileURL = urlToLoad {
             self.loadExecutable(url: fileURL) { result in
                 switch result {
                 case .success(let executable):

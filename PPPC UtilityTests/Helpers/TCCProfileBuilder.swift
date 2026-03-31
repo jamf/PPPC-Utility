@@ -33,8 +33,9 @@ class TCCProfileBuilder: NSObject {
     // MARK: - build testing objects
 
     func buildTCCPolicy(allowed: Bool?, authorization: TCCPolicyAuthorizationValue?) -> TCCPolicy {
-        var policy = TCCPolicy(identifier: "policy id", codeRequirement: "policy code req",
-                               receiverIdentifier: "policy receiver id", receiverCodeRequirement: "policy receiver code req")
+        var policy = TCCPolicy(
+            identifier: "policy id", codeRequirement: "policy code req",
+            receiverIdentifier: "policy receiver id", receiverCodeRequirement: "policy receiver code req")
         policy.comment = "policy comment"
         policy.identifierType = "policy id type"
         policy.receiverIdentifierType = "policy receiver id type"
@@ -44,27 +45,31 @@ class TCCProfileBuilder: NSObject {
     }
 
     func buildTCCPolicies(allowed: Bool?, authorization: TCCPolicyAuthorizationValue?) -> [String: [TCCPolicy]] {
-        return ["SystemPolicyAllFiles": [buildTCCPolicy(allowed: allowed, authorization: authorization)],
-                "AppleEvents": [buildTCCPolicy(allowed: allowed, authorization: authorization)]]
+        return [
+            "SystemPolicyAllFiles": [buildTCCPolicy(allowed: allowed, authorization: authorization)],
+            "AppleEvents": [buildTCCPolicy(allowed: allowed, authorization: authorization)]
+        ]
     }
 
     func buildTCCContent(_ contentIndex: Int, allowed: Bool?, authorization: TCCPolicyAuthorizationValue?) -> TCCProfile.Content {
-        return TCCProfile.Content(payloadDescription: "Content Desc \(contentIndex)",
-                                  displayName: "Content Name \(contentIndex)",
-                                  identifier: "Content ID \(contentIndex)",
-                                  organization: "Content Org \(contentIndex)",
-                                  type: "Content type \(contentIndex)",
-                                  uuid: "Content UUID \(contentIndex)",
-                                  version: contentIndex,
-                                  services: buildTCCPolicies(allowed: allowed, authorization: authorization))
+        return TCCProfile.Content(
+            payloadDescription: "Content Desc \(contentIndex)",
+            displayName: "Content Name \(contentIndex)",
+            identifier: "Content ID \(contentIndex)",
+            organization: "Content Org \(contentIndex)",
+            type: "Content type \(contentIndex)",
+            uuid: "Content UUID \(contentIndex)",
+            version: contentIndex,
+            services: buildTCCPolicies(allowed: allowed, authorization: authorization))
     }
 
     func buildProfile(allowed: Bool? = nil, authorization: TCCPolicyAuthorizationValue? = nil) -> TCCProfile {
-        var profile = TCCProfile(organization: "Test Org",
-                                 identifier: "Test ID",
-                                 displayName: "Test Name",
-                                 payloadDescription: "Test Desc",
-                                 services: [:])
+        var profile = TCCProfile(
+            organization: "Test Org",
+            identifier: "Test ID",
+            displayName: "Test Name",
+            payloadDescription: "Test Desc",
+            services: [:])
         profile.content = [buildTCCContent(1, allowed: allowed, authorization: authorization)]
         profile.version = 100
         profile.uuid = "the uuid"

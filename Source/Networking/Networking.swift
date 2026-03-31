@@ -71,27 +71,27 @@ class Networking {
         return URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 45.0)
     }
 
-	/// Sends a `URLRequest` and decodes a response to an endpoint.
-	/// - Parameter request: A request that already has authorization info.
-	/// - Returns: The result.
-	func loadPreAuthorized<T: Decodable>(request: URLRequest) async throws -> T {
-		let (data, urlResponse) = try await URLSession.shared.data(for: request)
+    /// Sends a `URLRequest` and decodes a response to an endpoint.
+    /// - Parameter request: A request that already has authorization info.
+    /// - Returns: The result.
+    func loadPreAuthorized<T: Decodable>(request: URLRequest) async throws -> T {
+        let (data, urlResponse) = try await URLSession.shared.data(for: request)
 
-		if let httpResponse = urlResponse as? HTTPURLResponse {
-			if httpResponse.statusCode == 401 {
-				throw AuthError.invalidUsernamePassword
-			} else if !(200...299).contains(httpResponse.statusCode) {
-				throw NetworkingError.serverResponse(httpResponse.statusCode, request.url?.absoluteString ?? "")
-			}
-		}
+        if let httpResponse = urlResponse as? HTTPURLResponse {
+            if httpResponse.statusCode == 401 {
+                throw AuthError.invalidUsernamePassword
+            } else if !(200...299).contains(httpResponse.statusCode) {
+                throw NetworkingError.serverResponse(httpResponse.statusCode, request.url?.absoluteString ?? "")
+            }
+        }
 
-		let decoder = JSONDecoder()
-		let response = try decoder.decode(T.self, from: data)
+        let decoder = JSONDecoder()
+        let response = try decoder.decode(T.self, from: data)
 
-		return response
-	}
+        return response
+    }
 
-	/// Sends a `URLRequest` and decodes a response to a Basic Auth protected endpoint.
+    /// Sends a `URLRequest` and decodes a response to a Basic Auth protected endpoint.
     /// - Parameter request: A request that does not yet include authorization info.
     /// - Returns: The result.
     func loadBasicAuthorized<T: Decodable>(request: URLRequest) async throws -> T {

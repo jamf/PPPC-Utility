@@ -43,16 +43,16 @@ class ModelTests: XCTestCase {
 
     func testGetExecutableBasedOnIdentifierAndCodeRequirement_BundleIdentifierType() {
         // given
-            let identifier = "com.example.App"
-            let codeRequirement = "testCodeRequirement"
+        let identifier = "com.example.App"
+        let codeRequirement = "testCodeRequirement"
 
         // when
-            let executable = model.getExecutableFrom(identifier: identifier, codeRequirement: codeRequirement)
+        let executable = model.getExecutableFrom(identifier: identifier, codeRequirement: codeRequirement)
 
         // then
-            XCTAssertEqual(executable.displayName, "App")
-            XCTAssertEqual(executable.codeRequirement, codeRequirement)
-            XCTAssertEqual(executable.iconPath, IconFilePath.application)
+        XCTAssertEqual(executable.displayName, "App")
+        XCTAssertEqual(executable.codeRequirement, codeRequirement)
+        XCTAssertEqual(executable.iconPath, IconFilePath.application)
     }
 
     func testGetExecutableBasedOnIdentifierAndCodeRequirement_PathIdentifierType() {
@@ -71,16 +71,16 @@ class ModelTests: XCTestCase {
 
     func testGetExecutableFromComputerBasedOnIdentifier() {
         // given
-            let identifier = "com.apple.Safari"
-            let codeRequirement = "randomReq"
+        let identifier = "com.apple.Safari"
+        let codeRequirement = "randomReq"
 
         // when
-            let executable = model.getExecutableFrom(identifier: identifier, codeRequirement: codeRequirement)
+        let executable = model.getExecutableFrom(identifier: identifier, codeRequirement: codeRequirement)
 
         // then
-            XCTAssertEqual(executable.displayName, "Safari")
-            XCTAssertNotEqual(executable.iconPath, IconFilePath.application)
-            XCTAssertNotEqual(codeRequirement, executable.codeRequirement)
+        XCTAssertEqual(executable.displayName, "Safari")
+        XCTAssertNotEqual(executable.iconPath, IconFilePath.application)
+        XCTAssertNotEqual(codeRequirement, executable.codeRequirement)
     }
 
     func testGetExecutableFromSelectedExecutables() {
@@ -189,10 +189,8 @@ class ModelTests: XCTestCase {
         // given
         let exe1 = Executable(identifier: "one", codeRequirement: "oneReq")
         let exe2 = Executable(identifier: "two", codeRequirement: "twoReq")
-
         exe1.appleEvents = [AppleEventRule(source: exe1, destination: exe2, value: true)]
         exe2.policy.SystemPolicyAllFiles = "Allow"
-
         model.selectedExecutables = [exe1, exe2]
         model.usingLegacyAllowKey = true
 
@@ -209,7 +207,6 @@ class ModelTests: XCTestCase {
         XCTAssertNotNil(profile.uuid)
         XCTAssertEqual(1, profile.version)
 
-        // then check policy settings
         // then verify the payload content top level
         XCTAssertEqual(1, profile.content.count)
         profile.content.forEach { content in
@@ -218,9 +215,8 @@ class ModelTests: XCTestCase {
 
             // then verify the services
             XCTAssertEqual(2, content.services.count)
-            let appleEvents = content.services["AppleEvents"]
-            XCTAssertNotNil(appleEvents)
-            let appleEventsPolicy = appleEvents?.first
+            let appleEventsPolicy = content.services["AppleEvents"]?.first
+            XCTAssertNotNil(appleEventsPolicy)
             XCTAssertEqual("one", appleEventsPolicy?.identifier)
             XCTAssertEqual("oneReq", appleEventsPolicy?.codeRequirement)
             XCTAssertEqual("bundleID", appleEventsPolicy?.identifierType)
@@ -230,9 +226,8 @@ class ModelTests: XCTestCase {
             XCTAssertTrue(appleEventsPolicy?.allowed == true)
             XCTAssertNil(appleEventsPolicy?.authorization)
 
-            let allFiles = content.services["SystemPolicyAllFiles"]
-            XCTAssertNotNil(allFiles)
-            let allFilesPolicy = allFiles?.first
+            let allFilesPolicy = content.services["SystemPolicyAllFiles"]?.first
+            XCTAssertNotNil(allFilesPolicy)
             XCTAssertEqual("two", allFilesPolicy?.identifier)
             XCTAssertEqual("twoReq", allFilesPolicy?.codeRequirement)
             XCTAssertEqual("bundleID", allFilesPolicy?.identifierType)
@@ -481,14 +476,18 @@ class ModelTests: XCTestCase {
     func testChangingFromAuthorizationKeyToLegacyAllowKeyWithMoreComplexVaues() {
         // given
         let allowStandard = TCCProfileDisplayValue.allowStandardUsersToApprove.rawValue
-        let p1Settings = ["SystemPolicyAllFiles": "Allow",
-                           "ListenEvent": allowStandard,
-                           "ScreenCapture": "Deny",
-                           "Camera": "Deny"]
+        let p1Settings = [
+            "SystemPolicyAllFiles": "Allow",
+            "ListenEvent": allowStandard,
+            "ScreenCapture": "Deny",
+            "Camera": "Deny"
+        ]
 
-        let p2Settings = ["SystemPolicyAllFiles": "Deny",
-                           "ScreenCapture": allowStandard,
-                           "Calendar": "Allow"]
+        let p2Settings = [
+            "SystemPolicyAllFiles": "Deny",
+            "ScreenCapture": allowStandard,
+            "Calendar": "Allow"
+        ]
         let builder = ModelBuilder().addExecutable(settings: p1Settings)
         model = builder.addExecutable(settings: p2Settings).build()
         model.usingLegacyAllowKey = false

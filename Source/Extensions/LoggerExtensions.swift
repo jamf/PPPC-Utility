@@ -8,7 +8,7 @@
 
 // This extension simplifies the logger instance creation by calling the bundle Id
 // and pre-declaring categories. Currently the predefined categories match the
-// class name. 
+// class name.
 
 import OSLog
 

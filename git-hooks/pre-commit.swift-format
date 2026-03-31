@@ -1,0 +1,24 @@
+#!/bin/bash
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+NC='\033[0m'
+
+STAGED_SWIFT_FILES=$(git diff --cached --name-only -z --diff-filter=ACM | tr '\0' '\n' | grep '\.swift$')
+
+if [ -z "$STAGED_SWIFT_FILES" ]; then
+    exit 0
+fi
+
+echo -e "${GREEN}Running swift-format...${NC}"
+
+echo "$STAGED_SWIFT_FILES" | tr '\n' '\0' | xargs -0 xcrun swift-format --in-place --
+FAILED=$?
+
+if [ $FAILED -ne 0 ]; then
+    echo -e "${RED}Commit rejected: Swift formatting failed${NC}"
+    exit 1
+fi
+
+echo "$STAGED_SWIFT_FILES" | tr '\n' '\0' | xargs -0 git add --
+echo -e "${GREEN}✓ Swift files were formatted${NC}"
+exit 0

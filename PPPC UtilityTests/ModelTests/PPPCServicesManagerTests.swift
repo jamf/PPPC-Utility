@@ -49,7 +49,10 @@ class PPPCServicesManagerTests: XCTestCase {
         let actual = service.userHelp
 
         // then
-        XCTAssertEqual(actual, "Use to deny specified apps access to the camera.\n\nMDM Key: Camera\nRelated entitlements: [\"com.apple.developer.avfoundation.multitasking-camera-access\", \"com.apple.security.device.camera\"]")
+        XCTAssertEqual(
+            actual,
+            "Use to deny specified apps access to the camera.\n\nMDM Key: Camera\nRelated entitlements: [\"com.apple.developer.avfoundation.multitasking-camera-access\", \"com.apple.security.device.camera\"]"
+        )
     }
 
     func testUserHelp_withoutEntitlements() throws {

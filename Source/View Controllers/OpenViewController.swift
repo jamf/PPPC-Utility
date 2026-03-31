@@ -60,7 +60,7 @@ class OpenViewController: NSViewController, NSTableViewDataSource, NSTableViewDe
         let block = completionBlock
         let panel = NSOpenPanel()
         panel.allowsMultipleSelection = true
-        panel.allowedFileTypes = [ kUTTypeBundle, kUTTypeUnixExecutable ] as [String]
+        panel.allowedFileTypes = [kUTTypeBundle, kUTTypeUnixExecutable] as [String]
         panel.directoryURL = URL(fileURLWithPath: "/Applications", isDirectory: true)
         panel.begin { response in
             if response == .OK {

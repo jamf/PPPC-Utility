@@ -96,7 +96,6 @@ public struct TCCProfile: Codable {
         var version: Int
         var services: [String: [TCCPolicy]]
 
-        // swiftlint:disable:next nesting
         enum CodingKeys: String, CodingKey, CaseIterable {
             case payloadDescription = "PayloadDescription"
             case displayName = "PayloadDisplayName"
@@ -130,14 +129,15 @@ public struct TCCProfile: Codable {
         case content = "PayloadContent"
     }
     init(organization: String, identifier: String, displayName: String, payloadDescription: String, services: [String: [TCCPolicy]]) {
-        let content = Content(payloadDescription: payloadDescription,
-                              displayName: displayName,
-                              identifier: identifier,
-                              organization: organization,
-                              type: "com.apple.TCC.configuration-profile-policy",
-                              uuid: UUID().uuidString,
-                              version: 1,
-                              services: services)
+        let content = Content(
+            payloadDescription: payloadDescription,
+            displayName: displayName,
+            identifier: identifier,
+            organization: organization,
+            type: "com.apple.TCC.configuration-profile-policy",
+            uuid: UUID().uuidString,
+            version: 1,
+            services: services)
         self.version = 1
         self.uuid = UUID().uuidString
         self.type = "Configuration"

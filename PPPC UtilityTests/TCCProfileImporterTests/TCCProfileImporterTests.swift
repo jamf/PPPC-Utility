@@ -42,7 +42,8 @@ class TCCProfileImporterTests: XCTestCase {
             case .success:
                 XCTFail("Malformed profile should not succeed")
             case .failure(let tccProfileError):
-                if case TCCProfileImportError.invalidProfileFile = tccProfileError { } else {
+                if case TCCProfileImportError.invalidProfileFile = tccProfileError {
+                } else {
                     XCTFail("Expected invalidProfileFile error, got \(tccProfileError)")
                 }
             }

@@ -31,9 +31,10 @@ struct JamfProVersion: Decodable {
     let version: String
 
     func mainVersionInfo() -> String {
-        return String(version.prefix { character in
-            return (character.isNumber || character == ".")
-        })
+        return String(
+            version.prefix { character in
+                return (character.isNumber || character == ".")
+            })
     }
 
     func semantic() -> SemanticVersion {
@@ -47,14 +48,16 @@ struct JamfProVersion: Decodable {
     init(fromHTMLString text: String?) throws {
         // we take version from HTML response body
         if let text = text,
-           let startRange = text.range(of: "<meta name=\"version\" content=\""),
-           let endRange = text.range(of: "-", options: [], range: startRange.upperBound..<text.endIndex, locale: nil) {
+            let startRange = text.range(of: "<meta name=\"version\" content=\""),
+            let endRange = text.range(of: "-", options: [], range: startRange.upperBound..<text.endIndex, locale: nil)
+        {
             let val = text[startRange.upperBound..<endRange.lowerBound]
             let versionParts = val.split(separator: ".")
             if versionParts.count == 3,
-               let major = Int(versionParts[0]),
-               let minor = Int(versionParts[1]),
-               let patch = Int(versionParts[2]) {
+                let major = Int(versionParts[0]),
+                let minor = Int(versionParts[1]),
+                let patch = Int(versionParts[2])
+            {
                 version = "\(major).\(minor).\(patch)"
             } else {
                 throw NSError(domain: NSCocoaErrorDomain, code: paramErr)
@@ -76,7 +79,6 @@ struct ActivationCode: Decodable {
         let organizationName: String
         let code: String
 
-        // swiftlint:disable:next nesting
         enum CodingKeys: String, CodingKey {
             case organizationName = "organization_name"
             case code

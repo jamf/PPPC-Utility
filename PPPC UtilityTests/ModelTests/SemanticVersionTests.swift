@@ -26,8 +26,9 @@
 //
 
 import Foundation
-@testable import PPPC_Utility
 import XCTest
+
+@testable import PPPC_Utility
 
 class SemanticVersionTests: XCTestCase {
     func testLessThan() {
