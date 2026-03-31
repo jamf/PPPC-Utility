@@ -23,7 +23,7 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 //
-import XCTest
+@preconcurrency import XCTest
 
 @testable import PPPC_Utility
 
@@ -31,7 +31,7 @@ class TCCProfileTests: XCTestCase {
 
     // MARK: - tests for serializing to and from xml
 
-    func testSerializationOfComplexProfileUsingAuthorization() throws {
+    @MainActor func testSerializationOfComplexProfileUsingAuthorization() async throws {
         // when we export to xml and reimport it should still have the same attributes
         let plistData = try TCCProfileBuilder().buildProfile(authorization: .allowStandardUserToSetSystemService).xmlData()
         let profile = try TCCProfile.parse(from: plistData)
@@ -75,7 +75,7 @@ class TCCProfileTests: XCTestCase {
         }
     }
 
-    func testSerializationOfProfileUsingLegacyAllowedKey() throws {
+    @MainActor func testSerializationOfProfileUsingLegacyAllowedKey() async throws {
         // when we export to xml and reimport it should still have the same attributes
         let plistData = try TCCProfileBuilder().buildProfile(allowed: true).xmlData()
         let profile = try TCCProfile.parse(from: plistData)
@@ -119,7 +119,7 @@ class TCCProfileTests: XCTestCase {
         }
     }
 
-    func testSerializationOfProfileWhenBothAllowedAndAuthorizationUsed() throws {
+    @MainActor func testSerializationOfProfileWhenBothAllowedAndAuthorizationUsed() async throws {
         // when we export to xml and reimport it should still have the same attributes
         let plistData = try TCCProfileBuilder().buildProfile(allowed: false, authorization: .allow).xmlData()
         let profile = try TCCProfile.parse(from: plistData)
@@ -146,7 +146,7 @@ class TCCProfileTests: XCTestCase {
 
     // unit tests for handling both Auth and allowed keys should fail?
 
-    func testSettingLegacyAllowValueNullifiesAuthorization() throws {
+    @MainActor func testSettingLegacyAllowValueNullifiesAuthorization() async throws {
         // given
         var tccPolicy = TCCPolicy(identifier: "id", codeRequirement: "req", receiverIdentifier: "recId", receiverCodeRequirement: "recreq")
         tccPolicy.authorization = .allow
@@ -159,7 +159,7 @@ class TCCProfileTests: XCTestCase {
         XCTAssertTrue(try XCTUnwrap(tccPolicy.allowed))
     }
 
-    func testSettingAuthorizationValueDoesNotNullifyAllowed() {
+    @MainActor func testSettingAuthorizationValueDoesNotNullifyAllowed() async {
         // given
         var tccPolicy = TCCPolicy(identifier: "id", codeRequirement: "req", receiverIdentifier: "recId", receiverCodeRequirement: "recreq")
         tccPolicy.allowed = false
@@ -172,13 +172,13 @@ class TCCProfileTests: XCTestCase {
         XCTAssertEqual(tccPolicy.authorization, TCCPolicyAuthorizationValue.allowStandardUserToSetSystemService)
     }
 
-    func testJamfProAPIData() throws {
+    func testJamfProAPIData() async throws {
         // given - build the test profile
         let tccProfile = TCCProfileBuilder().buildProfile(allowed: false, authorization: .allow)
         let expected = try loadTextFile(fileName: "TestTCCProfileForJamfProAPI").trimmingCharacters(in: .whitespacesAndNewlines)
 
         // when - wrap in Jamf Pro API xml
-        let data = try tccProfile.jamfProAPIData(signingIdentity: nil, site: nil)
+        let data = try await tccProfile.jamfProAPIData(signingIdentity: nil, site: nil)
 
         // then
         let xmlString = String(data: data, encoding: .utf8)

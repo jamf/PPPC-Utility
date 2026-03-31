@@ -26,13 +26,13 @@
 //
 
 import Foundation
-import XCTest
+@preconcurrency import XCTest
 
 @testable import PPPC_Utility
 
 class PPPCServicesManagerTests: XCTestCase {
 
-    func testLoadAllServices() {
+    @MainActor func testLoadAllServices() async {
         // given/when
         let actual = PPPCServicesManager()
 
@@ -40,7 +40,7 @@ class PPPCServicesManagerTests: XCTestCase {
         XCTAssertEqual(actual.allServices.count, 21)
     }
 
-    func testUserHelp_withEntitlements() throws {
+    @MainActor func testUserHelp_withEntitlements() async throws {
         // given
         let services = PPPCServicesManager()
         let service = try XCTUnwrap(services.allServices["Camera"])
@@ -52,7 +52,7 @@ class PPPCServicesManagerTests: XCTestCase {
         XCTAssertEqual(actual, "Use to deny specified apps access to the camera.\n\nMDM Key: Camera\nRelated entitlements: [\"com.apple.developer.avfoundation.multitasking-camera-access\", \"com.apple.security.device.camera\"]")
     }
 
-    func testUserHelp_withoutEntitlements() throws {
+    @MainActor func testUserHelp_withoutEntitlements() async throws {
         // given
         let services = PPPCServicesManager()
         let service = try XCTUnwrap(services.allServices["ScreenCapture"])
@@ -64,7 +64,7 @@ class PPPCServicesManagerTests: XCTestCase {
         XCTAssertEqual(actual, "Deny specified apps access to capture (read) the contents of the system display.\n\nMDM Key: ScreenCapture")
     }
 
-    func testCameraIsDenyOnly() throws {
+    @MainActor func testCameraIsDenyOnly() async throws {
         // given
         let services = PPPCServicesManager()
         let service = try XCTUnwrap(services.allServices["Camera"])
@@ -76,7 +76,7 @@ class PPPCServicesManagerTests: XCTestCase {
         XCTAssertTrue(actual)
     }
 
-    func testScreenCaptureAllowsStandardUsers() throws {
+    @MainActor func testScreenCaptureAllowsStandardUsers() async throws {
         // given
         let services = PPPCServicesManager()
         let service = try XCTUnwrap(services.allServices["ScreenCapture"])

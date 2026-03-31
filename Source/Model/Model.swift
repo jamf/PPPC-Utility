@@ -81,7 +81,7 @@ typealias LoadExecutableResult = Result<Executable, LoadExecutableError>
 
 extension Model {
 
-    @concurrent func loadExecutable(url: URL) async throws -> Executable {
+    func loadExecutable(url: URL) async throws -> Executable {
         let executable = Executable()
 
         if let bundle = Bundle(url: url) {

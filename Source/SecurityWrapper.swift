@@ -27,10 +27,13 @@
 
 import Foundation
 import Haversack
+import Security
+
+extension SecIdentity: @unchecked @retroactive Sendable {}
 
 struct SecurityWrapper {
 
-    static func execute(block: () -> (OSStatus)) throws {
+    nonisolated static func execute(block: () -> (OSStatus)) throws {
         let status = block()
         if status != 0 {
             throw NSError(domain: NSOSStatusErrorDomain, code: Int(status), userInfo: nil)
@@ -100,7 +103,7 @@ struct SecurityWrapper {
 		let haversack = Haversack()
 		let query = IdentityQuery().matching(mustBeValidOnDate: Date()).returning(.reference)
 
-		let identities = try haversack.search(where: query)
+		let identities = try await haversack.search(where: query)
 
 		return identities.compactMap {
 			guard let secIdentity = $0.reference else {
@@ -113,7 +116,7 @@ struct SecurityWrapper {
 		}
     }
 
-    static func getCertificateCommonName(for identity: SecIdentity) throws -> String {
+    nonisolated static func getCertificateCommonName(for identity: SecIdentity) throws -> String {
         var certificate: SecCertificate?
         var commonName: CFString?
         try execute { SecIdentityCopyCertificate(identity, &certificate) }

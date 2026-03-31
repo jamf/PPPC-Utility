@@ -119,12 +119,12 @@ class SaveViewController: NSViewController {
 
     // swiftlint:disable:next block_based_kvo
     nonisolated override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
-        MainActor.assumeIsolated {
-            if context == &SaveViewController.saveProfileKVOContext {
+        if context == &SaveViewController.saveProfileKVOContext {
+            MainActor.assumeIsolated {
                 updateIsReadyToSave()
-            } else {
-                super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
             }
+        } else {
+            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
         }
     }
 

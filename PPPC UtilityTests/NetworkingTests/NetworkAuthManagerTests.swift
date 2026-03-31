@@ -26,7 +26,7 @@
 //
 
 import Foundation
-import XCTest
+@preconcurrency import XCTest
 
 @testable import PPPC_Utility
 
@@ -121,7 +121,7 @@ class NetworkAuthManagerTests: XCTestCase {
         }
     }
 
-    func testBasicAuthString() throws {
+    @MainActor func testBasicAuthString() async throws {
         // given
         let authManager = NetworkAuthManager(username: "test", password: "none")
 
@@ -132,7 +132,7 @@ class NetworkAuthManagerTests: XCTestCase {
         XCTAssertEqual(actual, "dGVzdDpub25l")
     }
 
-    func testBasicAuthStringEmptyUsername() throws {
+    @MainActor func testBasicAuthStringEmptyUsername() async throws {
         // given
         let authManager = NetworkAuthManager(username: "", password: "none")
 
@@ -146,7 +146,7 @@ class NetworkAuthManagerTests: XCTestCase {
         }
     }
 
-    func testBasicAuthStringEmptyPassword() throws {
+    @MainActor func testBasicAuthStringEmptyPassword() async throws {
         // given
         let authManager = NetworkAuthManager(username: "mine", password: "")
 

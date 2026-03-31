@@ -26,13 +26,13 @@
 //
 
 import Foundation
-import XCTest
+@preconcurrency import XCTest
 
 @testable import PPPC_Utility
 
 class TCCProfileImporterTests: XCTestCase {
 
-    func testMalformedTCCProfile() {
+    @MainActor func testMalformedTCCProfile() async {
         let tccProfileImporter = TCCProfileImporter()
 
         let resourceURL = getResourceProfile(fileName: "TestTCCProfileSigned-Broken")
@@ -47,7 +47,7 @@ class TCCProfileImporterTests: XCTestCase {
         }
     }
 
-    func testEmptyContentTCCProfile() {
+    @MainActor func testEmptyContentTCCProfile() async {
         let tccProfileImporter = TCCProfileImporter()
 
         let resourceURL = getResourceProfile(fileName: "TestTCCUnsignedProfile-Empty")
@@ -62,7 +62,7 @@ class TCCProfileImporterTests: XCTestCase {
         }
     }
 
-    func testCorrectUnsignedProfileContentData() throws {
+    @MainActor func testCorrectUnsignedProfileContentData() async throws {
         let tccProfileImporter = TCCProfileImporter()
 
         let resourceURL = getResourceProfile(fileName: "TestTCCUnsignedProfile")
@@ -72,7 +72,7 @@ class TCCProfileImporterTests: XCTestCase {
         XCTAssertNotNil(tccProfile.content[0].services)
     }
 
-    func testCorrectUnsignedProfileContentDataAllLowercase() throws {
+    @MainActor func testCorrectUnsignedProfileContentDataAllLowercase() async throws {
         let tccProfileImporter = TCCProfileImporter()
 
         let resourceURL = getResourceProfile(fileName: "TestTCCUnsignedProfile-allLower")
@@ -82,7 +82,7 @@ class TCCProfileImporterTests: XCTestCase {
         XCTAssertNotNil(tccProfile.content[0].services)
     }
 
-    func testBrokenUnsignedProfile() {
+    @MainActor func testBrokenUnsignedProfile() async {
         let tccProfileImporter = TCCProfileImporter()
 
         let resourceURL = getResourceProfile(fileName: "TestTCCUnsignedProfile-Broken")

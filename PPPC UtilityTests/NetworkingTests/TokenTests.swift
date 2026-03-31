@@ -26,7 +26,7 @@
 //
 
 import Foundation
-import XCTest
+@preconcurrency import XCTest
 
 @testable import PPPC_Utility
 

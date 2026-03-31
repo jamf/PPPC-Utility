@@ -6,12 +6,12 @@
 //  Copyright (c) 2023 Jamf Software
 
 import Foundation
-import XCTest
+@preconcurrency import XCTest
 
 @testable import PPPC_Utility
 
 class JamfProAPIClientTests: XCTestCase {
-	func testOAuthTokenRequest() throws {
+	@MainActor func testOAuthTokenRequest() async throws {
 		// given
 		let authManager = NetworkAuthManager(username: "", password: "")
 		let apiClient = JamfProAPIClient(serverUrlString: "https://something", tokenManager: authManager)

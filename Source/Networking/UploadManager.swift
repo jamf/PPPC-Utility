@@ -56,7 +56,7 @@ struct UploadManager {
 			identity = signingIdentity.reference
 		}
 
-		let profileData = try profile.jamfProAPIData(signingIdentity: identity, site: siteInfo)
+		let profileData = try await profile.jamfProAPIData(signingIdentity: identity, site: siteInfo)
 
 		_ = try await networking.upload(computerConfigProfile: profileData)
 

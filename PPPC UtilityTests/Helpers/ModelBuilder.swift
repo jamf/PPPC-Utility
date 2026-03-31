@@ -28,6 +28,7 @@ import Cocoa
 
 @testable import PPPC_Utility
 
+@MainActor
 class ModelBuilder {
 
     var model: Model

@@ -160,11 +160,11 @@ public struct TCCProfile: Codable {
     ///   - signingIdentity: A signing identity; can be nil to leave the profile unsigned.
     ///   - site: A Jamf Pro site
     /// - Returns: XML data for use with the Jamf Pro API.
-    func jamfProAPIData(signingIdentity: SecIdentity?, site: (String, String)?) throws -> Data {
+    func jamfProAPIData(signingIdentity: SecIdentity?, site: (String, String)?) async throws -> Data {
         var profileText: String
         var profileData = try xmlData()
         if let identity = signingIdentity {
-            profileData = try SecurityWrapper.sign(data: profileData, using: identity)
+            profileData = try await SecurityWrapper.sign(data: profileData, using: identity)
         }
         profileText = String(data: profileData, encoding: .utf8) ?? ""
 
