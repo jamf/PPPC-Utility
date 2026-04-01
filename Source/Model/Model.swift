@@ -31,7 +31,9 @@ import OSLog
 @objc class Model: NSObject {
 
     @objc dynamic var current: Executable?
-    @objc dynamic static let shared = Model()
+    @objc dynamic nonisolated(unsafe) static let shared: Model = {
+        MainActor.assumeIsolated { Model() }
+    }()
     @objc dynamic var identities: [SigningIdentity] = []
     @objc dynamic var selectedExecutables: [Executable] = []
 
