@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "lineLength": 200,
+  "indentation": {
+    "spaces": 4
+  },
+  "multiElementCollectionTrailingCommas": false,
+  "rules": {
+    "AlwaysUseLowerCamelCase": false,
+    "ReplaceForEachWithForLoop": false
+  }
+}

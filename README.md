@@ -55,3 +55,13 @@ To upload the Privacy Preferences Policy Control Payload to Jamf Pro 10.7.0 and 
 Signed and unsigned profiles can be imported.
 
 ![Import any profile](/Images/ImportProfile.png "Import profiles")
+
+## Development
+
+### Pre-commit Hook
+
+A pre-commit hook is available that automatically formats Swift files using `swift-format` before each commit. To install it, run:
+
+```bash
+ln -sf ../../git-hooks/pre-commit.swift-format .git/hooks/pre-commit
+```

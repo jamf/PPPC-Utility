@@ -45,16 +45,16 @@ class ModelTests: XCTestCase {
 
     func testGetExecutableBasedOnIdentifierAndCodeRequirement_BundleIdentifierType() async {
         // given
-            let identifier = "com.example.App"
-            let codeRequirement = "testCodeRequirement"
+        let identifier = "com.example.App"
+        let codeRequirement = "testCodeRequirement"
 
         // when
-            let executable = await model.getExecutableFrom(identifier: identifier, codeRequirement: codeRequirement)
+        let executable = await model.getExecutableFrom(identifier: identifier, codeRequirement: codeRequirement)
 
         // then
-            XCTAssertEqual(executable.displayName, "App")
-            XCTAssertEqual(executable.codeRequirement, codeRequirement)
-            XCTAssertEqual(executable.iconPath, IconFilePath.application)
+        XCTAssertEqual(executable.displayName, "App")
+        XCTAssertEqual(executable.codeRequirement, codeRequirement)
+        XCTAssertEqual(executable.iconPath, IconFilePath.application)
     }
 
     func testGetExecutableBasedOnIdentifierAndCodeRequirement_PathIdentifierType() async {
@@ -73,16 +73,16 @@ class ModelTests: XCTestCase {
 
     func testGetExecutableFromComputerBasedOnIdentifier() async {
         // given
-            let identifier = "com.apple.Safari"
-            let codeRequirement = "randomReq"
+        let identifier = "com.apple.Safari"
+        let codeRequirement = "randomReq"
 
         // when
-            let executable = await model.getExecutableFrom(identifier: identifier, codeRequirement: codeRequirement)
+        let executable = await model.getExecutableFrom(identifier: identifier, codeRequirement: codeRequirement)
 
         // then
-            XCTAssertEqual(executable.displayName, "Safari")
-            XCTAssertNotEqual(executable.iconPath, IconFilePath.application)
-            XCTAssertNotEqual(codeRequirement, executable.codeRequirement)
+        XCTAssertEqual(executable.displayName, "Safari")
+        XCTAssertNotEqual(executable.iconPath, IconFilePath.application)
+        XCTAssertNotEqual(codeRequirement, executable.codeRequirement)
     }
 
     func testGetExecutableFromSelectedExecutables() async {

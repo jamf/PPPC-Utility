@@ -33,10 +33,10 @@ import Foundation
 class TokenTests: XCTestCase {
     func testPastIsNotValid() throws {
         // given
-		let formatter = ISO8601DateFormatter()
-		formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-		let expiration = try XCTUnwrap(formatter.date(from: "2021-06-22T22:05:58.81Z"))
-		let token = Token(value: "abc", expiresAt: expiration)
+        let formatter = ISO8601DateFormatter()
+        formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        let expiration = try XCTUnwrap(formatter.date(from: "2021-06-22T22:05:58.81Z"))
+        let token = Token(value: "abc", expiresAt: expiration)
 
         // when
         let valid = token.isValid
@@ -47,9 +47,9 @@ class TokenTests: XCTestCase {
 
     func testFutureIsValid() throws {
         // given
-		let formatter = ISO8601DateFormatter()
-		formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-		let expiration = try XCTUnwrap(formatter.date(from: "2750-06-22T22:05:58.81Z"))
+        let formatter = ISO8601DateFormatter()
+        formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        let expiration = try XCTUnwrap(formatter.date(from: "2750-06-22T22:05:58.81Z"))
         let token = Token(value: "abc", expiresAt: expiration)
 
         // when
@@ -59,67 +59,67 @@ class TokenTests: XCTestCase {
         XCTAssertTrue(valid)
     }
 
-	// MARK: - Decoding
+    // MARK: - Decoding
 
-	func testDecodeBasicAuthToken() throws {
-		// given
-		let jsonText = """
-		{
-			"token": "abc",
-			"expires": "2750-06-22T22:05:58.81Z"
-		}
-		"""
-		let jsonData = try XCTUnwrap(jsonText.data(using: .utf8))
-		let decoder = JSONDecoder()
+    func testDecodeBasicAuthToken() throws {
+        // given
+        let jsonText = """
+            {
+            	"token": "abc",
+            	"expires": "2750-06-22T22:05:58.81Z"
+            }
+            """
+        let jsonData = try XCTUnwrap(jsonText.data(using: .utf8))
+        let decoder = JSONDecoder()
 
-		// when
-		let actual = try decoder.decode(Token.self, from: jsonData)
+        // when
+        let actual = try decoder.decode(Token.self, from: jsonData)
 
-		// then
-		XCTAssertEqual(actual.value, "abc")
-		XCTAssertNotNil(actual.expiresAt)
-		XCTAssertTrue(actual.isValid)
-	}
+        // then
+        XCTAssertEqual(actual.value, "abc")
+        XCTAssertNotNil(actual.expiresAt)
+        XCTAssertTrue(actual.isValid)
+    }
 
-	func testDecodeExpiredBasicAuthToken() throws {
-		// given
-		let jsonText = """
-		{
-			"token": "abc",
-			"expires": "1970-10-24T22:05:58.81Z"
-		}
-		"""
-		let jsonData = try XCTUnwrap(jsonText.data(using: .utf8))
-		let decoder = JSONDecoder()
+    func testDecodeExpiredBasicAuthToken() throws {
+        // given
+        let jsonText = """
+            {
+            	"token": "abc",
+            	"expires": "1970-10-24T22:05:58.81Z"
+            }
+            """
+        let jsonData = try XCTUnwrap(jsonText.data(using: .utf8))
+        let decoder = JSONDecoder()
 
-		// when
-		let actual = try decoder.decode(Token.self, from: jsonData)
+        // when
+        let actual = try decoder.decode(Token.self, from: jsonData)
 
-		// then
-		XCTAssertEqual(actual.value, "abc")
-		XCTAssertNotNil(actual.expiresAt)
-		XCTAssertFalse(actual.isValid)
-	}
+        // then
+        XCTAssertEqual(actual.value, "abc")
+        XCTAssertNotNil(actual.expiresAt)
+        XCTAssertFalse(actual.isValid)
+    }
 
-	func testDecodeClientCredentialsAuthToken() throws {
-		// given
-		let jsonText = """
-		{
-			"access_token": "abc",
-			"scope": "api-role:2",
-			"token_type": "Bearer",
-			"expires_in": 599
-		}
-		"""
-		let jsonData = try XCTUnwrap(jsonText.data(using: .utf8))
-		let decoder = JSONDecoder()
+    func testDecodeClientCredentialsAuthToken() throws {
+        // given
+        let jsonText = """
+            {
+            	"access_token": "abc",
+            	"scope": "api-role:2",
+            	"token_type": "Bearer",
+            	"expires_in": 599
+            }
+            """
+        let jsonData = try XCTUnwrap(jsonText.data(using: .utf8))
+        let decoder = JSONDecoder()
 
-		// when
-		let actual = try decoder.decode(Token.self, from: jsonData)
+        // when
+        let actual = try decoder.decode(Token.self, from: jsonData)
 
-		// then
-		XCTAssertEqual(actual.value, "abc")
-		XCTAssertNotNil(actual.expiresAt)
-		XCTAssertTrue(actual.isValid)
-	}
+        // then
+        XCTAssertEqual(actual.value, "abc")
+        XCTAssertNotNil(actual.expiresAt)
+        XCTAssertTrue(actual.isValid)
+    }
 }

@@ -41,36 +41,37 @@ struct SecurityWrapper {
     }
 
     static func saveCredentials(username: String, password: String, server: String) throws {
-		let haversack = Haversack()
-		let item = InternetPasswordEntity()
-		item.server = server
-		item.account = username
-		item.passwordData = password.data(using: .utf8)
+        let haversack = Haversack()
+        let item = InternetPasswordEntity()
+        item.server = server
+        item.account = username
+        item.passwordData = password.data(using: .utf8)
 
-		try haversack.save(item, itemSecurity: .standard, updateExisting: true)
+        try haversack.save(item, itemSecurity: .standard, updateExisting: true)
     }
 
     static func removeCredentials(server: String, username: String) throws {
-		let haversack = Haversack()
-		let query = InternetPasswordQuery(server: server)
-			.matching(account: username)
+        let haversack = Haversack()
+        let query = InternetPasswordQuery(server: server)
+            .matching(account: username)
 
-		try haversack.delete(where: query, treatNotFoundAsSuccess: true)
+        try haversack.delete(where: query, treatNotFoundAsSuccess: true)
     }
 
     static func loadCredentials(server: String) throws -> (username: String, password: String)? {
-		let haversack = Haversack()
-		let query = InternetPasswordQuery(server: server)
-			.returning([.attributes, .data])
+        let haversack = Haversack()
+        let query = InternetPasswordQuery(server: server)
+            .returning([.attributes, .data])
 
-		if let item = try? haversack.first(where: query),
-		   let username = item.account,
-		   let passwordData = item.passwordData,
-		   let password = String(data: passwordData, encoding: .utf8) {
-			return (username: username, password: password)
-		}
+        if let item = try? haversack.first(where: query),
+            let username = item.account,
+            let passwordData = item.passwordData,
+            let password = String(data: passwordData, encoding: .utf8)
+        {
+            return (username: username, password: password)
+        }
 
-		return nil
+        return nil
     }
 
     @concurrent static func copyDesignatedRequirement(url: URL) async throws -> String {
@@ -100,20 +101,21 @@ struct SecurityWrapper {
     }
 
     @concurrent static func loadSigningIdentities() async throws -> [SigningIdentity] {
-		let haversack = Haversack()
-		let query = IdentityQuery().matching(mustBeValidOnDate: Date()).returning(.reference)
+        let haversack = Haversack()
+        let query = IdentityQuery().matching(mustBeValidOnDate: Date()).returning(.reference)
 
-		let identities = try await haversack.search(where: query)
+        let identities = try await haversack.search(where: query)
 
-		return identities.compactMap {
-			guard let secIdentity = $0.reference else {
-				return nil
-			}
+        return identities.compactMap {
+            guard let secIdentity = $0.reference else {
+                return nil
+            }
 
-			let name = try? getCertificateCommonName(for: secIdentity)
-			return SigningIdentity(name: name ?? "Unknown \(secIdentity.hashValue)",
-								   reference: secIdentity)
-		}
+            let name = try? getCertificateCommonName(for: secIdentity)
+            return SigningIdentity(
+                name: name ?? "Unknown \(secIdentity.hashValue)",
+                reference: secIdentity)
+        }
     }
 
     nonisolated static func getCertificateCommonName(for identity: SecIdentity) throws -> String {

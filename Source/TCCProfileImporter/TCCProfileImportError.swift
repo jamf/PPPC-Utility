@@ -26,6 +26,7 @@
 //
 
 import Foundation
+
 public enum TCCProfileImportError: Error {
     case cancelled
     case unableToOpenFile

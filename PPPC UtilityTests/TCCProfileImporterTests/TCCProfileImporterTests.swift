@@ -41,7 +41,8 @@ class TCCProfileImporterTests: XCTestCase {
             _ = try tccProfileImporter.decodeTCCProfile(fileUrl: resourceURL)
             XCTFail("Malformed profile should not succeed")
         } catch {
-            if case TCCProfileImportError.invalidProfileFile = error { } else {
+            if case TCCProfileImportError.invalidProfileFile = error {
+            } else {
                 XCTFail("Expected invalidProfileFile error, got \(error)")
             }
         }

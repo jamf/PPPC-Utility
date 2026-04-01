@@ -43,11 +43,11 @@ class MockNetworking: Networking {
             throw error
         }
 
-		let formatter = ISO8601DateFormatter()
-		formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-		let expiration = try XCTUnwrap(formatter.date(from: "2950-06-22T22:05:58.81Z"))
+        let formatter = ISO8601DateFormatter()
+        formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        let expiration = try XCTUnwrap(formatter.date(from: "2950-06-22T22:05:58.81Z"))
 
-		return Token(value: "xyz", expiresAt: expiration)
+        return Token(value: "xyz", expiresAt: expiration)
     }
 }
 

@@ -1,0 +1,19 @@
+name: swift-format
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/swift-format.yml'
+      - '.swift-format'
+      - '**/*.swift'
+
+permissions:
+  contents: read
+
+jobs:
+  swift-format:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Lint with swift-format
+        run: xcrun swift-format lint --strict -r -p .

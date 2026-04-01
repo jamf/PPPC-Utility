@@ -64,12 +64,14 @@ class SaveViewController: NSViewController {
     var defaultsController = NSUserDefaultsController.shared
 
     func updateIsReadyToSave() {
-        guard isReadyToSave != (
-            !organizationLabel.stringValue.isEmpty
-            && (payloadName != nil)
-            && !payloadName.isEmpty
-            && (payloadIdentifier != nil)
-            && !payloadIdentifier.isEmpty ) else { return }
+        guard
+            isReadyToSave
+                != (!organizationLabel.stringValue.isEmpty
+                    && (payloadName != nil)
+                    && !payloadName.isEmpty
+                    && (payloadIdentifier != nil)
+                    && !payloadIdentifier.isEmpty)
+        else { return }
         isReadyToSave = !isReadyToSave
     }
 
@@ -131,10 +133,11 @@ class SaveViewController: NSViewController {
     func saveTo(url: URL) {
         logger.info("Saving to \(url, privacy: .public)")
         let model = Model.shared
-        let profile = model.exportProfile(organization: organizationLabel.stringValue,
-                                          identifier: payloadIdentifier,
-                                          displayName: payloadName,
-                                          payloadDescription: payloadDescription ?? payloadName)
+        let profile = model.exportProfile(
+            organization: organizationLabel.stringValue,
+            identifier: payloadIdentifier,
+            displayName: payloadName,
+            payloadDescription: payloadDescription ?? payloadName)
         Task {
             do {
                 var outputData = try profile.xmlData()
