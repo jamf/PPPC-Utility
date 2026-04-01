@@ -59,7 +59,6 @@
 		C0EE9A7D28639BF800738B6B /* TestTCCProfileForJamfProAPI.txt in Resources */ = {isa = PBXBuildFile; fileRef = C0EE9A7C28639BF800738B6B /* TestTCCProfileForJamfProAPI.txt */; };
 		C0EE9A7F2863BDE300738B6B /* JamfProAPITypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0EE9A7E2863BDE300738B6B /* JamfProAPITypes.swift */; };
 		C0EE9A812863BE2B00738B6B /* NetworkAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0EE9A802863BE2B00738B6B /* NetworkAuthManager.swift */; };
-		C0EE9A832863BEEB00738B6B /* URLSessionAsyncCompatibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0EE9A822863BEEB00738B6B /* URLSessionAsyncCompatibility.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -131,7 +130,6 @@
 		C0EE9A7C28639BF800738B6B /* TestTCCProfileForJamfProAPI.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestTCCProfileForJamfProAPI.txt; sourceTree = "<group>"; };
 		C0EE9A7E2863BDE300738B6B /* JamfProAPITypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JamfProAPITypes.swift; sourceTree = "<group>"; };
 		C0EE9A802863BE2B00738B6B /* NetworkAuthManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkAuthManager.swift; sourceTree = "<group>"; };
-		C0EE9A822863BEEB00738B6B /* URLSessionAsyncCompatibility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLSessionAsyncCompatibility.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -324,7 +322,6 @@
 				C03270BF28636397008B38E0 /* JamfProAPIClient.swift */,
 				C0EE9A7E2863BDE300738B6B /* JamfProAPITypes.swift */,
 				C05844B72AD4512D00141353 /* Token.swift */,
-				C0EE9A822863BEEB00738B6B /* URLSessionAsyncCompatibility.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -512,7 +509,6 @@
 				6E6216F9215321CE0043DF18 /* OpenViewController.swift in Sources */,
 				C05844B82AD4512D00141353 /* Token.swift in Sources */,
 				6EC40A10214DE3B200BE4F17 /* Executable.swift in Sources */,
-				C0EE9A832863BEEB00738B6B /* URLSessionAsyncCompatibility.swift in Sources */,
 				C0EE9A812863BE2B00738B6B /* NetworkAuthManager.swift in Sources */,
 				6EC40A16214ECF1E00BE4F17 /* SaveViewController.swift in Sources */,
 				C05844BE2AD45F7900141353 /* UploadInfoView.swift in Sources */,
@@ -644,7 +640,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IBSC_NOTICES = NO;
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -700,7 +696,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IBSC_NOTICES = NO;
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
