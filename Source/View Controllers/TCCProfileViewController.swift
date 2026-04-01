@@ -183,17 +183,15 @@ class TCCProfileViewController: NSViewController {
         let tccProfileImporter = TCCProfileImporter()
         let tccConfigPanel = TCCProfileConfigurationPanel()
 
-        tccConfigPanel.loadTCCProfileFromFile(importer: tccProfileImporter, window: window) { [weak self] tccProfileResult in
-            guard let weakSelf = self else { return }
-            switch tccProfileResult {
-            case .success(let tccProfile):
-                Task {
-                    await weakSelf.model.importProfile(tccProfile: tccProfile)
+        Task {
+            do {
+                if let tccProfile = try await tccConfigPanel.loadTCCProfileFromFile(importer: tccProfileImporter, window: window) {
+                    await model.importProfile(tccProfile: tccProfile)
                 }
-            case .failure(let tccProfileImportError):
-                if !tccProfileImportError.isCancelled {
-                    weakSelf.showAlert(tccProfileImportError, for: window)
-                }
+            } catch let error as TCCProfileImportError {
+                showAlert(error, for: window)
+            } catch {
+                showAlert(TCCProfileImportError.invalidProfileFile(description: error.localizedDescription), for: window)
             }
         }
     }

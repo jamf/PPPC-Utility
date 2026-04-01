@@ -27,7 +27,7 @@
 
 import Cocoa
 
-class Alert: NSObject {
+class Alert {
     func display(header: String, message: String) {
         let dialog: NSAlert = NSAlert()
         dialog.messageText = header

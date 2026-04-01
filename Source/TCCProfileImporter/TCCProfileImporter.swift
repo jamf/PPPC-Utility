@@ -27,8 +27,6 @@
 
 import Foundation
 
-typealias TCCProfileImportResult = Result<TCCProfile, TCCProfileImportError>
-
 /// Load tcc profiles
 public class TCCProfileImporter {
 
