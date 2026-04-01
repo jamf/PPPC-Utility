@@ -28,7 +28,7 @@
 import Foundation
 import OSLog
 
-class PPPCServicesManager {
+class PPPCServicesManager: @unchecked Sendable {
 
     typealias MDMServiceKey = String
 

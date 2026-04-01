@@ -28,7 +28,7 @@
 import Cocoa
 import OSLog
 
-@objc class Model: NSObject {
+@objc class Model: NSObject, @unchecked Sendable {
 
     @objc dynamic var current: Executable?
     @objc dynamic nonisolated(unsafe) static let shared: Model = {
