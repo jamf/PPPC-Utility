@@ -64,12 +64,14 @@ class SaveViewController: NSViewController {
     var defaultsController = NSUserDefaultsController.shared
 
     func updateIsReadyToSave() {
-        guard isReadyToSave != (
-            !organizationLabel.stringValue.isEmpty
-            && (payloadName != nil)
-            && !payloadName.isEmpty
-            && (payloadIdentifier != nil)
-            && !payloadIdentifier.isEmpty ) else { return }
+        guard
+            isReadyToSave
+                != (!organizationLabel.stringValue.isEmpty
+                    && (payloadName != nil)
+                    && !payloadName.isEmpty
+                    && (payloadIdentifier != nil)
+                    && !payloadIdentifier.isEmpty)
+        else { return }
         isReadyToSave = !isReadyToSave
     }
 
@@ -118,7 +120,6 @@ class SaveViewController: NSViewController {
         defaultsController.removeObserver(self, forKeyPath: "values.organization", context: &SaveViewController.saveProfileKVOContext)
     }
 
-    // swiftlint:disable:next block_based_kvo
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
         if context == &SaveViewController.saveProfileKVOContext {
             updateIsReadyToSave()
@@ -130,10 +131,11 @@ class SaveViewController: NSViewController {
     func saveTo(url: URL) {
         logger.info("Saving to \(url, privacy: .public)")
         let model = Model.shared
-        let profile = model.exportProfile(organization: organizationLabel.stringValue,
-                                          identifier: payloadIdentifier,
-                                          displayName: payloadName,
-                                          payloadDescription: payloadDescription ?? payloadName)
+        let profile = model.exportProfile(
+            organization: organizationLabel.stringValue,
+            identifier: payloadIdentifier,
+            displayName: payloadName,
+            payloadDescription: payloadDescription ?? payloadName)
         do {
             var outputData = try profile.xmlData()
             if let identity = identitiesPopUpAC.selectedObjects.first as? SigningIdentity, let ref = identity.reference {

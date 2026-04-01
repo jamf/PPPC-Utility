@@ -41,14 +41,14 @@ enum AuthError: Error, Equatable {
 
 /// Support two main ways to authenticate to the Jamf Pro API.
 enum AuthenticationInfo {
-	case basicAuth(username: String, password: String)
+    case basicAuth(username: String, password: String)
 
-	case clientCreds(id: String, secret: String)
+    case clientCreds(id: String, secret: String)
 }
 
 /// This actor ensures that only one token refresh occurs at the same time.
 actor NetworkAuthManager {
-	private let authInfo: AuthenticationInfo
+    private let authInfo: AuthenticationInfo
 
     private var currentToken: Token?
     private var refreshTask: Task<Token, Error>?
@@ -56,21 +56,22 @@ actor NetworkAuthManager {
     private var supportsBearerAuth = true
 
     init(username: String, password: String) {
-		authInfo = .basicAuth(username: username, password: password)
+        authInfo = .basicAuth(username: username, password: password)
     }
 
-	init(clientId: String, clientSecret: String) {
-		authInfo = .clientCreds(id: clientId, secret: clientSecret)
-	}
+    init(clientId: String, clientSecret: String) {
+        authInfo = .clientCreds(id: clientId, secret: clientSecret)
+    }
 
-	func validToken(networking: Networking) async throws -> Token {
+    func validToken(networking: Networking) async throws -> Token {
         if let task = refreshTask {
             // A refresh is already running; we'll use those results when ready.
             return try await task.value
         }
 
         if let token = currentToken,
-           token.isValid {
+            token.isValid
+        {
             return token
         }
 
@@ -88,7 +89,7 @@ actor NetworkAuthManager {
             defer { refreshTask = nil }
 
             do {
-				let newToken = try await networking.getBearerToken(authInfo: authInfo)
+                let newToken = try await networking.getBearerToken(authInfo: authInfo)
                 currentToken = newToken
                 return newToken
             } catch NetworkingError.serverResponse(let responseCode, _) where responseCode == 404 {
@@ -120,8 +121,9 @@ actor NetworkAuthManager {
     /// This doesn't mutate any state and only accesses `let` constants so it doesn't need to be actor isolated.
     /// - Returns: The encoded data string for use with Basic Auth.
     nonisolated func basicAuthString() throws -> String {
-		guard case .basicAuth(let username, let password) = authInfo,
-			  !username.isEmpty && !password.isEmpty else {
+        guard case .basicAuth(let username, let password) = authInfo,
+            !username.isEmpty && !password.isEmpty
+        else {
             throw AuthError.invalidUsernamePassword
         }
         return Data("\(username):\(password)".utf8).base64EncodedString()

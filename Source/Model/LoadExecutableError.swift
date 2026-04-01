@@ -26,6 +26,7 @@
 //
 
 import Foundation
+
 public enum LoadExecutableError: Error {
     case identifierNotFound
     case resourceURLNotFound

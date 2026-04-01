@@ -26,6 +26,7 @@
 //
 
 import Foundation
+
 extension Array where Element: Equatable {
     mutating func appendIfNew(_ item: Element) {
         if !contains(item) {

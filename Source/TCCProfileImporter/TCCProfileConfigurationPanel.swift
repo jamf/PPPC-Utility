@@ -30,30 +30,30 @@ import Foundation
 
 class TCCProfileConfigurationPanel {
     /// Load TCC Profile data from file
-     ///
-     /// - Parameter completion: TCCProfileImportCompletion - success with TCCProfile or failure with TCCProfileImport Error
+    ///
+    /// - Parameter completion: TCCProfileImportCompletion - success with TCCProfile or failure with TCCProfileImport Error
     func loadTCCProfileFromFile(importer: TCCProfileImporter, window: NSWindow, _ completion: @escaping TCCProfileImportCompletion) {
-         let openPanel = NSOpenPanel.init()
-         openPanel.allowedFileTypes = ["mobileconfig", "plist"]
-         openPanel.allowsMultipleSelection = false
-         openPanel.canChooseDirectories = false
-         openPanel.canCreateDirectories = false
-         openPanel.canChooseFiles = true
-         openPanel.title = "Open TCCProfile File"
+        let openPanel = NSOpenPanel.init()
+        openPanel.allowedFileTypes = ["mobileconfig", "plist"]
+        openPanel.allowsMultipleSelection = false
+        openPanel.canChooseDirectories = false
+        openPanel.canCreateDirectories = false
+        openPanel.canChooseFiles = true
+        openPanel.title = "Open TCCProfile File"
 
-         openPanel.beginSheetModal(for: window) { (response) in
-             if response != .OK {
+        openPanel.beginSheetModal(for: window) { (response) in
+            if response != .OK {
                 completion(.failure(.cancelled))
-             } else {
-                 if let result = openPanel.url {
-                     importer.decodeTCCProfile(fileUrl: result) { tccProfileResult in
-                         return completion(tccProfileResult)
-                     }
-                 } else {
-                     completion(.failure(TCCProfileImportError.unableToOpenFile))
-                 }
-             }
-         }
+            } else {
+                if let result = openPanel.url {
+                    importer.decodeTCCProfile(fileUrl: result) { tccProfileResult in
+                        return completion(tccProfileResult)
+                    }
+                } else {
+                    completion(.failure(TCCProfileImportError.unableToOpenFile))
+                }
+            }
+        }
 
-     }
+    }
 }

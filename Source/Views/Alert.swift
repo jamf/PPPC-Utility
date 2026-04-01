@@ -41,7 +41,7 @@ class Alert: NSObject {
 
     /// Displays a message with a cancel button and returns true if OK was pressed
     /// Assumes this method is called from the main queue.
-    /// 
+    ///
     /// - Parameters:
     ///   - header: The header message
     ///   - message: The message body
