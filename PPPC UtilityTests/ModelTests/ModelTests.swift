@@ -26,23 +26,19 @@
 //
 
 import Foundation
-import XCTest
+import Testing
 
 @testable import PPPC_Utility
 
-class ModelTests: XCTestCase {
+@Suite
+struct ModelTests {
 
-    var model: Model!
-
-    override func setUp() {
-        super.setUp()
-        model = Model()
-    }
+    let model = Model()
 
     // MARK: - tests for getExecutableFrom*
 
-    func testGetExecutableBasedOnIdentifierAndCodeRequirement_BundleIdentifierType() {
-        // given
+    @Test
+    func getExecutableBasedOnIdentifierAndCodeRequirement_BundleIdentifierType() {
         let identifier = "com.example.App"
         let codeRequirement = "testCodeRequirement"
 
@@ -50,13 +46,13 @@ class ModelTests: XCTestCase {
         let executable = model.getExecutableFrom(identifier: identifier, codeRequirement: codeRequirement)
 
         // then
-        XCTAssertEqual(executable.displayName, "App")
-        XCTAssertEqual(executable.codeRequirement, codeRequirement)
-        XCTAssertEqual(executable.iconPath, IconFilePath.application)
+        #expect(executable.displayName == "App")
+        #expect(executable.codeRequirement == codeRequirement)
+        #expect(executable.iconPath == IconFilePath.application)
     }
 
-    func testGetExecutableBasedOnIdentifierAndCodeRequirement_PathIdentifierType() {
-        // given
+    @Test
+    func getExecutableBasedOnIdentifierAndCodeRequirement_PathIdentifierType() {
         let identifier = "/myGreatPath/Awesome/Binary"
         let codeRequirement = "testCodeRequirement"
 
@@ -64,13 +60,13 @@ class ModelTests: XCTestCase {
         let executable = model.getExecutableFrom(identifier: identifier, codeRequirement: codeRequirement)
 
         // then
-        XCTAssertEqual(executable.displayName, "Binary")
-        XCTAssertEqual(executable.codeRequirement, codeRequirement)
-        XCTAssertEqual(executable.iconPath, IconFilePath.binary)
+        #expect(executable.displayName == "Binary")
+        #expect(executable.codeRequirement == codeRequirement)
+        #expect(executable.iconPath == IconFilePath.binary)
     }
 
-    func testGetExecutableFromComputerBasedOnIdentifier() {
-        // given
+    @Test
+    func getExecutableFromComputerBasedOnIdentifier() {
         let identifier = "com.apple.Safari"
         let codeRequirement = "randomReq"
 
@@ -78,13 +74,13 @@ class ModelTests: XCTestCase {
         let executable = model.getExecutableFrom(identifier: identifier, codeRequirement: codeRequirement)
 
         // then
-        XCTAssertEqual(executable.displayName, "Safari")
-        XCTAssertNotEqual(executable.iconPath, IconFilePath.application)
-        XCTAssertNotEqual(codeRequirement, executable.codeRequirement)
+        #expect(executable.displayName == "Safari")
+        #expect(executable.iconPath != IconFilePath.application)
+        #expect(executable.codeRequirement != codeRequirement)
     }
 
-    func testGetExecutableFromSelectedExecutables() {
-        // given
+    @Test
+    func getExecutableFromSelectedExecutables() {
         let expectedIdentifier = "com.something.1"
         let executable = model.getExecutableFrom(identifier: expectedIdentifier, codeRequirement: "testReq")
         let executableSecond = model.getExecutableFrom(identifier: "com.something.2", codeRequirement: "testReq2")
@@ -94,14 +90,14 @@ class ModelTests: XCTestCase {
         let existingExecutable = model.getExecutableFromSelectedExecutables(bundleIdentifier: "com.something.1")
 
         // then
-        XCTAssertNotNil(existingExecutable)
-        XCTAssertEqual(existingExecutable?.identifier, expectedIdentifier)
-        XCTAssertEqual(existingExecutable?.displayName, "1")
-        XCTAssertEqual(existingExecutable?.iconPath, IconFilePath.application)
+        #expect(existingExecutable != nil)
+        #expect(existingExecutable?.identifier == expectedIdentifier)
+        #expect(existingExecutable?.displayName == "1")
+        #expect(existingExecutable?.iconPath == IconFilePath.application)
     }
 
-    func testGetExecutableFromSelectedExecutables_Path() {
-        // given
+    @Test
+    func getExecutableFromSelectedExecutables_Path() {
         let expectedIdentifier = "/path/something/Special"
         let executableOneMore = model.getExecutableFrom(identifier: "/path/something/Special1", codeRequirement: "testReq")
         let executable = model.getExecutableFrom(identifier: expectedIdentifier, codeRequirement: "testReq")
@@ -112,24 +108,25 @@ class ModelTests: XCTestCase {
         let existingExecutable = model.getExecutableFromSelectedExecutables(bundleIdentifier: "/path/something/Special")
 
         // then
-        XCTAssertNotNil(existingExecutable)
-        XCTAssertEqual(existingExecutable?.identifier, expectedIdentifier)
-        XCTAssertEqual(existingExecutable?.displayName, "Special")
-        XCTAssertEqual(existingExecutable?.iconPath, IconFilePath.binary)
+        #expect(existingExecutable != nil)
+        #expect(existingExecutable?.identifier == expectedIdentifier)
+        #expect(existingExecutable?.displayName == "Special")
+        #expect(existingExecutable?.iconPath == IconFilePath.binary)
     }
 
-    func testGetExecutableFromSelectedExecutables_Empty() {
+    @Test
+    func getExecutableFromSelectedExecutables_Empty() {
         // when
         let existingExecutable = model.getExecutableFromSelectedExecutables(bundleIdentifier: "com.something.1")
 
         // then
-        XCTAssertNil(existingExecutable)
+        #expect(existingExecutable == nil)
     }
 
     // MARK: - tests for exportProfile
 
-    func testExportProfileWithAppleEventsAndAuthorization() {
-        // given
+    @Test
+    func exportProfileWithAppleEventsAndAuthorization() {
         let exe1 = Executable(identifier: "one", codeRequirement: "oneReq")
         let exe2 = Executable(identifier: "two", codeRequirement: "twoReq")
 
@@ -142,181 +139,178 @@ class ModelTests: XCTestCase {
         let profile = model.exportProfile(organization: "Org", identifier: "ID", displayName: "Name", payloadDescription: "Desc")
 
         // then check top level settings
-        XCTAssertEqual("Org", profile.organization)
-        XCTAssertEqual("ID", profile.identifier)
-        XCTAssertEqual("Name", profile.displayName)
-        XCTAssertEqual("Desc", profile.payloadDescription)
-        XCTAssertEqual("System", profile.scope)
-        XCTAssertEqual("Configuration", profile.type)
-        XCTAssertNotNil(profile.uuid)
-        XCTAssertEqual(1, profile.version)
+        #expect(profile.organization == "Org")
+        #expect(profile.identifier == "ID")
+        #expect(profile.displayName == "Name")
+        #expect(profile.payloadDescription == "Desc")
+        #expect(profile.scope == "System")
+        #expect(profile.type == "Configuration")
+        #expect(!profile.uuid.isEmpty)
+        #expect(profile.version == 1)
 
         // then check policy settings
         // then verify the payload content top level
-        XCTAssertEqual(1, profile.content.count)
+        #expect(profile.content.count == 1)
         profile.content.forEach { content in
-            XCTAssertNotNil(content.uuid)
-            XCTAssertEqual(1, content.version)
+            #expect(!content.uuid.isEmpty)
+            #expect(content.version == 1)
 
             // then verify the services
-            XCTAssertEqual(2, content.services.count)
+            #expect(content.services.count == 2)
             let appleEvents = content.services["AppleEvents"]
-            XCTAssertNotNil(appleEvents)
+            #expect(appleEvents != nil)
             let appleEventsPolicy = appleEvents?.first
-            XCTAssertEqual("one", appleEventsPolicy?.identifier)
-            XCTAssertEqual("oneReq", appleEventsPolicy?.codeRequirement)
-            XCTAssertEqual("bundleID", appleEventsPolicy?.identifierType)
-            XCTAssertEqual("two", appleEventsPolicy?.receiverIdentifier)
-            XCTAssertEqual("twoReq", appleEventsPolicy?.receiverCodeRequirement)
-            XCTAssertEqual("bundleID", appleEventsPolicy?.receiverIdentifierType)
-            XCTAssertTrue(appleEventsPolicy?.authorization == .allow)
+            #expect(appleEventsPolicy?.identifier == "one")
+            #expect(appleEventsPolicy?.codeRequirement == "oneReq")
+            #expect(appleEventsPolicy?.identifierType == "bundleID")
+            #expect(appleEventsPolicy?.receiverIdentifier == "two")
+            #expect(appleEventsPolicy?.receiverCodeRequirement == "twoReq")
+            #expect(appleEventsPolicy?.receiverIdentifierType == "bundleID")
+            #expect(appleEventsPolicy?.authorization == .allow)
 
             let allFiles = content.services["SystemPolicyAllFiles"]
-            XCTAssertNotNil(allFiles)
+            #expect(allFiles != nil)
             let allFilesPolicy = allFiles?.first
-            XCTAssertEqual("two", allFilesPolicy?.identifier)
-            XCTAssertEqual("twoReq", allFilesPolicy?.codeRequirement)
-            XCTAssertEqual("bundleID", allFilesPolicy?.identifierType)
-            XCTAssertNil(allFilesPolicy?.receiverIdentifier)
-            XCTAssertNil(allFilesPolicy?.receiverCodeRequirement)
-            XCTAssertNil(allFilesPolicy?.receiverIdentifierType)
-            XCTAssertTrue(allFilesPolicy?.authorization == .allowStandardUserToSetSystemService)
+            #expect(allFilesPolicy?.identifier == "two")
+            #expect(allFilesPolicy?.codeRequirement == "twoReq")
+            #expect(allFilesPolicy?.identifierType == "bundleID")
+            #expect(allFilesPolicy?.receiverIdentifier == nil)
+            #expect(allFilesPolicy?.receiverCodeRequirement == nil)
+            #expect(allFilesPolicy?.receiverIdentifierType == nil)
+            #expect(allFilesPolicy?.authorization == .allowStandardUserToSetSystemService)
         }
     }
 
     // MARK: - tests for importProfile
 
-    func testImportProfileUsingAuthorizationKeyAllow() {
-        // given
+    @Test
+    func importProfileUsingAuthorizationKeyAllow() {
         let profile = TCCProfileBuilder().buildProfile(authorization: .allow)
 
         // when
         model.importProfile(tccProfile: profile)
 
         // then
-        XCTAssertEqual(1, model.selectedExecutables.count)
-        XCTAssertEqual("Allow", model.selectedExecutables.first?.policy.SystemPolicyAllFiles)
+        #expect(model.selectedExecutables.count == 1)
+        #expect(model.selectedExecutables.first?.policy.SystemPolicyAllFiles == "Allow")
     }
 
-    func testImportProfileUsingAuthorizationKeyDeny() {
-        // given
+    @Test
+    func importProfileUsingAuthorizationKeyDeny() {
         let profile = TCCProfileBuilder().buildProfile(authorization: .deny)
 
         // when
         model.importProfile(tccProfile: profile)
 
         // then
-        XCTAssertEqual(1, model.selectedExecutables.count)
-        XCTAssertEqual("Deny", model.selectedExecutables.first?.policy.SystemPolicyAllFiles)
+        #expect(model.selectedExecutables.count == 1)
+        #expect(model.selectedExecutables.first?.policy.SystemPolicyAllFiles == "Deny")
     }
 
-    func testImportProfileUsingAuthorizationKeyAllowStandardUsers() {
-        // given
+    @Test
+    func importProfileUsingAuthorizationKeyAllowStandardUsers() {
         let profile = TCCProfileBuilder().buildProfile(authorization: .allowStandardUserToSetSystemService)
 
         // when
         model.importProfile(tccProfile: profile)
 
         // then
-        XCTAssertEqual(1, model.selectedExecutables.count)
-        XCTAssertEqual("Let Standard Users Approve", model.selectedExecutables.first?.policy.SystemPolicyAllFiles)
+        #expect(model.selectedExecutables.count == 1)
+        #expect(model.selectedExecutables.first?.policy.SystemPolicyAllFiles == "Let Standard Users Approve")
     }
 
-    func testImportProfileUsingLegacyAllowKeyTrue() {
-        // given
+    @Test
+    func importProfileUsingLegacyAllowKeyTrue() {
         let profile = TCCProfileBuilder().buildProfile(allowed: true)
 
         // when
         model.importProfile(tccProfile: profile)
 
         // then
-        XCTAssertEqual(1, model.selectedExecutables.count)
-        XCTAssertEqual("Allow", model.selectedExecutables.first?.policy.SystemPolicyAllFiles)
+        #expect(model.selectedExecutables.count == 1)
+        #expect(model.selectedExecutables.first?.policy.SystemPolicyAllFiles == "Allow")
     }
 
-    func testImportProfileUsingLegacyAllowKeyFalse() {
-        // given
+    @Test
+    func importProfileUsingLegacyAllowKeyFalse() {
         let profile = TCCProfileBuilder().buildProfile(allowed: false)
 
         // when
         model.importProfile(tccProfile: profile)
 
         // then
-        XCTAssertEqual(1, model.selectedExecutables.count)
-        XCTAssertEqual("Deny", model.selectedExecutables.first?.policy.SystemPolicyAllFiles)
+        #expect(model.selectedExecutables.count == 1)
+        #expect(model.selectedExecutables.first?.policy.SystemPolicyAllFiles == "Deny")
     }
 
-    func testImportProfileUsingAuthorizationKeyThatIsInvalid() {
-        // given
+    @Test
+    func importProfileUsingAuthorizationKeyThatIsInvalid() {
         let profile = TCCProfileBuilder().buildProfile(authorization: "invalidkey")
 
         // when
         model.importProfile(tccProfile: profile)
 
         // then
-        XCTAssertEqual(1, model.selectedExecutables.count)
-        XCTAssertEqual("Deny", model.selectedExecutables.first?.policy.SystemPolicyAllFiles)
+        #expect(model.selectedExecutables.count == 1)
+        #expect(model.selectedExecutables.first?.policy.SystemPolicyAllFiles == "Deny")
     }
 
-    func testImportProfileUsingAuthorizationKeyTranslatesToAppleEvents() {
-        // given
+    @Test
+    func importProfileUsingAuthorizationKeyTranslatesToAppleEvents() {
         let profile = TCCProfileBuilder().buildProfile(authorization: "deny")
 
         // when
         model.importProfile(tccProfile: profile)
 
         // then
-        XCTAssertEqual(1, model.selectedExecutables.count)
-        XCTAssertEqual("Deny", model.selectedExecutables.first?.policy.SystemPolicyAllFiles)
+        #expect(model.selectedExecutables.count == 1)
+        #expect(model.selectedExecutables.first?.policy.SystemPolicyAllFiles == "Deny")
     }
 
-    // MARK: - tests for policyFromString
+    // MARK: - tests for profileToString
 
-    func testPolicyWhenUsingAllow() {
-        // given
+    @Test
+    func policyWhenUsingAllow() {
         let app = Executable(identifier: "id", codeRequirement: "req")
 
         // when
         let policy = model.policyFromString(executable: app, value: "Allow")
 
         // then
-        XCTAssertEqual(policy?.authorization, TCCPolicyAuthorizationValue.allow)
-        XCTAssertNil(policy?.allowed)
+        #expect(policy?.authorization == .allow)
     }
 
-    func testPolicyWhenUsingDeny() {
-        // given
+    @Test
+    func policyWhenUsingDeny() {
         let app = Executable(identifier: "id", codeRequirement: "req")
 
         // when
         let policy = model.policyFromString(executable: app, value: "Deny")
 
         // then
-        XCTAssertEqual(policy?.authorization, TCCPolicyAuthorizationValue.deny)
-        XCTAssertNil(policy?.allowed)
+        #expect(policy?.authorization == .deny)
     }
 
-    func testPolicyWhenUsingAllowForStandardUsers() {
-        // given
+    @Test
+    func policyWhenUsingAllowForStandardUsers() {
         let app = Executable(identifier: "id", codeRequirement: "req")
 
         // when
         let policy = model.policyFromString(executable: app, value: "Let Standard Users Approve")
 
         // then
-        XCTAssertEqual(policy?.authorization, TCCPolicyAuthorizationValue.allowStandardUserToSetSystemService)
-        XCTAssertNil(policy?.allowed)
+        #expect(policy?.authorization == .allowStandardUserToSetSystemService)
     }
 
-    func testPolicyWhenUsingUnknownValue() {
-        // given
+    @Test
+    func policyWhenUsingUnknownValue() {
         let app = Executable(identifier: "id", codeRequirement: "req")
 
         // when
         let policy = model.policyFromString(executable: app, value: "For MDM Admins Only")
 
         // then
-        XCTAssertNil(policy, "should have not created the policy with an unknown value")
+        #expect(policy == nil, "should have not created the policy with an unknown value")
     }
 
 }
