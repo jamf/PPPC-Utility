@@ -34,9 +34,7 @@ class PPPCServicesManager {
 
     let logger = Logger.PPPCServicesManager
 
-    static let shared: PPPCServicesManager = {
-        MainActor.assumeIsolated { PPPCServicesManager() }
-    }()
+    static let shared = PPPCServicesManager()
 
     let allServices: [MDMServiceKey: PPPCServiceInfo]
 
