@@ -6,13 +6,14 @@
 //  Copyright (c) 2023 Jamf Software
 
 import Foundation
-import XCTest
+import Testing
 
 @testable import PPPC_Utility
 
-class JamfProAPIClientTests: XCTestCase {
-    func testOAuthTokenRequest() throws {
-        // given
+@Suite
+struct JamfProAPIClientTests {
+    @Test
+    func oAuthTokenRequest() throws {
         let authManager = NetworkAuthManager(username: "", password: "")
         let apiClient = JamfProAPIClient(serverUrlString: "https://something", tokenManager: authManager)
 
@@ -20,8 +21,8 @@ class JamfProAPIClientTests: XCTestCase {
         let request = try apiClient.oauthTokenRequest(clientId: "mine&yours", clientSecret: "foo bar")
 
         // then
-        let body = try XCTUnwrap(request.httpBody)
+        let body = try #require(request.httpBody)
         let bodyString = String(data: body, encoding: .utf8)
-        XCTAssertEqual(bodyString, "grant_type=client_credentials&client_id=mine%26yours&client_secret=foo%20bar")
+        #expect(bodyString == "grant_type=client_credentials&client_id=mine%26yours&client_secret=foo%20bar")
     }
 }

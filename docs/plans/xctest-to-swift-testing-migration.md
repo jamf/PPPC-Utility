@@ -35,20 +35,30 @@ Convert 52 test methods across 8 test files (plus 2 helpers) from XCTest to Swif
 - NetworkAuthManagerTests has async tests — Swift Testing supports `async throws` natively
 - TCCProfileImporterTests uses callback-based patterns — may need `confirmation { }` macro
 
+## Progress
+
+- [x] **Phase 1: SemanticVersionTests** (3 tests)
+- [x] **Phase 2: TokenTests** (5 tests)
+- [x] **Phase 3: JamfProAPIClientTests + PPPCServicesManagerTests** (5 tests)
+- [ ] **Phase 4: NetworkAuthManagerTests** (7 tests)
+- [ ] **Phase 5: TCCProfileTests** (6 tests)
+- [ ] **Phase 6: TCCProfileImporterTests** (5 tests)
+- [ ] **Phase 7: ModelTests** (21 tests)
+
 ## Phases
 
-### Phase 1: SemanticVersionTests (3 tests) — FIRST, for review
+### Phase 1: SemanticVersionTests (3 tests) ✅
 - Simplest file: 3 test methods, no setUp/tearDown, no async, no mocks
 - Only uses `XCTAssertTrue` and `XCTAssertFalse`
 - Good candidate for parameterized tests (`@Test(arguments:)`) since each test runs multiple comparison assertions
 - Establishes the basic conversion pattern for review
 
-### Phase 2: TokenTests (5 tests)
+### Phase 2: TokenTests (5 tests) ✅
 - Simple-medium: date checks and JSON decoding
 - Uses `XCTAssertFalse`, `XCTAssertTrue`, `XCTAssertEqual`, `XCTAssertNotNil`, `XCTUnwrap`
 - Introduces `try #require()` pattern (replacing XCTUnwrap)
 
-### Phase 3: JamfProAPIClientTests (1 test) + PPPCServicesManagerTests (4 tests)
+### Phase 3: JamfProAPIClientTests (1 test) + PPPCServicesManagerTests (4 tests) ✅
 - Both simple, batch together since JamfProAPIClientTests is only 1 test
 - PPPCServicesManagerTests uses `XCTUnwrap` → `try #require()`
 

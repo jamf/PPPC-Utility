@@ -26,68 +26,70 @@
 //
 
 import Foundation
-import XCTest
+import Testing
 
 @testable import PPPC_Utility
 
-class PPPCServicesManagerTests: XCTestCase {
+@Suite
+struct PPPCServicesManagerTests {
 
-    func testLoadAllServices() {
-        // given/when
+    @Test
+    func loadAllServices() {
+        // when
         let actual = PPPCServicesManager()
 
         // then
-        XCTAssertEqual(actual.allServices.count, 21)
+        #expect(actual.allServices.count == 21)
     }
 
-    func testUserHelp_withEntitlements() throws {
-        // given
+    @Test
+    func userHelp_withEntitlements() throws {
         let services = PPPCServicesManager()
-        let service = try XCTUnwrap(services.allServices["Camera"])
+        let service = try #require(services.allServices["Camera"])
 
         // when
         let actual = service.userHelp
 
         // then
-        XCTAssertEqual(
-            actual,
+        #expect(
+            actual ==
             "Use to deny specified apps access to the camera.\n\nMDM Key: Camera\nRelated entitlements: [\"com.apple.developer.avfoundation.multitasking-camera-access\", \"com.apple.security.device.camera\"]"
         )
     }
 
-    func testUserHelp_withoutEntitlements() throws {
-        // given
+    @Test
+    func userHelp_withoutEntitlements() throws {
         let services = PPPCServicesManager()
-        let service = try XCTUnwrap(services.allServices["ScreenCapture"])
+        let service = try #require(services.allServices["ScreenCapture"])
 
         // when
         let actual = service.userHelp
 
         // then
-        XCTAssertEqual(actual, "Deny specified apps access to capture (read) the contents of the system display.\n\nMDM Key: ScreenCapture")
+        #expect(actual == "Deny specified apps access to capture (read) the contents of the system display.\n\nMDM Key: ScreenCapture")
     }
 
-    func testCameraIsDenyOnly() throws {
-        // given
+    @Test
+    func cameraIsDenyOnly() throws {
         let services = PPPCServicesManager()
-        let service = try XCTUnwrap(services.allServices["Camera"])
+        let service = try #require(services.allServices["Camera"])
 
         // when
-        let actual = try XCTUnwrap(service.denyOnly)
+        let actual = try #require(service.denyOnly)
 
         // then
-        XCTAssertTrue(actual)
+        #expect(actual)
     }
 
-    func testScreenCaptureAllowsStandardUsers() throws {
-        // given
+    @Test
+    func screenCaptureAllowsStandardUsers() throws {
         let services = PPPCServicesManager()
-        let service = try XCTUnwrap(services.allServices["ScreenCapture"])
+        let service = try #require(services.allServices["ScreenCapture"])
 
         // when
-        let actual = try XCTUnwrap(service.allowStandardUsersMacOS11Plus)
+        let actual = try #require(service.allowStandardUsersMacOS11Plus)
 
         // then
-        XCTAssertTrue(actual)
+        #expect(actual)
     }
 }
