@@ -26,11 +26,11 @@
 //
 
 import Foundation
-@preconcurrency import XCTest
+import Testing
 
 @testable import PPPC_Utility
 
-/// Fake networking class for testing.  No actual network was used in the making of this test.
+/// Fake networking class for testing. No actual network was used in the making of this test.
 class MockNetworking: Networking {
     var errorToThrow: Error?
 
@@ -45,15 +45,16 @@ class MockNetworking: Networking {
 
         let formatter = ISO8601DateFormatter()
         formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-        let expiration = try XCTUnwrap(formatter.date(from: "2950-06-22T22:05:58.81Z"))
+        let expiration = try #require(formatter.date(from: "2950-06-22T22:05:58.81Z"))
 
         return Token(value: "xyz", expiresAt: expiration)
     }
 }
 
-class NetworkAuthManagerTests: XCTestCase {
-    func testValidToken() async throws {
-        // given
+@Suite
+struct NetworkAuthManagerTests {
+    @Test
+    func validToken() async throws {
         let authManager = NetworkAuthManager(username: "test", password: "none")
         let networking = MockNetworking(tokenManager: authManager)
 
@@ -61,102 +62,82 @@ class NetworkAuthManagerTests: XCTestCase {
         let token = try await authManager.validToken(networking: networking)
 
         // then
-        XCTAssertEqual(token.value, "xyz")
-        XCTAssertTrue(token.isValid)
+        #expect(token.value == "xyz")
+        #expect(token.isValid)
     }
 
-    func testValidTokenNetworkFailure() async throws {
-        // given
+    @Test
+    func validTokenNetworkFailure() async {
         let authManager = NetworkAuthManager(username: "test", password: "none")
         let networking = MockNetworking(tokenManager: authManager)
         networking.errorToThrow = NetworkingError.serverResponse(500, "Bad server")
 
-        // when
-        do {
-            _ = try await authManager.validToken(networking: networking)
-            XCTFail("Expected to throw from `validToken` call")
-        } catch {
-            // then
-            XCTAssertEqual(error as? NetworkingError, NetworkingError.serverResponse(500, "Bad server"))
+        // when/then
+        await #expect(throws: NetworkingError.serverResponse(500, "Bad server")) {
+            try await authManager.validToken(networking: networking)
         }
     }
 
-    func testValidTokenBearerAuthNotSupported() async throws {
-        // given
+    @Test
+    func validTokenBearerAuthNotSupported() async throws {
         let authManager = NetworkAuthManager(username: "test", password: "none")
         let networking = MockNetworking(tokenManager: authManager)
         networking.errorToThrow = NetworkingError.serverResponse(404, "No such page")
 
         // default is that bearer auth is supported.
         let firstCheckBearerAuthSupported = authManager.bearerAuthSupported()
-        XCTAssertTrue(firstCheckBearerAuthSupported)
+        #expect(firstCheckBearerAuthSupported)
 
-        // when
-        do {
-            _ = try await authManager.validToken(networking: networking)
-            XCTFail("Expected to throw from `validToken` call")
-        } catch {
-            // then - should throw a `bearerAuthNotSupported` error
-            XCTAssertEqual(error as? AuthError, AuthError.bearerAuthNotSupported)
+        // when/then
+        await #expect(throws: AuthError.bearerAuthNotSupported) {
+            try await authManager.validToken(networking: networking)
         }
 
         // The authManager should now know that bearer auth is not supported
         let secondCheckBearerAuthSupported = authManager.bearerAuthSupported()
-        XCTAssertFalse(secondCheckBearerAuthSupported)
+        #expect(!secondCheckBearerAuthSupported)
     }
 
-    func testValidTokenInvalidUsernamePassword() async throws {
-        // given
+    @Test
+    func validTokenInvalidUsernamePassword() async {
         let authManager = NetworkAuthManager(username: "test", password: "none")
         let networking = MockNetworking(tokenManager: authManager)
         networking.errorToThrow = NetworkingError.serverResponse(401, "Not authorized")
 
-        // when
-        do {
-            _ = try await authManager.validToken(networking: networking)
-            XCTFail("Expected to throw from `validToken` call")
-        } catch {
-            // then - should throw a `invalidUsernamePassword` error
-            XCTAssertEqual(error as? AuthError, AuthError.invalidUsernamePassword)
+        // when/then
+        await #expect(throws: AuthError.invalidUsernamePassword) {
+            try await authManager.validToken(networking: networking)
         }
     }
 
-    @MainActor func testBasicAuthString() async throws {
-        // given
+    @Test
+    func basicAuthString() throws {
         let authManager = NetworkAuthManager(username: "test", password: "none")
 
         // when
         let actual = try authManager.basicAuthString()
 
         // then
-        XCTAssertEqual(actual, "dGVzdDpub25l")
+        #expect(actual == "dGVzdDpub25l")
     }
 
-    @MainActor func testBasicAuthStringEmptyUsername() async throws {
-        // given
+    @Test
+    func basicAuthStringEmptyUsername() {
         let authManager = NetworkAuthManager(username: "", password: "none")
 
-        // when
-        do {
-            _ = try authManager.basicAuthString()
-            XCTFail("Expected to throw from `basicAuthString` call")
-        } catch {
-            // then - should throw a `invalidUsernamePassword` error
-            XCTAssertEqual(error as? AuthError, AuthError.invalidUsernamePassword)
+        // when/then
+        #expect(throws: AuthError.invalidUsernamePassword) {
+            try authManager.basicAuthString()
         }
     }
 
-    @MainActor func testBasicAuthStringEmptyPassword() async throws {
-        // given
+    @Test
+    func basicAuthStringEmptyPassword() {
         let authManager = NetworkAuthManager(username: "mine", password: "")
 
-        // when
-        do {
-            _ = try authManager.basicAuthString()
-            XCTFail("Expected to throw from `basicAuthString` call")
-        } catch {
-            // then - should throw a `invalidUsernamePassword` error
-            XCTAssertEqual(error as? AuthError, AuthError.invalidUsernamePassword)
+        // when/then
+        #expect(throws: AuthError.invalidUsernamePassword) {
+            try authManager.basicAuthString()
         }
     }
 }

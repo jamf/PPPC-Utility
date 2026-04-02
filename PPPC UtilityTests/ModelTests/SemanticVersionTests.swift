@@ -26,70 +26,41 @@
 //
 
 import Foundation
+import Testing
+
 @testable import PPPC_Utility
-@preconcurrency import XCTest
 
-class SemanticVersionTests: XCTestCase {
-    func testLessThan() {
-        // given
-        let version = SemanticVersion(major: 10, minor: 7, patch: 1)
+@Suite
+struct SemanticVersionTests {
+    let version = SemanticVersion(major: 10, minor: 7, patch: 1)
 
-        // when
-        let shouldBeLessThan = version < SemanticVersion(major: 10, minor: 7, patch: 4)
-        let shouldBeLessThan2 = version < SemanticVersion(major: 10, minor: 8, patch: 1)
-        let shouldBeLessThan3 = version < SemanticVersion(major: 11, minor: 7, patch: 1)
-        let shouldNotBeLessThan = version < SemanticVersion(major: 10, minor: 7, patch: 1)
-        let shouldNotBeLessThan2 = version < SemanticVersion(major: 10, minor: 7, patch: 0)
-        let shouldNotBeLessThan3 = version < SemanticVersion(major: 10, minor: 6, patch: 1)
-        let shouldNotBeLessThan4 = version < SemanticVersion(major: 9, minor: 7, patch: 1)
-
-        // then
-        XCTAssertTrue(shouldBeLessThan)
-        XCTAssertTrue(shouldBeLessThan2)
-        XCTAssertTrue(shouldBeLessThan3)
-        XCTAssertFalse(shouldNotBeLessThan)
-        XCTAssertFalse(shouldNotBeLessThan2)
-        XCTAssertFalse(shouldNotBeLessThan3)
-        XCTAssertFalse(shouldNotBeLessThan4)
+    @Test
+    func lessThan() {
+        #expect(version < SemanticVersion(major: 10, minor: 7, patch: 4))
+        #expect(version < SemanticVersion(major: 10, minor: 8, patch: 1))
+        #expect(version < SemanticVersion(major: 11, minor: 7, patch: 1))
+        #expect(!(version < SemanticVersion(major: 10, minor: 7, patch: 1)))
+        #expect(!(version < SemanticVersion(major: 10, minor: 7, patch: 0)))
+        #expect(!(version < SemanticVersion(major: 10, minor: 6, patch: 1)))
+        #expect(!(version < SemanticVersion(major: 9, minor: 7, patch: 1)))
     }
 
-    func testEquality() {
-        // given
-        let version = SemanticVersion(major: 10, minor: 7, patch: 1)
-
-        // when
-        let shouldBeEqual = version == SemanticVersion(major: 10, minor: 7, patch: 1)
-        let shouldBeNotEqual = version == SemanticVersion(major: 10, minor: 7, patch: 4)
-        let shouldBeNotEqual2 = version == SemanticVersion(major: 10, minor: 8, patch: 1)
-        let shouldBeNotEqual3 = version == SemanticVersion(major: 11, minor: 7, patch: 1)
-
-        // then
-        XCTAssertTrue(shouldBeEqual)
-        XCTAssertFalse(shouldBeNotEqual)
-        XCTAssertFalse(shouldBeNotEqual2)
-        XCTAssertFalse(shouldBeNotEqual3)
+    @Test
+    func equality() {
+        #expect(version == SemanticVersion(major: 10, minor: 7, patch: 1))
+        #expect(version != SemanticVersion(major: 10, minor: 7, patch: 4))
+        #expect(version != SemanticVersion(major: 10, minor: 8, patch: 1))
+        #expect(version != SemanticVersion(major: 11, minor: 7, patch: 1))
     }
 
-    func testGreaterThan() {
-        // given
-        let version = SemanticVersion(major: 10, minor: 7, patch: 1)
-
-        // when
-        let shouldNotBeGreaterThan = version > SemanticVersion(major: 10, minor: 7, patch: 4)
-        let shouldNotBeGreaterThan2 = version > SemanticVersion(major: 10, minor: 8, patch: 1)
-        let shouldNotBeGreaterThan3 = version > SemanticVersion(major: 11, minor: 7, patch: 1)
-        let shouldNotBeGreaterThan4 = version > SemanticVersion(major: 10, minor: 7, patch: 1)
-        let shouldBeGreaterThan = version > SemanticVersion(major: 10, minor: 7, patch: 0)
-        let shouldBeGreaterThan2 = version > SemanticVersion(major: 10, minor: 6, patch: 1)
-        let shouldBeGreaterThan3 = version > SemanticVersion(major: 9, minor: 7, patch: 1)
-
-        // then
-        XCTAssertFalse(shouldNotBeGreaterThan)
-        XCTAssertFalse(shouldNotBeGreaterThan2)
-        XCTAssertFalse(shouldNotBeGreaterThan3)
-        XCTAssertFalse(shouldNotBeGreaterThan4)
-        XCTAssertTrue(shouldBeGreaterThan)
-        XCTAssertTrue(shouldBeGreaterThan2)
-        XCTAssertTrue(shouldBeGreaterThan3)
+    @Test
+    func greaterThan() {
+        #expect(!(version > SemanticVersion(major: 10, minor: 7, patch: 4)))
+        #expect(!(version > SemanticVersion(major: 10, minor: 8, patch: 1)))
+        #expect(!(version > SemanticVersion(major: 11, minor: 7, patch: 1)))
+        #expect(!(version > SemanticVersion(major: 10, minor: 7, patch: 1)))
+        #expect(version > SemanticVersion(major: 10, minor: 7, patch: 0))
+        #expect(version > SemanticVersion(major: 10, minor: 6, patch: 1))
+        #expect(version > SemanticVersion(major: 9, minor: 7, patch: 1))
     }
 }

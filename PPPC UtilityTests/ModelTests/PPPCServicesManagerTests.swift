@@ -26,68 +26,64 @@
 //
 
 import Foundation
-@preconcurrency import XCTest
+import Testing
 
 @testable import PPPC_Utility
 
-class PPPCServicesManagerTests: XCTestCase {
+@Suite
+struct PPPCServicesManagerTests {
 
-    @MainActor func testLoadAllServices() async {
-        // given/when
+    @Test
+    func loadAllServices() {
+        // when
         let actual = PPPCServicesManager()
 
         // then
-        XCTAssertEqual(actual.allServices.count, 21)
+        #expect(actual.allServices.count == 21)
     }
 
-    @MainActor func testUserHelp_withEntitlements() async throws {
-        // given
+    @Test
+    func userHelp_withEntitlements() throws {
         let services = PPPCServicesManager()
-        let service = try XCTUnwrap(services.allServices["Camera"])
+        let service = try #require(services.allServices["Camera"])
 
         // when
         let actual = service.userHelp
 
         // then
-        XCTAssertEqual(
-            actual,
-            "Use to deny specified apps access to the camera.\n\nMDM Key: Camera\nRelated entitlements: [\"com.apple.developer.avfoundation.multitasking-camera-access\", \"com.apple.security.device.camera\"]"
+        #expect(
+            actual
+                == "Use to deny specified apps access to the camera.\n\nMDM Key: Camera\nRelated entitlements: [\"com.apple.developer.avfoundation.multitasking-camera-access\", \"com.apple.security.device.camera\"]"
         )
     }
 
-    @MainActor func testUserHelp_withoutEntitlements() async throws {
-        // given
+    @Test
+    func userHelp_withoutEntitlements() throws {
         let services = PPPCServicesManager()
-        let service = try XCTUnwrap(services.allServices["ScreenCapture"])
+        let service = try #require(services.allServices["ScreenCapture"])
 
         // when
         let actual = service.userHelp
 
         // then
-        XCTAssertEqual(actual, "Deny specified apps access to capture (read) the contents of the system display.\n\nMDM Key: ScreenCapture")
+        #expect(actual == "Deny specified apps access to capture (read) the contents of the system display.\n\nMDM Key: ScreenCapture")
     }
 
-    @MainActor func testCameraIsDenyOnly() async throws {
-        // given
+    @Test
+    func cameraIsDenyOnly() throws {
         let services = PPPCServicesManager()
-        let service = try XCTUnwrap(services.allServices["Camera"])
-
-        // when
-        let actual = try XCTUnwrap(service.denyOnly)
+        let service = try #require(services.allServices["Camera"])
 
         // then
-        XCTAssertTrue(actual)
+        #expect(service.denyOnly == true)
     }
 
-    @MainActor func testScreenCaptureAllowsStandardUsers() async throws {
-        // given
+    @Test
+    func screenCaptureAllowsStandardUsers() throws {
         let services = PPPCServicesManager()
-        let service = try XCTUnwrap(services.allServices["ScreenCapture"])
-
-        // when
-        let actual = try XCTUnwrap(service.allowStandardUsers)
+        let service = try #require(services.allServices["ScreenCapture"])
 
         // then
-        XCTAssertTrue(actual)
+        #expect(service.allowStandardUsers == true)
     }
 }

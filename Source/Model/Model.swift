@@ -163,6 +163,7 @@ extension Model {
             return IconFilePath.unknown
         }
     }
+
 }
 
 // MARK: Exporting Profile

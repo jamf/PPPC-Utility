@@ -119,7 +119,6 @@ class SaveViewController: NSViewController {
         defaultsController.removeObserver(self, forKeyPath: "values.organization", context: &SaveViewController.saveProfileKVOContext)
     }
 
-    // swiftlint:disable:next block_based_kvo
     nonisolated override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
         if context == &SaveViewController.saveProfileKVOContext {
             MainActor.assumeIsolated {

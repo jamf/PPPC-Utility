@@ -26,84 +26,81 @@
 //
 
 import Foundation
-@preconcurrency import XCTest
+import Testing
 
 @testable import PPPC_Utility
 
-class TCCProfileImporterTests: XCTestCase {
+private final class BundleLocator {}
 
-    @MainActor func testMalformedTCCProfile() async {
+@Suite
+struct TCCProfileImporterTests {
+
+    @Test
+    func malformedTCCProfile() throws {
         let tccProfileImporter = TCCProfileImporter()
-
-        let resourceURL = getResourceProfile(fileName: "TestTCCProfileSigned-Broken")
+        let resourceURL = try getResourceProfile(fileName: "TestTCCProfileSigned-Broken")
 
         do {
             _ = try tccProfileImporter.decodeTCCProfile(fileUrl: resourceURL)
-            XCTFail("Malformed profile should not succeed")
+            Issue.record("Malformed profile should not succeed")
         } catch {
             if case TCCProfileImportError.invalidProfileFile = error {
             } else {
-                XCTFail("Expected invalidProfileFile error, got \(error)")
+                Issue.record("Expected invalidProfileFile error, got \(error)")
             }
         }
     }
 
-    @MainActor func testEmptyContentTCCProfile() async {
+    @Test
+    func emptyContentTCCProfile() throws {
         let tccProfileImporter = TCCProfileImporter()
-
-        let resourceURL = getResourceProfile(fileName: "TestTCCUnsignedProfile-Empty")
-
+        let resourceURL = try getResourceProfile(fileName: "TestTCCUnsignedProfile-Empty")
         let expectedTCCProfileError = TCCProfileImportError.invalidProfileFile(description: "PayloadContent")
 
         do {
             _ = try tccProfileImporter.decodeTCCProfile(fileUrl: resourceURL)
-            XCTFail("Empty Content, it shouldn't be success")
+            Issue.record("Empty Content, it shouldn't be success")
         } catch {
-            XCTAssertEqual(error.localizedDescription, expectedTCCProfileError.localizedDescription)
+            #expect(error.localizedDescription == expectedTCCProfileError.localizedDescription)
         }
     }
 
-    @MainActor func testCorrectUnsignedProfileContentData() async throws {
+    @Test
+    func correctUnsignedProfileContentData() throws {
         let tccProfileImporter = TCCProfileImporter()
-
-        let resourceURL = getResourceProfile(fileName: "TestTCCUnsignedProfile")
+        let resourceURL = try getResourceProfile(fileName: "TestTCCUnsignedProfile")
 
         let tccProfile = try tccProfileImporter.decodeTCCProfile(fileUrl: resourceURL)
-        XCTAssertNotNil(tccProfile.content)
-        XCTAssertNotNil(tccProfile.content[0].services)
+        #expect(!tccProfile.content.isEmpty)
+        #expect(!tccProfile.content[0].services.isEmpty)
     }
 
-    @MainActor func testCorrectUnsignedProfileContentDataAllLowercase() async throws {
+    @Test
+    func correctUnsignedProfileContentDataAllLowercase() throws {
         let tccProfileImporter = TCCProfileImporter()
-
-        let resourceURL = getResourceProfile(fileName: "TestTCCUnsignedProfile-allLower")
+        let resourceURL = try getResourceProfile(fileName: "TestTCCUnsignedProfile-allLower")
 
         let tccProfile = try tccProfileImporter.decodeTCCProfile(fileUrl: resourceURL)
-        XCTAssertNotNil(tccProfile.content)
-        XCTAssertNotNil(tccProfile.content[0].services)
+        #expect(!tccProfile.content.isEmpty)
+        #expect(!tccProfile.content[0].services.isEmpty)
     }
 
-    @MainActor func testBrokenUnsignedProfile() async {
+    @Test
+    func brokenUnsignedProfile() throws {
         let tccProfileImporter = TCCProfileImporter()
-
-        let resourceURL = getResourceProfile(fileName: "TestTCCUnsignedProfile-Broken")
-
+        let resourceURL = try getResourceProfile(fileName: "TestTCCUnsignedProfile-Broken")
         let expectedTCCProfileError = TCCProfileImportError.invalidProfileFile(description: "The given data was not a valid property list.")
 
         do {
             _ = try tccProfileImporter.decodeTCCProfile(fileUrl: resourceURL)
-            XCTFail("Broken Unsigned Profile, it shouldn't be success")
+            Issue.record("Broken Unsigned Profile, it shouldn't be success")
         } catch {
-            XCTAssertEqual(error.localizedDescription, expectedTCCProfileError.localizedDescription)
+            #expect(error.localizedDescription == expectedTCCProfileError.localizedDescription)
         }
     }
 
-    private func getResourceProfile(fileName: String) -> URL {
-        let testBundle = Bundle(for: type(of: self))
-        guard let resourceURL = testBundle.url(forResource: fileName, withExtension: "mobileconfig") else {
-            XCTFail("Resource file should exists")
-            return URL(fileURLWithPath: "invalidPath")
-        }
-        return resourceURL
+    private func getResourceProfile(fileName: String) throws -> URL {
+        let testBundle = Bundle(for: BundleLocator.self)
+        return try #require(testBundle.url(forResource: fileName, withExtension: "mobileconfig"))
     }
 }
