@@ -8,3 +8,4 @@
 
 - Place `@Test` and `@Suite` annotations on the line **above** the declaration, not inline
 - Use `// when` and `// then` comment blocks; skip `// given` (assumed from context)
+- Capture a baseline of compiler warnings before each phase, then verify no new warnings after

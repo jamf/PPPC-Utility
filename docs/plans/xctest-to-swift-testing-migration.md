@@ -40,7 +40,7 @@ Convert 52 test methods across 8 test files (plus 2 helpers) from XCTest to Swif
 - [x] **Phase 1: SemanticVersionTests** (3 tests)
 - [x] **Phase 2: TokenTests** (5 tests)
 - [x] **Phase 3: JamfProAPIClientTests + PPPCServicesManagerTests** (5 tests)
-- [ ] **Phase 4: NetworkAuthManagerTests** (7 tests)
+- [x] **Phase 4: NetworkAuthManagerTests** (7 tests)
 - [ ] **Phase 5: TCCProfileTests** (6 tests)
 - [ ] **Phase 6: TCCProfileImporterTests** (5 tests)
 - [ ] **Phase 7: ModelTests** (21 tests)
@@ -62,7 +62,7 @@ Convert 52 test methods across 8 test files (plus 2 helpers) from XCTest to Swif
 - Both simple, batch together since JamfProAPIClientTests is only 1 test
 - PPPCServicesManagerTests uses `XCTUnwrap` → `try #require()`
 
-### Phase 4: NetworkAuthManagerTests (7 tests)
+### Phase 4: NetworkAuthManagerTests (7 tests) ✅
 - Async/await tests — Swift Testing handles these natively
 - Has a MockNetworking class (stays as-is, it's not XCTest-specific)
 - Error handling patterns with `do/catch` + `XCTFail` → `do/catch` + `Issue.record`
