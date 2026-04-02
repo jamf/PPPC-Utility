@@ -14,3 +14,5 @@
   ```
   xcodebuild clean build-for-testing -project "PPPC Utility.xcodeproj" -scheme "PPPC Utility" -destination "platform=macOS" 2>&1 | grep -i "warning:" | grep -v "xcodebuild: WARNING"
   ```
+- Use parameterized tests with Traits where it reduces duplication; 1–2 args is ideal, max 3
+- Beyond 3 params: create separate tests with some values hard-coded
