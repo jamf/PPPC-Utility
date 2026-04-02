@@ -52,8 +52,8 @@ struct PPPCServicesManagerTests {
 
         // then
         #expect(
-            actual ==
-            "Use to deny specified apps access to the camera.\n\nMDM Key: Camera\nRelated entitlements: [\"com.apple.developer.avfoundation.multitasking-camera-access\", \"com.apple.security.device.camera\"]"
+            actual
+                == "Use to deny specified apps access to the camera.\n\nMDM Key: Camera\nRelated entitlements: [\"com.apple.developer.avfoundation.multitasking-camera-access\", \"com.apple.security.device.camera\"]"
         )
     }
 

@@ -181,7 +181,6 @@ struct ModelTests {
         }
     }
 
-
     // MARK: - tests for importProfile
 
     @Test
@@ -313,7 +312,5 @@ struct ModelTests {
         // then
         #expect(policy == nil, "should have not created the policy with an unknown value")
     }
-
-
 
 }
