@@ -37,34 +37,25 @@ import OSLog
 
     let logger = Logger.Model
 
-    func getAppleEventChoices(executable: Executable) -> [Executable] {
+    func getAppleEventChoices(executable: Executable) async -> [Executable] {
         var executables: [Executable] = []
 
-        loadExecutable(url: URL(fileURLWithPath: "/System/Library/CoreServices/System Events.app")) { result in
-            switch result {
-            case .success(let executable):
-                executables.append(executable)
-            case .failure(let error):
-                self.logger.error("\(error)")
-            }
+        do {
+            executables.append(try await loadExecutable(url: URL(fileURLWithPath: "/System/Library/CoreServices/System Events.app")))
+        } catch {
+            self.logger.error("\(error)")
         }
 
-        loadExecutable(url: URL(fileURLWithPath: "/System/Library/CoreServices/SystemUIServer.app")) { result in
-            switch result {
-            case .success(let executable):
-                executables.append(executable)
-            case .failure(let error):
-                self.logger.error("\(error)")
-            }
+        do {
+            executables.append(try await loadExecutable(url: URL(fileURLWithPath: "/System/Library/CoreServices/SystemUIServer.app")))
+        } catch {
+            self.logger.error("\(error)")
         }
 
-        loadExecutable(url: URL(fileURLWithPath: "/System/Library/CoreServices/Finder.app")) { result in
-            switch result {
-            case .success(let executable):
-                executables.append(executable)
-            case .failure(let error):
-                self.logger.error("\(error)")
-            }
+        do {
+            executables.append(try await loadExecutable(url: URL(fileURLWithPath: "/System/Library/CoreServices/Finder.app")))
+        } catch {
+            self.logger.error("\(error)")
         }
 
         let others = store.values.filter { $0 != executable && !Set(executables).contains($0) }
@@ -87,17 +78,16 @@ struct IconFilePath {
 }
 
 typealias LoadExecutableResult = Result<Executable, LoadExecutableError>
-typealias LoadExecutableCompletion = ((LoadExecutableResult) -> Void)
 
 extension Model {
 
-    func loadExecutable(url: URL, completion: @escaping LoadExecutableCompletion) {
+    func loadExecutable(url: URL) async throws -> Executable {
         let executable = Executable()
 
         if let bundle = Bundle(url: url) {
             switch populateFromBundle(executable, bundle: bundle, url: url) {
             case .failure(let error):
-                return completion(.failure(error))
+                throw error
             case .success:
                 break
             }
@@ -106,15 +96,15 @@ extension Model {
         }
 
         if let alreadyFoundExecutable = store[executable.identifier] {
-            return completion(.success(alreadyFoundExecutable))
+            return alreadyFoundExecutable
         }
 
         do {
-            executable.codeRequirement = try SecurityWrapper.copyDesignatedRequirement(url: url)
+            executable.codeRequirement = try await SecurityWrapper.copyDesignatedRequirement(url: url)
             store[executable.identifier] = executable
-            return completion(.success(executable))
+            return executable
         } catch {
-            return completion(.failure(.codeRequirementError(description: error.localizedDescription)))
+            throw LoadExecutableError.codeRequirementError(description: error.localizedDescription)
         }
     }
 
@@ -171,6 +161,7 @@ extension Model {
             return IconFilePath.unknown
         }
     }
+
 }
 
 // MARK: Exporting Profile
@@ -211,14 +202,14 @@ extension Model {
             services: services)
     }
 
-    func importProfile(tccProfile: TCCProfile) {
+    func importProfile(tccProfile: TCCProfile) async {
         if let content = tccProfile.content.first {
             self.cleanUpAndRemoveDependencies()
 
             self.importedTCCProfile = tccProfile
 
             for (key, policies) in content.services {
-                getExecutablesFromAllPolicies(policies: policies)
+                await getExecutablesFromAllPolicies(policies: policies)
 
                 for policy in policies {
                     let executable = getExecutableFromSelectedExecutables(bundleIdentifier: policy.identifier)
@@ -227,7 +218,7 @@ extension Model {
                             let rIdentifier = policy.receiverIdentifier,
                             let rCodeRequirement = policy.receiverCodeRequirement
                         {
-                            let destination = getExecutableFrom(identifier: rIdentifier, codeRequirement: rCodeRequirement)
+                            let destination = await getExecutableFrom(identifier: rIdentifier, codeRequirement: rCodeRequirement)
                             let allowed: Bool = (policy.allowed == true || policy.authorization == TCCPolicyAuthorizationValue.allow)
                             let appleEvent = AppleEventRule(source: source, destination: destination, value: allowed)
                             executable?.appleEvents.appendIfNew(appleEvent)
@@ -265,9 +256,9 @@ extension Model {
         return policy
     }
 
-    func getExecutablesFromAllPolicies(policies: [TCCPolicy]) {
+    func getExecutablesFromAllPolicies(policies: [TCCPolicy]) async {
         for tccPolicy in policies where getExecutableFromSelectedExecutables(bundleIdentifier: tccPolicy.identifier) == nil {
-            let executable = getExecutableFrom(identifier: tccPolicy.identifier, codeRequirement: tccPolicy.codeRequirement)
+            let executable = await getExecutableFrom(identifier: tccPolicy.identifier, codeRequirement: tccPolicy.codeRequirement)
             self.selectedExecutables.append(executable)
         }
     }
@@ -279,21 +270,18 @@ extension Model {
         return nil
     }
 
-    func getExecutableFrom(identifier: String, codeRequirement: String) -> Executable {
+    func getExecutableFrom(identifier: String, codeRequirement: String) async -> Executable {
         var executable = Executable(identifier: identifier, codeRequirement: codeRequirement)
-        findExecutableOnComputerUsing(bundleIdentifier: identifier) { result in
-            switch result {
-            case .success(let goodExecutable):
-                executable = goodExecutable
-            case .failure(let error):
-                self.logger.error("\(error)")
-            }
+        do {
+            executable = try await findExecutable(bundleIdentifier: identifier)
+        } catch {
+            self.logger.error("\(error)")
         }
 
         return executable
     }
 
-    private func findExecutableOnComputerUsing(bundleIdentifier: String, completion: @escaping LoadExecutableCompletion) {
+    private func findExecutable(bundleIdentifier: String) async throws -> Executable {
         var urlToLoad: URL?
         if bundleIdentifier.contains("/") {
             urlToLoad = URL(string: "file://\(bundleIdentifier)")
@@ -302,16 +290,9 @@ extension Model {
         }
 
         if let fileURL = urlToLoad {
-            self.loadExecutable(url: fileURL) { result in
-                switch result {
-                case .success(let executable):
-                    return completion(.success(executable))
-                case .failure(let error):
-                    return completion(.failure(error))
-                }
-            }
+            return try await self.loadExecutable(url: fileURL)
         }
-        return completion(.failure(.executableNotFound))
+        throw LoadExecutableError.executableNotFound
     }
 
     private func cleanUpAndRemoveDependencies() {

@@ -85,7 +85,7 @@ struct NetworkAuthManagerTests {
         networking.errorToThrow = NetworkingError.serverResponse(404, "No such page")
 
         // default is that bearer auth is supported.
-        let firstCheckBearerAuthSupported = await authManager.bearerAuthSupported()
+        let firstCheckBearerAuthSupported = authManager.bearerAuthSupported()
         #expect(firstCheckBearerAuthSupported)
 
         // when/then
@@ -94,7 +94,7 @@ struct NetworkAuthManagerTests {
         }
 
         // The authManager should now know that bearer auth is not supported
-        let secondCheckBearerAuthSupported = await authManager.bearerAuthSupported()
+        let secondCheckBearerAuthSupported = authManager.bearerAuthSupported()
         #expect(!secondCheckBearerAuthSupported)
     }
 

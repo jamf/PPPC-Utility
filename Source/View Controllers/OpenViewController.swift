@@ -43,16 +43,16 @@ class OpenViewController: NSViewController, NSTableViewDataSource, NSTableViewDe
         //  Reload executables
         current = Model.shared.current
         if let value = current {
-            choices = Model.shared.getAppleEventChoices(executable: value)
+            Task {
+                choices = await Model.shared.getAppleEventChoices(executable: value)
+            }
         }
     }
 
     func tableView(_ tableView: NSTableView, selectionIndexesForProposedSelection proposedSelectionIndexes: IndexSet) -> IndexSet {
-        DispatchQueue.main.async {
-            guard let index = proposedSelectionIndexes.first else { return }
-            self.completionBlock?([.success(self.choices[index])])
-            self.dismiss(self)
-        }
+        guard let index = proposedSelectionIndexes.first else { return proposedSelectionIndexes }
+        self.completionBlock?([.success(self.choices[index])])
+        self.dismiss(self)
         return proposedSelectionIndexes
     }
 
@@ -64,13 +64,20 @@ class OpenViewController: NSViewController, NSTableViewDataSource, NSTableViewDe
         panel.directoryURL = URL(fileURLWithPath: "/Applications", isDirectory: true)
         panel.begin { response in
             if response == .OK {
-                var selections: [LoadExecutableResult] = []
-                panel.urls.forEach {
-                    Model.shared.loadExecutable(url: $0) { result in
-                        selections.append(result)
+                Task {
+                    var selections: [LoadExecutableResult] = []
+                    for url in panel.urls {
+                        do {
+                            let executable = try await Model.shared.loadExecutable(url: url)
+                            selections.append(.success(executable))
+                        } catch {
+                            if let loadError = error as? LoadExecutableError {
+                                selections.append(.failure(loadError))
+                            }
+                        }
                     }
+                    block?(selections)
                 }
-                block?(selections)
             }
         }
     }

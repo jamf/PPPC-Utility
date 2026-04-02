@@ -38,12 +38,12 @@ struct ModelTests {
     // MARK: - tests for getExecutableFrom*
 
     @Test
-    func getExecutableBasedOnIdentifierAndCodeRequirement_BundleIdentifierType() {
+    func getExecutableBasedOnIdentifierAndCodeRequirement_BundleIdentifierType() async {
         let identifier = "com.example.App"
         let codeRequirement = "testCodeRequirement"
 
         // when
-        let executable = model.getExecutableFrom(identifier: identifier, codeRequirement: codeRequirement)
+        let executable = await model.getExecutableFrom(identifier: identifier, codeRequirement: codeRequirement)
 
         // then
         #expect(executable.displayName == "App")
@@ -52,12 +52,12 @@ struct ModelTests {
     }
 
     @Test
-    func getExecutableBasedOnIdentifierAndCodeRequirement_PathIdentifierType() {
+    func getExecutableBasedOnIdentifierAndCodeRequirement_PathIdentifierType() async {
         let identifier = "/myGreatPath/Awesome/Binary"
         let codeRequirement = "testCodeRequirement"
 
         // when
-        let executable = model.getExecutableFrom(identifier: identifier, codeRequirement: codeRequirement)
+        let executable = await model.getExecutableFrom(identifier: identifier, codeRequirement: codeRequirement)
 
         // then
         #expect(executable.displayName == "Binary")
@@ -66,12 +66,12 @@ struct ModelTests {
     }
 
     @Test
-    func getExecutableFromComputerBasedOnIdentifier() {
+    func getExecutableFromComputerBasedOnIdentifier() async {
         let identifier = "com.apple.Safari"
         let codeRequirement = "randomReq"
 
         // when
-        let executable = model.getExecutableFrom(identifier: identifier, codeRequirement: codeRequirement)
+        let executable = await model.getExecutableFrom(identifier: identifier, codeRequirement: codeRequirement)
 
         // then
         #expect(executable.displayName == "Safari")
@@ -80,10 +80,10 @@ struct ModelTests {
     }
 
     @Test
-    func getExecutableFromSelectedExecutables() {
+    func getExecutableFromSelectedExecutables() async {
         let expectedIdentifier = "com.something.1"
-        let executable = model.getExecutableFrom(identifier: expectedIdentifier, codeRequirement: "testReq")
-        let executableSecond = model.getExecutableFrom(identifier: "com.something.2", codeRequirement: "testReq2")
+        let executable = await model.getExecutableFrom(identifier: expectedIdentifier, codeRequirement: "testReq")
+        let executableSecond = await model.getExecutableFrom(identifier: "com.something.2", codeRequirement: "testReq2")
         model.selectedExecutables = [executable, executableSecond]
 
         // when
@@ -97,11 +97,11 @@ struct ModelTests {
     }
 
     @Test
-    func getExecutableFromSelectedExecutables_Path() {
+    func getExecutableFromSelectedExecutables_Path() async {
         let expectedIdentifier = "/path/something/Special"
-        let executableOneMore = model.getExecutableFrom(identifier: "/path/something/Special1", codeRequirement: "testReq")
-        let executable = model.getExecutableFrom(identifier: expectedIdentifier, codeRequirement: "testReq")
-        let executableSecond = model.getExecutableFrom(identifier: "com.something.2", codeRequirement: "testReq2")
+        let executableOneMore = await model.getExecutableFrom(identifier: "/path/something/Special1", codeRequirement: "testReq")
+        let executable = await model.getExecutableFrom(identifier: expectedIdentifier, codeRequirement: "testReq")
+        let executableSecond = await model.getExecutableFrom(identifier: "com.something.2", codeRequirement: "testReq2")
         model.selectedExecutables = [executableOneMore, executable, executableSecond]
 
         // when
@@ -184,11 +184,11 @@ struct ModelTests {
     // MARK: - tests for importProfile
 
     @Test
-    func importProfileUsingAuthorizationKeyAllow() {
+    func importProfileUsingAuthorizationKeyAllow() async {
         let profile = TCCProfileBuilder().buildProfile(authorization: .allow)
 
         // when
-        model.importProfile(tccProfile: profile)
+        await model.importProfile(tccProfile: profile)
 
         // then
         #expect(model.selectedExecutables.count == 1)
@@ -196,11 +196,11 @@ struct ModelTests {
     }
 
     @Test
-    func importProfileUsingAuthorizationKeyDeny() {
+    func importProfileUsingAuthorizationKeyDeny() async {
         let profile = TCCProfileBuilder().buildProfile(authorization: .deny)
 
         // when
-        model.importProfile(tccProfile: profile)
+        await model.importProfile(tccProfile: profile)
 
         // then
         #expect(model.selectedExecutables.count == 1)
@@ -208,11 +208,11 @@ struct ModelTests {
     }
 
     @Test
-    func importProfileUsingAuthorizationKeyAllowStandardUsers() {
+    func importProfileUsingAuthorizationKeyAllowStandardUsers() async {
         let profile = TCCProfileBuilder().buildProfile(authorization: .allowStandardUserToSetSystemService)
 
         // when
-        model.importProfile(tccProfile: profile)
+        await model.importProfile(tccProfile: profile)
 
         // then
         #expect(model.selectedExecutables.count == 1)
@@ -220,11 +220,11 @@ struct ModelTests {
     }
 
     @Test
-    func importProfileUsingLegacyAllowKeyTrue() {
+    func importProfileUsingLegacyAllowKeyTrue() async {
         let profile = TCCProfileBuilder().buildProfile(allowed: true)
 
         // when
-        model.importProfile(tccProfile: profile)
+        await model.importProfile(tccProfile: profile)
 
         // then
         #expect(model.selectedExecutables.count == 1)
@@ -232,11 +232,11 @@ struct ModelTests {
     }
 
     @Test
-    func importProfileUsingLegacyAllowKeyFalse() {
+    func importProfileUsingLegacyAllowKeyFalse() async {
         let profile = TCCProfileBuilder().buildProfile(allowed: false)
 
         // when
-        model.importProfile(tccProfile: profile)
+        await model.importProfile(tccProfile: profile)
 
         // then
         #expect(model.selectedExecutables.count == 1)
@@ -244,11 +244,11 @@ struct ModelTests {
     }
 
     @Test
-    func importProfileUsingAuthorizationKeyThatIsInvalid() {
+    func importProfileUsingAuthorizationKeyThatIsInvalid() async {
         let profile = TCCProfileBuilder().buildProfile(authorization: "invalidkey")
 
         // when
-        model.importProfile(tccProfile: profile)
+        await model.importProfile(tccProfile: profile)
 
         // then
         #expect(model.selectedExecutables.count == 1)
@@ -256,18 +256,18 @@ struct ModelTests {
     }
 
     @Test
-    func importProfileUsingAuthorizationKeyTranslatesToAppleEvents() {
+    func importProfileUsingAuthorizationKeyTranslatesToAppleEvents() async {
         let profile = TCCProfileBuilder().buildProfile(authorization: "deny")
 
         // when
-        model.importProfile(tccProfile: profile)
+        await model.importProfile(tccProfile: profile)
 
         // then
         #expect(model.selectedExecutables.count == 1)
         #expect(model.selectedExecutables.first?.policy.SystemPolicyAllFiles == "Deny")
     }
 
-    // MARK: - tests for profileToString
+    // MARK: - tests for policyFromString
 
     @Test
     func policyWhenUsingAllow() {

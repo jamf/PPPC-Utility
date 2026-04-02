@@ -154,7 +154,7 @@ struct TCCProfileTests {
     // unit tests for handling both Auth and allowed keys should fail?
 
     @Test
-    func settingLegacyAllowValueNullifiesAuthorization() throws {
+    func settingLegacyAllowValueNullifiesAuthorization() {
         var tccPolicy = TCCPolicy(identifier: "id", codeRequirement: "req", receiverIdentifier: "recId", receiverCodeRequirement: "recreq")
         tccPolicy.authorization = .allow
 
@@ -180,12 +180,12 @@ struct TCCProfileTests {
     }
 
     @Test
-    func jamfProAPIData() throws {
+    func jamfProAPIData() async throws {
         let tccProfile = TCCProfileBuilder().buildProfile(allowed: false, authorization: .allow)
         let expected = try loadTextFile(fileName: "TestTCCProfileForJamfProAPI").trimmingCharacters(in: .whitespacesAndNewlines)
 
         // when
-        let data = try tccProfile.jamfProAPIData(signingIdentity: nil, site: nil)
+        let data = try await tccProfile.jamfProAPIData(signingIdentity: nil, site: nil)
 
         // then
         let xmlString = String(data: data, encoding: .utf8)
