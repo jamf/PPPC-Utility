@@ -23,131 +23,138 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 //
-import XCTest
+import Foundation
+import Testing
 
 @testable import PPPC_Utility
 
-class TCCProfileTests: XCTestCase {
+private final class BundleLocator {}
+
+@Suite
+struct TCCProfileTests {
 
     // MARK: - tests for serializing to and from xml
 
-    func testSerializationOfComplexProfileUsingAuthorization() throws {
+    @Test
+    func serializationOfComplexProfileUsingAuthorization() throws {
         // when we export to xml and reimport it should still have the same attributes
         let plistData = try TCCProfileBuilder().buildProfile(authorization: .allowStandardUserToSetSystemService).xmlData()
         let profile = try TCCProfile.parse(from: plistData)
 
         // then verify the config profile top level
-        XCTAssertEqual("Configuration", profile.type)
-        XCTAssertEqual(100, profile.version)
-        XCTAssertEqual("the uuid", profile.uuid)
-        XCTAssertEqual("System", profile.scope)
-        XCTAssertEqual("Test Org", profile.organization)
-        XCTAssertEqual("Test ID", profile.identifier)
-        XCTAssertEqual("Test Name", profile.displayName)
-        XCTAssertEqual("Test Desc", profile.payloadDescription)
+        #expect(profile.type == "Configuration")
+        #expect(profile.version == 100)
+        #expect(profile.uuid == "the uuid")
+        #expect(profile.scope == "System")
+        #expect(profile.organization == "Test Org")
+        #expect(profile.identifier == "Test ID")
+        #expect(profile.displayName == "Test Name")
+        #expect(profile.payloadDescription == "Test Desc")
 
         // then verify the payload content top level
-        XCTAssertEqual(1, profile.content.count)
+        #expect(profile.content.count == 1)
         profile.content.forEach { content in
-            XCTAssertEqual("Content Desc 1", content.payloadDescription)
-            XCTAssertEqual("Content Name 1", content.displayName)
-            XCTAssertEqual("Content ID 1", content.identifier)
-            XCTAssertEqual("Content Org 1", content.organization)
-            XCTAssertEqual("Content type 1", content.type)
-            XCTAssertEqual("Content UUID 1", content.uuid)
-            XCTAssertEqual(1, content.version)
+            #expect(content.payloadDescription == "Content Desc 1")
+            #expect(content.displayName == "Content Name 1")
+            #expect(content.identifier == "Content ID 1")
+            #expect(content.organization == "Content Org 1")
+            #expect(content.type == "Content type 1")
+            #expect(content.uuid == "Content UUID 1")
+            #expect(content.version == 1)
 
             // then verify the services key
-            XCTAssertEqual(2, content.services.count)
+            #expect(content.services.count == 2)
             let allFiles = content.services["SystemPolicyAllFiles"]
-            XCTAssertEqual(1, allFiles?.count)
+            #expect(allFiles?.count == 1)
             allFiles?.forEach { policy in
-                XCTAssertEqual("policy id", policy.identifier)
-                XCTAssertEqual("policy id type", policy.identifierType)
-                XCTAssertEqual("policy code req", policy.codeRequirement)
-                XCTAssertNil(policy.allowed)
-                XCTAssertEqual(TCCPolicyAuthorizationValue.allowStandardUserToSetSystemService, policy.authorization)
-                XCTAssertEqual("policy comment", policy.comment)
-                XCTAssertEqual("policy receiver id", policy.receiverIdentifier)
-                XCTAssertEqual("policy receiver id type", policy.receiverIdentifierType)
-                XCTAssertEqual("policy receiver code req", policy.receiverCodeRequirement)
+                #expect(policy.identifier == "policy id")
+                #expect(policy.identifierType == "policy id type")
+                #expect(policy.codeRequirement == "policy code req")
+                #expect(policy.allowed == nil)
+                #expect(policy.authorization == .allowStandardUserToSetSystemService)
+                #expect(policy.comment == "policy comment")
+                #expect(policy.receiverIdentifier == "policy receiver id")
+                #expect(policy.receiverIdentifierType == "policy receiver id type")
+                #expect(policy.receiverCodeRequirement == "policy receiver code req")
             }
         }
     }
 
-    func testSerializationOfProfileUsingLegacyAllowedKey() throws {
+    @Test
+    func serializationOfProfileUsingLegacyAllowedKey() throws {
         // when we export to xml and reimport it should still have the same attributes
         let plistData = try TCCProfileBuilder().buildProfile(allowed: true).xmlData()
         let profile = try TCCProfile.parse(from: plistData)
 
         // then verify the config profile top level
-        XCTAssertEqual("Configuration", profile.type)
-        XCTAssertEqual(100, profile.version)
-        XCTAssertEqual("the uuid", profile.uuid)
-        XCTAssertEqual("System", profile.scope)
-        XCTAssertEqual("Test Org", profile.organization)
-        XCTAssertEqual("Test ID", profile.identifier)
-        XCTAssertEqual("Test Name", profile.displayName)
-        XCTAssertEqual("Test Desc", profile.payloadDescription)
+        #expect(profile.type == "Configuration")
+        #expect(profile.version == 100)
+        #expect(profile.uuid == "the uuid")
+        #expect(profile.scope == "System")
+        #expect(profile.organization == "Test Org")
+        #expect(profile.identifier == "Test ID")
+        #expect(profile.displayName == "Test Name")
+        #expect(profile.payloadDescription == "Test Desc")
 
         // then verify the payload content top level
-        XCTAssertEqual(1, profile.content.count)
+        #expect(profile.content.count == 1)
         profile.content.forEach { content in
-            XCTAssertEqual("Content Desc 1", content.payloadDescription)
-            XCTAssertEqual("Content Name 1", content.displayName)
-            XCTAssertEqual("Content ID 1", content.identifier)
-            XCTAssertEqual("Content Org 1", content.organization)
-            XCTAssertEqual("Content type 1", content.type)
-            XCTAssertEqual("Content UUID 1", content.uuid)
-            XCTAssertEqual(1, content.version)
+            #expect(content.payloadDescription == "Content Desc 1")
+            #expect(content.displayName == "Content Name 1")
+            #expect(content.identifier == "Content ID 1")
+            #expect(content.organization == "Content Org 1")
+            #expect(content.type == "Content type 1")
+            #expect(content.uuid == "Content UUID 1")
+            #expect(content.version == 1)
 
             // then verify the services key
-            XCTAssertEqual(2, content.services.count)
+            #expect(content.services.count == 2)
             let allFiles = content.services["SystemPolicyAllFiles"]
-            XCTAssertEqual(1, allFiles?.count)
+            #expect(allFiles?.count == 1)
             allFiles?.forEach { policy in
-                XCTAssertEqual("policy id", policy.identifier)
-                XCTAssertEqual("policy id type", policy.identifierType)
-                XCTAssertEqual("policy code req", policy.codeRequirement)
-                XCTAssertEqual(true, policy.allowed)
-                XCTAssertNil(policy.authorization)
-                XCTAssertEqual("policy comment", policy.comment)
-                XCTAssertEqual("policy receiver id", policy.receiverIdentifier)
-                XCTAssertEqual("policy receiver id type", policy.receiverIdentifierType)
-                XCTAssertEqual("policy receiver code req", policy.receiverCodeRequirement)
+                #expect(policy.identifier == "policy id")
+                #expect(policy.identifierType == "policy id type")
+                #expect(policy.codeRequirement == "policy code req")
+                #expect(policy.allowed == true)
+                #expect(policy.authorization == nil)
+                #expect(policy.comment == "policy comment")
+                #expect(policy.receiverIdentifier == "policy receiver id")
+                #expect(policy.receiverIdentifierType == "policy receiver id type")
+                #expect(policy.receiverCodeRequirement == "policy receiver code req")
             }
         }
     }
 
-    func testSerializationOfProfileWhenBothAllowedAndAuthorizationUsed() throws {
+    @Test
+    func serializationOfProfileWhenBothAllowedAndAuthorizationUsed() throws {
         // when we export to xml and reimport it should still have the same attributes
         let plistData = try TCCProfileBuilder().buildProfile(allowed: false, authorization: .allow).xmlData()
         let profile = try TCCProfile.parse(from: plistData)
 
         // then verify the config profile top level
-        XCTAssertEqual("Configuration", profile.type)
+        #expect(profile.type == "Configuration")
 
         // then verify the payload content top level
-        XCTAssertEqual(1, profile.content.count)
+        #expect(profile.content.count == 1)
         profile.content.forEach { content in
-            XCTAssertEqual("Content UUID 1", content.uuid)
-            XCTAssertEqual(1, content.version)
+            #expect(content.uuid == "Content UUID 1")
+            #expect(content.version == 1)
 
             // then verify the services key
-            XCTAssertEqual(2, content.services.count)
+            #expect(content.services.count == 2)
             let allFiles = content.services["SystemPolicyAllFiles"]
-            XCTAssertEqual(1, allFiles?.count)
+            #expect(allFiles?.count == 1)
             allFiles?.forEach { policy in
-                XCTAssertEqual(false, policy.allowed)
-                XCTAssertEqual(policy.authorization, TCCPolicyAuthorizationValue.allow)
+                #expect(policy.allowed == false)
+                #expect(policy.authorization == .allow)
             }
         }
     }
 
     // unit tests for handling both Auth and allowed keys should fail?
 
-    func testSettingLegacyAllowValueNullifiesAuthorization() throws {
-        // given
+    @Test
+    func settingLegacyAllowValueNullifiesAuthorization() throws {
         var tccPolicy = TCCPolicy(identifier: "id", codeRequirement: "req", receiverIdentifier: "recId", receiverCodeRequirement: "recreq")
         tccPolicy.authorization = .allow
 
@@ -155,12 +162,12 @@ class TCCProfileTests: XCTestCase {
         tccPolicy.allowed = true
 
         // then
-        XCTAssertNil(tccPolicy.authorization)
-        XCTAssertTrue(try XCTUnwrap(tccPolicy.allowed))
+        #expect(tccPolicy.authorization == nil)
+        #expect(tccPolicy.allowed == true)
     }
 
-    func testSettingAuthorizationValueDoesNotNullifyAllowed() {
-        // given
+    @Test
+    func settingAuthorizationValueDoesNotNullifyAllowed() {
         var tccPolicy = TCCPolicy(identifier: "id", codeRequirement: "req", receiverIdentifier: "recId", receiverCodeRequirement: "recreq")
         tccPolicy.allowed = false
 
@@ -168,29 +175,26 @@ class TCCProfileTests: XCTestCase {
         tccPolicy.authorization = .allowStandardUserToSetSystemService
 
         // then
-        XCTAssertEqual(tccPolicy.allowed, false, "we don't have to nil this out because we use authorization by default if present")
-        XCTAssertEqual(tccPolicy.authorization, TCCPolicyAuthorizationValue.allowStandardUserToSetSystemService)
+        #expect(tccPolicy.allowed == false, "we don't have to nil this out because we use authorization by default if present")
+        #expect(tccPolicy.authorization == .allowStandardUserToSetSystemService)
     }
 
-    func testJamfProAPIData() throws {
-        // given - build the test profile
+    @Test
+    func jamfProAPIData() throws {
         let tccProfile = TCCProfileBuilder().buildProfile(allowed: false, authorization: .allow)
         let expected = try loadTextFile(fileName: "TestTCCProfileForJamfProAPI").trimmingCharacters(in: .whitespacesAndNewlines)
 
-        // when - wrap in Jamf Pro API xml
+        // when
         let data = try tccProfile.jamfProAPIData(signingIdentity: nil, site: nil)
 
         // then
         let xmlString = String(data: data, encoding: .utf8)
-        XCTAssertEqual(xmlString, expected)
+        #expect(xmlString == expected)
     }
 
     private func loadTextFile(fileName: String) throws -> String {
-        let testBundle = Bundle(for: type(of: self))
-        guard let resourceURL = testBundle.url(forResource: fileName, withExtension: "txt") else {
-            XCTFail("Resource file should exists")
-            return ""
-        }
+        let testBundle = Bundle(for: BundleLocator.self)
+        let resourceURL = try #require(testBundle.url(forResource: fileName, withExtension: "txt"))
         return try String(contentsOf: resourceURL)
     }
 }

@@ -74,11 +74,8 @@ struct PPPCServicesManagerTests {
         let services = PPPCServicesManager()
         let service = try #require(services.allServices["Camera"])
 
-        // when
-        let actual = try #require(service.denyOnly)
-
         // then
-        #expect(actual)
+        #expect(service.denyOnly == true)
     }
 
     @Test
@@ -86,10 +83,7 @@ struct PPPCServicesManagerTests {
         let services = PPPCServicesManager()
         let service = try #require(services.allServices["ScreenCapture"])
 
-        // when
-        let actual = try #require(service.allowStandardUsersMacOS11Plus)
-
         // then
-        #expect(actual)
+        #expect(service.allowStandardUsersMacOS11Plus == true)
     }
 }

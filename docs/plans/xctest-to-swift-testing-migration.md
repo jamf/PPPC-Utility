@@ -41,7 +41,7 @@ Convert 52 test methods across 8 test files (plus 2 helpers) from XCTest to Swif
 - [x] **Phase 2: TokenTests** (5 tests)
 - [x] **Phase 3: JamfProAPIClientTests + PPPCServicesManagerTests** (5 tests)
 - [x] **Phase 4: NetworkAuthManagerTests** (7 tests)
-- [ ] **Phase 5: TCCProfileTests** (6 tests)
+- [x] **Phase 5: TCCProfileTests** (6 tests)
 - [ ] **Phase 6: TCCProfileImporterTests** (5 tests)
 - [ ] **Phase 7: ModelTests** (21 tests)
 
@@ -67,7 +67,7 @@ Convert 52 test methods across 8 test files (plus 2 helpers) from XCTest to Swif
 - Has a MockNetworking class (stays as-is, it's not XCTest-specific)
 - Error handling patterns with `do/catch` + `XCTFail` → `do/catch` + `Issue.record`
 
-### Phase 5: TCCProfileTests (6 tests)
+### Phase 5: TCCProfileTests (6 tests) ✅
 - Serialization round-trip tests, uses TCCProfileBuilder helper
 - Bundle resource loading (test bundle access pattern may need attention)
 

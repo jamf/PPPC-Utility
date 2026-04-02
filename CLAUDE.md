@@ -8,4 +8,9 @@
 
 - Place `@Test` and `@Suite` annotations on the line **above** the declaration, not inline
 - Use `// when` and `// then` comment blocks; skip `// given` (assumed from context)
-- Capture a baseline of compiler warnings before each phase, then verify no new warnings after
+- When XCTest assertions have message strings, preserve them as `#expect` messages, not code comments (e.g. `#expect(x == false, "reason")`)
+- Avoid `#require` on `Bool?` — it's ambiguous; use `#expect(x == true)` instead
+- Capture a baseline of compiler warnings before each phase, then verify no new warnings after. Use this command and compare the output before/after:
+  ```
+  xcodebuild clean build-for-testing -project "PPPC Utility.xcodeproj" -scheme "PPPC Utility" -destination "platform=macOS" 2>&1 | grep -i "warning:" | grep -v "xcodebuild: WARNING"
+  ```
