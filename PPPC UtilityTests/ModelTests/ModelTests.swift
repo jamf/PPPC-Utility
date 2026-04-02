@@ -127,7 +127,6 @@ struct ModelTests {
 
     @Test
     func exportProfileWithAppleEventsAndAuthorization() {
-        model.usingLegacyAllowKey = false
         let exe1 = Executable(identifier: "one", codeRequirement: "oneReq")
         let exe2 = Executable(identifier: "two", codeRequirement: "twoReq")
 
@@ -182,59 +181,6 @@ struct ModelTests {
         }
     }
 
-    @Test
-    func exportProfileWithAppleEventsAndLegacyAllowed() {
-        let exe1 = Executable(identifier: "one", codeRequirement: "oneReq")
-        let exe2 = Executable(identifier: "two", codeRequirement: "twoReq")
-        exe1.appleEvents = [AppleEventRule(source: exe1, destination: exe2, value: true)]
-        exe2.policy.SystemPolicyAllFiles = "Allow"
-        model.selectedExecutables = [exe1, exe2]
-        model.usingLegacyAllowKey = true
-
-        // when
-        let profile = model.exportProfile(organization: "Org", identifier: "ID", displayName: "Name", payloadDescription: "Desc")
-
-        // then check top level settings
-        #expect(profile.organization == "Org")
-        #expect(profile.identifier == "ID")
-        #expect(profile.displayName == "Name")
-        #expect(profile.payloadDescription == "Desc")
-        #expect(profile.scope == "System")
-        #expect(profile.type == "Configuration")
-        #expect(!profile.uuid.isEmpty)
-        #expect(profile.version == 1)
-
-        // then verify the payload content top level
-        #expect(profile.content.count == 1)
-        profile.content.forEach { content in
-            #expect(!content.uuid.isEmpty)
-            #expect(content.version == 1)
-
-            // then verify the services
-            #expect(content.services.count == 2)
-            let appleEventsPolicy = content.services["AppleEvents"]?.first
-            #expect(appleEventsPolicy != nil)
-            #expect(appleEventsPolicy?.identifier == "one")
-            #expect(appleEventsPolicy?.codeRequirement == "oneReq")
-            #expect(appleEventsPolicy?.identifierType == "bundleID")
-            #expect(appleEventsPolicy?.receiverIdentifier == "two")
-            #expect(appleEventsPolicy?.receiverCodeRequirement == "twoReq")
-            #expect(appleEventsPolicy?.receiverIdentifierType == "bundleID")
-            #expect(appleEventsPolicy?.allowed == true)
-            #expect(appleEventsPolicy?.authorization == nil)
-
-            let allFilesPolicy = content.services["SystemPolicyAllFiles"]?.first
-            #expect(allFilesPolicy != nil)
-            #expect(allFilesPolicy?.identifier == "two")
-            #expect(allFilesPolicy?.codeRequirement == "twoReq")
-            #expect(allFilesPolicy?.identifierType == "bundleID")
-            #expect(allFilesPolicy?.receiverIdentifier == nil)
-            #expect(allFilesPolicy?.receiverCodeRequirement == nil)
-            #expect(allFilesPolicy?.receiverIdentifierType == nil)
-            #expect(allFilesPolicy?.allowed == true)
-            #expect(allFilesPolicy?.authorization == nil)
-        }
-    }
 
     // MARK: - tests for importProfile
 
@@ -325,8 +271,7 @@ struct ModelTests {
     // MARK: - tests for profileToString
 
     @Test
-    func policyWhenUsingAllowAndAuthorizationKey() {
-        model.usingLegacyAllowKey = false
+    func policyWhenUsingAllow() {
         let app = Executable(identifier: "id", codeRequirement: "req")
 
         // when
@@ -334,12 +279,10 @@ struct ModelTests {
 
         // then
         #expect(policy?.authorization == .allow)
-        #expect(policy?.allowed == nil)
     }
 
     @Test
     func policyWhenUsingDeny() {
-        model.usingLegacyAllowKey = false
         let app = Executable(identifier: "id", codeRequirement: "req")
 
         // when
@@ -347,12 +290,10 @@ struct ModelTests {
 
         // then
         #expect(policy?.authorization == .deny)
-        #expect(policy?.allowed == nil)
     }
 
     @Test
     func policyWhenUsingAllowForStandardUsers() {
-        model.usingLegacyAllowKey = false
         let app = Executable(identifier: "id", codeRequirement: "req")
 
         // when
@@ -360,7 +301,6 @@ struct ModelTests {
 
         // then
         #expect(policy?.authorization == .allowStandardUserToSetSystemService)
-        #expect(policy?.allowed == nil)
     }
 
     @Test
@@ -374,116 +314,6 @@ struct ModelTests {
         #expect(policy == nil, "should have not created the policy with an unknown value")
     }
 
-    @Test
-    func policyWhenUsingLegacyDeny() {
-        let app = Executable(identifier: "id", codeRequirement: "req")
-        model.usingLegacyAllowKey = true
 
-        // when
-        let policy = model.policyFromString(executable: app, value: "Deny")
-
-        // then
-        #expect(policy?.authorization == nil, "should not set authorization when in legacy mode")
-        #expect(policy?.allowed == false)
-    }
-
-    @Test
-    func policyWhenUsingLegacyAllow() {
-        let app = Executable(identifier: "id", codeRequirement: "req")
-        model.usingLegacyAllowKey = true
-
-        // when
-        let policy = model.policyFromString(executable: app, value: "Allow")
-
-        // then
-        #expect(policy?.authorization == nil, "should not set authorization when in legacy mode")
-        #expect(policy?.allowed == true)
-    }
-
-    // test for the unrecognized strings for both legacy and normal
-    @Test
-    func policyWhenUsingLegacyAllowButNonLegacyValueUsed() {
-        let app = Executable(identifier: "id", codeRequirement: "req")
-        model.usingLegacyAllowKey = true
-
-        // when
-        let policy = model.policyFromString(executable: app, value: "Let Standard Users Approve")
-
-        // then
-        #expect(policy == nil, "should have errored out because of an invalid value")
-    }
-
-    // MARK: - tests for requiresAuthorizationKey
-
-    @Test(arguments: [
-        (TCCPolicyAuthorizationValue.allowStandardUserToSetSystemService, true),
-        (TCCPolicyAuthorizationValue.allow, false),
-        (TCCPolicyAuthorizationValue.deny, false),
-    ])
-    func requiresAuthorizationKey(authorization: TCCPolicyAuthorizationValue, expected: Bool) {
-        let profile = TCCProfileBuilder().buildProfile(authorization: authorization)
-        model.importProfile(tccProfile: profile)
-        #expect(model.requiresAuthorizationKey() == expected)
-    }
-
-    // MARK: - tests for changeToUseLegacyAllowKey
-
-    @Test
-    func changingFromAuthorizationKeyToLegacyAllowKey() {
-        let allowStandard = TCCProfileDisplayValue.allowStandardUsersToApprove.rawValue
-        let exeSettings = ["AddressBook": "Allow", "ListenEvent": allowStandard, "ScreenCapture": allowStandard]
-        let model = ModelBuilder().addExecutable(settings: exeSettings).build()
-        model.usingLegacyAllowKey = false
-
-        // when
-        model.changeToUseLegacyAllowKey()
-
-        // then
-        #expect(model.selectedExecutables.count == 1, "should have only one exe")
-        let policy = model.selectedExecutables.first?.policy
-        #expect(policy?.AddressBook == "Allow")
-        #expect(policy?.Camera == "-")
-        #expect(policy?.ListenEvent == "-")
-        #expect(policy?.ScreenCapture == "-")
-        #expect(model.usingLegacyAllowKey)
-    }
-
-    @Test
-    func changingFromAuthorizationKeyToLegacyAllowKeyWithMoreComplexVaues() {
-        let allowStandard = TCCProfileDisplayValue.allowStandardUsersToApprove.rawValue
-        let p1Settings = [
-            "SystemPolicyAllFiles": "Allow",
-            "ListenEvent": allowStandard,
-            "ScreenCapture": "Deny",
-            "Camera": "Deny"
-        ]
-
-        let p2Settings = [
-            "SystemPolicyAllFiles": "Deny",
-            "ScreenCapture": allowStandard,
-            "Calendar": "Allow"
-        ]
-        let builder = ModelBuilder().addExecutable(settings: p1Settings)
-        let model = builder.addExecutable(settings: p2Settings).build()
-        model.usingLegacyAllowKey = false
-
-        // when
-        model.changeToUseLegacyAllowKey()
-
-        // then
-        #expect(model.selectedExecutables.count == 2, "should have only one exe")
-        let policy1 = model.selectedExecutables[0].policy
-        #expect(policy1.SystemPolicyAllFiles == "Allow")
-        #expect(policy1.ListenEvent == "-")
-        #expect(policy1.ScreenCapture == "Deny")
-        #expect(policy1.Camera == "Deny")
-
-        let policy2 = model.selectedExecutables[1].policy
-        #expect(policy2.SystemPolicyAllFiles == "Deny")
-        #expect(policy2.ListenEvent == "-")
-        #expect(policy2.ScreenCapture == "-")
-        #expect(policy2.Calendar == "Allow")
-        #expect(model.usingLegacyAllowKey)
-    }
 
 }

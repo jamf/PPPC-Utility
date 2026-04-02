@@ -34,7 +34,7 @@ struct PPPCServiceInfo: Decodable {
     let englishDescription: String
     let entitlements: [String]?
     let denyOnly: Bool?
-    let allowStandardUsersMacOS11Plus: Bool?
+    let allowStandardUsers: Bool?
 
     var userHelp: String {
         if let entitlements = entitlements {

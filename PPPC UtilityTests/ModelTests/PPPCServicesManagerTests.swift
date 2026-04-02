@@ -84,6 +84,6 @@ struct PPPCServicesManagerTests {
         let service = try #require(services.allServices["ScreenCapture"])
 
         // then
-        #expect(service.allowStandardUsersMacOS11Plus == true)
+        #expect(service.allowStandardUsers == true)
     }
 }
