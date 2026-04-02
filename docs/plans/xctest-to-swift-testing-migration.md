@@ -42,8 +42,9 @@ Convert 52 test methods across 8 test files (plus 2 helpers) from XCTest to Swif
 - [x] **Phase 3: JamfProAPIClientTests + PPPCServicesManagerTests** (5 tests)
 - [x] **Phase 4: NetworkAuthManagerTests** (7 tests)
 - [x] **Phase 5: TCCProfileTests** (6 tests)
-- [ ] **Phase 6: TCCProfileImporterTests** (5 tests)
+- [x] **Phase 6: TCCProfileImporterTests** (5 tests)
 - [ ] **Phase 7: ModelTests** (21 tests)
+- [ ] **Phase 8: Fix stale storyboard outlet** — `addressBookStackView` connection in Main.storyboard references a property removed in Nov 2020 (renamed to `adminFilesStackView`). Pre-existing, not caused by migration.
 
 ## Phases
 
@@ -71,7 +72,7 @@ Convert 52 test methods across 8 test files (plus 2 helpers) from XCTest to Swif
 - Serialization round-trip tests, uses TCCProfileBuilder helper
 - Bundle resource loading (test bundle access pattern may need attention)
 
-### Phase 6: TCCProfileImporterTests (5 tests)
+### Phase 6: TCCProfileImporterTests (5 tests) ✅
 - Most complex conversion: callback-based async patterns
 - May need Swift Testing's `confirmation { }` macro for callback verification
 - Bundle resource loading for .mobileconfig test files
