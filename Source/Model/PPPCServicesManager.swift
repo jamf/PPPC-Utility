@@ -28,13 +28,13 @@
 import Foundation
 import OSLog
 
-class PPPCServicesManager: @unchecked Sendable {
+class PPPCServicesManager {
 
     typealias MDMServiceKey = String
 
     let logger = Logger.PPPCServicesManager
 
-    nonisolated(unsafe) static let shared: PPPCServicesManager = {
+    static let shared: PPPCServicesManager = {
         MainActor.assumeIsolated { PPPCServicesManager() }
     }()
 

@@ -29,8 +29,6 @@ import Foundation
 import Haversack
 import Security
 
-extension SecIdentity: @unchecked @retroactive Sendable {}
-
 struct SecurityWrapper {
 
     nonisolated static func execute(block: () -> (OSStatus)) throws {
@@ -87,8 +85,7 @@ struct SecurityWrapper {
         return text! as String
     }
 
-    @concurrent static func sign(data: Data, using identity: SecIdentity) async throws -> Data {
-
+    static func sign(data: Data, using identity: SecIdentity) async throws -> Data {
         var outputData: CFData?
         var encoder: CMSEncoder?
         try execute { CMSEncoderCreate(&encoder) }

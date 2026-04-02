@@ -28,10 +28,10 @@
 import Cocoa
 import OSLog
 
-@objc class Model: NSObject, @unchecked Sendable {
+@objc class Model: NSObject {
 
     @objc dynamic var current: Executable?
-    @objc dynamic nonisolated(unsafe) static let shared: Model = {
+    @objc dynamic static let shared: Model = {
         MainActor.assumeIsolated { Model() }
     }()
     @objc dynamic var identities: [SigningIdentity] = []
