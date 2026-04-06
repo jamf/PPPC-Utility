@@ -93,6 +93,7 @@ class SaveViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         payloadIdentifier = UUID().uuidString
+        identitiesPopUp.isEnabled = false
         Task {
             do {
                 var identities = try await SecurityWrapper.loadSigningIdentities()
@@ -101,6 +102,7 @@ class SaveViewController: NSViewController {
             } catch {
                 logger.error("Error loading identities: \(error)")
             }
+            identitiesPopUp.isEnabled = true
         }
 
         loadImportedTCCProfileInfo()
