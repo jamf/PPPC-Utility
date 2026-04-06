@@ -85,6 +85,7 @@ struct SecurityWrapper {
         return text! as String
     }
 
+    // TODO - add @concurrent after swift ui conversion
     static func sign(data: Data, using identity: SecIdentity) async throws -> Data {
         var outputData: CFData?
         var encoder: CMSEncoder?

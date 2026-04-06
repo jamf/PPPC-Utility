@@ -79,7 +79,7 @@ class JamfProAPIClient: Networking {
     func load<T: Decodable>(request: URLRequest) async throws -> T {
         let result: T
 
-        if authManager.bearerAuthSupported() {
+        if await authManager.bearerAuthSupported() {
             do {
                 result = try await loadBearerAuthorized(request: request)
             } catch AuthError.bearerAuthNotSupported {
@@ -100,7 +100,7 @@ class JamfProAPIClient: Networking {
     func send(request: URLRequest) async throws -> Data {
         let result: Data
 
-        if authManager.bearerAuthSupported() {
+        if await authManager.bearerAuthSupported() {
             do {
                 result = try await sendBearerAuthorized(request: request)
             } catch AuthError.bearerAuthNotSupported {

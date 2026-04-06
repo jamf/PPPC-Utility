@@ -193,7 +193,7 @@ class Networking {
     /// - Parameter request: A URLRequest
     /// - Returns: The request with the bearer token added
     private func authorizeBasic(request: URLRequest) async throws -> URLRequest {
-        let basicValue = try authManager.basicAuthString()
+        let basicValue = try await authManager.basicAuthString()
         var newRequest = request
         newRequest.setValue("Basic \(basicValue)", forHTTPHeaderField: "Authorization")
         return newRequest

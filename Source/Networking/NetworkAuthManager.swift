@@ -49,7 +49,7 @@ enum AuthenticationInfo {
 /// This class ensures that only one token refresh occurs at the same time.
 /// With MainActor default isolation, all types are MainActor by default,
 /// providing the same serialization that the actor previously offered.
-class NetworkAuthManager {
+actor NetworkAuthManager {
     private let authInfo: AuthenticationInfo
 
     private var currentToken: Token?
@@ -72,7 +72,7 @@ class NetworkAuthManager {
         }
 
         if let token = currentToken,
-            token.isValid
+            await token.isValid
         {
             return token
         }

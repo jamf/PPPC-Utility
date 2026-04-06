@@ -27,12 +27,12 @@
 
 import Cocoa
 
-class SigningIdentity: NSObject {
+nonisolated class SigningIdentity: NSObject {
 
-    @objc dynamic var displayName: String
-    nonisolated(unsafe) var reference: SecIdentity?
+    @objc dynamic let displayName: String
+    let reference: SecIdentity?
 
-    nonisolated init(name: String, reference: SecIdentity?) {
+    init(name: String, reference: SecIdentity?) {
         self.displayName = name
         self.reference = reference
         super.init()
