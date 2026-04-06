@@ -92,8 +92,10 @@ class SaveViewController: NSViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        preferredContentSize = NSSize(width: 502, height: 219)
         payloadIdentifier = UUID().uuidString
         identitiesPopUp.isEnabled = false
+        identitiesPopUp.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
         Task {
             do {
                 var identities = try await SecurityWrapper.loadSigningIdentities()
