@@ -349,7 +349,7 @@ struct UploadInfoView: View {
                 authMgr: makeAuthManager(),
                 siteInfo: siteIdAndName,
                 signingIdentity: mustSign ? signingId : nil)
-            Alert().display(header: "Success", message: "Profile uploaded succesfully")
+            Alert().display(header: "Success", message: "Profile uploaded successfully")
             dismissView()
         } catch {
             warningInfo = error.localizedDescription
