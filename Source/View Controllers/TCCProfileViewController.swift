@@ -209,7 +209,7 @@ class TCCProfileViewController: NSViewController {
             guard response == .OK else { return }
             for url in panel.urls {
                 do {
-                    let executable = try await self.model.loadExecutable(url: url)
+                    let executable = try self.model.loadExecutable(url: url)
                     guard self.shouldExecutableBeAdded(executable) else {
                         let error = LoadExecutableError.executableAlreadyExists
                         self.showAlert(error, for: window)
@@ -416,32 +416,31 @@ extension TCCProfileViewController: NSTableViewDataSource {
 
         guard let window = self.view.window else { return false }
 
-        guard let urls = urls, !urls.isEmpty else { return false }
-
-        Task {
-            for url in urls {
-                do {
-                    let newExecutable = try await model.loadExecutable(url: url)
-                    if tableView == self.executablesTable {
-                        guard self.executablesAC.canInsert else {
-                            continue
-                        }
-                        if self.shouldExecutableBeAdded(newExecutable) {
-                            self.executablesAC.insert(newExecutable, atArrangedObjectIndex: row)
-                        }
-                    } else {
-                        self.insertIntoAppleEvents(newExecutable)
+        var addedAny = false
+        urls?.forEach { url in
+            do {
+                let newExecutable = try model.loadExecutable(url: url)
+                if tableView == self.executablesTable {
+                    guard self.executablesAC.canInsert else {
+                        return
                     }
-                } catch {
-                    if let loadError = error as? LoadExecutableError {
-                        self.showAlert(loadError, for: window)
+                    if self.shouldExecutableBeAdded(newExecutable) {
+                        self.executablesAC.insert(newExecutable, atArrangedObjectIndex: row)
+                        addedAny = true
                     }
-                    self.logger.error("\(error)")
+                } else {
+                    self.insertIntoAppleEvents(newExecutable)
+                    addedAny = true
                 }
+            } catch {
+                if let loadError = error as? LoadExecutableError {
+                    self.showAlert(loadError, for: window)
+                }
+                self.logger.error("\(error)")
             }
         }
 
-        return true
+        return addedAny
     }
 
 }

@@ -40,19 +40,19 @@ import OSLog
         var executables: [Executable] = []
 
         do {
-            executables.append(try await loadExecutable(url: URL(fileURLWithPath: "/System/Library/CoreServices/System Events.app")))
+            executables.append(try loadExecutable(url: URL(fileURLWithPath: "/System/Library/CoreServices/System Events.app")))
         } catch {
             self.logger.error("\(error)")
         }
 
         do {
-            executables.append(try await loadExecutable(url: URL(fileURLWithPath: "/System/Library/CoreServices/SystemUIServer.app")))
+            executables.append(try loadExecutable(url: URL(fileURLWithPath: "/System/Library/CoreServices/SystemUIServer.app")))
         } catch {
             self.logger.error("\(error)")
         }
 
         do {
-            executables.append(try await loadExecutable(url: URL(fileURLWithPath: "/System/Library/CoreServices/Finder.app")))
+            executables.append(try loadExecutable(url: URL(fileURLWithPath: "/System/Library/CoreServices/Finder.app")))
         } catch {
             self.logger.error("\(error)")
         }
@@ -80,7 +80,7 @@ typealias LoadExecutableResult = Result<Executable, LoadExecutableError>
 
 extension Model {
 
-    func loadExecutable(url: URL) async throws -> Executable {
+    func loadExecutable(url: URL) throws -> Executable {
         let executable = Executable()
 
         if let bundle = Bundle(url: url) {
@@ -99,7 +99,7 @@ extension Model {
         }
 
         do {
-            executable.codeRequirement = try await SecurityWrapper.copyDesignatedRequirement(url: url)
+            executable.codeRequirement = try SecurityWrapper.copyDesignatedRequirement(url: url)
             store[executable.identifier] = executable
             return executable
         } catch {
@@ -289,7 +289,7 @@ extension Model {
         }
 
         if let fileURL = urlToLoad {
-            return try await self.loadExecutable(url: fileURL)
+            return try self.loadExecutable(url: fileURL)
         }
         throw LoadExecutableError.executableNotFound
     }

@@ -74,7 +74,7 @@ class OpenViewController: NSViewController, NSTableViewDataSource, NSTableViewDe
                     var selections: [LoadExecutableResult] = []
                     for url in panel.urls {
                         do {
-                            let executable = try await Model.shared.loadExecutable(url: url)
+                            let executable = try Model.shared.loadExecutable(url: url)
                             selections.append(.success(executable))
                         } catch {
                             if let loadError = error as? LoadExecutableError {

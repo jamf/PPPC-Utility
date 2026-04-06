@@ -72,7 +72,11 @@ struct SecurityWrapper {
         return nil
     }
 
-    @concurrent static func copyDesignatedRequirement(url: URL) async throws -> String {
+    static func copyDesignatedRequirement(url: URL) throws -> String {
+        try _copyDesignatedRequirement(url: url)
+    }
+
+    private static func _copyDesignatedRequirement(url: URL) throws -> String {
         let flags = SecCSFlags(rawValue: 0)
         var staticCode: SecStaticCode?
         var requirement: SecRequirement?
