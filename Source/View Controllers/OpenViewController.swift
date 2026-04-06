@@ -51,8 +51,11 @@ class OpenViewController: NSViewController, NSTableViewDataSource, NSTableViewDe
 
     func tableView(_ tableView: NSTableView, selectionIndexesForProposedSelection proposedSelectionIndexes: IndexSet) -> IndexSet {
         guard let index = proposedSelectionIndexes.first else { return proposedSelectionIndexes }
-        self.completionBlock?([.success(self.choices[index])])
-        self.dismiss(self)
+        // put the completion block on the MainActor queue and dismiss when done
+        Task {
+            self.completionBlock?([.success(self.choices[index])])
+            self.dismiss(self)
+        }
         return proposedSelectionIndexes
     }
 
