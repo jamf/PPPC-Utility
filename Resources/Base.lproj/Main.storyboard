@@ -2724,6 +2724,7 @@
                     </view>
                     <connections>
                         <outlet property="choicesAC" destination="Ahp-qT-sFP" id="cbZ-HT-gsI"/>
+                        <outlet property="choicesTableView" destination="xsX-cV-kEM" id="tVw-8K-pL3"/>
                     </connections>
                 </viewController>
                 <customObject id="6QA-Al-Het" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

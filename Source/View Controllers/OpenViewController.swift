@@ -37,14 +37,17 @@ class OpenViewController: NSViewController, NSTableViewDataSource, NSTableViewDe
     @objc dynamic var choices: [Executable] = []
 
     @IBOutlet var choicesAC: NSArrayController!
+    @IBOutlet weak var choicesTableView: NSTableView!
 
     override func viewWillAppear() {
         super.viewWillAppear()
         //  Reload executables
         current = Model.shared.current
+        choicesTableView.isEnabled = false
         if let value = current {
             Task {
                 choices = await Model.shared.getAppleEventChoices(executable: value)
+                choicesTableView.isEnabled = true
             }
         }
     }
