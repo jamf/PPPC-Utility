@@ -204,25 +204,23 @@ class TCCProfileViewController: NSViewController {
         guard let window = self.view.window else {
             return
         }
-        panel.begin { response in
-            if response == .OK {
-                Task {
-                    for url in panel.urls {
-                        do {
-                            let executable = try await self.model.loadExecutable(url: url)
-                            guard self.shouldExecutableBeAdded(executable) else {
-                                let error = LoadExecutableError.executableAlreadyExists
-                                self.showAlert(error, for: window)
-                                continue
-                            }
-                            block(executable)
-                        } catch {
-                            if let loadError = error as? LoadExecutableError {
-                                self.showAlert(loadError, for: window)
-                            }
-                            self.logger.error("\(error)")
-                        }
+        Task {
+            let response = await panel.beginSheetModal(for: window)
+            guard response == .OK else { return }
+            for url in panel.urls {
+                do {
+                    let executable = try await self.model.loadExecutable(url: url)
+                    guard self.shouldExecutableBeAdded(executable) else {
+                        let error = LoadExecutableError.executableAlreadyExists
+                        self.showAlert(error, for: window)
+                        continue
                     }
+                    block(executable)
+                } catch {
+                    if let loadError = error as? LoadExecutableError {
+                        self.showAlert(loadError, for: window)
+                    }
+                    self.logger.error("\(error)")
                 }
             }
         }
