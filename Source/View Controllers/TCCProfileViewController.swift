@@ -156,13 +156,14 @@ class TCCProfileViewController: NSViewController {
                 logger.error("Error loading identities: \(error.localizedDescription)")
             }
 
-            let uploadView = UploadInfoView(signingIdentities: identities) {
-                // Dismiss the sheet when the UploadInfoView decides it is done
-                if let controller = self.presentedViewControllers?.first {
-                    self.dismiss(controller)
-                }
+            weak var presentedController: NSViewController?
+            let uploadView = UploadInfoView(signingIdentities: identities) { [weak self] in
+                guard let self, let controller = presentedController else { return }
+                self.dismiss(controller)
             }
-            self.presentAsSheet(NSHostingController(rootView: uploadView))
+            let hostingController = NSHostingController(rootView: uploadView)
+            presentedController = hostingController
+            self.presentAsSheet(hostingController)
         }
     }
 
