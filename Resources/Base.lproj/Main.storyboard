@@ -2066,7 +2066,7 @@
                                         <constraint firstItem="kz4-ht-2cC" firstAttribute="top" secondItem="ziG-1X-dvc" secondAttribute="top" id="8KY-jy-tJT"/>
                                     </constraints>
                                 </clipView>
-                                <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="KLE-vO-NH9">
+                                <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="KLE-vO-NH9">
                                     <rect key="frame" x="1" y="541" width="630" height="17"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
@@ -2741,11 +2741,11 @@
             <objects>
                 <viewController id="mUH-Fz-fcT" customClass="SaveViewController" customModule="PPPC_Utility" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="GHe-gw-cy8">
-                        <rect key="frame" x="0.0" y="0.0" width="606" height="219"/>
+                        <rect key="frame" x="0.0" y="0.0" width="456" height="219"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <gridView xPlacement="leading" yPlacement="center" rowAlignment="none" translatesAutoresizingMaskIntoConstraints="NO" id="nzc-6A-dLR">
-                                <rect key="frame" x="20" y="55" width="566" height="144"/>
+                                <rect key="frame" x="20" y="55" width="416" height="144"/>
                                 <rows>
                                     <gridRow id="uWb-yl-Q35"/>
                                     <gridRow id="ncF-JL-mkS"/>
@@ -2903,7 +2903,7 @@
                                 </gridCells>
                             </gridView>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vNo-b7-akf">
-                                <rect key="frame" x="533" y="11" width="53" height="24"/>
+                                <rect key="frame" x="383" y="11" width="53" height="24"/>
                                 <buttonCell key="cell" type="push" title="Save" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="oOs-dR-fYN">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -2952,7 +2952,7 @@ Gw
                 </arrayController>
                 <userDefaultsController id="kfS-xo-ej2"/>
             </objects>
-            <point key="canvasLocation" x="2015" y="386.5"/>
+            <point key="canvasLocation" x="1940" y="387"/>
         </scene>
     </scenes>
     <resources>
