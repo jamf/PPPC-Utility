@@ -44,6 +44,7 @@
 		71061E54246106C800822D35 /* LoadExecutableError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71061E53246106C800822D35 /* LoadExecutableError.swift */; };
 		A149C78D2CC68FBF00E0789E /* LoggerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A149C78C2CC68FA100E0789E /* LoggerExtensions.swift */; };
 		A3AEAC59ED8A799232A3C7A0 /* MockURLProtocolTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5366B3770CBADA87D7BBF4C5 /* MockURLProtocolTests.swift */; };
+		FEE04458C398AE5C1074928F /* NetworkingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34BE578BDC64B5400E2F0233 /* NetworkingTests.swift */; };
 		B5E09548250BCCFC00A40409 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E09547250BCCFC00A40409 /* Alert.swift */; };
 		C01BEDBA28636F57001B0B3B /* SemanticVersionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01BEDB928636F57001B0B3B /* SemanticVersionTests.swift */; };
 		C03270BA28636330008B38E0 /* SemanticVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03270B928636330008B38E0 /* SemanticVersion.swift */; };
@@ -78,11 +79,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0B5B34EC5FC52B5B4C9D0258 /* ArrayExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ArrayExtensionTests.swift; path = ArrayExtensionTests.swift; sourceTree = "<group>"; };
-		15C8454BE335603AE6B55049 /* ExecutableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExecutableTests.swift; path = ExecutableTests.swift; sourceTree = "<group>"; };
+		0B5B34EC5FC52B5B4C9D0258 /* ArrayExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensionTests.swift; sourceTree = "<group>"; };
+		15C8454BE335603AE6B55049 /* ExecutableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExecutableTests.swift; sourceTree = "<group>"; };
 		345B01D523FDBF55008838B6 /* TCCProfileExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TCCProfileExtensions.swift; sourceTree = "<group>"; };
 		34DED4D523FDDB2B00C53FB9 /* TCCProfileConfigurationPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TCCProfileConfigurationPanel.swift; sourceTree = "<group>"; };
-		47A216936077FDD709470D77 /* JamfProVersionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = JamfProVersionTests.swift; path = JamfProVersionTests.swift; sourceTree = "<group>"; };
+		47A216936077FDD709470D77 /* JamfProVersionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JamfProVersionTests.swift; sourceTree = "<group>"; };
+		34BE578BDC64B5400E2F0233 /* NetworkingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingTests.swift; sourceTree = "<group>"; };
 		5366B3770CBADA87D7BBF4C5 /* MockURLProtocolTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLProtocolTests.swift; sourceTree = "<group>"; };
 		5901A2762534DF1400A1CD2F /* ModelBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelBuilder.swift; sourceTree = "<group>"; };
 		59206D6825265F0C00B94795 /* TCCProfileTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TCCProfileTests.swift; sourceTree = "<group>"; };
@@ -140,8 +142,9 @@
 		C0EE9A7C28639BF800738B6B /* TestTCCProfileForJamfProAPI.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestTCCProfileForJamfProAPI.txt; sourceTree = "<group>"; };
 		C0EE9A7E2863BDE300738B6B /* JamfProAPITypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JamfProAPITypes.swift; sourceTree = "<group>"; };
 		C0EE9A802863BE2B00738B6B /* NetworkAuthManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkAuthManager.swift; sourceTree = "<group>"; };
-		DAC55385D89BDBD447395AF1 /* TCCPolicyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TCCPolicyTests.swift; path = TCCPolicyTests.swift; sourceTree = "<group>"; };
+		DAC55385D89BDBD447395AF1 /* TCCPolicyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TCCPolicyTests.swift; sourceTree = "<group>"; };
 		F3DBEDB941B7AEAE7BFF2776 /* MockURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLProtocol.swift; sourceTree = "<group>"; };
+		F82A8F992F85984800A72E5C /* PPPC Utility.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "PPPC Utility.xctestplan"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,7 +171,6 @@
 			children = (
 				0B5B34EC5FC52B5B4C9D0258 /* ArrayExtensionTests.swift */,
 			);
-			name = ExtensionTests;
 			path = ExtensionTests;
 			sourceTree = "<group>";
 		};
@@ -264,6 +266,7 @@
 		6EC409D1214D65BC00BE4F17 = {
 			isa = PBXGroup;
 			children = (
+				F82A8F992F85984800A72E5C /* PPPC Utility.xctestplan */,
 				6E95730721553B650002C30B /* LICENSE */,
 				97227C6726248CD7000F26C1 /* CHANGELOG.md */,
 				6E5D5A1521541B8F00B43312 /* README.md */,
@@ -367,6 +370,7 @@
 				C07961E128749A36007B98A7 /* TokenTests.swift */,
 				47A216936077FDD709470D77 /* JamfProVersionTests.swift */,
 				5366B3770CBADA87D7BBF4C5 /* MockURLProtocolTests.swift */,
+				34BE578BDC64B5400E2F0233 /* NetworkingTests.swift */,
 			);
 			path = NetworkingTests;
 			sourceTree = "<group>";
@@ -511,6 +515,7 @@
 				D023DD16033D452488B41741 /* ArrayExtensionTests.swift in Sources */,
 				47F24E408CC42F176BD97CA5 /* MockURLProtocol.swift in Sources */,
 				A3AEAC59ED8A799232A3C7A0 /* MockURLProtocolTests.swift in Sources */,
+				FEE04458C398AE5C1074928F /* NetworkingTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

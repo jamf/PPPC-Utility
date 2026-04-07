@@ -36,7 +36,7 @@ final class MockURLProtocol: URLProtocol, @unchecked Sendable {
     nonisolated(unsafe) static var requestHandler: RequestHandler?
 
     /// Clear the handler between tests.
-    static func reset() {
+    nonisolated static func reset() {
         requestHandler = nil
     }
 

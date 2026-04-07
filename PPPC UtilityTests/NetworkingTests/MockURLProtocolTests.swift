@@ -29,7 +29,9 @@ import Foundation
 @testable import PPPC_Utility
 
 @Suite("MockURLProtocol", .serialized)
-struct MockURLProtocolTests {
+final class MockURLProtocolTests {
+
+    deinit { MockURLProtocol.reset() }
 
     @Test("Injected session intercepts requests and returns expected data")
     func injectedSessionInterceptsRequests() async throws {
@@ -38,7 +40,6 @@ struct MockURLProtocolTests {
             let url = request.url!
             return (.ok(url: url), expectedBody)
         }
-        defer { MockURLProtocol.reset() }
 
         // when
         let url = URL(string: "https://example.com/test")!
@@ -56,7 +57,6 @@ struct MockURLProtocolTests {
             let url = request.url!
             return (.status(401, url: url), Data())
         }
-        defer { MockURLProtocol.reset() }
 
         // when
         let url = URL(string: "https://example.com/auth")!
