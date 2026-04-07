@@ -13,6 +13,26 @@ The goal is to close these gaps in four small, independently reviewable pull req
 
 **Honest coverage estimate after all 4 phases: ~55–65%.** See "Remaining gaps" at the bottom.
 
+## Quality gates (apply to every phase)
+
+1. **Warning baseline:** Capture compiler warnings before and after, and verify no new warnings are introduced:
+   ```
+   xcodebuild clean build-for-testing -project "PPPC Utility.xcodeproj" -scheme "PPPC Utility" -destination "platform=macOS" 2>&1 | grep -i "warning:" | grep -v "xcodebuild: WARNING"
+   ```
+2. **Coverage measurement:** Always save a result bundle and report target coverage from it:
+   ```
+   xcodebuild test -project "PPPC Utility.xcodeproj" -scheme "PPPC Utility" -destination "platform=macOS" -resultBundlePath "build/TestResults.xcresult"
+   xcrun xccov view --report --only-targets "build/TestResults.xcresult"
+   ```
+   Capture a baseline before each phase and compare after.
+
+## Testing conventions
+
+- Follow Swift Testing conventions for this repo (`@Test`/`@Suite` on their own line, `// when` + `// then` comments only).
+- Avoid string-equality checks on localized error messages; assert error types/codes instead.
+- For XML, assert presence/absence of specific nodes via parsing, not full-string equality.
+- Mock URLProtocol must be parallel-safe by default: use a per-session handler registry keyed by a unique session ID (e.g., request header), with thread-safe storage and teardown reset. Each test uses its own `URLSessionConfiguration` with its own session ID.
+
 ---
 
 ## Phase 1 — Pure Unit Tests
@@ -45,7 +65,7 @@ All new test files build and pass. No new compiler warnings.
 ## Phase 2 — URLSession Injection + Mock Infrastructure
 
 **Branch:** `test/phase-2-urlsession-injection`
-**Production changes only — no new tests.**
+**Production changes plus minimal test coverage for the new injection seam.**
 
 ### Production changes
 | File | Change |
@@ -53,11 +73,13 @@ All new test files build and pass. No new compiler warnings.
 | `Source/Networking/Networking.swift` | Add `session: URLSession = .shared` to `init`; replace all `URLSession.shared.data(for:)` call sites with `session.data(for:)` |
 | `Source/Networking/JamfProAPIClient.swift` | Replace `URLSession.shared.data(for: simpleRequest)` in the HTML version fallback with `session.data(for: simpleRequest)` |
 | `Source/Networking/UploadManager.swift` | Add `session: URLSession = .shared` to `init`; pass `session` when constructing `JamfProAPIClient` (2 call sites) |
+| _Optional if needed_ | If `UploadManager` calls `SecurityWrapper` directly, introduce a small injectable signing abstraction with a default implementation that delegates to `SecurityWrapper` so tests can bypass Security calls. |
 
 ### New test helper
 | File | What it provides |
 |------|-----------------|
-| `PPPC UtilityTests/Helpers/MockURLProtocol.swift` | `MockURLProtocol: URLProtocol` with static `requestHandler`; `URLSession.mock(handler:)` factory method; `HTTPURLResponse.ok(url:)` and `.status(_:url:)` convenience helpers |
+| `PPPC UtilityTests/Helpers/MockURLProtocol.swift` | `MockURLProtocol: URLProtocol` with per-session handler registry keyed by a unique session ID header; thread-safe storage; `URLSession.mock(handler:)` creates an isolated session; `MockURLProtocol.reset()` for teardown; `HTTPURLResponse.ok(url:)` and `.status(_:url:)` helpers |
+| `PPPC UtilityTests/NetworkingTests/MockURLProtocolTests.swift` | Minimal test proving injected `URLSession` is used and handlers are isolated per session (parallel-safe). |
 
 ### Verification
 Build succeeds, all existing 50 tests still pass, no new warnings. No behavioral change — `URLSession.shared` remains the default for all production paths.
@@ -80,7 +102,7 @@ Build succeeds, all existing 50 tests still pass, no new warnings. No behavioral
 - `Source/Networking/JamfProAPIClient.swift` — `getJamfProVersion`, `getOrganizationName`, `getBearerToken`, `load()`
 
 ### Verification
-Run tests. All new tests pass with no real network calls.
+Run tests. All new tests pass with no real network calls. Error assertions use error types/codes, not localized message strings.
 
 ---
 
@@ -92,8 +114,8 @@ Run tests. All new tests pass with no real network calls.
 ### New / expanded files
 | File | What it tests |
 |------|---------------|
-| `PPPC UtilityTests/NetworkingTests/UploadManagerTests.swift` | `verifyConnection`: version ≥ 10.7.1 → `mustSign=false`; version < 10.7.1 → `mustSign=true`; 401 → `anyError("Invalid credentials.")`; 500 → `anyError("Jamf Pro server is unavailable.")`; `upload`: no site → no `<site>` in XML; with site → correct `<site><id>…</id><name>…</name></site>` block |
-| `PPPC UtilityTests/TCCProfileImporterTests/TCCProfileTests.swift` | Expand existing suite: `jamfProAPIData(site: nil)` has no `<site>`; `jamfProAPIData(site:)` has correct site block; `<general>`, `<payloads>`, `<name>`, `<description>` all present |
+| `PPPC UtilityTests/NetworkingTests/UploadManagerTests.swift` | `verifyConnection`: version ≥ 10.7.1 → `mustSign=false`; version < 10.7.1 → `mustSign=true`; 401 → `invalidUsernamePassword` (type/code); 500 → `serverResponse(500)` (type/code); `upload`: no site → no `<site>` in XML; with site → correct `<site><id>…</id><name>…</name></site>` block |
+| `PPPC UtilityTests/TCCProfileImporterTests/TCCProfileTests.swift` | Expand existing suite: `jamfProAPIData(site: nil)` has no `<site>`; `jamfProAPIData(site:)` has correct site block; `<general>`, `<payloads>`, `<name>`, `<description>` all present (assert via XML parsing) |
 
 ### Key source under test
 - `Source/Networking/UploadManager.swift` — `verifyConnection`, `upload`
