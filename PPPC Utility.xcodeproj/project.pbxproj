@@ -7,9 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		09614BF857C294E1E344298C /* TCCPolicyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC55385D89BDBD447395AF1 /* TCCPolicyTests.swift */; };
+		1E57D2CD1B0B3602E7FD9806 /* JamfProVersionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A216936077FDD709470D77 /* JamfProVersionTests.swift */; };
 		345B01D623FDBF55008838B6 /* TCCProfileExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 345B01D523FDBF55008838B6 /* TCCProfileExtensions.swift */; };
 		34DED4D423FDCAFD00C53FB9 /* SwiftyCMSDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F95AE1523158F03002E0A22 /* SwiftyCMSDecoder.swift */; };
 		34DED4D623FDDB2B00C53FB9 /* TCCProfileConfigurationPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DED4D523FDDB2B00C53FB9 /* TCCProfileConfigurationPanel.swift */; };
+		4FCF90441F48EF3AAAD465A9 /* ExecutableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C8454BE335603AE6B55049 /* ExecutableTests.swift */; };
 		5901A2772534DF1400A1CD2F /* ModelBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5901A2762534DF1400A1CD2F /* ModelBuilder.swift */; };
 		59206D6925265F0C00B94795 /* TCCProfileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59206D6825265F0C00B94795 /* TCCProfileTests.swift */; };
 		59798B82252D16310070A204 /* TCCProfileBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59798B81252D16310070A204 /* TCCProfileBuilder.swift */; };
@@ -59,6 +62,7 @@
 		C0EE9A7D28639BF800738B6B /* TestTCCProfileForJamfProAPI.txt in Resources */ = {isa = PBXBuildFile; fileRef = C0EE9A7C28639BF800738B6B /* TestTCCProfileForJamfProAPI.txt */; };
 		C0EE9A7F2863BDE300738B6B /* JamfProAPITypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0EE9A7E2863BDE300738B6B /* JamfProAPITypes.swift */; };
 		C0EE9A812863BE2B00738B6B /* NetworkAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0EE9A802863BE2B00738B6B /* NetworkAuthManager.swift */; };
+		D023DD16033D452488B41741 /* ArrayExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5B34EC5FC52B5B4C9D0258 /* ArrayExtensionTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,8 +76,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0B5B34EC5FC52B5B4C9D0258 /* ArrayExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ArrayExtensionTests.swift; path = ArrayExtensionTests.swift; sourceTree = "<group>"; };
+		15C8454BE335603AE6B55049 /* ExecutableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExecutableTests.swift; path = ExecutableTests.swift; sourceTree = "<group>"; };
 		345B01D523FDBF55008838B6 /* TCCProfileExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TCCProfileExtensions.swift; sourceTree = "<group>"; };
 		34DED4D523FDDB2B00C53FB9 /* TCCProfileConfigurationPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TCCProfileConfigurationPanel.swift; sourceTree = "<group>"; };
+		47A216936077FDD709470D77 /* JamfProVersionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = JamfProVersionTests.swift; path = JamfProVersionTests.swift; sourceTree = "<group>"; };
 		5901A2762534DF1400A1CD2F /* ModelBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelBuilder.swift; sourceTree = "<group>"; };
 		59206D6825265F0C00B94795 /* TCCProfileTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TCCProfileTests.swift; sourceTree = "<group>"; };
 		59798B81252D16310070A204 /* TCCProfileBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TCCProfileBuilder.swift; sourceTree = "<group>"; };
@@ -130,6 +137,7 @@
 		C0EE9A7C28639BF800738B6B /* TestTCCProfileForJamfProAPI.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestTCCProfileForJamfProAPI.txt; sourceTree = "<group>"; };
 		C0EE9A7E2863BDE300738B6B /* JamfProAPITypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JamfProAPITypes.swift; sourceTree = "<group>"; };
 		C0EE9A802863BE2B00738B6B /* NetworkAuthManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkAuthManager.swift; sourceTree = "<group>"; };
+		DAC55385D89BDBD447395AF1 /* TCCPolicyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TCCPolicyTests.swift; path = TCCPolicyTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +159,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		566844CF7F499F04774BB73F /* ExtensionTests */ = {
+			isa = PBXGroup;
+			children = (
+				0B5B34EC5FC52B5B4C9D0258 /* ArrayExtensionTests.swift */,
+			);
+			name = ExtensionTests;
+			path = ExtensionTests;
+			sourceTree = "<group>";
+		};
 		5901A2752534DEFF00A1CD2F /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -176,6 +193,8 @@
 				5F90EBE32319992B00738D09 /* ModelTests.swift */,
 				C0E0384327A30D6B00A23FA2 /* PPPCServicesManagerTests.swift */,
 				C01BEDB928636F57001B0B3B /* SemanticVersionTests.swift */,
+				15C8454BE335603AE6B55049 /* ExecutableTests.swift */,
+				DAC55385D89BDBD447395AF1 /* TCCPolicyTests.swift */,
 			);
 			path = ModelTests;
 			sourceTree = "<group>";
@@ -207,6 +226,7 @@
 				5F95AE272315B069002E0A22 /* TCCProfileImporterTests */,
 				C07961E028749A36007B98A7 /* NetworkingTests */,
 				5F95AE1F2315A6AD002E0A22 /* Info.plist */,
+				566844CF7F499F04774BB73F /* ExtensionTests */,
 			);
 			path = "PPPC UtilityTests";
 			sourceTree = "<group>";
@@ -340,6 +360,7 @@
 				C0A2B5412B1A5D5C0007F510 /* JamfProAPIClientTests.swift */,
 				C07961E328749A51007B98A7 /* NetworkAuthManagerTests.swift */,
 				C07961E128749A36007B98A7 /* TokenTests.swift */,
+				47A216936077FDD709470D77 /* JamfProVersionTests.swift */,
 			);
 			path = NetworkingTests;
 			sourceTree = "<group>";
@@ -478,6 +499,10 @@
 				59798B82252D16310070A204 /* TCCProfileBuilder.swift in Sources */,
 				5F90EBE42319992B00738D09 /* ModelTests.swift in Sources */,
 				C0E0384427A30D6B00A23FA2 /* PPPCServicesManagerTests.swift in Sources */,
+				4FCF90441F48EF3AAAD465A9 /* ExecutableTests.swift in Sources */,
+				09614BF857C294E1E344298C /* TCCPolicyTests.swift in Sources */,
+				1E57D2CD1B0B3602E7FD9806 /* JamfProVersionTests.swift in Sources */,
+				D023DD16033D452488B41741 /* ArrayExtensionTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

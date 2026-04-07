@@ -15,5 +15,6 @@
   xcodebuild clean build-for-testing -project "PPPC Utility.xcodeproj" -scheme "PPPC Utility" -destination "platform=macOS" 2>&1 | grep -i "warning:" | grep -v "xcodebuild: WARNING"
   ```
 - Test mocks must be parallel-safe. For URLProtocol mocks, use a per-session handler registry keyed by a unique session ID (e.g., a request header), with thread-safe storage and teardown reset; do not rely on a single static handler when tests can run in parallel.
+- Avoid snake_case in test names (e.g., `generateDisplayName_bundleIdentifier`). If a name is getting long, use a Trait with a sentence-style description instead.
 - Use parameterized tests with Traits where it reduces duplication; 1–2 args is ideal, max 3
 - Beyond 3 params: create separate tests with some values hard-coded
