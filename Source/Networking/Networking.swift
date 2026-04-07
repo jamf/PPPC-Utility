@@ -46,10 +46,12 @@ enum NetworkingError: Error, Equatable {
 class Networking {
     let authManager: NetworkAuthManager
     let serverUrlString: String
+    let session: URLSession
 
-    init(serverUrlString: String, tokenManager: NetworkAuthManager) {
+    init(serverUrlString: String, tokenManager: NetworkAuthManager, session: URLSession = .shared) {
         self.serverUrlString = serverUrlString
         self.authManager = tokenManager
+        self.session = session
     }
 
     /// Subclasses must override this to do a network call to return a bearer token.
@@ -75,7 +77,7 @@ class Networking {
     /// - Parameter request: A request that already has authorization info.
     /// - Returns: The result.
     func loadPreAuthorized<T: Decodable>(request: URLRequest) async throws -> T {
-        let (data, urlResponse) = try await URLSession.shared.data(for: request)
+        let (data, urlResponse) = try await session.data(for: request)
 
         if let httpResponse = urlResponse as? HTTPURLResponse {
             if httpResponse.statusCode == 401 {
@@ -96,7 +98,7 @@ class Networking {
     /// - Returns: The result.
     func loadBasicAuthorized<T: Decodable>(request: URLRequest) async throws -> T {
         let authorizedRequest = try await authorizeBasic(request: request)
-        let (data, urlResponse) = try await URLSession.shared.data(for: authorizedRequest)
+        let (data, urlResponse) = try await session.data(for: authorizedRequest)
 
         if let httpResponse = urlResponse as? HTTPURLResponse {
             if httpResponse.statusCode == 401 {
@@ -117,7 +119,7 @@ class Networking {
     /// - Returns: The result.
     func loadBearerAuthorized<T: Decodable>(request: URLRequest, allowRetryForAuth: Bool = true) async throws -> T {
         let authorizedRequest = try await authorizeBearer(request: request)
-        let (data, urlResponse) = try await URLSession.shared.data(for: authorizedRequest)
+        let (data, urlResponse) = try await session.data(for: authorizedRequest)
 
         if let httpResponse = urlResponse as? HTTPURLResponse {
             if httpResponse.statusCode == 401 {
@@ -143,7 +145,7 @@ class Networking {
     /// - Returns: The result.
     func sendBearerAuthorized(request: URLRequest, allowRetryForAuth: Bool = true) async throws -> Data {
         let authorizedRequest = try await authorizeBearer(request: request)
-        let (data, urlResponse) = try await URLSession.shared.data(for: authorizedRequest)
+        let (data, urlResponse) = try await session.data(for: authorizedRequest)
 
         if let httpResponse = urlResponse as? HTTPURLResponse {
             if httpResponse.statusCode == 401 {
@@ -166,7 +168,7 @@ class Networking {
     /// - Returns: The result.
     func sendBasicAuthorized(request: URLRequest) async throws -> Data {
         let authorizedRequest = try await authorizeBasic(request: request)
-        let (data, urlResponse) = try await URLSession.shared.data(for: authorizedRequest)
+        let (data, urlResponse) = try await session.data(for: authorizedRequest)
 
         if let httpResponse = urlResponse as? HTTPURLResponse {
             if httpResponse.statusCode == 401 {

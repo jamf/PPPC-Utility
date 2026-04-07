@@ -11,6 +11,7 @@ import OSLog
 
 struct UploadManager {
     let serverURL: String
+    let session: URLSession
 
     let logger = Logger.UploadManager
 
@@ -23,10 +24,15 @@ struct UploadManager {
         case anyError(String)
     }
 
+    init(serverURL: String, session: URLSession = .shared) {
+        self.serverURL = serverURL
+        self.session = session
+    }
+
     func verifyConnection(authManager: NetworkAuthManager) async throws -> VerificationInfo {
         logger.info("Checking connection to Jamf Pro server")
 
-        let networking = JamfProAPIClient(serverUrlString: serverURL, tokenManager: authManager)
+        let networking = JamfProAPIClient(serverUrlString: serverURL, tokenManager: authManager, session: session)
 
         do {
             let version = try await networking.getJamfProVersion()
@@ -49,7 +55,7 @@ struct UploadManager {
     func upload(profile: TCCProfile, authMgr: NetworkAuthManager, siteInfo: (String, String)?, signingIdentity: SigningIdentity?) async throws {
         logger.info("Uploading profile: \(profile.displayName, privacy: .public)")
 
-        let networking = JamfProAPIClient(serverUrlString: serverURL, tokenManager: authMgr)
+        let networking = JamfProAPIClient(serverUrlString: serverURL, tokenManager: authMgr, session: session)
         var identity: SecIdentity?
         if let signingIdentity = signingIdentity {
             logger.info("Signing profile with \(signingIdentity.displayName)")

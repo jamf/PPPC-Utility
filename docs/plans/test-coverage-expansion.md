@@ -31,7 +31,8 @@ The goal is to close these gaps in four small, independently reviewable pull req
 - Follow Swift Testing conventions for this repo (`@Test`/`@Suite` on their own line, `// when` + `// then` comments only).
 - Avoid string-equality checks on localized error messages; assert error types/codes instead.
 - For XML, assert presence/absence of specific nodes via parsing, not full-string equality.
-- Mock URLProtocol must be parallel-safe by default: use a per-session handler registry keyed by a unique session ID (e.g., request header), with thread-safe storage and teardown reset. Each test uses its own `URLSessionConfiguration` with its own session ID.
+- Prefer Swift Concurrency (actors, async/await) over locks/mutexes. Allow low-level synchronization only when synchronous nonisolated contexts (e.g., URLProtocol overrides) make async impossible.
+- Network tests run serialized (`.serialized` trait on suites). `MockURLProtocol` uses a simple single static handler — no per-session registry or thread-safe storage needed.
 
 ---
 
@@ -77,8 +78,8 @@ All new test files build and pass. No new compiler warnings.
 ### New test helper
 | File | What it provides |
 |------|-----------------|
-| `PPPC UtilityTests/Helpers/MockURLProtocol.swift` | `MockURLProtocol: URLProtocol` with per-session handler registry keyed by a unique session ID header; thread-safe storage; `URLSession.mock(handler:)` creates an isolated session; `MockURLProtocol.reset()` for teardown; `HTTPURLResponse.ok(url:)` and `.status(_:url:)` helpers |
-| `PPPC UtilityTests/NetworkingTests/MockURLProtocolTests.swift` | Minimal test proving injected `URLSession` is used and handlers are isolated per session (parallel-safe). |
+| `PPPC UtilityTests/Helpers/MockURLProtocol.swift` | `MockURLProtocol: URLProtocol` with a single static `requestHandler` closure; `URLSession.mock(handler:)` creates an ephemeral session wired to the protocol; `MockURLProtocol.reset()` for teardown; `HTTPURLResponse.ok(url:)` and `.status(_:url:)` helpers |
+| `PPPC UtilityTests/NetworkingTests/MockURLProtocolTests.swift` | Minimal tests proving injected `URLSession` intercepts requests and returns expected responses. Suite runs `.serialized`. |
 
 ### Verification
 Build succeeds, all existing 50 tests still pass, no new warnings. No behavioral change — `URLSession.shared` remains the default for all production paths.
@@ -122,7 +123,7 @@ Run tests. All new tests pass with no real network calls. Error assertions use e
 
 ### MockURLProtocol dispatch pattern for UploadManager tests
 ```swift
-MockURLProtocol.requestHandler = { request in
+let (session, _) = URLSession.mock { request in
     let path = request.url?.path ?? ""
     if path.hasSuffix("auth/token")               { return (tokenResponse, tokenJSON) }
     if path.contains("jamf-pro-version")           { return (ok, versionJSON) }
