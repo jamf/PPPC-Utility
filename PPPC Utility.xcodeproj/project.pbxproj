@@ -74,6 +74,10 @@
 		AA0000020000000000000006 /* DropHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000002 /* DropHandlerTests.swift */; };
 		AA0000020000000000000007 /* PolicySelectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000003 /* PolicySelectionTests.swift */; };
 		AA0000020000000000000008 /* ProfileBuildingSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000004 /* ProfileBuildingSnapshotTests.swift */; };
+		AA0000030000000000000005 /* ProfileImportTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000030000000000000001 /* ProfileImportTests.swift */; };
+		AA0000030000000000000006 /* SaveSheetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000030000000000000002 /* SaveSheetTests.swift */; };
+		AA0000030000000000000007 /* SaveSheetSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000030000000000000003 /* SaveSheetSnapshotTests.swift */; };
+		AA0000030000000000000008 /* TestUIProfile.mobileconfig in Resources */ = {isa = PBXBuildFile; fileRef = AA0000030000000000000004 /* TestUIProfile.mobileconfig */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -168,6 +172,10 @@
 		AA0000020000000000000002 /* DropHandlerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropHandlerTests.swift; sourceTree = "<group>"; };
 		AA0000020000000000000003 /* PolicySelectionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicySelectionTests.swift; sourceTree = "<group>"; };
 		AA0000020000000000000004 /* ProfileBuildingSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileBuildingSnapshotTests.swift; sourceTree = "<group>"; };
+		AA0000030000000000000001 /* ProfileImportTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImportTests.swift; sourceTree = "<group>"; };
+		AA0000030000000000000002 /* SaveSheetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveSheetTests.swift; sourceTree = "<group>"; };
+		AA0000030000000000000003 /* SaveSheetSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveSheetSnapshotTests.swift; sourceTree = "<group>"; };
+		AA0000030000000000000004 /* TestUIProfile.mobileconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = TestUIProfile.mobileconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -418,8 +426,20 @@
 				AA0000020000000000000002 /* DropHandlerTests.swift */,
 				AA0000020000000000000003 /* PolicySelectionTests.swift */,
 				AA0000020000000000000004 /* ProfileBuildingSnapshotTests.swift */,
+				AA0000030000000000000001 /* ProfileImportTests.swift */,
+				AA0000030000000000000002 /* SaveSheetTests.swift */,
+				AA0000030000000000000003 /* SaveSheetSnapshotTests.swift */,
+				AA0000030000000000000009 /* Resources */,
 			);
 			path = "PPPC UtilityUITests";
+			sourceTree = "<group>";
+		};
+		AA0000030000000000000009 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				AA0000030000000000000004 /* TestUIProfile.mobileconfig */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -569,6 +589,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA0000030000000000000008 /* TestUIProfile.mobileconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -649,6 +670,9 @@
 				AA0000020000000000000006 /* DropHandlerTests.swift in Sources */,
 				AA0000020000000000000007 /* PolicySelectionTests.swift in Sources */,
 				AA0000020000000000000008 /* ProfileBuildingSnapshotTests.swift in Sources */,
+				AA0000030000000000000005 /* ProfileImportTests.swift in Sources */,
+				AA0000030000000000000006 /* SaveSheetTests.swift in Sources */,
+				AA0000030000000000000007 /* SaveSheetSnapshotTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

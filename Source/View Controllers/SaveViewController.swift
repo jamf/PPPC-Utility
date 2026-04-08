@@ -96,6 +96,9 @@ class SaveViewController: NSViewController {
         payloadIdentifier = UUID().uuidString
         identitiesPopUp.isEnabled = false
         identitiesPopUp.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+
+        setupAccessibilityIdentifiers()
+
         Task {
             do {
                 var identities = try await SecurityWrapper.loadSigningIdentities()
@@ -166,6 +169,15 @@ class SaveViewController: NSViewController {
             payloadDescription = tccProfile.payloadDescription
             payloadIdentifier = tccProfile.identifier
         }
+    }
+
+    // MARK: - Accessibility Identifiers
+
+    private func setupAccessibilityIdentifiers() {
+        payloadNameLabel.setAccessibilityIdentifier("SavePayloadNameField")
+        organizationLabel.setAccessibilityIdentifier("SaveOrganizationField")
+        identitiesPopUp.setAccessibilityIdentifier("SaveSigningIdentityPopUp")
+        saveButton.setAccessibilityIdentifier("SaveSheetSaveButton")
     }
 
 }
