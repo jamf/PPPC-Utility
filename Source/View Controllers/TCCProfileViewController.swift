@@ -413,6 +413,33 @@ class TCCProfileViewController: NSViewController {
         addAppleEventButton.setAccessibilityIdentifier("AddAppleEventButton")
         removeAppleEventButton.setAccessibilityIdentifier("RemoveAppleEventButton")
         removeExecutableButton.setAccessibilityIdentifier("RemoveExecutableButton")
+
+        // Detail labels
+        nameLabel.setAccessibilityIdentifier("ExecutableNameLabel")
+        identifierLabel.setAccessibilityIdentifier("ExecutableIdentifierLabel")
+        codeRequirementLabel.setAccessibilityIdentifier("ExecutableCodeRequirementLabel")
+
+        // Policy popup buttons
+        addressBookPopUp.setAccessibilityIdentifier("Policy.AddressBook")
+        photosPopUp.setAccessibilityIdentifier("Policy.Photos")
+        remindersPopUp.setAccessibilityIdentifier("Policy.Reminders")
+        calendarPopUp.setAccessibilityIdentifier("Policy.Calendar")
+        accessibilityPopUp.setAccessibilityIdentifier("Policy.Accessibility")
+        postEventsPopUp.setAccessibilityIdentifier("Policy.PostEvent")
+        adminFilesPopUp.setAccessibilityIdentifier("Policy.SystemPolicySysAdminFiles")
+        allFilesPopUp.setAccessibilityIdentifier("Policy.SystemPolicyAllFiles")
+        cameraPopUp.setAccessibilityIdentifier("Policy.Camera")
+        microphonePopUp.setAccessibilityIdentifier("Policy.Microphone")
+        fileProviderPresencePopUp.setAccessibilityIdentifier("Policy.FileProviderPresence")
+        listenEventPopUp.setAccessibilityIdentifier("Policy.ListenEvent")
+        mediaLibraryPopUp.setAccessibilityIdentifier("Policy.MediaLibrary")
+        screenCapturePopUp.setAccessibilityIdentifier("Policy.ScreenCapture")
+        speechRecognitionPopUp.setAccessibilityIdentifier("Policy.SpeechRecognition")
+        dekstopFolderPopUp.setAccessibilityIdentifier("Policy.SystemPolicyDesktopFolder")
+        documentsFolderPopUp.setAccessibilityIdentifier("Policy.SystemPolicyDocumentsFolder")
+        downloadsFolderPopUp.setAccessibilityIdentifier("Policy.SystemPolicyDownloadsFolder")
+        networkVolumesPopUp.setAccessibilityIdentifier("Policy.SystemPolicyNetworkVolumes")
+        removableVolumesPopUp.setAccessibilityIdentifier("Policy.SystemPolicyRemovableVolumes")
     }
 
     // MARK: - UI Test Mode
@@ -427,6 +454,24 @@ class TCCProfileViewController: NSViewController {
         )
         executable.iconPath = IconFilePath.application
         model.selectedExecutables.append(executable)
+    }
+
+    // MARK: - Programmatic Drop Hook (Test Support)
+
+    /// Simulates a drop operation on the executables table from a file URL.
+    /// Used by UI tests to bypass Finder drag-and-drop automation.
+    func performTestDrop(fileURL: URL) -> Bool {
+        do {
+            let newExecutable = try model.loadExecutable(url: fileURL)
+            guard executablesAC.canInsert, shouldExecutableBeAdded(newExecutable) else {
+                return false
+            }
+            executablesAC.addObject(newExecutable)
+            return true
+        } catch {
+            logger.error("Test drop failed: \(error)")
+            return false
+        }
     }
 }
 

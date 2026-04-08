@@ -70,6 +70,10 @@
 		34983C38E36D43848E3180EF /* AppLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51AE948AE3843988D9E90D8 /* AppLaunchTests.swift */; };
 		0DC8C0849BC44886BAC99843 /* MainWindowSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2911C12E8241B384B0FE8F /* MainWindowSnapshotTests.swift */; };
 		3476DD57FB5D41868778839E /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = AFA8FC3ECC9F414D9865D1C4 /* SnapshotTesting */; };
+		AA0000020000000000000005 /* ExecutableManagementTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000001 /* ExecutableManagementTests.swift */; };
+		AA0000020000000000000006 /* DropHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000002 /* DropHandlerTests.swift */; };
+		AA0000020000000000000007 /* PolicySelectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000003 /* PolicySelectionTests.swift */; };
+		AA0000020000000000000008 /* ProfileBuildingSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000004 /* ProfileBuildingSnapshotTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -160,6 +164,10 @@
 		0256149B20FD423097A8D712 /* PPPC UtilityUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PPPC UtilityUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A51AE948AE3843988D9E90D8 /* AppLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLaunchTests.swift; sourceTree = "<group>"; };
 		3B2911C12E8241B384B0FE8F /* MainWindowSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindowSnapshotTests.swift; sourceTree = "<group>"; };
+		AA0000020000000000000001 /* ExecutableManagementTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExecutableManagementTests.swift; sourceTree = "<group>"; };
+		AA0000020000000000000002 /* DropHandlerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropHandlerTests.swift; sourceTree = "<group>"; };
+		AA0000020000000000000003 /* PolicySelectionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicySelectionTests.swift; sourceTree = "<group>"; };
+		AA0000020000000000000004 /* ProfileBuildingSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileBuildingSnapshotTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -406,6 +414,10 @@
 			children = (
 				A51AE948AE3843988D9E90D8 /* AppLaunchTests.swift */,
 				3B2911C12E8241B384B0FE8F /* MainWindowSnapshotTests.swift */,
+				AA0000020000000000000001 /* ExecutableManagementTests.swift */,
+				AA0000020000000000000002 /* DropHandlerTests.swift */,
+				AA0000020000000000000003 /* PolicySelectionTests.swift */,
+				AA0000020000000000000004 /* ProfileBuildingSnapshotTests.swift */,
 			);
 			path = "PPPC UtilityUITests";
 			sourceTree = "<group>";
@@ -633,6 +645,10 @@
 			files = (
 				34983C38E36D43848E3180EF /* AppLaunchTests.swift in Sources */,
 				0DC8C0849BC44886BAC99843 /* MainWindowSnapshotTests.swift in Sources */,
+				AA0000020000000000000005 /* ExecutableManagementTests.swift in Sources */,
+				AA0000020000000000000006 /* DropHandlerTests.swift in Sources */,
+				AA0000020000000000000007 /* PolicySelectionTests.swift in Sources */,
+				AA0000020000000000000008 /* ProfileBuildingSnapshotTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
