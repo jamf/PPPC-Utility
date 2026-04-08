@@ -216,6 +216,59 @@ final class NetworkingSendBearerAuthorizedTests {
         #expect(String(data: data, encoding: .utf8) == "OK")
     }
 
+    @Test("Refreshes the bearer token and retries when server returns 401 on first attempt")
+    func retriesOnceOn401() async throws {
+        nonisolated(unsafe) var tokenCallCount = 0
+        let authManager = NetworkAuthManager(username: "admin", password: "pass")
+        let session = URLSession.mock { request in
+            let path = request.url?.path ?? ""
+            if path.hasSuffix("auth/token") {
+                tokenCallCount += 1
+                if tokenCallCount == 1 {
+                    let tokenJSON = #"{"token":"stale","expires":"2099-01-01T00:00:00.000Z"}"#
+                    return (.ok(url: request.url!), Data(tokenJSON.utf8))
+                }
+                let tokenJSON = #"{"token":"refreshed","expires":"2099-01-01T00:00:00.000Z"}"#
+                return (.ok(url: request.url!), Data(tokenJSON.utf8))
+            }
+            let auth = request.value(forHTTPHeaderField: "Authorization") ?? ""
+            if auth.contains("refreshed") {
+                return (.ok(url: request.url!), Data("OK".utf8))
+            }
+            return (.status(401, url: request.url!), Data())
+        }
+
+        let networking = JamfProAPIClient(serverUrlString: "https://jamf.example.com", tokenManager: authManager, session: session)
+        let request = try networking.url(forEndpoint: "api/v1/resource")
+
+        // when
+        let data = try await networking.sendBearerAuthorized(request: request)
+
+        // then
+        #expect(String(data: data, encoding: .utf8) == "OK")
+    }
+
+    @Test("Throws invalidToken when server returns 401 on both the initial and retry attempts")
+    func throwsOnSecond401() async throws {
+        let authManager = NetworkAuthManager(username: "admin", password: "pass")
+        let session = URLSession.mock { request in
+            let path = request.url?.path ?? ""
+            if path.hasSuffix("auth/token") {
+                let tokenJSON = #"{"token":"refreshed","expires":"2099-01-01T00:00:00.000Z"}"#
+                return (.ok(url: request.url!), Data(tokenJSON.utf8))
+            }
+            return (.status(401, url: request.url!), Data())
+        }
+
+        let networking = JamfProAPIClient(serverUrlString: "https://jamf.example.com", tokenManager: authManager, session: session)
+        let request = try networking.url(forEndpoint: "api/v1/resource")
+
+        // when/then
+        await #expect(throws: AuthError.invalidToken) {
+            try await networking.sendBearerAuthorized(request: request)
+        }
+    }
+
     @Test("Throws serverResponse on 500")
     func throwsOn500() async throws {
         let authManager = NetworkAuthManager(username: "admin", password: "pass")

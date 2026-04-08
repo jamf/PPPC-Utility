@@ -151,7 +151,7 @@ class Networking {
             if httpResponse.statusCode == 401 {
                 if allowRetryForAuth {
                     _ = try await authManager.refreshToken(networking: self)
-                    return try await loadBearerAuthorized(request: request, allowRetryForAuth: false)
+                    return try await sendBearerAuthorized(request: request, allowRetryForAuth: false)
                 }
 
                 throw AuthError.invalidToken
