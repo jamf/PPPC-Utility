@@ -234,6 +234,9 @@ class TCCProfileViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setupAccessibilityIdentifiers()
+        loadUITestModeDataIfNeeded()
+
         //  Setup policy pop up
         setupAllowDeny(policies: [
             addressBookPopUpAC,
@@ -398,6 +401,32 @@ class TCCProfileViewController: NSViewController {
             $0.destination == rule.destination
         }
         return foundRule == nil
+    }
+
+    // MARK: - Accessibility Identifiers
+
+    private func setupAccessibilityIdentifiers() {
+        executablesTable.setAccessibilityIdentifier("ExecutablesTable")
+        appleEventsTable.setAccessibilityIdentifier("AppleEventsTable")
+        saveButton.setAccessibilityIdentifier("SaveButton")
+        uploadButton.setAccessibilityIdentifier("UploadButton")
+        addAppleEventButton.setAccessibilityIdentifier("AddAppleEventButton")
+        removeAppleEventButton.setAccessibilityIdentifier("RemoveAppleEventButton")
+        removeExecutableButton.setAccessibilityIdentifier("RemoveExecutableButton")
+    }
+
+    // MARK: - UI Test Mode
+
+    private func loadUITestModeDataIfNeeded() {
+        guard CommandLine.arguments.contains("-UITestMode") else { return }
+
+        let executable = Executable(
+            identifier: "com.apple.iBooks",
+            codeRequirement: "identifier \"com.apple.iBooks\" and anchor apple",
+            "Books"
+        )
+        executable.iconPath = IconFilePath.application
+        model.selectedExecutables.append(executable)
     }
 }
 
