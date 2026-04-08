@@ -111,33 +111,33 @@ struct NetworkAuthManagerTests {
     }
 
     @Test
-    func basicAuthString() throws {
+    func basicAuthString() async throws {
         let authManager = NetworkAuthManager(username: "test", password: "none")
 
         // when
-        let actual = try authManager.basicAuthString()
+        let actual = try await authManager.basicAuthString()
 
         // then
         #expect(actual == "dGVzdDpub25l")
     }
 
     @Test
-    func basicAuthStringEmptyUsername() {
+    func basicAuthStringEmptyUsername() async throws {
         let authManager = NetworkAuthManager(username: "", password: "none")
 
         // when/then
-        #expect(throws: AuthError.invalidUsernamePassword) {
-            try authManager.basicAuthString()
+        await #expect(throws: AuthError.invalidUsernamePassword) {
+            try await authManager.basicAuthString()
         }
     }
 
     @Test
-    func basicAuthStringEmptyPassword() {
+    func basicAuthStringEmptyPassword() async throws {
         let authManager = NetworkAuthManager(username: "mine", password: "")
 
         // when/then
-        #expect(throws: AuthError.invalidUsernamePassword) {
-            try authManager.basicAuthString()
+        await #expect(throws: AuthError.invalidUsernamePassword) {
+            try await authManager.basicAuthString()
         }
     }
 }

@@ -147,21 +147,24 @@ class TCCProfileViewController: NSViewController {
     let logger = Logger.TCCProfileViewController
 
     @IBAction func uploadAction(_ sender: NSButton) {
-        let identities: [SigningIdentity]
-        do {
-            identities = try SecurityWrapper.loadSigningIdentities()
-        } catch {
-            identities = []
-            logger.error("Error loading identities: \(error.localizedDescription)")
-        }
+        Task {
+            let identities: [SigningIdentity]
+            do {
+                identities = try await SecurityWrapper.loadSigningIdentities()
+            } catch {
+                identities = []
+                logger.error("Error loading identities: \(error.localizedDescription)")
+            }
 
-        let uploadView = UploadInfoView(signingIdentities: identities) {
-            // Dismiss the sheet when the UploadInfoView decides it is done
-            if let controller = self.presentedViewControllers?.first {
+            weak var presentedController: NSViewController?
+            let uploadView = UploadInfoView(signingIdentities: identities) { [weak self] in
+                guard let self, let controller = presentedController else { return }
                 self.dismiss(controller)
             }
+            let hostingController = NSHostingController(rootView: uploadView)
+            presentedController = hostingController
+            self.presentAsSheet(hostingController)
         }
-        self.presentAsSheet(NSHostingController(rootView: uploadView))
     }
 
     fileprivate func showAlert(_ error: LocalizedError, for window: NSWindow) {
@@ -181,15 +184,15 @@ class TCCProfileViewController: NSViewController {
         let tccProfileImporter = TCCProfileImporter()
         let tccConfigPanel = TCCProfileConfigurationPanel()
 
-        tccConfigPanel.loadTCCProfileFromFile(importer: tccProfileImporter, window: window) { [weak self] tccProfileResult in
-            guard let weakSelf = self else { return }
-            switch tccProfileResult {
-            case .success(let tccProfile):
-                weakSelf.model.importProfile(tccProfile: tccProfile)
-            case .failure(let tccProfileImportError):
-                if !tccProfileImportError.isCancelled {
-                    weakSelf.showAlert(tccProfileImportError, for: window)
+        Task {
+            do {
+                if let tccProfile = try await tccConfigPanel.loadTCCProfileFromFile(importer: tccProfileImporter, window: window) {
+                    await model.importProfile(tccProfile: tccProfile)
                 }
+            } catch let error as TCCProfileImportError {
+                showAlert(error, for: window)
+            } catch {
+                showAlert(TCCProfileImportError.invalidProfileFile(description: error.localizedDescription), for: window)
             }
         }
     }
@@ -202,23 +205,23 @@ class TCCProfileViewController: NSViewController {
         guard let window = self.view.window else {
             return
         }
-        panel.begin { response in
-            if response == .OK {
-                panel.urls.forEach {
-                    self.model.loadExecutable(url: $0) { [weak self] result in
-                        switch result {
-                        case .success(let executable):
-                            guard self?.shouldExecutableBeAdded(executable) ?? false else {
-                                let error = LoadExecutableError.executableAlreadyExists
-                                self?.showAlert(error, for: window)
-                                return
-                            }
-                            block(executable)
-                        case .failure(let error):
-                            self?.showAlert(error, for: window)
-                            self?.logger.error("\(error)")
-                        }
+        Task {
+            let response = await panel.beginSheetModal(for: window)
+            guard response == .OK else { return }
+            for url in panel.urls {
+                do {
+                    let executable = try self.model.loadExecutable(url: url)
+                    guard self.shouldExecutableBeAdded(executable) else {
+                        let error = LoadExecutableError.executableAlreadyExists
+                        self.showAlert(error, for: window)
+                        continue
                     }
+                    block(executable)
+                } catch {
+                    if let loadError = error as? LoadExecutableError {
+                        self.showAlert(loadError, for: window)
+                    }
+                    self.logger.error("\(error)")
                 }
             }
         }
@@ -251,9 +254,15 @@ class TCCProfileViewController: NSViewController {
             removableVolumesPopUpAC
         ])
 
-        setupStandardUserAllowAndDeny(policies: [screenCapturePopUpAC, listenEventPopUpAC])
+        setupStandardUserAllowAndDeny(policies: [
+            screenCapturePopUpAC,
+            listenEventPopUpAC
+        ])
 
-        setupDenyOnly(policies: [cameraPopUpAC, microphonePopUpAC])
+        setupDenyOnly(policies: [
+            cameraPopUpAC,
+            microphonePopUpAC
+        ])
 
         setupDescriptions()
 
@@ -409,26 +418,26 @@ extension TCCProfileViewController: NSTableViewDataSource {
         guard let window = self.view.window else { return false }
 
         var addedAny = false
-        urls?.forEach { (url) in
-            model.loadExecutable(url: url) { [weak self] result in
-                switch result {
-                case .success(let newExecutable):
-                    if tableView == self?.executablesTable {
-                        guard self?.executablesAC.canInsert ?? false else {
-                            return
-                        }
-                        if self?.shouldExecutableBeAdded(newExecutable) ?? false {
-                            self?.executablesAC.insert(newExecutable, atArrangedObjectIndex: row)
-                            addedAny = true
-                        }
-                    } else {
-                        self?.insertIntoAppleEvents(newExecutable)
+        urls?.forEach { url in
+            do {
+                let newExecutable = try model.loadExecutable(url: url)
+                if tableView == self.executablesTable {
+                    guard self.executablesAC.canInsert else {
+                        return
+                    }
+                    if self.shouldExecutableBeAdded(newExecutable) {
+                        self.executablesAC.insert(newExecutable, atArrangedObjectIndex: row)
                         addedAny = true
                     }
-                case .failure(let error):
-                    self?.showAlert(error, for: window)
-                    self?.logger.error("\(error)")
+                } else {
+                    self.insertIntoAppleEvents(newExecutable)
+                    addedAny = true
                 }
+            } catch {
+                if let loadError = error as? LoadExecutableError {
+                    self.showAlert(loadError, for: window)
+                }
+                self.logger.error("\(error)")
             }
         }
 

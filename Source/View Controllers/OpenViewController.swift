@@ -37,19 +37,25 @@ class OpenViewController: NSViewController, NSTableViewDataSource, NSTableViewDe
     @objc dynamic var choices: [Executable] = []
 
     @IBOutlet var choicesAC: NSArrayController!
+    @IBOutlet weak var choicesTableView: NSTableView!
 
     override func viewWillAppear() {
         super.viewWillAppear()
         //  Reload executables
         current = Model.shared.current
+        choicesTableView.isEnabled = false
         if let value = current {
-            choices = Model.shared.getAppleEventChoices(executable: value)
+            Task {
+                choices = await Model.shared.getAppleEventChoices(executable: value)
+                choicesTableView.isEnabled = true
+            }
         }
     }
 
     func tableView(_ tableView: NSTableView, selectionIndexesForProposedSelection proposedSelectionIndexes: IndexSet) -> IndexSet {
-        DispatchQueue.main.async {
-            guard let index = proposedSelectionIndexes.first else { return }
+        guard let index = proposedSelectionIndexes.first else { return proposedSelectionIndexes }
+        // put the completion block on the MainActor queue and dismiss when done
+        Task {
             self.completionBlock?([.success(self.choices[index])])
             self.dismiss(self)
         }
@@ -64,13 +70,20 @@ class OpenViewController: NSViewController, NSTableViewDataSource, NSTableViewDe
         panel.directoryURL = URL(fileURLWithPath: "/Applications", isDirectory: true)
         panel.begin { response in
             if response == .OK {
-                var selections: [LoadExecutableResult] = []
-                panel.urls.forEach {
-                    Model.shared.loadExecutable(url: $0) { result in
-                        selections.append(result)
+                Task {
+                    var selections: [LoadExecutableResult] = []
+                    for url in panel.urls {
+                        do {
+                            let executable = try Model.shared.loadExecutable(url: url)
+                            selections.append(.success(executable))
+                        } catch {
+                            if let loadError = error as? LoadExecutableError {
+                                selections.append(.failure(loadError))
+                            }
+                        }
                     }
+                    block?(selections)
                 }
-                block?(selections)
             }
         }
     }

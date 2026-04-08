@@ -46,7 +46,9 @@ enum AuthenticationInfo {
     case clientCreds(id: String, secret: String)
 }
 
-/// This actor ensures that only one token refresh occurs at the same time.
+/// This class ensures that only one token refresh occurs at the same time.
+/// With MainActor default isolation, all types are MainActor by default,
+/// providing the same serialization that the actor previously offered.
 actor NetworkAuthManager {
     private let authInfo: AuthenticationInfo
 
@@ -70,7 +72,7 @@ actor NetworkAuthManager {
         }
 
         if let token = currentToken,
-            token.isValid
+            await token.isValid
         {
             return token
         }
@@ -112,15 +114,15 @@ actor NetworkAuthManager {
     /// The default is that bearer authentication is supported.  After the first network call attempting to use bearer auth, if the
     /// server does not actually support it this will return false.
     /// - Returns: True if bearer auth is supported.
-    func bearerAuthSupported() async -> Bool {
+    func bearerAuthSupported() -> Bool {
         return supportsBearerAuth
     }
 
     /// Properly encodes the username and password for use in Basic authentication.
     ///
-    /// This doesn't mutate any state and only accesses `let` constants so it doesn't need to be actor isolated.
+    /// This doesn't mutate any state and only accesses `let` constants so it doesn't need special isolation.
     /// - Returns: The encoded data string for use with Basic Auth.
-    nonisolated func basicAuthString() throws -> String {
+    func basicAuthString() throws -> String {
         guard case .basicAuth(let username, let password) = authInfo,
             !username.isEmpty && !password.isEmpty
         else {

@@ -40,15 +40,13 @@ struct TCCProfileImporterTests {
         let tccProfileImporter = TCCProfileImporter()
         let resourceURL = try getResourceProfile(fileName: "TestTCCProfileSigned-Broken")
 
-        tccProfileImporter.decodeTCCProfile(fileUrl: resourceURL) { tccProfileResult in
-            switch tccProfileResult {
-            case .success:
-                Issue.record("Malformed profile should not succeed")
-            case .failure(let tccProfileError):
-                if case TCCProfileImportError.invalidProfileFile = tccProfileError {
-                } else {
-                    Issue.record("Expected invalidProfileFile error, got \(tccProfileError)")
-                }
+        do {
+            _ = try tccProfileImporter.decodeTCCProfile(fileUrl: resourceURL)
+            Issue.record("Malformed profile should not succeed")
+        } catch {
+            if case TCCProfileImportError.invalidProfileFile = error {
+            } else {
+                Issue.record("Expected invalidProfileFile error, got \(error)")
             }
         }
     }
@@ -59,13 +57,11 @@ struct TCCProfileImporterTests {
         let resourceURL = try getResourceProfile(fileName: "TestTCCUnsignedProfile-Empty")
         let expectedTCCProfileError = TCCProfileImportError.invalidProfileFile(description: "PayloadContent")
 
-        tccProfileImporter.decodeTCCProfile(fileUrl: resourceURL) { tccProfileResult in
-            switch tccProfileResult {
-            case .success:
-                Issue.record("Empty Content, it shouldn't be success")
-            case .failure(let tccProfileError):
-                #expect(tccProfileError.localizedDescription == expectedTCCProfileError.localizedDescription)
-            }
+        do {
+            _ = try tccProfileImporter.decodeTCCProfile(fileUrl: resourceURL)
+            Issue.record("Empty Content, it shouldn't be success")
+        } catch {
+            #expect(error.localizedDescription == expectedTCCProfileError.localizedDescription)
         }
     }
 
@@ -74,15 +70,9 @@ struct TCCProfileImporterTests {
         let tccProfileImporter = TCCProfileImporter()
         let resourceURL = try getResourceProfile(fileName: "TestTCCUnsignedProfile")
 
-        tccProfileImporter.decodeTCCProfile(fileUrl: resourceURL) { tccProfileResult in
-            switch tccProfileResult {
-            case .success(let tccProfile):
-                #expect(!tccProfile.content.isEmpty)
-                #expect(!tccProfile.content[0].services.isEmpty)
-            case .failure(let tccProfileError):
-                Issue.record("Unable to read tccProfile \(tccProfileError.localizedDescription)")
-            }
-        }
+        let tccProfile = try tccProfileImporter.decodeTCCProfile(fileUrl: resourceURL)
+        #expect(!tccProfile.content.isEmpty)
+        #expect(!tccProfile.content[0].services.isEmpty)
     }
 
     @Test
@@ -90,15 +80,9 @@ struct TCCProfileImporterTests {
         let tccProfileImporter = TCCProfileImporter()
         let resourceURL = try getResourceProfile(fileName: "TestTCCUnsignedProfile-allLower")
 
-        tccProfileImporter.decodeTCCProfile(fileUrl: resourceURL) { tccProfileResult in
-            switch tccProfileResult {
-            case .success(let tccProfile):
-                #expect(!tccProfile.content.isEmpty)
-                #expect(!tccProfile.content[0].services.isEmpty)
-            case .failure(let tccProfileError):
-                Issue.record("Unable to read tccProfile \(tccProfileError.localizedDescription)")
-            }
-        }
+        let tccProfile = try tccProfileImporter.decodeTCCProfile(fileUrl: resourceURL)
+        #expect(!tccProfile.content.isEmpty)
+        #expect(!tccProfile.content[0].services.isEmpty)
     }
 
     @Test
@@ -107,13 +91,11 @@ struct TCCProfileImporterTests {
         let resourceURL = try getResourceProfile(fileName: "TestTCCUnsignedProfile-Broken")
         let expectedTCCProfileError = TCCProfileImportError.invalidProfileFile(description: "The given data was not a valid property list.")
 
-        tccProfileImporter.decodeTCCProfile(fileUrl: resourceURL) { tccProfileResult in
-            switch tccProfileResult {
-            case .success:
-                Issue.record("Broken Unsigned Profile, it shouldn't be success")
-            case .failure(let tccProfileError):
-                #expect(tccProfileError.localizedDescription == expectedTCCProfileError.localizedDescription)
-            }
+        do {
+            _ = try tccProfileImporter.decodeTCCProfile(fileUrl: resourceURL)
+            Issue.record("Broken Unsigned Profile, it shouldn't be success")
+        } catch {
+            #expect(error.localizedDescription == expectedTCCProfileError.localizedDescription)
         }
     }
 

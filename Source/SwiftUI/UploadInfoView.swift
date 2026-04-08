@@ -119,10 +119,12 @@ struct UploadInfoView: View {
                 .keyboardShortcut(.cancelAction)
 
                 Button(verifiedConnection ? "Upload" : "Check connection") {
-                    if verifiedConnection {
-                        performUpload()
-                    } else {
-                        verifyConnection()
+                    Task {
+                        if verifiedConnection {
+                            await performUpload()
+                        } else {
+                            await verifyConnection()
+                        }
                     }
                 }
                 .keyboardShortcut(.defaultAction)
@@ -272,7 +274,7 @@ struct UploadInfoView: View {
         return NetworkAuthManager(clientId: username, clientSecret: password)
     }
 
-    func verifyConnection() {
+    func verifyConnection() async {
         guard connectionInfoPassesValidation(setWarningInfo: true) else {
             return
         }
@@ -280,31 +282,30 @@ struct UploadInfoView: View {
         networkOperationInfo = "Checking Jamf Pro server"
 
         let uploadMgr = UploadManager(serverURL: serverURL)
-        uploadMgr.verifyConnection(authManager: makeAuthManager()) { result in
-            if case .success(let success) = result {
-                mustSign = success.mustSign
-                organization = success.organization
-                verifiedConnectionHash = hashOfConnectionInfo
-                if saveToKeychain {
-                    do {
-                        try SecurityWrapper.saveCredentials(
-                            username: username,
-                            password: password,
-                            server: serverURL)
-                    } catch {
-                        logger.error("Failed to save credentials with error: \(error.localizedDescription)")
-                    }
+        do {
+            let info = try await uploadMgr.verifyConnection(authManager: makeAuthManager())
+            mustSign = info.mustSign
+            organization = info.organization
+            verifiedConnectionHash = hashOfConnectionInfo
+            if saveToKeychain {
+                do {
+                    try SecurityWrapper.saveCredentials(
+                        username: username,
+                        password: password,
+                        server: serverURL)
+                } catch {
+                    logger.error("Failed to save credentials with error: \(error.localizedDescription)")
                 }
-                // Future on macOS 12+: focus on Payload Name field
-            } else if case .failure(let failure) = result,
-                case .anyError(let errorString) = failure
-            {
-                warningInfo = errorString
-                verifiedConnectionHash = 0
             }
-
-            networkOperationInfo = nil
+        } catch UploadManager.VerificationError.anyError(let errorString) {
+            warningInfo = errorString
+            verifiedConnectionHash = 0
+        } catch {
+            warningInfo = error.localizedDescription
+            verifiedConnectionHash = 0
         }
+
+        networkOperationInfo = nil
     }
 
     private func dismissView() {
@@ -317,7 +318,7 @@ struct UploadInfoView: View {
         }
     }
 
-    func performUpload() {
+    func performUpload() async {
         guard connectionInfoPassesValidation(setWarningInfo: true) else {
             return
         }
@@ -342,20 +343,18 @@ struct UploadInfoView: View {
         }
 
         let uploadMgr = UploadManager(serverURL: serverURL)
-        uploadMgr.upload(
-            profile: profile,
-            authMgr: makeAuthManager(),
-            siteInfo: siteIdAndName,
-            signingIdentity: mustSign ? signingId : nil
-        ) { possibleError in
-            if let error = possibleError {
-                warningInfo = error.localizedDescription
-            } else {
-                Alert().display(header: "Success", message: "Profile uploaded succesfully")
-                dismissView()
-            }
-            networkOperationInfo = nil
+        do {
+            try await uploadMgr.upload(
+                profile: profile,
+                authMgr: makeAuthManager(),
+                siteInfo: siteIdAndName,
+                signingIdentity: mustSign ? signingId : nil)
+            Alert().display(header: "Success", message: "Profile uploaded successfully")
+            dismissView()
+        } catch {
+            warningInfo = error.localizedDescription
         }
+        networkOperationInfo = nil
     }
 }
 

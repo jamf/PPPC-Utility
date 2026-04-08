@@ -31,9 +31,12 @@ import Foundation
 class TCCProfileConfigurationPanel {
     /// Load TCC Profile data from file
     ///
-    /// - Parameter completion: TCCProfileImportCompletion - success with TCCProfile or failure with TCCProfileImport Error
-    func loadTCCProfileFromFile(importer: TCCProfileImporter, window: NSWindow, _ completion: @escaping TCCProfileImportCompletion) {
-        let openPanel = NSOpenPanel.init()
+    /// - Parameters:
+    ///   - importer: The TCCProfileImporter to use
+    ///   - window: The window to present the open panel in
+    /// - Returns: The decoded TCCProfile, or nil if the user cancelled
+    func loadTCCProfileFromFile(importer: TCCProfileImporter, window: NSWindow) async throws -> TCCProfile? {
+        let openPanel = NSOpenPanel()
         openPanel.allowedFileTypes = ["mobileconfig", "plist"]
         openPanel.allowsMultipleSelection = false
         openPanel.canChooseDirectories = false
@@ -41,19 +44,13 @@ class TCCProfileConfigurationPanel {
         openPanel.canChooseFiles = true
         openPanel.title = "Open TCCProfile File"
 
-        openPanel.beginSheetModal(for: window) { (response) in
-            if response != .OK {
-                completion(.failure(.cancelled))
-            } else {
-                if let result = openPanel.url {
-                    importer.decodeTCCProfile(fileUrl: result) { tccProfileResult in
-                        return completion(tccProfileResult)
-                    }
-                } else {
-                    completion(.failure(TCCProfileImportError.unableToOpenFile))
-                }
-            }
+        let response = await openPanel.beginSheetModal(for: window)
+        guard response == .OK else { return nil }
+
+        guard let fileUrl = openPanel.url else {
+            throw TCCProfileImportError.unableToOpenFile
         }
 
+        return try importer.decodeTCCProfile(fileUrl: fileUrl)
     }
 }

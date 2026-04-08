@@ -85,23 +85,26 @@ class SaveViewController: NSViewController {
 
         panel.begin { response in
             if response == .OK {
-                // Let the save panel fully close itself before doing any work that may require keychain access.
-                DispatchQueue.main.async {
-                    self.saveTo(url: panel.url!)
-                }
+                self.saveTo(url: panel.url!)
             }
         }
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        preferredContentSize = NSSize(width: 502, height: 219)
         payloadIdentifier = UUID().uuidString
-        do {
-            var identities = try SecurityWrapper.loadSigningIdentities()
-            identities.insert(SigningIdentity(name: "Not signed", reference: nil), at: 0)
-            identitiesPopUpAC.add(contentsOf: identities)
-        } catch {
-            logger.error("Error loading identities: \(error)")
+        identitiesPopUp.isEnabled = false
+        identitiesPopUp.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        Task {
+            do {
+                var identities = try await SecurityWrapper.loadSigningIdentities()
+                identities.insert(SigningIdentity(name: "Not signed", reference: nil), at: 0)
+                identitiesPopUpAC.add(contentsOf: identities)
+            } catch {
+                logger.error("Error loading identities: \(error)")
+            }
+            identitiesPopUp.isEnabled = true
         }
 
         loadImportedTCCProfileInfo()
@@ -120,9 +123,11 @@ class SaveViewController: NSViewController {
         defaultsController.removeObserver(self, forKeyPath: "values.organization", context: &SaveViewController.saveProfileKVOContext)
     }
 
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
+    nonisolated override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
         if context == &SaveViewController.saveProfileKVOContext {
-            updateIsReadyToSave()
+            MainActor.assumeIsolated {
+                updateIsReadyToSave()
+            }
         } else {
             super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
         }
@@ -136,18 +141,20 @@ class SaveViewController: NSViewController {
             identifier: payloadIdentifier,
             displayName: payloadName,
             payloadDescription: payloadDescription ?? payloadName)
-        do {
-            var outputData = try profile.xmlData()
-            if let identity = identitiesPopUpAC.selectedObjects.first as? SigningIdentity, let ref = identity.reference {
-                logger.info("Signing profile with \(identity.displayName)")
-                outputData = try SecurityWrapper.sign(data: outputData, using: ref)
+        Task {
+            do {
+                var outputData = try profile.xmlData()
+                if let identity = identitiesPopUpAC.selectedObjects.first as? SigningIdentity, let ref = identity.reference {
+                    logger.info("Signing profile with \(identity.displayName)")
+                    outputData = try await SecurityWrapper.sign(data: outputData, using: ref)
+                }
+                try outputData.write(to: url)
+                logger.info("Saved successfully")
+            } catch {
+                logger.error("Error: \(error)")
             }
-            try outputData.write(to: url)
-            logger.info("Saved successfully")
-        } catch {
-            logger.error("Error: \(error)")
+            self.dismiss(nil)
         }
-        self.dismiss(nil)
     }
 
     func loadImportedTCCProfileInfo() {

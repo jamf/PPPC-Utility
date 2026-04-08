@@ -27,10 +27,11 @@
 
 import Foundation
 import Haversack
+import Security
 
 struct SecurityWrapper {
 
-    static func execute(block: () -> (OSStatus)) throws {
+    nonisolated static func execute(block: () -> (OSStatus)) throws {
         let status = block()
         if status != 0 {
             throw NSError(domain: NSOSStatusErrorDomain, code: Int(status), userInfo: nil)
@@ -72,6 +73,10 @@ struct SecurityWrapper {
     }
 
     static func copyDesignatedRequirement(url: URL) throws -> String {
+        try _copyDesignatedRequirement(url: url)
+    }
+
+    private static func _copyDesignatedRequirement(url: URL) throws -> String {
         let flags = SecCSFlags(rawValue: 0)
         var staticCode: SecStaticCode?
         var requirement: SecRequirement?
@@ -84,8 +89,8 @@ struct SecurityWrapper {
         return text! as String
     }
 
-    static func sign(data: Data, using identity: SecIdentity) throws -> Data {
-
+    // TODO - add @concurrent after swift ui conversion
+    static func sign(data: Data, using identity: SecIdentity) async throws -> Data {
         var outputData: CFData?
         var encoder: CMSEncoder?
         try execute { CMSEncoderCreate(&encoder) }
@@ -97,11 +102,11 @@ struct SecurityWrapper {
         return outputData! as Data
     }
 
-    static func loadSigningIdentities() throws -> [SigningIdentity] {
+    @concurrent static func loadSigningIdentities() async throws -> [SigningIdentity] {
         let haversack = Haversack()
         let query = IdentityQuery().matching(mustBeValidOnDate: Date()).returning(.reference)
 
-        let identities = try haversack.search(where: query)
+        let identities = try await haversack.search(where: query)
 
         return identities.compactMap {
             guard let secIdentity = $0.reference else {
@@ -115,7 +120,7 @@ struct SecurityWrapper {
         }
     }
 
-    static func getCertificateCommonName(for identity: SecIdentity) throws -> String {
+    nonisolated static func getCertificateCommonName(for identity: SecIdentity) throws -> String {
         var certificate: SecCertificate?
         var commonName: CFString?
         try execute { SecIdentityCopyCertificate(identity, &certificate) }
