@@ -58,15 +58,20 @@ struct UploadInfoView: View {
         VStack {
             Form {
                 TextField("Jamf Pro Server *:", text: $serverURL)
+                    .accessibilityIdentifier("UploadServerURLField")
                 Picker("Authorization Type:", selection: $authType) {
                     Text("Basic/Bearer Auth").tag(AuthenticationType.basicAuth)
                     Text("Client Credentials (v10.49+):").tag(AuthenticationType.clientCredentials)
                 }
+                .accessibilityIdentifier("UploadAuthTypePicker")
                 TextField(authType == .basicAuth ? "Username *:" : "Client ID *:", text: $username)
+                    .accessibilityIdentifier("UploadUsernameField")
                 SecureField(authType == .basicAuth ? "Password *:" : "Client Secret *:", text: $password)
+                    .accessibilityIdentifier("UploadPasswordField")
 
                 HStack {
                     Toggle("Save in Keychain", isOn: $saveToKeychain)
+                        .accessibilityIdentifier("UploadSaveKeychainToggle")
                         .help("Store the username & password or client id & secret in the login keychain")
                     if verifiedConnection {
                         Spacer()
@@ -78,20 +83,28 @@ struct UploadInfoView: View {
                     .padding(.vertical)
 
                 TextField("Organization *:", text: $organization)
+                    .accessibilityIdentifier("UploadOrganizationField")
                 TextField("Payload Name *:", text: $payloadName)
+                    .accessibilityIdentifier("UploadPayloadNameField")
                 TextField("Payload Identifier *:", text: $payloadId)
+                    .accessibilityIdentifier("UploadPayloadIdField")
                 TextField("Payload Description:", text: $payloadDescription)
+                    .accessibilityIdentifier("UploadPayloadDescriptionField")
                 Picker("Signing Identity:", selection: $signingId) {
                     Text("Profile signed by server").tag(nil as SigningIdentity?)
                     ForEach(signingIdentities, id: \.self) { identity in
                         Text(identity.displayName).tag(identity)
                     }
                 }
+                .accessibilityIdentifier("UploadSigningIdentityPicker")
                 .disabled(!mustSign)
                 Toggle("Use Site", isOn: $useSite)
+                    .accessibilityIdentifier("UploadUseSiteToggle")
                 TextField("Site ID", value: $siteId, formatter: intFormatter)
+                    .accessibilityIdentifier("UploadSiteIdField")
                     .disabled(!useSite)
                 TextField("Site Name", text: $siteName)
+                    .accessibilityIdentifier("UploadSiteNameField")
                     .disabled(!useSite)
             }
             .padding(.bottom)
@@ -100,6 +113,7 @@ struct UploadInfoView: View {
                 Text(warning)
                     .font(.headline)
                     .foregroundColor(.red)
+                    .accessibilityIdentifier("UploadWarningText")
             }
             if let networkInfo = networkOperationInfo {
                 HStack {
@@ -116,6 +130,7 @@ struct UploadInfoView: View {
                 Button("Cancel") {
                     dismissView()
                 }
+                .accessibilityIdentifier("UploadCancelButton")
                 .keyboardShortcut(.cancelAction)
 
                 Button(verifiedConnection ? "Upload" : "Check connection") {
@@ -127,6 +142,7 @@ struct UploadInfoView: View {
                         }
                     }
                 }
+                .accessibilityIdentifier("UploadActionButton")
                 .keyboardShortcut(.defaultAction)
                 .disabled(!buttonEnabled())
             }
@@ -274,6 +290,16 @@ struct UploadInfoView: View {
         return NetworkAuthManager(clientId: username, clientSecret: password)
     }
 
+    private func makeUploadManager() -> UploadManager {
+        if CommandLine.arguments.contains("-UITestStubNetwork") {
+            let config = URLSessionConfiguration.ephemeral
+            config.protocolClasses = [MockURLProtocol.self]
+            let session = URLSession(configuration: config)
+            return UploadManager(serverURL: serverURL, session: session)
+        }
+        return UploadManager(serverURL: serverURL)
+    }
+
     func verifyConnection() async {
         guard connectionInfoPassesValidation(setWarningInfo: true) else {
             return
@@ -281,7 +307,7 @@ struct UploadInfoView: View {
 
         networkOperationInfo = "Checking Jamf Pro server"
 
-        let uploadMgr = UploadManager(serverURL: serverURL)
+        let uploadMgr = makeUploadManager()
         do {
             let info = try await uploadMgr.verifyConnection(authManager: makeAuthManager())
             mustSign = info.mustSign
@@ -342,7 +368,7 @@ struct UploadInfoView: View {
             }
         }
 
-        let uploadMgr = UploadManager(serverURL: serverURL)
+        let uploadMgr = makeUploadManager()
         do {
             try await uploadMgr.upload(
                 profile: profile,

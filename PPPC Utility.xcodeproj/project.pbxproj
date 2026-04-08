@@ -80,6 +80,9 @@
 		AA0000030000000000000008 /* TestUIProfile.mobileconfig in Resources */ = {isa = PBXBuildFile; fileRef = AA0000030000000000000004 /* TestUIProfile.mobileconfig */; };
 		AA0000040000000000000003 /* AppleEventTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000040000000000000001 /* AppleEventTests.swift */; };
 		AA0000040000000000000004 /* AppleEventSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000040000000000000002 /* AppleEventSnapshotTests.swift */; };
+		AA0000050000000000000010 /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3DBEDB941B7AEAE7BFF2776 /* MockURLProtocol.swift */; };
+		AA0000050000000000000003 /* UploadSheetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000050000000000000001 /* UploadSheetTests.swift */; };
+		AA0000050000000000000004 /* UploadSheetSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000050000000000000002 /* UploadSheetSnapshotTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -180,6 +183,8 @@
 		AA0000030000000000000004 /* TestUIProfile.mobileconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = TestUIProfile.mobileconfig; sourceTree = "<group>"; };
 		AA0000040000000000000001 /* AppleEventTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleEventTests.swift; sourceTree = "<group>"; };
 		AA0000040000000000000002 /* AppleEventSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleEventSnapshotTests.swift; sourceTree = "<group>"; };
+		AA0000050000000000000001 /* UploadSheetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadSheetTests.swift; sourceTree = "<group>"; };
+		AA0000050000000000000002 /* UploadSheetSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadSheetSnapshotTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -436,6 +441,8 @@
 				AA0000030000000000000009 /* Resources */,
 				AA0000040000000000000001 /* AppleEventTests.swift */,
 				AA0000040000000000000002 /* AppleEventSnapshotTests.swift */,
+				AA0000050000000000000001 /* UploadSheetTests.swift */,
+				AA0000050000000000000002 /* UploadSheetSnapshotTests.swift */,
 			);
 			path = "PPPC UtilityUITests";
 			sourceTree = "<group>";
@@ -663,6 +670,7 @@
 				5F90EBDF2319970000738D09 /* TCCProfileImportError.swift in Sources */,
 				C03270BA28636330008B38E0 /* SemanticVersion.swift in Sources */,
 				6E651CC82314397D001CC974 /* FlippedClipView.swift in Sources */,
+				AA0000050000000000000010 /* MockURLProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -681,6 +689,8 @@
 				AA0000030000000000000007 /* SaveSheetSnapshotTests.swift in Sources */,
 				AA0000040000000000000003 /* AppleEventTests.swift in Sources */,
 				AA0000040000000000000004 /* AppleEventSnapshotTests.swift in Sources */,
+				AA0000050000000000000003 /* UploadSheetTests.swift in Sources */,
+				AA0000050000000000000004 /* UploadSheetSnapshotTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
