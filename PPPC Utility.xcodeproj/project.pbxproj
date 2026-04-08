@@ -83,6 +83,7 @@
 		AA0000050000000000000010 /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3DBEDB941B7AEAE7BFF2776 /* MockURLProtocol.swift */; };
 		AA0000050000000000000003 /* UploadSheetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000050000000000000001 /* UploadSheetTests.swift */; };
 		AA0000050000000000000004 /* UploadSheetSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000050000000000000002 /* UploadSheetSnapshotTests.swift */; };
+		AA0000060000000000000002 /* FullWorkflowSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000060000000000000001 /* FullWorkflowSnapshotTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -185,6 +186,7 @@
 		AA0000040000000000000002 /* AppleEventSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleEventSnapshotTests.swift; sourceTree = "<group>"; };
 		AA0000050000000000000001 /* UploadSheetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadSheetTests.swift; sourceTree = "<group>"; };
 		AA0000050000000000000002 /* UploadSheetSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadSheetSnapshotTests.swift; sourceTree = "<group>"; };
+		AA0000060000000000000001 /* FullWorkflowSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullWorkflowSnapshotTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -443,6 +445,7 @@
 				AA0000040000000000000002 /* AppleEventSnapshotTests.swift */,
 				AA0000050000000000000001 /* UploadSheetTests.swift */,
 				AA0000050000000000000002 /* UploadSheetSnapshotTests.swift */,
+				AA0000060000000000000001 /* FullWorkflowSnapshotTests.swift */,
 			);
 			path = "PPPC UtilityUITests";
 			sourceTree = "<group>";
@@ -691,6 +694,7 @@
 				AA0000040000000000000004 /* AppleEventSnapshotTests.swift in Sources */,
 				AA0000050000000000000003 /* UploadSheetTests.swift in Sources */,
 				AA0000050000000000000004 /* UploadSheetSnapshotTests.swift in Sources */,
+				AA0000060000000000000002 /* FullWorkflowSnapshotTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
