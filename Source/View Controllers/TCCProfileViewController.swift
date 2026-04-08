@@ -128,6 +128,7 @@ class TCCProfileViewController: NSViewController {
 
     @IBOutlet weak var saveButton: NSButton!
     @IBOutlet weak var uploadButton: NSButton!
+    @IBOutlet weak var addExecutableButton: NSButton!
     @IBOutlet weak var addAppleEventButton: NSButton!
     @IBOutlet weak var removeAppleEventButton: NSButton!
     @IBOutlet weak var removeExecutableButton: NSButton!
@@ -284,6 +285,9 @@ class TCCProfileViewController: NSViewController {
         executablesTable.dataSource = self
         appleEventsTable.registerForDraggedTypes([.fileURL])
         appleEventsTable.dataSource = self
+
+        setupAccessibilityIdentifiers()
+        loadUITestProfileIfNeeded()
     }
 
     @IBAction func showHelpMessage(_ sender: InfoButton) {
@@ -399,6 +403,53 @@ class TCCProfileViewController: NSViewController {
         }
         return foundRule == nil
     }
+
+    private func setupAccessibilityIdentifiers() {
+        executablesTable.setAccessibilityIdentifier("ExecutablesTable")
+        appleEventsTable.setAccessibilityIdentifier("AppleEventsTable")
+        saveButton.setAccessibilityIdentifier("SaveButton")
+        uploadButton.setAccessibilityIdentifier("UploadButton")
+        addExecutableButton.setAccessibilityIdentifier("AddExecutableButton")
+        addAppleEventButton.setAccessibilityIdentifier("AddAppleEventButton")
+        removeAppleEventButton.setAccessibilityIdentifier("RemoveAppleEventButton")
+        removeExecutableButton.setAccessibilityIdentifier("RemoveExecutableButton")
+    }
+
+    private func loadUITestProfileIfNeeded() {
+        guard ProcessInfo.processInfo.arguments.contains("-UITestMode") else { return }
+        guard let profileURL = Bundle.main.url(forResource: "TestTCCUnsignedProfile", withExtension: "mobileconfig") else {
+            logger.error("UITestMode: Failed to find bundled test profile")
+            return
+        }
+        let importer = TCCProfileImporter()
+        Task {
+            do {
+                let tccProfile = try importer.decodeTCCProfile(data: Data(contentsOf: profileURL))
+                await model.importProfile(tccProfile: tccProfile)
+            } catch {
+                logger.error("UITestMode: Failed to load test profile: \(error.localizedDescription)")
+            }
+        }
+    }
+
+    #if DEBUG
+        /// Simulates a drop of the given file URL onto the executables table.
+        /// Used by UI tests to add executables without automating Finder.
+        func simulateDropOnExecutablesTable(fileURL: URL) -> Bool {
+            do {
+                let executable = try model.loadExecutable(url: fileURL)
+                guard shouldExecutableBeAdded(executable), executablesAC.canInsert else {
+                    return false
+                }
+                let insertIndex = (executablesAC.arrangedObjects as? [Any])?.count ?? 0
+                executablesAC.insert(executable, atArrangedObjectIndex: insertIndex)
+                return true
+            } catch {
+                logger.error("simulateDropOnExecutablesTable failed: \(error)")
+                return false
+            }
+        }
+    #endif
 }
 
 extension TCCProfileViewController: NSTableViewDataSource {

@@ -16,7 +16,13 @@ No UI test target exists yet. This plan adds one incrementally.
 ### Tools
 
 - **XCUITest** for interaction tests (launch, tap, type, assert element state)
-- **swift-snapshot-testing** (pointfreeco) for automated visual regression via screenshot comparison
+
+### Conventions
+
+- Prefer **multiple assertions per test** to minimize app launches — each test method relaunches the app, which is expensive
+- Do not use `// when` / `// then` comment blocks in UI tests — they add noise in assertion-heavy tests
+- The UI test target uses **Swift 5 with minimal concurrency checking** (XCTestCase lifecycle methods are nonisolated, incompatible with MainActor default isolation)
+- No `SWIFT_DEFAULT_ACTOR_ISOLATION` on the UI test target
 
 ### Test data strategy
 
@@ -36,25 +42,22 @@ Upload/connection tests use **scoped `URLSession` injection**. When the app dete
 1. All existing unit tests still pass after each phase.
 2. No new compiler warnings.
 3. UI tests pass in a clean `xcodebuild test` run.
-4. Snapshot references checked into the repo under a clearly named directory.
 
 ---
 
-## Phase 1 — Infrastructure & App Launch
+## Phase 1 — Infrastructure & App Launch ✅
 
-**Goal:** Create the UI test target, add swift-snapshot-testing, prove the app launches and the main window is testable.
+**Goal:** Create the UI test target, prove the app launches and the main window is testable.
 
 ### Work
 
 | Item | Detail |
 |------|--------|
 | Add `PPPC UtilityUITests` target | Xcode UI Testing Bundle targeting `PPPC Utility.app` |
-| Add `swift-snapshot-testing` SPM dependency | Test-only dependency on the UI test target |
 | Add accessibility identifiers to `TCCProfileViewController` | Executables table, Apple Events table, Save button, Upload button, add/remove buttons |
 | Add `-UITestMode` launch argument support | Check flag in `TCCProfileViewController.viewDidLoad`; when set, load a bundled test `.mobileconfig` into `Model.shared` |
-| Add programmatic drop hook | Test-only method that synthesizes a drop operation on the executables table from a file URL |
-| `AppLaunchTests.swift` | Verify app launches, main window exists, executables table visible, key buttons present |
-| `MainWindowSnapshotTests.swift` | Snapshot of empty main window (no executables loaded) as visual baseline |
+| Add programmatic drop hook | `#if DEBUG` method that synthesizes a drop operation on the executables table from a file URL |
+| `AppLaunchTests.swift` | Verify app launches, main window exists, tables visible, all key buttons present, and correct buttons disabled at empty startup (Save, Upload, Remove Executable, Add Apple Event, Remove Apple Event should be disabled; Add Executable should be enabled) |
 
 ### Verification
 
@@ -81,7 +84,6 @@ xcodebuild test -project "PPPC Utility.xcodeproj" -scheme "PPPC Utility" -destin
 | `ExecutableManagementTests.swift` | Launch with `-UITestMode` → verify preloaded executable appears in table; select executable → verify detail labels populated; remove executable → verify table row gone |
 | `DropHandlerTests.swift` | Programmatic drop of Books.app URL onto executables table → verify new row appears with correct name/identifier |
 | `PolicySelectionTests.swift` | Select executable → change a policy popup → verify popup value persists after re-selecting the executable; verify initial state is "-" for all popups |
-| `ProfileBuildingSnapshotTests.swift` | Snapshot of main window with one executable added and policies set |
 
 ---
 
@@ -99,7 +101,6 @@ xcodebuild test -project "PPPC Utility.xcodeproj" -scheme "PPPC Utility" -destin
 |------|---------------|
 | `ProfileImportTests.swift` | Launch with `-UITestMode` (preloaded profile) → verify executables table populated with expected rows; verify policy values match imported profile |
 | `SaveSheetTests.swift` | Trigger save sheet → verify fields present (payload name, org, signing identity); verify save button disabled when required fields empty; verify save button enabled when fields filled |
-| `SaveSheetSnapshotTests.swift` | Snapshot of save sheet in default state and with fields filled |
 
 ### Test data
 
@@ -121,7 +122,6 @@ xcodebuild test -project "PPPC Utility.xcodeproj" -scheme "PPPC Utility" -destin
 | File | What it tests |
 |------|---------------|
 | `AppleEventTests.swift` | Select executable → click Add Apple Event → OpenViewController appears → select destination from preloaded choices table → rule appears in Apple Events table; remove rule → table row gone |
-| `AppleEventSnapshotTests.swift` | Snapshot of Apple Events table with one rule present |
 
 ---
 
@@ -143,19 +143,6 @@ xcodebuild test -project "PPPC Utility.xcodeproj" -scheme "PPPC Utility" -destin
 | File | What it tests |
 |------|---------------|
 | `UploadSheetTests.swift` | Open upload sheet → verify all fields present; verify "Check connection" button disabled with empty URL; enter URL + credentials → button enabled; verify auth type picker switches between Basic Auth and Client Credentials fields; verify "Use Site" toggle shows/hides site fields |
-| `UploadSheetSnapshotTests.swift` | Snapshots: empty form, Basic Auth filled, Client Credentials filled, site fields visible |
-
----
-
-## Phase 6 — Visual Regression Baseline
-
-**Goal:** Capture light-mode snapshots of key screens as a regression baseline.
-
-### New test files
-
-| File | What it tests |
-|------|---------------|
-| `FullWorkflowSnapshotTests.swift` | End-to-end snapshots in default (light) mode: empty state → executable added → policies configured → Apple Event added → save sheet → upload sheet |
 
 ---
 
@@ -163,12 +150,11 @@ xcodebuild test -project "PPPC Utility.xcodeproj" -scheme "PPPC Utility" -destin
 
 ```
 PPPC Utility.xcodeproj/project.pbxproj                          (Phase 1 — add UI test target)
-Package.swift or SPM config                                       (Phase 1 — swift-snapshot-testing dep)
 Source/View Controllers/TCCProfileViewController.swift            (Phase 1-4 — accessibility identifiers, test harness)
 Source/View Controllers/SaveViewController.swift                  (Phase 3 — accessibility identifiers)
 Source/View Controllers/OpenViewController.swift                  (Phase 4 — accessibility identifiers)
 Source/SwiftUI/UploadInfoView.swift                               (Phase 5 — accessibility identifiers)
-PPPC UtilityUITests/                                              (Phase 1-6 — all new test files)
+PPPC UtilityUITests/                                              (Phase 1-5 — all new test files)
 ```
 
 ---
@@ -176,8 +162,6 @@ PPPC UtilityUITests/                                              (Phase 1-6 —
 ## CI considerations
 
 - macOS UI tests require a GUI session (not headless). GitHub Actions macOS runners support this.
-- Snapshot tests are sensitive to OS version and screen scale. Pin to a specific macOS version in CI.
-- On first run, snapshot tests generate reference images (test fails). Commit the references, then subsequent runs compare against them.
 
 ## What this plan does NOT cover
 

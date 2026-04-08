@@ -25,6 +25,14 @@
         "identifier" : "5F95AE1A2315A6AD002E0A22",
         "name" : "PPPC UtilityTests"
       }
+    },
+    {
+      "parallelizable" : false,
+      "target" : {
+        "containerPath" : "container:PPPC Utility.xcodeproj",
+        "identifier" : "AA0001000000000000000001",
+        "name" : "PPPC UtilityUITests"
+      }
     }
   ],
   "version" : 1

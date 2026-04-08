@@ -23,6 +23,14 @@
 - Beyond 3 params: create separate tests with some values hard-coded
 - Use `deinit` as teardown for repeated cleanup across tests in a suite. Use `class` for suites that need `deinit`; use `struct` otherwise.
 
+## UI Testing Conventions
+
+- UI tests use XCTest (XCUITest), not Swift Testing — the UI test target uses Swift 5 with minimal concurrency checking
+- Prefer **multiple assertions per test** to minimize app launches. Each test method relaunches the app, which is expensive. Group related checks (e.g., verify all buttons exist in one test) rather than one assertion per test.
+- Do not use `// when` / `// then` comment blocks in UI tests — they add noise without clarity in assertion-heavy tests
+- Use accessibility identifiers set in `setupAccessibilityIdentifiers()` to locate UI elements
+- The `-UITestMode` launch argument triggers test-specific setup (e.g., loading a test profile)
+
 ## Git
 
 - Do not stage or commit changes in terminal sessions

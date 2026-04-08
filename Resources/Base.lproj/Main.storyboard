@@ -2459,6 +2459,7 @@
                         <outlet property="accessibilityPopUp" destination="SEh-52-ueo" id="zEc-za-cWB"/>
                         <outlet property="accessibilityPopUpAC" destination="2QJ-da-IYc" id="4aT-Yu-8gw"/>
                         <outlet property="addAppleEventButton" destination="RsL-5g-N88" id="1tb-qr-hsR"/>
+                        <outlet property="addExecutableButton" destination="pHR-Fa-o0o" id="UIa-dd-Exe"/>
                         <outlet property="addressBookHelpButton" destination="9ei-Pc-bwm" id="TZh-jR-QVC"/>
                         <outlet property="addressBookPopUp" destination="kIP-RZ-a35" id="6Af-nz-6yD"/>
                         <outlet property="addressBookPopUpAC" destination="XZw-vD-zUR" id="HU8-mW-u4g"/>
