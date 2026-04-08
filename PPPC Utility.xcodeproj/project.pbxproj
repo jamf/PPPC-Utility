@@ -78,6 +78,8 @@
 		AA0000030000000000000006 /* SaveSheetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000030000000000000002 /* SaveSheetTests.swift */; };
 		AA0000030000000000000007 /* SaveSheetSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000030000000000000003 /* SaveSheetSnapshotTests.swift */; };
 		AA0000030000000000000008 /* TestUIProfile.mobileconfig in Resources */ = {isa = PBXBuildFile; fileRef = AA0000030000000000000004 /* TestUIProfile.mobileconfig */; };
+		AA0000040000000000000003 /* AppleEventTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000040000000000000001 /* AppleEventTests.swift */; };
+		AA0000040000000000000004 /* AppleEventSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000040000000000000002 /* AppleEventSnapshotTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -176,6 +178,8 @@
 		AA0000030000000000000002 /* SaveSheetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveSheetTests.swift; sourceTree = "<group>"; };
 		AA0000030000000000000003 /* SaveSheetSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveSheetSnapshotTests.swift; sourceTree = "<group>"; };
 		AA0000030000000000000004 /* TestUIProfile.mobileconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = TestUIProfile.mobileconfig; sourceTree = "<group>"; };
+		AA0000040000000000000001 /* AppleEventTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleEventTests.swift; sourceTree = "<group>"; };
+		AA0000040000000000000002 /* AppleEventSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleEventSnapshotTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -430,6 +434,8 @@
 				AA0000030000000000000002 /* SaveSheetTests.swift */,
 				AA0000030000000000000003 /* SaveSheetSnapshotTests.swift */,
 				AA0000030000000000000009 /* Resources */,
+				AA0000040000000000000001 /* AppleEventTests.swift */,
+				AA0000040000000000000002 /* AppleEventSnapshotTests.swift */,
 			);
 			path = "PPPC UtilityUITests";
 			sourceTree = "<group>";
@@ -673,6 +679,8 @@
 				AA0000030000000000000005 /* ProfileImportTests.swift in Sources */,
 				AA0000030000000000000006 /* SaveSheetTests.swift in Sources */,
 				AA0000030000000000000007 /* SaveSheetSnapshotTests.swift in Sources */,
+				AA0000040000000000000003 /* AppleEventTests.swift in Sources */,
+				AA0000040000000000000004 /* AppleEventSnapshotTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -41,6 +41,9 @@ class OpenViewController: NSViewController, NSTableViewDataSource, NSTableViewDe
 
     override func viewWillAppear() {
         super.viewWillAppear()
+
+        setupAccessibilityIdentifiers()
+
         //  Reload executables
         current = Model.shared.current
         choicesTableView.isEnabled = false
@@ -86,6 +89,12 @@ class OpenViewController: NSViewController, NSTableViewDataSource, NSTableViewDe
                 }
             }
         }
+    }
+
+    // MARK: - Accessibility Identifiers
+
+    private func setupAccessibilityIdentifiers() {
+        choicesTableView.setAccessibilityIdentifier("AppleEventChoicesTable")
     }
 
 }
