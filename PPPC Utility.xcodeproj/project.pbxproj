@@ -156,6 +156,7 @@ remoteInfo = "PPPC Utility";
 		DAC55385D89BDBD447395AF1 /* TCCPolicyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TCCPolicyTests.swift; sourceTree = "<group>"; };
 		F3DBEDB941B7AEAE7BFF2776 /* MockURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLProtocol.swift; sourceTree = "<group>"; };
 		F82A8F992F85984800A72E5C /* PPPC Utility.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "PPPC Utility.xctestplan"; sourceTree = "<group>"; };
+		AA002100000000000000002B /* PPPC Utility UI Tests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "PPPC Utility UI Tests.xctestplan"; sourceTree = "<group>"; };
 AA000B00000000000000000B /* AppLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLaunchTests.swift; sourceTree = "<group>"; };
 AA000D00000000000000000D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 AA0005000000000000000005 /* PPPC UtilityUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PPPC UtilityUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -289,6 +290,7 @@ runOnlyForDeploymentPostprocessing = 0;
 			isa = PBXGroup;
 			children = (
 				F82A8F992F85984800A72E5C /* PPPC Utility.xctestplan */,
+				AA002100000000000000002B /* PPPC Utility UI Tests.xctestplan */,
 				6E95730721553B650002C30B /* LICENSE */,
 				97227C6726248CD7000F26C1 /* CHANGELOG.md */,
 				6E5D5A1521541B8F00B43312 /* README.md */,

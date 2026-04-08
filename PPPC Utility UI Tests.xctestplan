@@ -1,7 +1,7 @@
 {
   "configurations" : [
     {
-      "id" : "A2100AAD-F211-4146-9683-1509D479B82B",
+      "id" : "C4300CCF-D433-4368-B895-3721F691DA4D",
       "name" : "Test Scheme Action",
       "options" : {
 
@@ -10,7 +10,6 @@
   ],
   "defaultOptions" : {
     "codeCoverage" : true,
-    "performanceAntipatternCheckerEnabled" : true,
     "targetForVariableExpansion" : {
       "containerPath" : "container:PPPC Utility.xcodeproj",
       "identifier" : "6EC409D9214D65BC00BE4F17",
@@ -19,11 +18,10 @@
   },
   "testTargets" : [
     {
-      "parallelizable" : false,
       "target" : {
         "containerPath" : "container:PPPC Utility.xcodeproj",
-        "identifier" : "5F95AE1A2315A6AD002E0A22",
-        "name" : "PPPC UtilityTests"
+        "identifier" : "AA0001000000000000000001",
+        "name" : "PPPC UtilityUITests"
       }
     }
   ],
