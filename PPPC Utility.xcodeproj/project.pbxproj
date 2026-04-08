@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		09614BF857C294E1E344298C /* TCCPolicyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC55385D89BDBD447395AF1 /* TCCPolicyTests.swift */; };
 		1E57D2CD1B0B3602E7FD9806 /* JamfProVersionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A216936077FDD709470D77 /* JamfProVersionTests.swift */; };
+		846A32C3BB81E3C29B621792 /* UploadManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30877432D1026706D7E805DA /* UploadManagerTests.swift */; };
 		345B01D623FDBF55008838B6 /* TCCProfileExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 345B01D523FDBF55008838B6 /* TCCProfileExtensions.swift */; };
 		34DED4D423FDCAFD00C53FB9 /* SwiftyCMSDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F95AE1523158F03002E0A22 /* SwiftyCMSDecoder.swift */; };
 		34DED4D623FDDB2B00C53FB9 /* TCCProfileConfigurationPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DED4D523FDDB2B00C53FB9 /* TCCProfileConfigurationPanel.swift */; };
@@ -83,6 +84,7 @@
 		15C8454BE335603AE6B55049 /* ExecutableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExecutableTests.swift; sourceTree = "<group>"; };
 		345B01D523FDBF55008838B6 /* TCCProfileExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TCCProfileExtensions.swift; sourceTree = "<group>"; };
 		34DED4D523FDDB2B00C53FB9 /* TCCProfileConfigurationPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TCCProfileConfigurationPanel.swift; sourceTree = "<group>"; };
+		30877432D1026706D7E805DA /* UploadManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadManagerTests.swift; sourceTree = "<group>"; };
 		47A216936077FDD709470D77 /* JamfProVersionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JamfProVersionTests.swift; sourceTree = "<group>"; };
 		34BE578BDC64B5400E2F0233 /* NetworkingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingTests.swift; sourceTree = "<group>"; };
 		5366B3770CBADA87D7BBF4C5 /* MockURLProtocolTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLProtocolTests.swift; sourceTree = "<group>"; };
@@ -371,6 +373,7 @@
 				47A216936077FDD709470D77 /* JamfProVersionTests.swift */,
 				5366B3770CBADA87D7BBF4C5 /* MockURLProtocolTests.swift */,
 				34BE578BDC64B5400E2F0233 /* NetworkingTests.swift */,
+				30877432D1026706D7E805DA /* UploadManagerTests.swift */,
 			);
 			path = NetworkingTests;
 			sourceTree = "<group>";
@@ -516,6 +519,7 @@
 				47F24E408CC42F176BD97CA5 /* MockURLProtocol.swift in Sources */,
 				A3AEAC59ED8A799232A3C7A0 /* MockURLProtocolTests.swift in Sources */,
 				FEE04458C398AE5C1074928F /* NetworkingTests.swift in Sources */,
+				846A32C3BB81E3C29B621792 /* UploadManagerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
