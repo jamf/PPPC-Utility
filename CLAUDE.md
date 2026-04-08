@@ -7,6 +7,7 @@
 
 ## Swift Testing Conventions
 
+- When adding unit tests, do not modify production code just to accommodate a test. If a genuine bug is found, fix it in a separate commit with its own justification.
 - Place `@Test` and `@Suite` annotations on the line **above** the declaration, not inline
 - Use `// when` and `// then` comment blocks; skip `// given` (assumed from context)
 - When XCTest assertions have message strings, preserve them as `#expect` messages, not code comments (e.g. `#expect(x == false, "reason")`)
@@ -21,3 +22,7 @@
 - Use parameterized tests with Traits where it reduces duplication; 1–2 args is ideal, max 3
 - Beyond 3 params: create separate tests with some values hard-coded
 - Use `deinit` as teardown for repeated cleanup across tests in a suite. Use `class` for suites that need `deinit`; use `struct` otherwise.
+
+## Git
+
+- Do not stage or commit changes in terminal sessions
