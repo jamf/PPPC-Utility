@@ -1,5 +1,9 @@
 # PPPC Utility
 
+## Swift General
+
+- Never force unwrap (`!`) or force cast (`as!`) — use `if let`, `guard let`, or `as?` instead
+
 ## Swift Concurrency
 
 - `SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor` is set on both app and test targets — don't add explicit `@MainActor` to production code or test structs/functions, it's already the default

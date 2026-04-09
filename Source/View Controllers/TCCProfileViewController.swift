@@ -28,6 +28,7 @@
 import Cocoa
 import OSLog
 import SwiftUI
+import UniformTypeIdentifiers
 
 enum TCCProfileDisplayValue: String {
     case allow = "Allow"
@@ -201,7 +202,7 @@ class TCCProfileViewController: NSViewController {
     func promptForExecutables(_ block: @escaping (Executable) -> Void) {
         let panel = NSOpenPanel()
         panel.allowsMultipleSelection = true
-        panel.allowedFileTypes = [kUTTypeBundle, kUTTypeUnixExecutable] as [String]
+        panel.allowedContentTypes = [.bundle, .unixExecutable]
         panel.directoryURL = URL(fileURLWithPath: "/Applications", isDirectory: true)
         guard let window = self.view.window else {
             return
@@ -229,7 +230,7 @@ class TCCProfileViewController: NSViewController {
     }
 
     let pasteboardOptions: [NSPasteboard.ReadingOptionKey: Any] = [
-        .urlReadingContentsConformToTypes: [kUTTypeBundle, kUTTypeUnixExecutable]
+        .urlReadingContentsConformToTypes: [UTType.bundle.identifier, UTType.unixExecutable.identifier]
     ]
 
     override func viewDidLoad() {
