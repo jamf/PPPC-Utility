@@ -26,6 +26,7 @@
 //
 
 import Cocoa
+import UniformTypeIdentifiers
 
 class OpenViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
 
@@ -66,7 +67,7 @@ class OpenViewController: NSViewController, NSTableViewDataSource, NSTableViewDe
         let block = completionBlock
         let panel = NSOpenPanel()
         panel.allowsMultipleSelection = true
-        panel.allowedFileTypes = [kUTTypeBundle, kUTTypeUnixExecutable] as [String]
+        panel.allowedContentTypes = [.bundle, .unixExecutable]
         panel.directoryURL = URL(fileURLWithPath: "/Applications", isDirectory: true)
         panel.begin { response in
             if response == .OK {

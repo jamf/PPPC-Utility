@@ -27,10 +27,11 @@
 
 import Cocoa
 import OSLog
+import UniformTypeIdentifiers
 
 class SaveViewController: NSViewController {
 
-    private static var saveProfileKVOContext = 0
+    nonisolated(unsafe) private static var saveProfileKVOContext = 0
 
     @objc dynamic var isReadyToSave: Bool = false
 
@@ -77,7 +78,9 @@ class SaveViewController: NSViewController {
 
     @IBAction func savePressed(_ sender: NSButton) {
         let panel = NSSavePanel()
-        panel.allowedFileTypes = ["mobileconfig"]
+        if let mobileconfigType = UTType(filenameExtension: "mobileconfig") {
+            panel.allowedContentTypes = [mobileconfigType]
+        }
         panel.nameFieldStringValue = payloadName
         if let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first {
             panel.directoryURL = URL(fileURLWithPath: path, isDirectory: true)

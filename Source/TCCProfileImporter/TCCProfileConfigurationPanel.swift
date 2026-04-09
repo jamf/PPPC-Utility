@@ -27,6 +27,7 @@
 
 import AppKit
 import Foundation
+import UniformTypeIdentifiers
 
 class TCCProfileConfigurationPanel {
     /// Load TCC Profile data from file
@@ -37,7 +38,11 @@ class TCCProfileConfigurationPanel {
     /// - Returns: The decoded TCCProfile, or nil if the user cancelled
     func loadTCCProfileFromFile(importer: TCCProfileImporter, window: NSWindow) async throws -> TCCProfile? {
         let openPanel = NSOpenPanel()
-        openPanel.allowedFileTypes = ["mobileconfig", "plist"]
+        var contentTypes: [UTType] = [.propertyList]
+        if let mobileconfigType = UTType(filenameExtension: "mobileconfig") {
+            contentTypes.append(mobileconfigType)
+        }
+        openPanel.allowedContentTypes = contentTypes
         openPanel.allowsMultipleSelection = false
         openPanel.canChooseDirectories = false
         openPanel.canCreateDirectories = false
