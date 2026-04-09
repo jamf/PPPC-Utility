@@ -1,4 +1,4 @@
-name: Unit Tests
+name: Tests
 
 on:
   pull_request:
@@ -10,7 +10,7 @@ permissions:
   contents: read
 
 jobs:
-  test:
+  unit-tests:
     runs-on: macos-26
     steps:
       - uses: actions/checkout@v4
@@ -20,6 +20,20 @@ jobs:
           xcodebuild test \
             -project "PPPC Utility.xcodeproj" \
             -scheme "PPPC Utility" \
+            -destination "platform=macOS" \
+            CODE_SIGN_IDENTITY="-" \
+            CODE_SIGNING_REQUIRED=NO
+
+  ui-tests:
+    runs-on: macos-26
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run UI tests
+        run: |
+          xcodebuild test \
+            -project "PPPC Utility.xcodeproj" \
+            -scheme "PPPC Utility UI Tests" \
             -destination "platform=macOS" \
             CODE_SIGN_IDENTITY="-" \
             CODE_SIGNING_REQUIRED=NO

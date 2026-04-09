@@ -1,0 +1,29 @@
+{
+  "configurations" : [
+    {
+      "id" : "C4300CCF-D433-4368-B895-3721F691DA4D",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : true,
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:PPPC Utility.xcodeproj",
+      "identifier" : "6EC409D9214D65BC00BE4F17",
+      "name" : "PPPC Utility"
+    }
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:PPPC Utility.xcodeproj",
+        "identifier" : "AA0001000000000000000001",
+        "name" : "PPPC UtilityUITests"
+      }
+    }
+  ],
+  "version" : 1
+}

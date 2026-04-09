@@ -1,4 +1,5 @@
 {
+  "originHash" : "a1bc04ca45476ec303ba87ffcb6060d93e81550701340ec8355671215edfb5d9",
   "pins" : [
     {
       "identity" : "haversack",
@@ -19,5 +20,5 @@
       }
     }
   ],
-  "version" : 2
+  "version" : 3
 }
