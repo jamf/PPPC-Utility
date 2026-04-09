@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		09614BF857C294E1E344298C /* TCCPolicyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC55385D89BDBD447395AF1 /* TCCPolicyTests.swift */; };
 		1E57D2CD1B0B3602E7FD9806 /* JamfProVersionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A216936077FDD709470D77 /* JamfProVersionTests.swift */; };
-		846A32C3BB81E3C29B621792 /* UploadManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30877432D1026706D7E805DA /* UploadManagerTests.swift */; };
 		345B01D623FDBF55008838B6 /* TCCProfileExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 345B01D523FDBF55008838B6 /* TCCProfileExtensions.swift */; };
 		34DED4D423FDCAFD00C53FB9 /* SwiftyCMSDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F95AE1523158F03002E0A22 /* SwiftyCMSDecoder.swift */; };
 		34DED4D623FDDB2B00C53FB9 /* TCCProfileConfigurationPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DED4D523FDDB2B00C53FB9 /* TCCProfileConfigurationPanel.swift */; };
@@ -43,9 +42,11 @@
 		6EC40A16214ECF1E00BE4F17 /* SaveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC40A15214ECF1E00BE4F17 /* SaveViewController.swift */; };
 		6EC40A1C214EF87800BE4F17 /* SigningIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC40A1B214EF87800BE4F17 /* SigningIdentity.swift */; };
 		71061E54246106C800822D35 /* LoadExecutableError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71061E53246106C800822D35 /* LoadExecutableError.swift */; };
+		846A32C3BB81E3C29B621792 /* UploadManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30877432D1026706D7E805DA /* UploadManagerTests.swift */; };
 		A149C78D2CC68FBF00E0789E /* LoggerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A149C78C2CC68FA100E0789E /* LoggerExtensions.swift */; };
 		A3AEAC59ED8A799232A3C7A0 /* MockURLProtocolTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5366B3770CBADA87D7BBF4C5 /* MockURLProtocolTests.swift */; };
-		FEE04458C398AE5C1074928F /* NetworkingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34BE578BDC64B5400E2F0233 /* NetworkingTests.swift */; };
+		AA000E00000000000000000E /* AppLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000B00000000000000000B /* AppLaunchTests.swift */; };
+		AA001200000000000000001C /* TestTCCUnsignedProfile.mobileconfig in Resources */ = {isa = PBXBuildFile; fileRef = AA001100000000000000001B /* TestTCCUnsignedProfile.mobileconfig */; };
 		B5E09548250BCCFC00A40409 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E09547250BCCFC00A40409 /* Alert.swift */; };
 		C01BEDBA28636F57001B0B3B /* SemanticVersionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01BEDB928636F57001B0B3B /* SemanticVersionTests.swift */; };
 		C03270BA28636330008B38E0 /* SemanticVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03270B928636330008B38E0 /* SemanticVersion.swift */; };
@@ -67,8 +68,7 @@
 		C0EE9A7F2863BDE300738B6B /* JamfProAPITypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0EE9A7E2863BDE300738B6B /* JamfProAPITypes.swift */; };
 		C0EE9A812863BE2B00738B6B /* NetworkAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0EE9A802863BE2B00738B6B /* NetworkAuthManager.swift */; };
 		D023DD16033D452488B41741 /* ArrayExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5B34EC5FC52B5B4C9D0258 /* ArrayExtensionTests.swift */; };
-AA000E00000000000000000E /* AppLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000B00000000000000000B /* AppLaunchTests.swift */; };
-AA001200000000000000001C /* TestTCCUnsignedProfile.mobileconfig in Resources */ = {isa = PBXBuildFile; fileRef = AA001100000000000000001B /* TestTCCUnsignedProfile.mobileconfig */; };
+		FEE04458C398AE5C1074928F /* NetworkingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34BE578BDC64B5400E2F0233 /* NetworkingTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,23 +79,23 @@ AA001200000000000000001C /* TestTCCUnsignedProfile.mobileconfig in Resources */ 
 			remoteGlobalIDString = 6EC409D9214D65BC00BE4F17;
 			remoteInfo = "PPPC Utility";
 		};
-AA0006000000000000000006 /* PBXContainerItemProxy */ = {
-isa = PBXContainerItemProxy;
-containerPortal = 6EC409D2214D65BC00BE4F17 /* Project object */;
-proxyType = 1;
-remoteGlobalIDString = 6EC409D9214D65BC00BE4F17;
-remoteInfo = "PPPC Utility";
-};
+		AA0006000000000000000006 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6EC409D2214D65BC00BE4F17 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6EC409D9214D65BC00BE4F17;
+			remoteInfo = "PPPC Utility";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		0B5B34EC5FC52B5B4C9D0258 /* ArrayExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensionTests.swift; sourceTree = "<group>"; };
 		15C8454BE335603AE6B55049 /* ExecutableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExecutableTests.swift; sourceTree = "<group>"; };
-		345B01D523FDBF55008838B6 /* TCCProfileExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TCCProfileExtensions.swift; sourceTree = "<group>"; };
-		34DED4D523FDDB2B00C53FB9 /* TCCProfileConfigurationPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TCCProfileConfigurationPanel.swift; sourceTree = "<group>"; };
 		30877432D1026706D7E805DA /* UploadManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadManagerTests.swift; sourceTree = "<group>"; };
-		47A216936077FDD709470D77 /* JamfProVersionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JamfProVersionTests.swift; sourceTree = "<group>"; };
+		345B01D523FDBF55008838B6 /* TCCProfileExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TCCProfileExtensions.swift; sourceTree = "<group>"; };
 		34BE578BDC64B5400E2F0233 /* NetworkingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingTests.swift; sourceTree = "<group>"; };
+		34DED4D523FDDB2B00C53FB9 /* TCCProfileConfigurationPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TCCProfileConfigurationPanel.swift; sourceTree = "<group>"; };
+		47A216936077FDD709470D77 /* JamfProVersionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JamfProVersionTests.swift; sourceTree = "<group>"; };
 		5366B3770CBADA87D7BBF4C5 /* MockURLProtocolTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLProtocolTests.swift; sourceTree = "<group>"; };
 		5901A2762534DF1400A1CD2F /* ModelBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelBuilder.swift; sourceTree = "<group>"; };
 		59206D6825265F0C00B94795 /* TCCProfileTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TCCProfileTests.swift; sourceTree = "<group>"; };
@@ -134,6 +134,11 @@ remoteInfo = "PPPC Utility";
 		71061E53246106C800822D35 /* LoadExecutableError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadExecutableError.swift; sourceTree = "<group>"; };
 		97227C6726248CD7000F26C1 /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
 		A149C78C2CC68FA100E0789E /* LoggerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerExtensions.swift; sourceTree = "<group>"; };
+		AA0005000000000000000005 /* PPPC UtilityUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PPPC UtilityUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA000B00000000000000000B /* AppLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLaunchTests.swift; sourceTree = "<group>"; };
+		AA000D00000000000000000D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AA001100000000000000001B /* TestTCCUnsignedProfile.mobileconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = TestTCCUnsignedProfile.mobileconfig; sourceTree = "<group>"; };
+		AA002100000000000000002B /* PPPC Utility UI Tests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "PPPC Utility UI Tests.xctestplan"; sourceTree = "<group>"; };
 		B5E09547250BCCFC00A40409 /* Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		C01BEDB928636F57001B0B3B /* SemanticVersionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SemanticVersionTests.swift; sourceTree = "<group>"; };
 		C03270B928636330008B38E0 /* SemanticVersion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SemanticVersion.swift; sourceTree = "<group>"; };
@@ -156,11 +161,6 @@ remoteInfo = "PPPC Utility";
 		DAC55385D89BDBD447395AF1 /* TCCPolicyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TCCPolicyTests.swift; sourceTree = "<group>"; };
 		F3DBEDB941B7AEAE7BFF2776 /* MockURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLProtocol.swift; sourceTree = "<group>"; };
 		F82A8F992F85984800A72E5C /* PPPC Utility.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "PPPC Utility.xctestplan"; sourceTree = "<group>"; };
-		AA002100000000000000002B /* PPPC Utility UI Tests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "PPPC Utility UI Tests.xctestplan"; sourceTree = "<group>"; };
-AA000B00000000000000000B /* AppLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLaunchTests.swift; sourceTree = "<group>"; };
-AA000D00000000000000000D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-AA0005000000000000000005 /* PPPC UtilityUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PPPC UtilityUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-AA001100000000000000001B /* TestTCCUnsignedProfile.mobileconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = TestTCCUnsignedProfile.mobileconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,13 +179,13 @@ AA001100000000000000001B /* TestTCCUnsignedProfile.mobileconfig */ = {isa = PBXF
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-AA0003000000000000000003 /* Frameworks */ = {
-isa = PBXFrameworksBuildPhase;
-buildActionMask = 2147483647;
-files = (
-);
-runOnlyForDeploymentPostprocessing = 0;
-};
+		AA0003000000000000000003 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -368,6 +368,15 @@ runOnlyForDeploymentPostprocessing = 0;
 			path = "View Controllers";
 			sourceTree = "<group>";
 		};
+		AA001000000000000000001A /* PPPC UtilityUITests */ = {
+			isa = PBXGroup;
+			children = (
+				AA000B00000000000000000B /* AppLaunchTests.swift */,
+				AA000D00000000000000000D /* Info.plist */,
+			);
+			path = "PPPC UtilityUITests";
+			sourceTree = "<group>";
+		};
 		C03270BD28636397008B38E0 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
@@ -403,15 +412,6 @@ runOnlyForDeploymentPostprocessing = 0;
 			path = NetworkingTests;
 			sourceTree = "<group>";
 		};
-AA001000000000000000001A /* PPPC UtilityUITests */ = {
-isa = PBXGroup;
-children = (
-AA000B00000000000000000B /* AppLaunchTests.swift */,
-AA000D00000000000000000D /* Info.plist */,
-);
-path = "PPPC UtilityUITests";
-sourceTree = "<group>";
-};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -453,24 +453,24 @@ sourceTree = "<group>";
 			productReference = 6EC409DA214D65BC00BE4F17 /* PPPC Utility.app */;
 			productType = "com.apple.product-type.application";
 		};
-AA0001000000000000000001 /* PPPC UtilityUITests */ = {
-isa = PBXNativeTarget;
-buildConfigurationList = AA0008000000000000000008 /* Build configuration list for PBXNativeTarget "PPPC UtilityUITests" */;
-buildPhases = (
-AA0002000000000000000002 /* Sources */,
-AA0003000000000000000003 /* Frameworks */,
-AA0004000000000000000004 /* Resources */,
-);
-buildRules = (
-);
-dependencies = (
-AA0007000000000000000007 /* PBXTargetDependency */,
-);
-name = "PPPC UtilityUITests";
-productName = "PPPC UtilityUITests";
-productReference = AA0005000000000000000005 /* PPPC UtilityUITests.xctest */;
-productType = "com.apple.product-type.bundle.ui-testing";
-};
+		AA0001000000000000000001 /* PPPC UtilityUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AA0008000000000000000008 /* Build configuration list for PBXNativeTarget "PPPC UtilityUITests" */;
+			buildPhases = (
+				AA0002000000000000000002 /* Sources */,
+				AA0003000000000000000003 /* Frameworks */,
+				AA0004000000000000000004 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AA0007000000000000000007 /* PBXTargetDependency */,
+			);
+			name = "PPPC UtilityUITests";
+			productName = "PPPC UtilityUITests";
+			productReference = AA0005000000000000000005 /* PPPC UtilityUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -486,10 +486,6 @@ productType = "com.apple.product-type.bundle.ui-testing";
 						LastSwiftMigration = 1020;
 						TestTargetID = 6EC409D9214D65BC00BE4F17;
 					};
-					AA0001000000000000000001 = {
-						CreatedOnToolsVersion = 16.0;
-						TestTargetID = 6EC409D9214D65BC00BE4F17;
-					};
 					6EC409D9214D65BC00BE4F17 = {
 						CreatedOnToolsVersion = 10.0;
 						LastSwiftMigration = 1100;
@@ -501,6 +497,10 @@ productType = "com.apple.product-type.bundle.ui-testing";
 								enabled = 1;
 							};
 						};
+					};
+					AA0001000000000000000001 = {
+						CreatedOnToolsVersion = 16.0;
+						TestTargetID = 6EC409D9214D65BC00BE4F17;
 					};
 				};
 			};
@@ -552,13 +552,13 @@ productType = "com.apple.product-type.bundle.ui-testing";
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-AA0004000000000000000004 /* Resources */ = {
-isa = PBXResourcesBuildPhase;
-buildActionMask = 2147483647;
-files = (
-);
-runOnlyForDeploymentPostprocessing = 0;
-};
+		AA0004000000000000000004 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -626,14 +626,14 @@ runOnlyForDeploymentPostprocessing = 0;
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-AA0002000000000000000002 /* Sources */ = {
-isa = PBXSourcesBuildPhase;
-buildActionMask = 2147483647;
-files = (
-AA000E00000000000000000E /* AppLaunchTests.swift in Sources */,
-);
-runOnlyForDeploymentPostprocessing = 0;
-};
+		AA0002000000000000000002 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA000E00000000000000000E /* AppLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -642,11 +642,11 @@ runOnlyForDeploymentPostprocessing = 0;
 			target = 6EC409D9214D65BC00BE4F17 /* PPPC Utility */;
 			targetProxy = 5F95AE202315A6AD002E0A22 /* PBXContainerItemProxy */;
 		};
-AA0007000000000000000007 /* PBXTargetDependency */ = {
-isa = PBXTargetDependency;
-target = 6EC409D9214D65BC00BE4F17 /* PPPC Utility */;
-targetProxy = AA0006000000000000000006 /* PBXContainerItemProxy */;
-};
+		AA0007000000000000000007 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6EC409D9214D65BC00BE4F17 /* PPPC Utility */;
+			targetProxy = AA0006000000000000000006 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -677,6 +677,7 @@ targetProxy = AA0006000000000000000006 /* PBXContainerItemProxy */;
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 15.6;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jamf.PPPC-UtilityTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -705,6 +706,7 @@ targetProxy = AA0006000000000000000006 /* PBXContainerItemProxy */;
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 15.6;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jamf.PPPC-UtilityTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -887,55 +889,57 @@ targetProxy = AA0006000000000000000006 /* PBXContainerItemProxy */;
 			};
 			name = Release;
 		};
-AA0009000000000000000009 /* Debug */ = {
-isa = XCBuildConfiguration;
-buildSettings = {
-CODE_SIGN_IDENTITY = "Apple Development";
-"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
-CODE_SIGN_STYLE = Manual;
-COMBINE_HIDPI_IMAGES = YES;
-DEVELOPMENT_TEAM = "";
-INFOPLIST_FILE = "PPPC UtilityUITests/Info.plist";
-LD_RUNPATH_SEARCH_PATHS = (
-"$(inherited)",
-"@executable_path/../Frameworks",
-"@loader_path/../Frameworks",
-);
-PRODUCT_BUNDLE_IDENTIFIER = "com.jamf.PPPC-UtilityUITests";
-PRODUCT_NAME = "$(TARGET_NAME)";
-PROVISIONING_PROFILE_SPECIFIER = "";
-SWIFT_APPROACHABLE_CONCURRENCY = YES;
-SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-SWIFT_STRICT_CONCURRENCY = minimal;
-SWIFT_VERSION = 5.0;
-TEST_TARGET_NAME = "PPPC Utility";
-};
-name = Debug;
-};
-AA000A00000000000000000A /* Release */ = {
-isa = XCBuildConfiguration;
-buildSettings = {
-CODE_SIGN_IDENTITY = "Apple Development";
-"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
-CODE_SIGN_STYLE = Manual;
-COMBINE_HIDPI_IMAGES = YES;
-DEVELOPMENT_TEAM = "";
-INFOPLIST_FILE = "PPPC UtilityUITests/Info.plist";
-LD_RUNPATH_SEARCH_PATHS = (
-"$(inherited)",
-"@executable_path/../Frameworks",
-"@loader_path/../Frameworks",
-);
-PRODUCT_BUNDLE_IDENTIFIER = "com.jamf.PPPC-UtilityUITests";
-PRODUCT_NAME = "$(TARGET_NAME)";
-PROVISIONING_PROFILE_SPECIFIER = "";
-SWIFT_APPROACHABLE_CONCURRENCY = YES;
-SWIFT_STRICT_CONCURRENCY = minimal;
-SWIFT_VERSION = 5.0;
-TEST_TARGET_NAME = "PPPC Utility";
-};
-name = Release;
-};
+		AA0009000000000000000009 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				CODE_SIGN_STYLE = Manual;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = "PPPC UtilityUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 15.6;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.jamf.PPPC-UtilityUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_STRICT_CONCURRENCY = minimal;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = "PPPC Utility";
+			};
+			name = Debug;
+		};
+		AA000A00000000000000000A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				CODE_SIGN_STYLE = Manual;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = "PPPC UtilityUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 15.6;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.jamf.PPPC-UtilityUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_STRICT_CONCURRENCY = minimal;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = "PPPC Utility";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -966,15 +970,15 @@ name = Release;
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-AA0008000000000000000008 /* Build configuration list for PBXNativeTarget "PPPC UtilityUITests" */ = {
-isa = XCConfigurationList;
-buildConfigurations = (
-AA0009000000000000000009 /* Debug */,
-AA000A00000000000000000A /* Release */,
-);
-defaultConfigurationIsVisible = 0;
-defaultConfigurationName = Release;
-};
+		AA0008000000000000000008 /* Build configuration list for PBXNativeTarget "PPPC UtilityUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA0009000000000000000009 /* Debug */,
+				AA000A00000000000000000A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
