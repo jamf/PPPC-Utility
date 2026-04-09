@@ -34,60 +34,62 @@ import Testing
 struct ExecutableTests {
     let executable = Executable()
 
-    @Test("Display name uses last component of bundle identifier")
-    func generateDisplayNameBundleIdentifier() {
+    @Test(
+        "Display name uses last component of identifier",
+        arguments: [
+            ("com.example.MyApp", "MyApp"),
+            ("/Applications/Utilities/Terminal.app/Contents/MacOS/Terminal", "Terminal"),
+            ("Terminal", "Terminal")
+        ])
+    func generateDisplayName(identifier: String, expected: String) {
         // when
-        let displayName = executable.generateDisplayName(identifier: "com.example.MyApp")
+        let displayName = executable.generateDisplayName(identifier: identifier)
 
         // then
-        #expect(displayName == "MyApp")
+        #expect(displayName == expected)
     }
 
-    @Test("Display name uses last component of path identifier")
-    func generateDisplayNamePathIdentifier() {
+    @Test(
+        "Icon path matches identifier type",
+        arguments: [
+            ("com.example.MyApp", "/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/GenericApplicationIcon.icns"),
+            ("/Applications/Utilities/Terminal.app/Contents/MacOS/Terminal", "/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/ExecutableBinaryIcon.icns")
+        ])
+    func generateIconPath(identifier: String, expected: String) {
         // when
-        let displayName = executable.generateDisplayName(identifier: "/Applications/Utilities/Terminal.app/Contents/MacOS/Terminal")
+        let iconPath = executable.generateIconPath(identifier: identifier)
 
         // then
-        #expect(displayName == "Terminal")
+        #expect(iconPath == expected)
     }
 
-    @Test("Display name returns identifier when single component")
-    func generateDisplayNameSingleComponent() {
-        // when
-        let displayName = executable.generateDisplayName(identifier: "Terminal")
-
-        // then
-        #expect(displayName == "Terminal")
-    }
-
-    @Test("Icon path is application for bundle identifier")
-    func generateIconPathForBundleIdentifier() {
-        // when
-        let iconPath = executable.generateIconPath(identifier: "com.example.MyApp")
-
-        // then
-        #expect(iconPath == IconFilePath.application)
-    }
-
-    @Test("Icon path is binary for path identifier")
-    func generateIconPathForPathIdentifier() {
-        // when
-        let iconPath = executable.generateIconPath(identifier: "/Applications/Utilities/Terminal.app/Contents/MacOS/Terminal")
-
-        // then
-        #expect(iconPath == IconFilePath.binary)
-    }
-
-    @Test("All policy values default to dash")
-    func allPolicyValuesAreDefaults() {
+    @Test("All policy properties default to dash")
+    func policyPropertiesDefaultToDash() {
         let policy = Policy()
 
-        // when
-        let values = policy.allPolicyValues()
-
         // then
-        #expect(values.count == 20)
-        #expect(values.allSatisfy { $0 == "-" })
+        #expect(policy.Accessibility == "-")
+        #expect(policy.AddressBook == "-")
+        #expect(policy.BluetoothAlways == "-")
+        #expect(policy.Calendar == "-")
+        #expect(policy.Camera == "-")
+        #expect(policy.FileProviderPresence == "-")
+        #expect(policy.ListenEvent == "-")
+        #expect(policy.MediaLibrary == "-")
+        #expect(policy.Microphone == "-")
+        #expect(policy.Photos == "-")
+        #expect(policy.PostEvent == "-")
+        #expect(policy.Reminders == "-")
+        #expect(policy.ScreenCapture == "-")
+        #expect(policy.SpeechRecognition == "-")
+        #expect(policy.SystemPolicyAllFiles == "-")
+        #expect(policy.SystemPolicyAppBundles == "-")
+        #expect(policy.SystemPolicyAppData == "-")
+        #expect(policy.SystemPolicyDesktopFolder == "-")
+        #expect(policy.SystemPolicyDocumentsFolder == "-")
+        #expect(policy.SystemPolicyDownloadsFolder == "-")
+        #expect(policy.SystemPolicyNetworkVolumes == "-")
+        #expect(policy.SystemPolicyRemovableVolumes == "-")
+        #expect(policy.SystemPolicySysAdminFiles == "-")
     }
 }

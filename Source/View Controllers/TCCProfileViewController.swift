@@ -52,80 +52,92 @@ class TCCProfileViewController: NSViewController {
     @IBOutlet weak var identifierLabel: NSTextField!
     @IBOutlet weak var codeRequirementLabel: NSTextField!
 
-    @IBOutlet weak var addressBookPopUp: NSPopUpButton!
-    @IBOutlet weak var photosPopUp: NSPopUpButton!
-    @IBOutlet weak var remindersPopUp: NSPopUpButton!
-    @IBOutlet weak var calendarPopUp: NSPopUpButton!
     @IBOutlet weak var accessibilityPopUp: NSPopUpButton!
-    @IBOutlet weak var postEventsPopUp: NSPopUpButton!
+    @IBOutlet weak var addressBookPopUp: NSPopUpButton!
     @IBOutlet weak var adminFilesPopUp: NSPopUpButton!
     @IBOutlet weak var allFilesPopUp: NSPopUpButton!
+    @IBOutlet weak var appBundlesPopUp: NSPopUpButton!
+    @IBOutlet weak var appDataPopUp: NSPopUpButton!
+    @IBOutlet weak var bluetoothAlwaysPopUp: NSPopUpButton!
+    @IBOutlet weak var calendarPopUp: NSPopUpButton!
     @IBOutlet weak var cameraPopUp: NSPopUpButton!
-    @IBOutlet weak var microphonePopUp: NSPopUpButton!
-    @IBOutlet weak var fileProviderPresencePopUp: NSPopUpButton!
-    @IBOutlet weak var listenEventPopUp: NSPopUpButton!
-    @IBOutlet weak var mediaLibraryPopUp: NSPopUpButton!
-    @IBOutlet weak var screenCapturePopUp: NSPopUpButton!
-    @IBOutlet weak var speechRecognitionPopUp: NSPopUpButton!
     @IBOutlet weak var dekstopFolderPopUp: NSPopUpButton!
     @IBOutlet weak var documentsFolderPopUp: NSPopUpButton!
     @IBOutlet weak var downloadsFolderPopUp: NSPopUpButton!
+    @IBOutlet weak var fileProviderPresencePopUp: NSPopUpButton!
+    @IBOutlet weak var listenEventPopUp: NSPopUpButton!
+    @IBOutlet weak var mediaLibraryPopUp: NSPopUpButton!
+    @IBOutlet weak var microphonePopUp: NSPopUpButton!
     @IBOutlet weak var networkVolumesPopUp: NSPopUpButton!
+    @IBOutlet weak var photosPopUp: NSPopUpButton!
+    @IBOutlet weak var postEventsPopUp: NSPopUpButton!
+    @IBOutlet weak var remindersPopUp: NSPopUpButton!
     @IBOutlet weak var removableVolumesPopUp: NSPopUpButton!
+    @IBOutlet weak var screenCapturePopUp: NSPopUpButton!
+    @IBOutlet weak var speechRecognitionPopUp: NSPopUpButton!
 
     // Labels with descriptions
-    @IBOutlet weak var addressBookHelpButton: InfoButton!
-    @IBOutlet weak var photosHelpButton: InfoButton!
-    @IBOutlet weak var remindersHelpButton: InfoButton!
-    @IBOutlet weak var calendarHelpButton: InfoButton!
     @IBOutlet weak var accessibilityHelpButton: InfoButton!
-    @IBOutlet weak var postEventsHelpButton: InfoButton!
+    @IBOutlet weak var addressBookHelpButton: InfoButton!
     @IBOutlet weak var adminFilesHelpButton: InfoButton!
     @IBOutlet weak var allFilesHelpButton: InfoButton!
+    @IBOutlet weak var appBundlesHelpButton: InfoButton!
+    @IBOutlet weak var appDataHelpButton: InfoButton!
+    @IBOutlet weak var bluetoothAlwaysHelpButton: InfoButton!
+    @IBOutlet weak var calendarHelpButton: InfoButton!
     @IBOutlet weak var cameraHelpButton: InfoButton!
-    @IBOutlet weak var microphoneHelpButton: InfoButton!
-    @IBOutlet weak var fileProviderHelpButton: InfoButton!
-    @IBOutlet weak var listenEventHelpButton: InfoButton!
-    @IBOutlet weak var mediaLibraryHelpButton: InfoButton!
-    @IBOutlet weak var screenCaptureHelpButton: InfoButton!
-    @IBOutlet weak var speechRecognitionHelpButton: InfoButton!
     @IBOutlet weak var desktopFolderHelpButton: InfoButton!
     @IBOutlet weak var documentsFolderHelpButton: InfoButton!
     @IBOutlet weak var downloadsFolderHelpButton: InfoButton!
+    @IBOutlet weak var fileProviderHelpButton: InfoButton!
+    @IBOutlet weak var listenEventHelpButton: InfoButton!
+    @IBOutlet weak var mediaLibraryHelpButton: InfoButton!
+    @IBOutlet weak var microphoneHelpButton: InfoButton!
     @IBOutlet weak var networkVolumesHelpButton: InfoButton!
+    @IBOutlet weak var photosHelpButton: InfoButton!
+    @IBOutlet weak var postEventsHelpButton: InfoButton!
+    @IBOutlet weak var remindersHelpButton: InfoButton!
     @IBOutlet weak var removableVolumesHelpButton: InfoButton!
+    @IBOutlet weak var screenCaptureHelpButton: InfoButton!
+    @IBOutlet weak var speechRecognitionHelpButton: InfoButton!
 
     @IBOutlet weak var adminFilesStackView: NSStackView!
+    @IBOutlet weak var allFilesStackView: NSStackView!
+    @IBOutlet weak var appBundlesStackView: NSStackView!
+    @IBOutlet weak var appDataStackView: NSStackView!
+    @IBOutlet weak var bluetoothAlwaysStackView: NSStackView!
     @IBOutlet weak var cameraStackView: NSStackView!
     @IBOutlet weak var desktopFolderStackView: NSStackView!
     @IBOutlet weak var downloadsFolderStackView: NSStackView!
-    @IBOutlet weak var allFilesStackView: NSStackView!
     @IBOutlet weak var mediaLibraryStackView: NSStackView!
     @IBOutlet weak var networkVolumesStackView: NSStackView!
     @IBOutlet weak var postEventsStackView: NSStackView!
     @IBOutlet weak var removableVolumesStackView: NSStackView!
     @IBOutlet weak var speechRecognitionStackView: NSStackView!
 
-    @IBOutlet weak var addressBookPopUpAC: NSArrayController!
-    @IBOutlet weak var photosPopUpAC: NSArrayController!
-    @IBOutlet weak var remindersPopUpAC: NSArrayController!
-    @IBOutlet weak var calendarPopUpAC: NSArrayController!
     @IBOutlet weak var accessibilityPopUpAC: NSArrayController!
-    @IBOutlet weak var postEventsPopUpAC: NSArrayController!
+    @IBOutlet weak var addressBookPopUpAC: NSArrayController!
     @IBOutlet weak var adminFilesPopUpAC: NSArrayController!
     @IBOutlet weak var allFilesPopUpAC: NSArrayController!
+    @IBOutlet weak var appBundlesPopUpAC: NSArrayController!
+    @IBOutlet weak var appDataPopUpAC: NSArrayController!
+    @IBOutlet weak var bluetoothAlwaysPopUpAC: NSArrayController!
+    @IBOutlet weak var calendarPopUpAC: NSArrayController!
     @IBOutlet weak var cameraPopUpAC: NSArrayController!
-    @IBOutlet weak var microphonePopUpAC: NSArrayController!
-    @IBOutlet weak var fileProviderPresencePopUpAC: NSArrayController!
-    @IBOutlet weak var listenEventPopUpAC: NSArrayController!
-    @IBOutlet weak var mediaLibraryPopUpAC: NSArrayController!
-    @IBOutlet weak var screenCapturePopUpAC: NSArrayController!
-    @IBOutlet weak var speechRecognitionPopUpAC: NSArrayController!
     @IBOutlet weak var dekstopFolderPopUpAC: NSArrayController!
     @IBOutlet weak var documentsFolderPopUpAC: NSArrayController!
     @IBOutlet weak var downloadsFolderPopUpAC: NSArrayController!
+    @IBOutlet weak var fileProviderPresencePopUpAC: NSArrayController!
+    @IBOutlet weak var listenEventPopUpAC: NSArrayController!
+    @IBOutlet weak var mediaLibraryPopUpAC: NSArrayController!
+    @IBOutlet weak var microphonePopUpAC: NSArrayController!
     @IBOutlet weak var networkVolumesPopUpAC: NSArrayController!
+    @IBOutlet weak var photosPopUpAC: NSArrayController!
+    @IBOutlet weak var remindersPopUpAC: NSArrayController!
     @IBOutlet weak var removableVolumesPopUpAC: NSArrayController!
+    @IBOutlet weak var screenCapturePopUpAC: NSArrayController!
+    @IBOutlet weak var speechRecognitionPopUpAC: NSArrayController!
+    @IBOutlet weak var postEventsPopUpAC: NSArrayController!
 
     @IBOutlet weak var saveButton: NSButton!
     @IBOutlet weak var uploadButton: NSButton!
@@ -238,22 +250,25 @@ class TCCProfileViewController: NSViewController {
 
         //  Setup policy pop up
         setupAllowDeny(policies: [
-            addressBookPopUpAC,
-            photosPopUpAC,
-            remindersPopUpAC,
-            calendarPopUpAC,
             accessibilityPopUpAC,
-            postEventsPopUpAC,
+            addressBookPopUpAC,
             adminFilesPopUpAC,
             allFilesPopUpAC,
-            fileProviderPresencePopUpAC,
-            mediaLibraryPopUpAC,
-            speechRecognitionPopUpAC,
+            appBundlesPopUpAC,
+            appDataPopUpAC,
+            bluetoothAlwaysPopUpAC,
+            calendarPopUpAC,
             dekstopFolderPopUpAC,
             documentsFolderPopUpAC,
             downloadsFolderPopUpAC,
+            fileProviderPresencePopUpAC,
+            mediaLibraryPopUpAC,
             networkVolumesPopUpAC,
-            removableVolumesPopUpAC
+            photosPopUpAC,
+            postEventsPopUpAC,
+            remindersPopUpAC,
+            removableVolumesPopUpAC,
+            speechRecognitionPopUpAC
         ])
 
         setupStandardUserAllowAndDeny(policies: [
@@ -270,10 +285,13 @@ class TCCProfileViewController: NSViewController {
 
         setupStackViewsWithBackground(stackViews: [
             adminFilesStackView,
+            allFilesStackView,
+            appBundlesStackView,
+            appDataStackView,
+            bluetoothAlwaysStackView,
             cameraStackView,
             desktopFolderStackView,
             downloadsFolderStackView,
-            allFilesStackView,
             mediaLibraryStackView,
             networkVolumesStackView,
             postEventsStackView,
@@ -340,26 +358,29 @@ class TCCProfileViewController: NSViewController {
 
     private func setupDescriptions() {
         let services = PPPCServicesManager.shared
-        addressBookHelpButton.setHelpMessage(services.allServices["AddressBook"]?.userHelp)
-        photosHelpButton.setHelpMessage(services.allServices["Photos"]?.userHelp)
-        remindersHelpButton.setHelpMessage(services.allServices["Reminders"]?.userHelp)
-        calendarHelpButton.setHelpMessage(services.allServices["Calendar"]?.userHelp)
         accessibilityHelpButton.setHelpMessage(services.allServices["Accessibility"]?.userHelp)
-        postEventsHelpButton.setHelpMessage(services.allServices["PostEvent"]?.userHelp)
+        addressBookHelpButton.setHelpMessage(services.allServices["AddressBook"]?.userHelp)
         adminFilesHelpButton.setHelpMessage(services.allServices["SystemPolicySysAdminFiles"]?.userHelp)
         allFilesHelpButton.setHelpMessage(services.allServices["SystemPolicyAllFiles"]?.userHelp)
+        appBundlesHelpButton.setHelpMessage(services.allServices["SystemPolicyAppBundles"]?.userHelp)
+        appDataHelpButton.setHelpMessage(services.allServices["SystemPolicyAppData"]?.userHelp)
+        bluetoothAlwaysHelpButton.setHelpMessage(services.allServices["BluetoothAlways"]?.userHelp)
+        calendarHelpButton.setHelpMessage(services.allServices["Calendar"]?.userHelp)
         cameraHelpButton.setHelpMessage(services.allServices["Camera"]?.userHelp)
-        microphoneHelpButton.setHelpMessage(services.allServices["Microphone"]?.userHelp)
-        fileProviderHelpButton.setHelpMessage(services.allServices["FileProviderPresence"]?.userHelp)
-        listenEventHelpButton.setHelpMessage(services.allServices["ListenEvent"]?.userHelp)
-        mediaLibraryHelpButton.setHelpMessage(services.allServices["MediaLibrary"]?.userHelp)
-        screenCaptureHelpButton.setHelpMessage(services.allServices["ScreenCapture"]?.userHelp)
-        speechRecognitionHelpButton.setHelpMessage(services.allServices["SpeechRecognition"]?.userHelp)
         desktopFolderHelpButton.setHelpMessage(services.allServices["SystemPolicyDesktopFolder"]?.userHelp)
         documentsFolderHelpButton.setHelpMessage(services.allServices["SystemPolicyDocumentsFolder"]?.userHelp)
         downloadsFolderHelpButton.setHelpMessage(services.allServices["SystemPolicyDownloadsFolder"]?.userHelp)
+        fileProviderHelpButton.setHelpMessage(services.allServices["FileProviderPresence"]?.userHelp)
+        listenEventHelpButton.setHelpMessage(services.allServices["ListenEvent"]?.userHelp)
+        mediaLibraryHelpButton.setHelpMessage(services.allServices["MediaLibrary"]?.userHelp)
+        microphoneHelpButton.setHelpMessage(services.allServices["Microphone"]?.userHelp)
         networkVolumesHelpButton.setHelpMessage(services.allServices["SystemPolicyNetworkVolumes"]?.userHelp)
+        photosHelpButton.setHelpMessage(services.allServices["Photos"]?.userHelp)
+        postEventsHelpButton.setHelpMessage(services.allServices["PostEvent"]?.userHelp)
+        remindersHelpButton.setHelpMessage(services.allServices["Reminders"]?.userHelp)
         removableVolumesHelpButton.setHelpMessage(services.allServices["SystemPolicyRemovableVolumes"]?.userHelp)
+        screenCaptureHelpButton.setHelpMessage(services.allServices["ScreenCapture"]?.userHelp)
+        speechRecognitionHelpButton.setHelpMessage(services.allServices["SpeechRecognition"]?.userHelp)
     }
 
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
@@ -414,6 +435,29 @@ class TCCProfileViewController: NSViewController {
         addAppleEventButton.setAccessibilityIdentifier("AddAppleEventButton")
         removeAppleEventButton.setAccessibilityIdentifier("RemoveAppleEventButton")
         removeExecutableButton.setAccessibilityIdentifier("RemoveExecutableButton")
+        accessibilityPopUp.setAccessibilityIdentifier("AccessibilityPopUp")
+        addressBookPopUp.setAccessibilityIdentifier("AddressBookPopUp")
+        adminFilesPopUp.setAccessibilityIdentifier("AdminFilesPopUp")
+        allFilesPopUp.setAccessibilityIdentifier("AllFilesPopUp")
+        appBundlesPopUp.setAccessibilityIdentifier("AppBundlesPopUp")
+        appDataPopUp.setAccessibilityIdentifier("AppDataPopUp")
+        bluetoothAlwaysPopUp.setAccessibilityIdentifier("BluetoothAlwaysPopUp")
+        calendarPopUp.setAccessibilityIdentifier("CalendarPopUp")
+        cameraPopUp.setAccessibilityIdentifier("CameraPopUp")
+        dekstopFolderPopUp.setAccessibilityIdentifier("DesktopFolderPopUp")
+        documentsFolderPopUp.setAccessibilityIdentifier("DocumentsFolderPopUp")
+        downloadsFolderPopUp.setAccessibilityIdentifier("DownloadsFolderPopUp")
+        fileProviderPresencePopUp.setAccessibilityIdentifier("FileProviderPresencePopUp")
+        listenEventPopUp.setAccessibilityIdentifier("ListenEventPopUp")
+        mediaLibraryPopUp.setAccessibilityIdentifier("MediaLibraryPopUp")
+        microphonePopUp.setAccessibilityIdentifier("MicrophonePopUp")
+        networkVolumesPopUp.setAccessibilityIdentifier("NetworkVolumesPopUp")
+        photosPopUp.setAccessibilityIdentifier("PhotosPopUp")
+        postEventsPopUp.setAccessibilityIdentifier("PostEventsPopUp")
+        remindersPopUp.setAccessibilityIdentifier("RemindersPopUp")
+        removableVolumesPopUp.setAccessibilityIdentifier("RemovableVolumesPopUp")
+        screenCapturePopUp.setAccessibilityIdentifier("ScreenCapturePopUp")
+        speechRecognitionPopUp.setAccessibilityIdentifier("SpeechRecognitionPopUp")
     }
 
     private func loadUITestProfileIfNeeded() {
