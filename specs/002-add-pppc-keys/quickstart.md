@@ -52,7 +52,7 @@ xcodebuild clean build -project "PPPC Utility.xcodeproj" -scheme "PPPC Utility" 
 xcodebuild test -project "PPPC Utility.xcodeproj" -scheme "PPPC Utility" -destination "platform=macOS" -testPlan "PPPC Utility"
 
 # UI tests
-xcodebuild test -project "PPPC Utility.xcodeproj" -scheme "PPPC Utility" -destination "platform=macOS" -testPlan "PPPC Utility UI Tests"
+xcodebuild test -project "PPPC Utility.xcodeproj" -scheme "PPPC Utility UI Tests" -destination "platform=macOS"
 
 # Compiler warnings check
 xcodebuild clean build-for-testing -project "PPPC Utility.xcodeproj" -scheme "PPPC Utility" -destination "platform=macOS" 2>&1 | grep -i "warning:" | grep -v "xcodebuild: WARNING"

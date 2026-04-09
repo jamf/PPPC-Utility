@@ -47,7 +47,10 @@ class TCCProfileBuilder: NSObject {
     func buildTCCPolicies(allowed: Bool?, authorization: TCCPolicyAuthorizationValue?) -> [String: [TCCPolicy]] {
         return [
             "SystemPolicyAllFiles": [buildTCCPolicy(allowed: allowed, authorization: authorization)],
-            "AppleEvents": [buildTCCPolicy(allowed: allowed, authorization: authorization)]
+            "AppleEvents": [buildTCCPolicy(allowed: allowed, authorization: authorization)],
+            "BluetoothAlways": [buildTCCPolicy(allowed: allowed, authorization: authorization)],
+            "SystemPolicyAppBundles": [buildTCCPolicy(allowed: allowed, authorization: authorization)],
+            "SystemPolicyAppData": [buildTCCPolicy(allowed: allowed, authorization: authorization)]
         ]
     }
 

@@ -39,7 +39,22 @@ struct PPPCServicesManagerTests {
         let actual = PPPCServicesManager()
 
         // then
-        #expect(actual.allServices.count == 21)
+        #expect(actual.allServices.count == 24)
+    }
+
+    @Test(
+        "Service is loaded with correct English name",
+        arguments: [
+            ("BluetoothAlways", "Bluetooth Always"),
+            ("SystemPolicyAppBundles", "App Bundles"),
+            ("SystemPolicyAppData", "App Data")
+        ])
+    func serviceIsLoaded(key: String, expectedName: String) throws {
+        let services = PPPCServicesManager()
+        let service = try #require(services.allServices[key])
+
+        // then
+        #expect(service.englishName == expectedName)
     }
 
     @Test("User help with entitlements")

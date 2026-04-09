@@ -23,9 +23,9 @@
 
 **Purpose**: Capture baseline before any changes
 
-- [ ] T001 Capture baseline compiler warnings by running: `xcodebuild clean build-for-testing -project "PPPC Utility.xcodeproj" -scheme "PPPC Utility" -destination "platform=macOS" 2>&1 | grep -i "warning:" | grep -v "xcodebuild: WARNING"`
-- [ ] T002 Run existing unit tests to confirm green baseline: `xcodebuild test -project "PPPC Utility.xcodeproj" -scheme "PPPC Utility" -destination "platform=macOS" -testPlan "PPPC Utility"`
-- [ ] T003 Run existing UI tests to confirm green baseline: `xcodebuild test -project "PPPC Utility.xcodeproj" -scheme "PPPC Utility" -destination "platform=macOS" -testPlan "PPPC Utility UI Tests"`
+- [X] T001 Capture baseline compiler warnings by running: `xcodebuild clean build-for-testing -project "PPPC Utility.xcodeproj" -scheme "PPPC Utility" -destination "platform=macOS" 2>&1 | grep -i "warning:" | grep -v "xcodebuild: WARNING"`
+- [X] T002 Run existing unit tests to confirm green baseline: `xcodebuild test -project "PPPC Utility.xcodeproj" -scheme "PPPC Utility" -destination "platform=macOS" -testPlan "PPPC Utility"`
+- [X] T003 Run existing UI tests to confirm green baseline: `xcodebuild test -project "PPPC Utility.xcodeproj" -scheme "PPPC Utility" -destination "platform=macOS" -testPlan "PPPC Utility UI Tests"`
 
 ---
 
@@ -35,9 +35,9 @@
 
 **⚠️ CRITICAL**: No UI or test work can begin until this phase is complete.
 
-- [ ] T004 [P] [US1] [US2] [US3] Add 3 new service entries to `Resources/PPPCServices.json` — insert `BluetoothAlways` (after Accessibility, alphabetically), `SystemPolicyAppBundles` (after SystemPolicyAllFiles), and `SystemPolicyAppData` (after SystemPolicyAppBundles). Each entry has `mdmKey`, `englishName`, and `englishDescription` per data-model.md. No `entitlements`, `denyOnly`, or `allowStandardUsers` fields.
-- [ ] T005 [P] [US1] [US2] [US3] Add 3 new enum cases to `ServicesKeys` in `Source/Model/TCCProfile.swift` — add `case bluetoothAlways = "BluetoothAlways"`, `case appBundles = "SystemPolicyAppBundles"`, `case appData = "SystemPolicyAppData"`.
-- [ ] T006 [P] [US1] [US2] [US3] Add 3 new `@objc dynamic` properties to the `Policy` class in `Source/Model/Executable.swift` — add `@objc dynamic var BluetoothAlways: String = "-"`, `@objc dynamic var SystemPolicyAppBundles: String = "-"`, `@objc dynamic var SystemPolicyAppData: String = "-"`. Property names MUST exactly match MDM key strings (KVC requirement).
+- [X] T004 [P] [US1] [US2] [US3] Add 3 new service entries to `Resources/PPPCServices.json` — insert `BluetoothAlways` (after Accessibility, alphabetically), `SystemPolicyAppBundles` (after SystemPolicyAllFiles), and `SystemPolicyAppData` (after SystemPolicyAppBundles). Each entry has `mdmKey`, `englishName`, and `englishDescription` per data-model.md. No `entitlements`, `denyOnly`, or `allowStandardUsers` fields.
+- [X] T005 [P] [US1] [US2] [US3] Add 3 new enum cases to `ServicesKeys` in `Source/Model/TCCProfile.swift` — add `case bluetoothAlways = "BluetoothAlways"`, `case appBundles = "SystemPolicyAppBundles"`, `case appData = "SystemPolicyAppData"`.
+- [X] T006 [P] [US1] [US2] [US3] Add 3 new `@objc dynamic` properties to the `Policy` class in `Source/Model/Executable.swift` — add `@objc dynamic var BluetoothAlways: String = "-"`, `@objc dynamic var SystemPolicyAppBundles: String = "-"`, `@objc dynamic var SystemPolicyAppData: String = "-"`. Property names MUST exactly match MDM key strings (KVC requirement).
 
 **Checkpoint**: Data model complete. Build should succeed with no new warnings. Existing tests may now fail (service count assertions) — expected.
 
@@ -51,9 +51,9 @@
 
 ### Implementation
 
-- [ ] T007 [US1] [US2] [US3] Add IBOutlet declarations for all 3 new services in `Source/View Controllers/TCCProfileViewController.swift` — for each service, add: `NSPopUpButton` outlet, `NSArrayController` outlet, `InfoButton` outlet, and `NSStackView` outlet. Follow the naming pattern of existing outlets (e.g., `bluetoothAlwaysPopUp`, `bluetoothAlwaysPopUpAC`, `bluetoothAlwaysHelpButton`, `bluetoothAlwaysStackView`).
-- [ ] T008 [US1] [US2] [US3] Wire new services into setup methods in `Source/View Controllers/TCCProfileViewController.swift` — add the 3 new `NSArrayController` outlets to the `setupAllowDeny()` call in `viewDidLoad()`. Add the 3 new `InfoButton` outlets to `setupDescriptions()` with their MDM keys. Add the 3 new `NSStackView` outlets to `setupStackViewsWithBackground()` (for alternating row backgrounds). Add accessibility identifiers for the 3 new popups in `setupAccessibilityIdentifiers()`.
-- [ ] T009 [US1] [US2] [US3] Add UI elements for all 3 new services in `Resources/Base.lproj/Main.storyboard` — for each service, duplicate an existing service row (e.g., the Reminders row pattern) and update: label text, popup button binding to the corresponding `Policy` property via Cocoa Bindings, NSArrayController connection, InfoButton connection, and NSStackView connection. Wire all IBOutlets to the view controller.
+- [X] T007 [US1] [US2] [US3] Add IBOutlet declarations for all 3 new services in `Source/View Controllers/TCCProfileViewController.swift` — for each service, add: `NSPopUpButton` outlet, `NSArrayController` outlet, `InfoButton` outlet, and `NSStackView` outlet. Follow the naming pattern of existing outlets (e.g., `bluetoothAlwaysPopUp`, `bluetoothAlwaysPopUpAC`, `bluetoothAlwaysHelpButton`, `bluetoothAlwaysStackView`).
+- [X] T008 [US1] [US2] [US3] Wire new services into setup methods in `Source/View Controllers/TCCProfileViewController.swift` — add the 3 new `NSArrayController` outlets to the `setupAllowDeny()` call in `viewDidLoad()`. Add the 3 new `InfoButton` outlets to `setupDescriptions()` with their MDM keys. Add the 3 new `NSStackView` outlets to `setupStackViewsWithBackground()` (for alternating row backgrounds). Add accessibility identifiers for the 3 new popups in `setupAccessibilityIdentifiers()`.
+- [X] T009 [US1] [US2] [US3] Add UI elements for all 3 new services in `Resources/Base.lproj/Main.storyboard` — for each service, duplicate an existing service row (e.g., the Reminders row pattern) and update: label text, popup button binding to the corresponding `Policy` property via Cocoa Bindings, NSArrayController connection, InfoButton connection, and NSStackView connection. Wire all IBOutlets to the view controller.
 
 **Checkpoint**: All 3 services visible in UI. Build and launch app to verify popups appear. Cocoa Bindings functional (selecting Allow/Deny updates the Policy object).
 
@@ -65,10 +65,10 @@
 
 ### Tests
 
-- [ ] T010 [P] [US1] [US2] [US3] Update service count assertion in `PPPC UtilityTests/ModelTests/PPPCServicesManagerTests.swift` — change expected `allServices.count` from 21 to 24. Add assertions that `allServices["BluetoothAlways"]`, `allServices["SystemPolicyAppBundles"]`, and `allServices["SystemPolicyAppData"]` are non-nil with correct `englishName` values. (Satisfies TR-001)
-- [ ] T011 [P] [US1] [US2] [US3] Update policy defaults test in `PPPC UtilityTests/ModelTests/ExecutableTests.swift` — verify that a new `Executable`'s `policy.BluetoothAlways`, `policy.SystemPolicyAppBundles`, and `policy.SystemPolicyAppData` all default to `"-"`. Update any existing count-based assertions for total policy properties. (Satisfies TR-002)
-- [ ] T012 [P] [US1] [US2] [US3] Add new keys to `buildTCCPolicies()` in `PPPC UtilityTests/Helpers/TCCProfileBuilder.swift` — add `"BluetoothAlways"`, `"SystemPolicyAppBundles"`, and `"SystemPolicyAppData"` entries to the returned dictionary so round-trip tests exercise the new keys.
-- [ ] T013 [US1] [US2] [US3] Add export/import round-trip tests in `PPPC UtilityTests/ModelTests/ModelTests.swift` — add tests verifying that for each of the 3 new keys, setting a policy to Allow or Deny, exporting, and re-importing preserves the value. Use `ModelBuilder` to create executables with specific policy settings. (Satisfies TR-003)
+- [X] T010 [P] [US1] [US2] [US3] Update service count assertion in `PPPC UtilityTests/ModelTests/PPPCServicesManagerTests.swift` — change expected `allServices.count` from 21 to 24. Add assertions that `allServices["BluetoothAlways"]`, `allServices["SystemPolicyAppBundles"]`, and `allServices["SystemPolicyAppData"]` are non-nil with correct `englishName` values. (Satisfies TR-001)
+- [X] T011 [P] [US1] [US2] [US3] Update policy defaults test in `PPPC UtilityTests/ModelTests/ExecutableTests.swift` — verify that a new `Executable`'s `policy.BluetoothAlways`, `policy.SystemPolicyAppBundles`, and `policy.SystemPolicyAppData` all default to `"-"`. Update any existing count-based assertions for total policy properties. (Satisfies TR-002)
+- [X] T012 [P] [US1] [US2] [US3] Add new keys to `buildTCCPolicies()` in `PPPC UtilityTests/Helpers/TCCProfileBuilder.swift` — add `"BluetoothAlways"`, `"SystemPolicyAppBundles"`, and `"SystemPolicyAppData"` entries to the returned dictionary so round-trip tests exercise the new keys.
+- [X] T013 [US1] [US2] [US3] Add export/import round-trip tests in `PPPC UtilityTests/ModelTests/ModelTests.swift` — add tests verifying that for each of the 3 new keys, setting a policy to Allow or Deny, exporting, and re-importing preserves the value. Use `ModelBuilder` to create executables with specific policy settings. (Satisfies TR-003)
 
 **Checkpoint**: Run unit test plan — all tests pass including updated service count, defaults, and round-trip assertions.
 
@@ -82,15 +82,15 @@
 
 ### Test Fixtures
 
-- [ ] T014 [P] [US4] Rename existing fixture `PPPC UtilityTests/TCCProfileImporterTests/TestTCCUnsignedProfile.mobileconfig` to `TestTCCUnsignedProfile-Legacy.mobileconfig` — this preserves the original file (without new keys) as the legacy import fixture. Update the Xcode project file if the resource is referenced by name.
-- [ ] T015 [P] [US4] Create new `PPPC UtilityTests/TCCProfileImporterTests/TestTCCUnsignedProfile.mobileconfig` — copy from the legacy file and add `BluetoothAlways`, `SystemPolicyAppBundles`, and `SystemPolicyAppData` service entries with test policy dictionaries (Allowed: true, Identifier, CodeRequirement, IdentifierType, Comment). Follow the exact XML plist structure of existing service entries.
-- [ ] T016 [P] [US4] Update `PPPC UtilityTests/TCCProfileImporterTests/TestTCCUnsignedProfile-allLower.mobileconfig` — add `bluetoothalways`, `systempolicyappbundles`, and `systempolicyappdata` entries (lowercase keys) following the existing lowercase pattern.
-- [ ] T017 [P] [US4] Update `Resources/TestTCCUnsignedProfile.mobileconfig` — add the 3 new service entries (same as T015) so the app-bundled UI test profile includes all 24 services.
+- [X] T014 [P] [US4] Rename existing fixture `PPPC UtilityTests/TCCProfileImporterTests/TestTCCUnsignedProfile.mobileconfig` to `TestTCCUnsignedProfile-Legacy.mobileconfig` — this preserves the original file (without new keys) as the legacy import fixture. Update the Xcode project file if the resource is referenced by name.
+- [X] T015 [P] [US4] Create new `PPPC UtilityTests/TCCProfileImporterTests/TestTCCUnsignedProfile.mobileconfig` — copy from the legacy file and add `BluetoothAlways`, `SystemPolicyAppBundles`, and `SystemPolicyAppData` service entries with test policy dictionaries (Allowed: true, Identifier, CodeRequirement, IdentifierType, Comment). Follow the exact XML plist structure of existing service entries.
+- [X] T016 [P] [US4] Update `PPPC UtilityTests/TCCProfileImporterTests/TestTCCUnsignedProfile-allLower.mobileconfig` — add `bluetoothalways`, `systempolicyappbundles`, and `systempolicyappdata` entries (lowercase keys) following the existing lowercase pattern.
+- [X] T017 [P] [US4] Update `Resources/TestTCCUnsignedProfile.mobileconfig` — add the 3 new service entries (same as T015) so the app-bundled UI test profile includes all 24 services.
 
 ### Tests
 
-- [ ] T018 [US4] Add legacy import test in `PPPC UtilityTests/TCCProfileImporterTests/TCCProfileImporterTests.swift` — add a test that imports `TestTCCUnsignedProfile-Legacy.mobileconfig`, feeds it through `Model.importProfile()`, and verifies the 3 new policy columns default to `"-"` on all imported executables. (Satisfies TR-005)
-- [ ] T019 [US4] Verify existing `correctUnsignedProfileContentData` test passes with the new fixture in `PPPC UtilityTests/TCCProfileImporterTests/TCCProfileImporterTests.swift` — the test should now import a profile with all 24 services and succeed. (Satisfies TR-004)
+- [X] T018 [US4] Add legacy import test in `PPPC UtilityTests/TCCProfileImporterTests/TCCProfileImporterTests.swift` — add a test that imports `TestTCCUnsignedProfile-Legacy.mobileconfig`, feeds it through `Model.importProfile()`, and verifies the 3 new policy columns default to `"-"` on all imported executables. (Satisfies TR-005)
+- [X] T019 [US4] Verify existing `correctUnsignedProfileContentData` test passes with the new fixture in `PPPC UtilityTests/TCCProfileImporterTests/TCCProfileImporterTests.swift` — the test should now import a profile with all 24 services and succeed. (Satisfies TR-004)
 
 **Checkpoint**: All importer tests pass. Legacy profile imports cleanly. Modern profile imports with all 24 services.
 
@@ -100,11 +100,11 @@
 
 **Purpose**: UI test, final validation, quality gate checks
 
-- [ ] T020 [US1] [US2] [US3] Add or update a UI test in `PPPC UtilityUITests/AppLaunchTests.swift` to verify the policy table column count reflects the 3 new services. Use the `-UITestMode` launch argument (which loads the test profile) and assert expected popup/column count. (Satisfies TR-006)
-- [ ] T021 Compare compiler warnings against T001 baseline — verify no new warnings introduced by running the same command and diffing output.
-- [ ] T022 Run full unit test plan and verify all tests pass: `xcodebuild test -project "PPPC Utility.xcodeproj" -scheme "PPPC Utility" -destination "platform=macOS" -testPlan "PPPC Utility"`
-- [ ] T023 Run full UI test plan and verify all tests pass: `xcodebuild test -project "PPPC Utility.xcodeproj" -scheme "PPPC Utility" -destination "platform=macOS" -testPlan "PPPC Utility UI Tests"`
-- [ ] T024 Validate quickstart.md build and test commands still work per `specs/002-add-pppc-keys/quickstart.md`
+- [X] T020 [US1] [US2] [US3] Add or update a UI test in `PPPC UtilityUITests/AppLaunchTests.swift` to verify the policy table column count reflects the 3 new services. Use the `-UITestMode` launch argument (which loads the test profile) and assert expected popup/column count. (Satisfies TR-006)
+- [X] T021 Compare compiler warnings against T001 baseline — verify no new warnings introduced by running the same command and diffing output.
+- [X] T022 Run full unit test plan and verify all tests pass: `xcodebuild test -project "PPPC Utility.xcodeproj" -scheme "PPPC Utility" -destination "platform=macOS" -testPlan "PPPC Utility"`
+- [X] T023 Run full UI test plan and verify all tests pass: `xcodebuild test -project "PPPC Utility.xcodeproj" -scheme "PPPC Utility" -destination "platform=macOS" -testPlan "PPPC Utility UI Tests"`
+- [X] T024 Validate quickstart.md build and test commands still work per `specs/002-add-pppc-keys/quickstart.md`
 
 ---
 

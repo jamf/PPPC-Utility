@@ -48,34 +48,7 @@
 						<string>bundleID</string>
 					</dict>
 				</array>
-	<key>BluetoothAlways</key>
-<array>
-<dict>
-<key>Allowed</key>
-<true/>
-<key>CodeRequirement</key>
-<string>identifier "io.brackets.appshell" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = JQ525L2MZD</string>
-<key>Comment</key>
-<string></string>
-<key>Identifier</key>
-<string>io.brackets.appshell</string>
-<key>IdentifierType</key>
-<string>bundleID</string>
-</dict>
-<dict>
-<key>Allowed</key>
-<false/>
-<key>CodeRequirement</key>
-<string>identifier "com.jamfsoftware.JamfAdmin" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = "483DWKW443"</string>
-<key>Comment</key>
-<string></string>
-<key>Identifier</key>
-<string>com.jamfsoftware.JamfAdmin</string>
-<key>IdentifierType</key>
-<string>bundleID</string>
-</dict>
-</array>
-			<key>AddressBook</key>
+				<key>AddressBook</key>
 				<array>
 					<dict>
 						<key>Allowed</key>
@@ -477,61 +450,7 @@
 						<string>bundleID</string>
 					</dict>
 				</array>
-	<key>SystemPolicyAppBundles</key>
-<array>
-<dict>
-<key>Allowed</key>
-<true/>
-<key>CodeRequirement</key>
-<string>identifier "io.brackets.appshell" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = JQ525L2MZD</string>
-<key>Comment</key>
-<string></string>
-<key>Identifier</key>
-<string>io.brackets.appshell</string>
-<key>IdentifierType</key>
-<string>bundleID</string>
-</dict>
-<dict>
-<key>Allowed</key>
-<false/>
-<key>CodeRequirement</key>
-<string>identifier "com.jamfsoftware.JamfAdmin" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = "483DWKW443"</string>
-<key>Comment</key>
-<string></string>
-<key>Identifier</key>
-<string>com.jamfsoftware.JamfAdmin</string>
-<key>IdentifierType</key>
-<string>bundleID</string>
-</dict>
-</array>
-<key>SystemPolicyAppData</key>
-<array>
-<dict>
-<key>Allowed</key>
-<true/>
-<key>CodeRequirement</key>
-<string>identifier "io.brackets.appshell" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = JQ525L2MZD</string>
-<key>Comment</key>
-<string></string>
-<key>Identifier</key>
-<string>io.brackets.appshell</string>
-<key>IdentifierType</key>
-<string>bundleID</string>
-</dict>
-<dict>
-<key>Allowed</key>
-<false/>
-<key>CodeRequirement</key>
-<string>identifier "com.jamfsoftware.JamfAdmin" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = "483DWKW443"</string>
-<key>Comment</key>
-<string></string>
-<key>Identifier</key>
-<string>com.jamfsoftware.JamfAdmin</string>
-<key>IdentifierType</key>
-<string>bundleID</string>
-</dict>
-</array>
-			<key>SystemPolicyDesktopFolder</key>
+				<key>SystemPolicyDesktopFolder</key>
 				<array>
 					<dict>
 						<key>Allowed</key>

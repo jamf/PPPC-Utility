@@ -915,6 +915,180 @@
                                                         <real value="3.4028234663852886e+38"/>
                                                     </customSpacing>
                                                 </stackView>
+                                                <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ab1-BB-sv1" userLabel="App Bundles Stack View">
+                                                    <rect key="frame" x="0.0" y="0.0" width="630" height="50"/>
+                                                    <subviews>
+                                                        <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ab1-BB-tf1">
+                                                            <rect key="frame" x="8" y="17" width="369" height="16"/>
+                                                            <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="App Bundles:" id="ab1-BB-tc1">
+                                                                <font key="font" usesAppearanceFont="YES"/>
+                                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                            </textFieldCell>
+                                                        </textField>
+                                                        <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ab1-BB-pu1">
+                                                            <rect key="frame" x="383" y="0.0" width="205" height="50"/>
+                                                            <popUpButtonCell key="cell" type="push" title="-" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="ab1-BB-m11" id="ab1-BB-pc1">
+                                                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                                                <font key="font" metaFont="message"/>
+                                                                <menu key="menu" id="ab1-BB-mn1">
+                                                                    <items>
+                                                                        <menuItem title="-" state="on" id="ab1-BB-m11"/>
+                                                                        <menuItem title="Allow" id="ab1-BB-m12"/>
+                                                                        <menuItem title="Deny" id="ab1-BB-m13"/>
+                                                                    </items>
+                                                                </menu>
+                                                            </popUpButtonCell>
+                                                            <connections>
+                                                                <binding destination="ab1-BB-ar1" name="content" keyPath="arrangedObjects" id="ab1-BB-bd1"/>
+                                                                <binding destination="qId-iR-fmq" name="selectedObject" keyPath="selection.policy.SystemPolicyAppBundles" previousBinding="ab1-BB-bd1" id="ab1-BB-bd2"/>
+                                                            </connections>
+                                                        </popUpButton>
+                                                        <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ab1-BB-ib1" customClass="InfoButton" customModule="PPPC_Utility" customModuleProvider="target">
+                                                            <rect key="frame" x="596" y="13" width="24" height="24"/>
+                                                            <buttonCell key="cell" type="help" bezelStyle="helpButton" alignment="center" borderStyle="border" inset="2" id="ab1-BB-bc1">
+                                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                <font key="font" metaFont="system"/>
+                                                            </buttonCell>
+                                                            <connections>
+                                                                <action selector="showHelpMessage:" target="ZfI-PN-mks" id="ab1-BB-ac1"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
+                                                    <edgeInsets key="edgeInsets" left="10" right="10" top="0.0" bottom="0.0"/>
+                                                    <constraints>
+                                                        <constraint firstItem="ab1-BB-ib1" firstAttribute="centerY" secondItem="ab1-BB-pu1" secondAttribute="centerY" id="ab1-BB-c01"/>
+                                                        <constraint firstAttribute="bottom" secondItem="ab1-BB-pu1" secondAttribute="bottom" id="ab1-BB-c02"/>
+                                                        <constraint firstItem="ab1-BB-tf1" firstAttribute="centerY" secondItem="ab1-BB-pu1" secondAttribute="centerY" id="ab1-BB-c03"/>
+                                                        <constraint firstItem="ab1-BB-pu1" firstAttribute="top" secondItem="ab1-BB-sv1" secondAttribute="top" id="ab1-BB-c04"/>
+                                                    </constraints>
+                                                    <visibilityPriorities>
+                                                        <integer value="1000"/>
+                                                        <integer value="1000"/>
+                                                        <integer value="1000"/>
+                                                    </visibilityPriorities>
+                                                    <customSpacing>
+                                                        <real value="3.4028234663852886e+38"/>
+                                                        <real value="3.4028234663852886e+38"/>
+                                                        <real value="3.4028234663852886e+38"/>
+                                                    </customSpacing>
+                                                </stackView>
+                                                <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ad1-CC-sv1" userLabel="App Data Stack View">
+                                                    <rect key="frame" x="0.0" y="0.0" width="630" height="50"/>
+                                                    <subviews>
+                                                        <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ad1-CC-tf1">
+                                                            <rect key="frame" x="8" y="17" width="369" height="16"/>
+                                                            <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="App Data:" id="ad1-CC-tc1">
+                                                                <font key="font" usesAppearanceFont="YES"/>
+                                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                            </textFieldCell>
+                                                        </textField>
+                                                        <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ad1-CC-pu1">
+                                                            <rect key="frame" x="383" y="0.0" width="205" height="50"/>
+                                                            <popUpButtonCell key="cell" type="push" title="-" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="ad1-CC-m11" id="ad1-CC-pc1">
+                                                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                                                <font key="font" metaFont="message"/>
+                                                                <menu key="menu" id="ad1-CC-mn1">
+                                                                    <items>
+                                                                        <menuItem title="-" state="on" id="ad1-CC-m11"/>
+                                                                        <menuItem title="Allow" id="ad1-CC-m12"/>
+                                                                        <menuItem title="Deny" id="ad1-CC-m13"/>
+                                                                    </items>
+                                                                </menu>
+                                                            </popUpButtonCell>
+                                                            <connections>
+                                                                <binding destination="ad1-CC-ar1" name="content" keyPath="arrangedObjects" id="ad1-CC-bd1"/>
+                                                                <binding destination="qId-iR-fmq" name="selectedObject" keyPath="selection.policy.SystemPolicyAppData" previousBinding="ad1-CC-bd1" id="ad1-CC-bd2"/>
+                                                            </connections>
+                                                        </popUpButton>
+                                                        <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ad1-CC-ib1" customClass="InfoButton" customModule="PPPC_Utility" customModuleProvider="target">
+                                                            <rect key="frame" x="596" y="13" width="24" height="24"/>
+                                                            <buttonCell key="cell" type="help" bezelStyle="helpButton" alignment="center" borderStyle="border" inset="2" id="ad1-CC-bc1">
+                                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                <font key="font" metaFont="system"/>
+                                                            </buttonCell>
+                                                            <connections>
+                                                                <action selector="showHelpMessage:" target="ZfI-PN-mks" id="ad1-CC-ac1"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
+                                                    <edgeInsets key="edgeInsets" left="10" right="10" top="0.0" bottom="0.0"/>
+                                                    <constraints>
+                                                        <constraint firstItem="ad1-CC-ib1" firstAttribute="centerY" secondItem="ad1-CC-pu1" secondAttribute="centerY" id="ad1-CC-c01"/>
+                                                        <constraint firstAttribute="bottom" secondItem="ad1-CC-pu1" secondAttribute="bottom" id="ad1-CC-c02"/>
+                                                        <constraint firstItem="ad1-CC-tf1" firstAttribute="centerY" secondItem="ad1-CC-pu1" secondAttribute="centerY" id="ad1-CC-c03"/>
+                                                        <constraint firstItem="ad1-CC-pu1" firstAttribute="top" secondItem="ad1-CC-sv1" secondAttribute="top" id="ad1-CC-c04"/>
+                                                    </constraints>
+                                                    <visibilityPriorities>
+                                                        <integer value="1000"/>
+                                                        <integer value="1000"/>
+                                                        <integer value="1000"/>
+                                                    </visibilityPriorities>
+                                                    <customSpacing>
+                                                        <real value="3.4028234663852886e+38"/>
+                                                        <real value="3.4028234663852886e+38"/>
+                                                        <real value="3.4028234663852886e+38"/>
+                                                    </customSpacing>
+                                                </stackView>
+                                                <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bt1-AA-sv1" userLabel="Bluetooth Always Stack View">
+                                                    <rect key="frame" x="0.0" y="0.0" width="630" height="50"/>
+                                                    <subviews>
+                                                        <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bt1-AA-tf1">
+                                                            <rect key="frame" x="8" y="17" width="369" height="16"/>
+                                                            <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="Bluetooth Always:" id="bt1-AA-tc1">
+                                                                <font key="font" usesAppearanceFont="YES"/>
+                                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                            </textFieldCell>
+                                                        </textField>
+                                                        <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bt1-AA-pu1">
+                                                            <rect key="frame" x="383" y="0.0" width="205" height="50"/>
+                                                            <popUpButtonCell key="cell" type="push" title="-" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="bt1-AA-m11" id="bt1-AA-pc1">
+                                                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                                                <font key="font" metaFont="message"/>
+                                                                <menu key="menu" id="bt1-AA-mn1">
+                                                                    <items>
+                                                                        <menuItem title="-" state="on" id="bt1-AA-m11"/>
+                                                                        <menuItem title="Allow" id="bt1-AA-m12"/>
+                                                                        <menuItem title="Deny" id="bt1-AA-m13"/>
+                                                                    </items>
+                                                                </menu>
+                                                            </popUpButtonCell>
+                                                            <connections>
+                                                                <binding destination="bt1-AA-ar1" name="content" keyPath="arrangedObjects" id="bt1-AA-bd1"/>
+                                                                <binding destination="qId-iR-fmq" name="selectedObject" keyPath="selection.policy.BluetoothAlways" previousBinding="bt1-AA-bd1" id="bt1-AA-bd2"/>
+                                                            </connections>
+                                                        </popUpButton>
+                                                        <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bt1-AA-ib1" customClass="InfoButton" customModule="PPPC_Utility" customModuleProvider="target">
+                                                            <rect key="frame" x="596" y="13" width="24" height="24"/>
+                                                            <buttonCell key="cell" type="help" bezelStyle="helpButton" alignment="center" borderStyle="border" inset="2" id="bt1-AA-bc1">
+                                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                <font key="font" metaFont="system"/>
+                                                            </buttonCell>
+                                                            <connections>
+                                                                <action selector="showHelpMessage:" target="ZfI-PN-mks" id="bt1-AA-ac1"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
+                                                    <edgeInsets key="edgeInsets" left="10" right="10" top="0.0" bottom="0.0"/>
+                                                    <constraints>
+                                                        <constraint firstItem="bt1-AA-ib1" firstAttribute="centerY" secondItem="bt1-AA-pu1" secondAttribute="centerY" id="bt1-AA-c01"/>
+                                                        <constraint firstAttribute="bottom" secondItem="bt1-AA-pu1" secondAttribute="bottom" id="bt1-AA-c02"/>
+                                                        <constraint firstItem="bt1-AA-tf1" firstAttribute="centerY" secondItem="bt1-AA-pu1" secondAttribute="centerY" id="bt1-AA-c03"/>
+                                                        <constraint firstItem="bt1-AA-pu1" firstAttribute="top" secondItem="bt1-AA-sv1" secondAttribute="top" id="bt1-AA-c04"/>
+                                                    </constraints>
+                                                    <visibilityPriorities>
+                                                        <integer value="1000"/>
+                                                        <integer value="1000"/>
+                                                        <integer value="1000"/>
+                                                    </visibilityPriorities>
+                                                    <customSpacing>
+                                                        <real value="3.4028234663852886e+38"/>
+                                                        <real value="3.4028234663852886e+38"/>
+                                                        <real value="3.4028234663852886e+38"/>
+                                                    </customSpacing>
+                                                </stackView>
                                                 <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7Go-DV-ssf">
                                                     <rect key="frame" x="0.0" y="850" width="630" height="50"/>
                                                     <subviews>
@@ -2014,6 +2188,15 @@
                                                 <constraint firstItem="kPv-Tl-c0b" firstAttribute="width" secondItem="kz4-ht-2cC" secondAttribute="width" id="zKx-vk-T2B"/>
                                                 <constraint firstItem="27r-Jg-Rxp" firstAttribute="width" secondItem="kIP-RZ-a35" secondAttribute="width" id="zXN-8y-1Oh"/>
                                                 <constraint firstItem="ZGr-iF-K0I" firstAttribute="width" secondItem="kz4-ht-2cC" secondAttribute="width" id="zmL-Oa-V6k"/>
+                                                <constraint firstItem="bt1-AA-sv1" firstAttribute="width" secondItem="kz4-ht-2cC" secondAttribute="width" id="bt1-AA-w01"/>
+                                                <constraint firstItem="bt1-AA-sv1" firstAttribute="height" secondItem="9iO-vL-Pwi" secondAttribute="height" id="bt1-AA-h01"/>
+                                                <constraint firstItem="bt1-AA-pu1" firstAttribute="width" secondItem="kIP-RZ-a35" secondAttribute="width" id="bt1-AA-w02"/>
+                                                <constraint firstItem="ab1-BB-sv1" firstAttribute="width" secondItem="kz4-ht-2cC" secondAttribute="width" id="ab1-BB-w01"/>
+                                                <constraint firstItem="ab1-BB-sv1" firstAttribute="height" secondItem="9iO-vL-Pwi" secondAttribute="height" id="ab1-BB-h01"/>
+                                                <constraint firstItem="ab1-BB-pu1" firstAttribute="width" secondItem="kIP-RZ-a35" secondAttribute="width" id="ab1-BB-w02"/>
+                                                <constraint firstItem="ad1-CC-sv1" firstAttribute="width" secondItem="kz4-ht-2cC" secondAttribute="width" id="ad1-CC-w01"/>
+                                                <constraint firstItem="ad1-CC-sv1" firstAttribute="height" secondItem="9iO-vL-Pwi" secondAttribute="height" id="ad1-CC-h01"/>
+                                                <constraint firstItem="ad1-CC-pu1" firstAttribute="width" secondItem="kIP-RZ-a35" secondAttribute="width" id="ad1-CC-w02"/>
                                             </constraints>
                                             <visibilityPriorities>
                                                 <integer value="1000"/>
@@ -2036,8 +2219,14 @@
                                                 <integer value="1000"/>
                                                 <integer value="1000"/>
                                                 <integer value="1000"/>
+                                                <integer value="1000"/>
+                                                <integer value="1000"/>
+                                                <integer value="1000"/>
                                             </visibilityPriorities>
                                             <customSpacing>
+                                                <real value="3.4028234663852886e+38"/>
+                                                <real value="3.4028234663852886e+38"/>
+                                                <real value="3.4028234663852886e+38"/>
                                                 <real value="3.4028234663852886e+38"/>
                                                 <real value="3.4028234663852886e+38"/>
                                                 <real value="3.4028234663852886e+38"/>
@@ -2541,6 +2730,18 @@
                         <outlet property="speechRecognitionPopUp" destination="0Bc-Aj-hsp" id="HNo-xJ-kfA"/>
                         <outlet property="speechRecognitionPopUpAC" destination="IEZ-zf-QjT" id="agd-t2-bmc"/>
                         <outlet property="speechRecognitionStackView" destination="thb-Gy-Auo" id="uuT-Yb-Ibd"/>
+                        <outlet property="bluetoothAlwaysHelpButton" destination="bt1-AA-ib1" id="bt1-AA-o01"/>
+                        <outlet property="bluetoothAlwaysPopUp" destination="bt1-AA-pu1" id="bt1-AA-o02"/>
+                        <outlet property="bluetoothAlwaysPopUpAC" destination="bt1-AA-ar1" id="bt1-AA-o03"/>
+                        <outlet property="bluetoothAlwaysStackView" destination="bt1-AA-sv1" id="bt1-AA-o04"/>
+                        <outlet property="appBundlesHelpButton" destination="ab1-BB-ib1" id="ab1-BB-o01"/>
+                        <outlet property="appBundlesPopUp" destination="ab1-BB-pu1" id="ab1-BB-o02"/>
+                        <outlet property="appBundlesPopUpAC" destination="ab1-BB-ar1" id="ab1-BB-o03"/>
+                        <outlet property="appBundlesStackView" destination="ab1-BB-sv1" id="ab1-BB-o04"/>
+                        <outlet property="appDataHelpButton" destination="ad1-CC-ib1" id="ad1-CC-o01"/>
+                        <outlet property="appDataPopUp" destination="ad1-CC-pu1" id="ad1-CC-o02"/>
+                        <outlet property="appDataPopUpAC" destination="ad1-CC-ar1" id="ad1-CC-o03"/>
+                        <outlet property="appDataStackView" destination="ad1-CC-sv1" id="ad1-CC-o04"/>
                         <outlet property="uploadButton" destination="wba-mI-3Kz" id="A7X-l6-awl"/>
                     </connections>
                 </viewController>
@@ -2591,6 +2792,9 @@
                 <arrayController id="enB-rh-Zf7"/>
                 <arrayController id="lgP-c3-wQo"/>
                 <arrayController id="sRi-eg-n1o"/>
+                <arrayController id="bt1-AA-ar1"/>
+                <arrayController id="ab1-BB-ar1"/>
+                <arrayController id="ad1-CC-ar1"/>
                 <arrayController objectClassName="AppleEventRule" id="qGh-WP-H0J">
                     <classReference key="objectClass" className="AppleEventRule"/>
                     <connections>

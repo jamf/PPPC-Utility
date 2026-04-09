@@ -267,39 +267,46 @@ struct ModelTests {
         #expect(model.selectedExecutables.first?.policy.SystemPolicyAllFiles == "Deny")
     }
 
+    // MARK: - Service key round-trips
+
+    @Test(
+        "Service key round-trip preserves value",
+        arguments: [
+            ("BluetoothAlways", "Allow"),
+            ("SystemPolicyAppBundles", "Deny"),
+            ("SystemPolicyAppData", "Allow")
+        ])
+    func serviceKeyRoundTrip(serviceKey: String, value: String) async {
+        let model = ModelBuilder()
+            .addExecutable(settings: [serviceKey: value])
+            .build()
+
+        // when
+        let profile = model.exportProfile(organization: "Org", identifier: "ID", displayName: "Name", payloadDescription: "Desc")
+        await model.importProfile(tccProfile: profile)
+
+        // then
+        let result = model.selectedExecutables.last?.policy.value(forKey: serviceKey) as? String
+        #expect(result == value)
+    }
+
     // MARK: - tests for policyFromString
 
-    @Test
-    func policyWhenUsingAllow() {
+    @Test(
+        "policyFromString maps display value to authorization",
+        arguments: [
+            ("Allow", TCCPolicyAuthorizationValue.allow),
+            ("Deny", TCCPolicyAuthorizationValue.deny),
+            ("Let Standard Users Approve", TCCPolicyAuthorizationValue.allowStandardUserToSetSystemService)
+        ])
+    func policyFromStringAuthorization(value: String, expected: String) {
         let app = Executable(identifier: "id", codeRequirement: "req")
 
         // when
-        let policy = model.policyFromString(executable: app, value: "Allow")
+        let policy = model.policyFromString(executable: app, value: value)
 
         // then
-        #expect(policy?.authorization == .allow)
-    }
-
-    @Test
-    func policyWhenUsingDeny() {
-        let app = Executable(identifier: "id", codeRequirement: "req")
-
-        // when
-        let policy = model.policyFromString(executable: app, value: "Deny")
-
-        // then
-        #expect(policy?.authorization == .deny)
-    }
-
-    @Test
-    func policyWhenUsingAllowForStandardUsers() {
-        let app = Executable(identifier: "id", codeRequirement: "req")
-
-        // when
-        let policy = model.policyFromString(executable: app, value: "Let Standard Users Approve")
-
-        // then
-        #expect(policy?.authorization == .allowStandardUserToSetSystemService)
+        #expect(policy?.authorization == expected)
     }
 
     @Test

@@ -76,6 +76,7 @@ class Executable: NSObject {
 
 class Policy: NSObject {
     @objc dynamic var AddressBook: String = "-"
+    @objc dynamic var BluetoothAlways: String = "-"
     @objc dynamic var Calendar: String = "-"
     @objc dynamic var Reminders: String = "-"
     @objc dynamic var Photos: String = "-"
@@ -84,6 +85,8 @@ class Policy: NSObject {
     @objc dynamic var Accessibility: String = "-"
     @objc dynamic var PostEvent: String = "-"
     @objc dynamic var SystemPolicyAllFiles: String = "-"
+    @objc dynamic var SystemPolicyAppBundles: String = "-"
+    @objc dynamic var SystemPolicyAppData: String = "-"
     @objc dynamic var SystemPolicySysAdminFiles: String = "-"
     @objc dynamic var FileProviderPresence: String = "-"
     @objc dynamic var ListenEvent: String = "-"
