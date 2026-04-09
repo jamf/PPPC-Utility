@@ -548,6 +548,7 @@ productType = "com.apple.product-type.bundle.ui-testing";
 				6EC409E2214D65BD00BE4F17 /* Assets.xcassets in Resources */,
 				C0E0384227A30D1D00A23FA2 /* PPPCServices.json in Resources */,
 				6EC409E5214D65BD00BE4F17 /* Main.storyboard in Resources */,
+				AA001200000000000000001C /* TestTCCUnsignedProfile.mobileconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
