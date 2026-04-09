@@ -3,9 +3,11 @@
 ## Swift Concurrency
 
 - `SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor` is set on both app and test targets — don't add explicit `@MainActor` to production code or test structs/functions, it's already the default
+- Always use Swift Concurrency (actors, async/await, Sendable) — avoid locks, mutexes, or other low-level synchronization
 
 ## Swift Testing Conventions
 
+- When adding unit tests, do not modify production code just to accommodate a test. If a genuine bug is found, fix it in a separate commit with its own justification.
 - Place `@Test` and `@Suite` annotations on the line **above** the declaration, not inline
 - Use `// when` and `// then` comment blocks; skip `// given` (assumed from context)
 - When XCTest assertions have message strings, preserve them as `#expect` messages, not code comments (e.g. `#expect(x == false, "reason")`)
@@ -14,5 +16,13 @@
   ```
   xcodebuild clean build-for-testing -project "PPPC Utility.xcodeproj" -scheme "PPPC Utility" -destination "platform=macOS" 2>&1 | grep -i "warning:" | grep -v "xcodebuild: WARNING"
   ```
+- Network test suites use `.serialized` trait. `MockURLProtocol` uses a simple single static handler — no per-session registry needed.
+- Avoid snake_case in test names (e.g., `generateDisplayName_bundleIdentifier`). If a name is getting long, use a Trait with a sentence-style description instead.
+- For complex tests, use a descriptive `@Test("...")` trait that explains the scenario and expected outcome so the test is understandable without reading the body.
 - Use parameterized tests with Traits where it reduces duplication; 1–2 args is ideal, max 3
 - Beyond 3 params: create separate tests with some values hard-coded
+- Use `deinit` as teardown for repeated cleanup across tests in a suite. Use `class` for suites that need `deinit`; use `struct` otherwise.
+
+## Git
+
+- Do not stage or commit changes in terminal sessions

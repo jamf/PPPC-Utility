@@ -151,7 +151,7 @@ class JamfProAPIClient: Networking {
         } catch is NetworkingError {
             // Possibly we are talking to Jamf Pro v10.22 or lower and we can grab the version from a meta tag on the login page.
             let simpleRequest = try url(forEndpoint: "")
-            let (data, _) = try await URLSession.shared.data(for: simpleRequest)
+            let (data, _) = try await session.data(for: simpleRequest)
             info = try JamfProVersion(fromHTMLString: String(data: data, encoding: .utf8))
         }
 

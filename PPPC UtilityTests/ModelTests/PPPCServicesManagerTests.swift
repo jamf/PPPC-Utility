@@ -42,8 +42,8 @@ struct PPPCServicesManagerTests {
         #expect(actual.allServices.count == 21)
     }
 
-    @Test
-    func userHelp_withEntitlements() throws {
+    @Test("User help with entitlements")
+    func userHelpWithEntitlements() throws {
         let services = PPPCServicesManager()
         let service = try #require(services.allServices["Camera"])
 
@@ -57,8 +57,8 @@ struct PPPCServicesManagerTests {
         )
     }
 
-    @Test
-    func userHelp_withoutEntitlements() throws {
+    @Test("User help without entitlements")
+    func userHelpWithoutEntitlements() throws {
         let services = PPPCServicesManager()
         let service = try #require(services.allServices["ScreenCapture"])
 

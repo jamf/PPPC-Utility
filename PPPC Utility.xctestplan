@@ -1,0 +1,31 @@
+{
+  "configurations" : [
+    {
+      "id" : "A2100AAD-F211-4146-9683-1509D479B82B",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : true,
+    "performanceAntipatternCheckerEnabled" : true,
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:PPPC Utility.xcodeproj",
+      "identifier" : "6EC409D9214D65BC00BE4F17",
+      "name" : "PPPC Utility"
+    }
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : false,
+      "target" : {
+        "containerPath" : "container:PPPC Utility.xcodeproj",
+        "identifier" : "5F95AE1A2315A6AD002E0A22",
+        "name" : "PPPC UtilityTests"
+      }
+    }
+  ],
+  "version" : 1
+}

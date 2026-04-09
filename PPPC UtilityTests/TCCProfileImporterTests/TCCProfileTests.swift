@@ -192,6 +192,44 @@ struct TCCProfileTests {
         #expect(xmlString == expected)
     }
 
+    @Test("jamfProAPIData XML contains expected structure and no site element when site is nil")
+    func jamfProAPIDataXMLStructureWithoutSite() async throws {
+        let profile = TCCProfileBuilder().buildProfile(allowed: false, authorization: .allow)
+
+        // when
+        let data = try await profile.jamfProAPIData(signingIdentity: nil, site: nil)
+
+        // then
+        let doc = try XMLDocument(data: data)
+        let root = try #require(doc.rootElement())
+        #expect(root.name == "os_x_configuration_profile")
+        let general = try #require(root.elements(forName: "general").first)
+        #expect(general.elements(forName: "payloads").count == 1)
+        #expect(general.elements(forName: "name").first?.stringValue == "Test Name")
+        #expect(general.elements(forName: "description").first?.stringValue == "Test Desc")
+        #expect(general.elements(forName: "site").isEmpty, "No site element when site parameter is nil")
+    }
+
+    @Test("jamfProAPIData XML includes correct site element when site is provided")
+    func jamfProAPIDataXMLStructureWithSite() async throws {
+        let profile = TCCProfileBuilder().buildProfile(allowed: false, authorization: .allow)
+
+        // when
+        let data = try await profile.jamfProAPIData(signingIdentity: nil, site: ("42", "Test Site"))
+
+        // then
+        let doc = try XMLDocument(data: data)
+        let root = try #require(doc.rootElement())
+        #expect(root.name == "os_x_configuration_profile")
+        let general = try #require(root.elements(forName: "general").first)
+        let site = try #require(general.elements(forName: "site").first, "Site element should be present")
+        #expect(site.elements(forName: "id").first?.stringValue == "42")
+        #expect(site.elements(forName: "name").first?.stringValue == "Test Site")
+        #expect(general.elements(forName: "payloads").count == 1)
+        #expect(general.elements(forName: "name").first?.stringValue == "Test Name")
+        #expect(general.elements(forName: "description").first?.stringValue == "Test Desc")
+    }
+
     private func loadTextFile(fileName: String) throws -> String {
         let testBundle = Bundle(for: BundleLocator.self)
         let resourceURL = try #require(testBundle.url(forResource: fileName, withExtension: "txt"))

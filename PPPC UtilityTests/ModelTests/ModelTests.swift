@@ -37,8 +37,8 @@ struct ModelTests {
 
     // MARK: - tests for getExecutableFrom*
 
-    @Test
-    func getExecutableBasedOnIdentifierAndCodeRequirement_BundleIdentifierType() async {
+    @Test("Get executable from identifier uses bundle identifier type")
+    func getExecutableUsesBundleIdentifierType() async {
         let identifier = "com.example.App"
         let codeRequirement = "testCodeRequirement"
 
@@ -51,8 +51,8 @@ struct ModelTests {
         #expect(executable.iconPath == IconFilePath.application)
     }
 
-    @Test
-    func getExecutableBasedOnIdentifierAndCodeRequirement_PathIdentifierType() async {
+    @Test("Get executable from identifier uses path identifier type")
+    func getExecutableUsesPathIdentifierType() async {
         let identifier = "/myGreatPath/Awesome/Binary"
         let codeRequirement = "testCodeRequirement"
 
@@ -65,7 +65,7 @@ struct ModelTests {
         #expect(executable.iconPath == IconFilePath.binary)
     }
 
-    @Test
+    @Test("Get executable from computer based on identifier")
     func getExecutableFromComputerBasedOnIdentifier() async {
         let identifier = "com.apple.Safari"
         let codeRequirement = "randomReq"
@@ -79,7 +79,7 @@ struct ModelTests {
         #expect(executable.codeRequirement != codeRequirement)
     }
 
-    @Test
+    @Test("Get executable from selected executables by bundle ID")
     func getExecutableFromSelectedExecutables() async {
         let expectedIdentifier = "com.something.1"
         let executable = await model.getExecutableFrom(identifier: expectedIdentifier, codeRequirement: "testReq")
@@ -96,8 +96,8 @@ struct ModelTests {
         #expect(existingExecutable?.iconPath == IconFilePath.application)
     }
 
-    @Test
-    func getExecutableFromSelectedExecutables_Path() async {
+    @Test("Get executable from selected executables by path")
+    func getExecutableFromSelectedExecutablesWithPath() async {
         let expectedIdentifier = "/path/something/Special"
         let executableOneMore = await model.getExecutableFrom(identifier: "/path/something/Special1", codeRequirement: "testReq")
         let executable = await model.getExecutableFrom(identifier: expectedIdentifier, codeRequirement: "testReq")
@@ -114,8 +114,8 @@ struct ModelTests {
         #expect(existingExecutable?.iconPath == IconFilePath.binary)
     }
 
-    @Test
-    func getExecutableFromSelectedExecutables_Empty() {
+    @Test("Get executable from selected executables returns nil when empty")
+    func getExecutableFromSelectedExecutablesEmpty() {
         // when
         let existingExecutable = model.getExecutableFromSelectedExecutables(bundleIdentifier: "com.something.1")
 
