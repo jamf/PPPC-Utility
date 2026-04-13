@@ -48,22 +48,22 @@
 						<string>bundleid</string>
 					</dict>
 				</array>
-	<key>bluetoothalways</key>
-<array>
-<dict>
-<key>allowed</key>
-<true/>
-<key>coderequirement</key>
-<string>identifier "io.brackets.appshell" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = JQ525L2MZD</string>
-<key>comment</key>
-<string></string>
-<key>identifier</key>
-<string>io.brackets.appshell</string>
-<key>identifiertype</key>
-<string>bundleID</string>
-</dict>
-</array>
-			<key>addressbook</key>
+				<key>bluetoothalways</key>
+					<array>
+						<dict>
+							<key>allowed</key>
+							<true/>
+							<key>coderequirement</key>
+							<string>identifier "io.brackets.appshell" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.ou] = jq525l2mzd</string>
+							<key>comment</key>
+							<string></string>
+							<key>identifier</key>
+							<string>io.brackets.appshell</string>
+							<key>identifiertype</key>
+							<string>bundleid</string>
+						</dict>
+					</array>
+				<key>addressbook</key>
 				<array>
 					<dict>
 						<key>allowed</key>
@@ -465,37 +465,37 @@
 						<string>bundleid</string>
 					</dict>
 				</array>
-	<key>systempolicyappbundles</key>
-<array>
-<dict>
-<key>allowed</key>
-<true/>
-<key>coderequirement</key>
-<string>identifier "io.brackets.appshell" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = JQ525L2MZD</string>
-<key>comment</key>
-<string></string>
-<key>identifier</key>
-<string>io.brackets.appshell</string>
-<key>identifiertype</key>
-<string>bundleID</string>
-</dict>
-</array>
-<key>systempolicyappdata</key>
-<array>
-<dict>
-<key>allowed</key>
-<true/>
-<key>coderequirement</key>
-<string>identifier "io.brackets.appshell" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = JQ525L2MZD</string>
-<key>comment</key>
-<string></string>
-<key>identifier</key>
-<string>io.brackets.appshell</string>
-<key>identifiertype</key>
-<string>bundleID</string>
-</dict>
-</array>
-			<key>systempolicydesktopfolder</key>
+				<key>systempolicyappbundles</key>
+					<array>
+						<dict>
+							<key>allowed</key>
+							<true/>
+							<key>coderequirement</key>
+							<string>identifier "io.brackets.appshell" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.ou] = jq525l2mzd</string>
+							<key>comment</key>
+							<string></string>
+							<key>identifier</key>
+							<string>io.brackets.appshell</string>
+							<key>identifiertype</key>
+							<string>bundleid</string>
+						</dict>
+					</array>
+				<key>systempolicyappdata</key>
+					<array>
+						<dict>
+							<key>allowed</key>
+							<true/>
+							<key>coderequirement</key>
+							<string>identifier "io.brackets.appshell" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.ou] = jq525l2mzd</string>
+							<key>comment</key>
+							<string></string>
+							<key>identifier</key>
+							<string>io.brackets.appshell</string>
+							<key>identifiertype</key>
+							<string>bundleid</string>
+						</dict>
+					</array>
+				<key>systempolicydesktopfolder</key>
 				<array>
 					<dict>
 						<key>allowed</key>

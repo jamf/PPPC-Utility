@@ -64,6 +64,22 @@ struct TCCProfileTests {
 
             // then verify the services key
             #expect(content.services.count == 5)
+            let allFiles = content.services["SystemPolicyAllFiles"]
+            #expect(allFiles?.count == 1)
+            allFiles?.forEach { policy in
+                #expect(policy.identifier == "policy id")
+                #expect(policy.identifierType == "policy id type")
+                #expect(policy.codeRequirement == "policy code req")
+                #expect(policy.allowed == nil)
+                #expect(policy.authorization == .allowStandardUserToSetSystemService)
+                #expect(policy.comment == "policy comment")
+                #expect(policy.receiverIdentifier == "policy receiver id")
+                #expect(policy.receiverIdentifierType == "policy receiver id type")
+                #expect(policy.receiverCodeRequirement == "policy receiver code req")
+            }
+            #expect(content.services["BluetoothAlways"] != nil, "BluetoothAlways should be included")
+            #expect(content.services["SystemPolicyAppBundles"] != nil, "SystemPolicyAppBundles should be included")
+            #expect(content.services["SystemPolicyAppData"] != nil, "SystemPolicyAppData should be included")
         }
     }
 
@@ -96,6 +112,19 @@ struct TCCProfileTests {
 
             // then verify the services key
             #expect(content.services.count == 5)
+            let allFiles = content.services["SystemPolicyAllFiles"]
+            #expect(allFiles?.count == 1)
+            allFiles?.forEach { policy in
+                #expect(policy.identifier == "policy id")
+                #expect(policy.identifierType == "policy id type")
+                #expect(policy.codeRequirement == "policy code req")
+                #expect(policy.allowed == true)
+                #expect(policy.authorization == nil)
+                #expect(policy.comment == "policy comment")
+                #expect(policy.receiverIdentifier == "policy receiver id")
+                #expect(policy.receiverIdentifierType == "policy receiver id type")
+                #expect(policy.receiverCodeRequirement == "policy receiver code req")
+            }
         }
     }
 

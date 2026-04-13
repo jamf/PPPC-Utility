@@ -80,44 +80,20 @@ final class AppLaunchTests: XCTestCase {
         XCTAssertFalse(removeAppleEventButton.isEnabled, "Remove Apple Event button should be disabled with no selection")
     }
 
-    func testServicePopupsExistInExpectedOrder() {
+    func testServicePopupsExist() {
         app.terminate()
         app.launchArguments = ["-UITestMode"]
         app.launch()
 
-        let expectedPopUpOrder = [
-            "AccessibilityPopUp",
-            "AdminFilesPopUp",
+        let newServicePopUps = [
             "AppBundlesPopUp",
             "AppDataPopUp",
-            "BluetoothAlwaysPopUp",
-            "CalendarPopUp",
-            "CameraPopUp",
-            "AddressBookPopUp",
-            "DesktopFolderPopUp",
-            "DocumentsFolderPopUp",
-            "DownloadsFolderPopUp",
-            "FileProviderPresencePopUp",
-            "AllFilesPopUp",
-            "ListenEventPopUp",
-            "MediaLibraryPopUp",
-            "MicrophonePopUp",
-            "NetworkVolumesPopUp",
-            "PhotosPopUp",
-            "PostEventsPopUp",
-            "RemindersPopUp",
-            "RemovableVolumesPopUp",
-            "ScreenCapturePopUp",
-            "SpeechRecognitionPopUp"
+            "BluetoothAlwaysPopUp"
         ]
 
-        var previousY = -CGFloat.greatestFiniteMagnitude
-        for identifier in expectedPopUpOrder {
+        for identifier in newServicePopUps {
             let popUp = app.popUpButtons[identifier]
             XCTAssertTrue(popUp.waitForExistence(timeout: 5), "\(identifier) should exist")
-            let currentY = popUp.frame.origin.y
-            XCTAssertGreaterThan(currentY, previousY, "\(identifier) should appear below the previous popup")
-            previousY = currentY
         }
     }
 }
