@@ -24,8 +24,16 @@
 - Avoid snake_case in test names (e.g., `generateDisplayName_bundleIdentifier`). If a name is getting long, use a Trait with a sentence-style description instead.
 - For complex tests, use a descriptive `@Test("...")` trait that explains the scenario and expected outcome so the test is understandable without reading the body.
 - Use parameterized tests with Traits where it reduces duplication; 1–2 args is ideal, max 3
+  ```swift
+  @Test("Service key round-trip preserves value", arguments: [
+      ("BluetoothAlways", "Allow"),
+      ("SystemPolicyAppBundles", "Deny")
+  ])
+  func serviceKeyRoundTrip(serviceKey: String, value: String) async { … }
+  ```
 - Beyond 3 params: create separate tests with some values hard-coded
 - Use `deinit` as teardown for repeated cleanup across tests in a suite. Use `class` for suites that need `deinit`; use `struct` otherwise.
+- After adding or refactoring tests, look for duplication or tests that are no longer relevant. Do not add redundant tests.
 
 ## UI Testing Conventions
 
@@ -34,6 +42,14 @@
 - Do not use `// when` / `// then` comment blocks in UI tests — they add noise without clarity in assertion-heavy tests
 - Use accessibility identifiers set in `setupAccessibilityIdentifiers()` to locate UI elements
 - The `-UITestMode` launch argument triggers test-specific setup (e.g., loading a test profile)
+
+## UI Conventions
+
+- Service keys (popup rows) in the main window must appear in alphabetical order.
+
+## Naming
+
+- Avoid "new" in test or function names — it becomes stale quickly. Describe the behavior, not the novelty.
 
 ## Git
 

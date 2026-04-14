@@ -59,6 +59,7 @@
 		C07B1FB82AF596D80075E38B /* UploadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07B1FB72AF596D80075E38B /* UploadManager.swift */; };
 		C0A2B5422B1A5D5C0007F510 /* JamfProAPIClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A2B5412B1A5D5C0007F510 /* JamfProAPIClientTests.swift */; };
 		C0A85DB5279873C600086283 /* TestTCCUnsignedProfile-allLower.mobileconfig in Resources */ = {isa = PBXBuildFile; fileRef = C0A85DB4279873C600086283 /* TestTCCUnsignedProfile-allLower.mobileconfig */; };
+		AA002200000000000000002B /* TestTCCUnsignedProfile-Legacy.mobileconfig in Resources */ = {isa = PBXBuildFile; fileRef = AA002200000000000000002A /* TestTCCUnsignedProfile-Legacy.mobileconfig */; };
 		C0DC2BB92B2263FC003A4474 /* Haversack in Frameworks */ = {isa = PBXBuildFile; productRef = C0DC2BB82B2263FC003A4474 /* Haversack */; };
 		C0E0383F27A30C7100A23FA2 /* PPPCServiceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E0383D27A30C7100A23FA2 /* PPPCServiceInfo.swift */; };
 		C0E0384027A30C7100A23FA2 /* PPPCServicesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E0383E27A30C7100A23FA2 /* PPPCServicesManager.swift */; };
@@ -151,6 +152,7 @@
 		C07B1FB72AF596D80075E38B /* UploadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadManager.swift; sourceTree = "<group>"; };
 		C0A2B5412B1A5D5C0007F510 /* JamfProAPIClientTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JamfProAPIClientTests.swift; sourceTree = "<group>"; };
 		C0A85DB4279873C600086283 /* TestTCCUnsignedProfile-allLower.mobileconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "TestTCCUnsignedProfile-allLower.mobileconfig"; sourceTree = "<group>"; };
+		AA002200000000000000002A /* TestTCCUnsignedProfile-Legacy.mobileconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "TestTCCUnsignedProfile-Legacy.mobileconfig"; sourceTree = "<group>"; };
 		C0E0383D27A30C7100A23FA2 /* PPPCServiceInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PPPCServiceInfo.swift; sourceTree = "<group>"; };
 		C0E0383E27A30C7100A23FA2 /* PPPCServicesManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PPPCServicesManager.swift; sourceTree = "<group>"; };
 		C0E0384127A30D1D00A23FA2 /* PPPCServices.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = PPPCServices.json; sourceTree = "<group>"; };
@@ -266,6 +268,7 @@
 			children = (
 				5F95AE2B2315B172002E0A22 /* TestTCCProfileSigned-Broken.mobileconfig */,
 				C0A85DB4279873C600086283 /* TestTCCUnsignedProfile-allLower.mobileconfig */,
+				AA002200000000000000002A /* TestTCCUnsignedProfile-Legacy.mobileconfig */,
 				5F95AE2A2315B172002E0A22 /* TestTCCUnsignedProfile-Broken.mobileconfig */,
 				5F95AE2C2315B172002E0A22 /* TestTCCUnsignedProfile-Empty.mobileconfig */,
 				5F95AE292315B172002E0A22 /* TestTCCUnsignedProfile.mobileconfig */,
@@ -536,6 +539,7 @@
 				5F95AE312315B172002E0A22 /* TestTCCUnsignedProfile-Empty.mobileconfig in Resources */,
 				5F95AE2F2315B172002E0A22 /* TestTCCUnsignedProfile-Broken.mobileconfig in Resources */,
 				C0A85DB5279873C600086283 /* TestTCCUnsignedProfile-allLower.mobileconfig in Resources */,
+				AA002200000000000000002B /* TestTCCUnsignedProfile-Legacy.mobileconfig in Resources */,
 				C0EE9A7D28639BF800738B6B /* TestTCCProfileForJamfProAPI.txt in Resources */,
 				5F95AE302315B172002E0A22 /* TestTCCProfileSigned-Broken.mobileconfig in Resources */,
 			);

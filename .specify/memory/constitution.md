@@ -51,6 +51,7 @@ acceptable only for components without adequate SwiftUI coverage.
 
 - Minimum deployment target: macOS 13.0.
 - All interactive UI elements MUST have accessibility identifiers and labels.
+- Service keys in the main window MUST appear in alphabetical order.
 - Profiles MUST be saveable locally (signed or unsigned) and uploadable to
   Jamf Pro (bearer token, basic auth fallback, or OAuth client credentials).
 
@@ -86,4 +87,4 @@ Git) are maintained in `CLAUDE.md`. Amendments require:
 All PRs and code reviews MUST verify compliance with this constitution.
 Complexity violations MUST be justified in the PR description.
 
-**Version**: 1.1.0 | **Ratified**: 2026-04-09 | **Last Amended**: 2026-04-09
+**Version**: 1.2.0 | **Ratified**: 2026-04-09 | **Last Amended**: 2026-04-09

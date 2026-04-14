@@ -72,7 +72,31 @@ struct TCCProfileImporterTests {
 
         let tccProfile = try tccProfileImporter.decodeTCCProfile(fileUrl: resourceURL)
         #expect(!tccProfile.content.isEmpty)
-        #expect(!tccProfile.content[0].services.isEmpty)
+        let services = tccProfile.content[0].services
+        #expect(!services.isEmpty)
+        #expect(services.count == 24, "Profile should contain exactly 24 services")
+        #expect(services["BluetoothAlways"] != nil, "BluetoothAlways service should exist")
+        #expect(services["SystemPolicyAppBundles"] != nil, "SystemPolicyAppBundles service should exist")
+        #expect(services["SystemPolicyAppData"] != nil, "SystemPolicyAppData service should exist")
+    }
+
+    @Test("Legacy profile without new keys imports with dash defaults")
+    func legacyProfileImportsWithDashDefaults() async throws {
+        let tccProfileImporter = TCCProfileImporter()
+        let resourceURL = try getResourceProfile(fileName: "TestTCCUnsignedProfile-Legacy")
+        let tccProfile = try tccProfileImporter.decodeTCCProfile(fileUrl: resourceURL)
+
+        // when
+        let model = Model()
+        await model.importProfile(tccProfile: tccProfile)
+
+        // then
+        #expect(!model.selectedExecutables.isEmpty, "Legacy profile should import at least one executable")
+        for executable in model.selectedExecutables {
+            #expect(executable.policy.BluetoothAlways == "-", "BluetoothAlways should default to dash for legacy profiles")
+            #expect(executable.policy.SystemPolicyAppBundles == "-", "SystemPolicyAppBundles should default to dash for legacy profiles")
+            #expect(executable.policy.SystemPolicyAppData == "-", "SystemPolicyAppData should default to dash for legacy profiles")
+        }
     }
 
     @Test

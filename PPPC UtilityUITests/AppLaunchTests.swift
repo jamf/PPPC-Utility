@@ -79,4 +79,21 @@ final class AppLaunchTests: XCTestCase {
         XCTAssertTrue(removeAppleEventButton.waitForExistence(timeout: 5), "Remove Apple Event button should exist")
         XCTAssertFalse(removeAppleEventButton.isEnabled, "Remove Apple Event button should be disabled with no selection")
     }
+
+    func testServicePopupsExist() {
+        app.terminate()
+        app.launchArguments = ["-UITestMode"]
+        app.launch()
+
+        let newServicePopUps = [
+            "AppBundlesPopUp",
+            "AppDataPopUp",
+            "BluetoothAlwaysPopUp"
+        ]
+
+        for identifier in newServicePopUps {
+            let popUp = app.popUpButtons[identifier]
+            XCTAssertTrue(popUp.waitForExistence(timeout: 5), "\(identifier) should exist")
+        }
+    }
 }

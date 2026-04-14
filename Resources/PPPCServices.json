@@ -5,6 +5,11 @@
         "englishDescription": "Allows specified apps to control the Mac via Accessibility APIs."
     },
     {
+        "mdmKey": "BluetoothAlways",
+        "englishName": "Bluetooth Always",
+        "englishDescription": "Specifies the policies for the app to access Bluetooth devices."
+    },
+    {
         "mdmKey": "AppleEvents",
         "englishName": "AppleEvents",
         "englishDescription": "Allows specified apps to send a restricted AppleEvent to another process."
@@ -180,6 +185,16 @@
             "com.apple.security.files.user-selected.read-only",
             "com.apple.security.files.user-selected.read-write"
         ]
+    },
+    {
+        "mdmKey": "SystemPolicyAppBundles",
+        "englishName": "App Bundles",
+        "englishDescription": "Allows the app to update or delete other apps."
+    },
+    {
+        "mdmKey": "SystemPolicyAppData",
+        "englishName": "App Data",
+        "englishDescription": "Specifies the policies for the app to access the data of other apps."
     },
     {
         "mdmKey": "SystemPolicySysAdminFiles",
