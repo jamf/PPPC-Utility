@@ -1,6 +1,7 @@
 name: swift-format
 
 on:
+  workflow_dispatch:
   pull_request:
     paths:
       - '.github/workflows/swift-format.yml'
