@@ -39,8 +39,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @IBAction func orderFrontStandardAboutPanel(_ sender: Any?) {
-        let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
-        NSApp.orderFrontStandardAboutPanel(options: [.applicationVersion: version])
+        NSApp.orderFrontStandardAboutPanel(options: [.version: ""])
     }
 
 }
