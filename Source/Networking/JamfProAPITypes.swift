@@ -78,14 +78,12 @@ struct ActivationCode: Decodable {
 
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        
         if let licenseInformation = try container.decodeIfPresent(OrgAndCode.self, forKey: .licenseInformation) {
             activationCode = licenseInformation
         } else {
             activationCode = try container.decode(OrgAndCode.self, forKey: .activationCode)
         }
     }
-    
     struct OrgAndCode: Decodable {
         let organizationName: String
         let code: String
