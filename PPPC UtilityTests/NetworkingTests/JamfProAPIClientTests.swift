@@ -118,6 +118,7 @@ final class JamfProAPIClientOrgTests {
         // then
         #expect(orgName == "Acme Corp")
     }
+
     @Test("getOrganizationName decodes activation code response for 11.31 and later")
     func getOrgNameDecodesResponseFromLicenseInformation() async throws {
         let authManager = NetworkAuthManager(username: "admin", password: "pass")
