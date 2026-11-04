@@ -94,8 +94,8 @@ final class JamfProAPIClientOrgTests {
 
     deinit { MockURLProtocol.reset() }
 
-    @Test("getOrganizationName decodes activation code response")
-    func getOrgNameDecodesResponse() async throws {
+    @Test("getOrganizationName decodes activation code response for pre-11.31")
+    func getOrgNameDecodesResponseFromActivationCode() async throws {
         let authManager = NetworkAuthManager(username: "admin", password: "pass")
         let session = URLSession.mock { request in
             let path = request.url?.path ?? ""
@@ -105,6 +105,31 @@ final class JamfProAPIClientOrgTests {
             }
             if path.contains("activationcode") {
                 let json = #"{"activation_code":{"organization_name":"Acme Corp","code":"ABC123"}}"#
+                return (.ok(url: request.url!), Data(json.utf8))
+            }
+            throw URLError(.badURL)
+        }
+
+        let client = JamfProAPIClient(serverUrlString: "https://jamf.example.com", tokenManager: authManager, session: session)
+
+        // when
+        let orgName = try await client.getOrganizationName()
+
+        // then
+        #expect(orgName == "Acme Corp")
+    }
+
+    @Test("getOrganizationName decodes activation code response for 11.31 and later")
+    func getOrgNameDecodesResponseFromLicenseInformation() async throws {
+        let authManager = NetworkAuthManager(username: "admin", password: "pass")
+        let session = URLSession.mock { request in
+            let path = request.url?.path ?? ""
+            if path.hasSuffix("auth/token") {
+                let tokenJSON = #"{"token":"abc","expires":"2099-01-01T00:00:00.000Z"}"#
+                return (.ok(url: request.url!), Data(tokenJSON.utf8))
+            }
+            if path.contains("activationcode") {
+                let json = #"{"license_information":{"organization_name":"Acme Corp","code":"ABC123"}}"#
                 return (.ok(url: request.url!), Data(json.utf8))
             }
             throw URLError(.badURL)

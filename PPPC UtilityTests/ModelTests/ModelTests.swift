@@ -294,7 +294,7 @@ struct ModelTests {
 
     @Test(
         "policyFromString maps display value to authorization",
-        arguments: [
+        arguments: await [
             ("Allow", TCCPolicyAuthorizationValue.allow),
             ("Deny", TCCPolicyAuthorizationValue.deny),
             ("Let Standard Users Approve", TCCPolicyAuthorizationValue.allowStandardUserToSetSystemService)
